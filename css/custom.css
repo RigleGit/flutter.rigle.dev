@@ -1,0 +1,60 @@
+/* ============================================================
+   custom.css — flutter.rigle.dev
+   Cargado automáticamente por el tema Relearn
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. Resetear text-transform uppercase del h1 del tema
+   ---------------------------------------------------------- */
+article.default h1 {
+  font-size: 1.8rem !important;
+  text-transform: none !important;
+}
+
+/* ----------------------------------------------------------
+   2. Grid responsivo para tarjetas de la sección ejercicios
+   ---------------------------------------------------------- */
+.exercise-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 900px) {
+  .exercise-feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .exercise-feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.exercise-feature-card {
+  background: #f7fdfb;
+  border: 1px solid #c8e6e1;
+  border-radius: 8px;
+  padding: 1.1rem 1rem;
+  color: #1a3a35;
+}
+
+.exercise-feature-card h3 {
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  color: #1a3a35;
+  text-transform: none;
+}
+
+.exercise-feature-card p {
+  color: #444;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.exercise-feature-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
