@@ -1,7 +1,7 @@
 var relearn_searchindex = [
   {
     "breadcrumb": "Learn Flutter — solved exercises",
-    "content": "A collection of solved Flutter exercises focused on concrete, real-world implementation patterns.\nWhat you will find 📱 Project-ready exercises Realistic Flutter scenarios you can adapt directly to your own apps.\n🧩 State and architecture Widgets, navigation, API usage, local persistence, and testing with practical focus.\n📈 Progressive difficulty Each exercise shows its level so you can practice in sequence and track your progress.\nAvailable exercises Widgets and UI Forms and navigation State and architecture API and async Persistence and data Testing and resources FAQ Do I need prior Flutter experience? Not for exercises tagged beginner. Knowing basic Dart syntax and having Flutter installed is enough to get started.\nCan I use these exercises in real projects? Yes. Each exercise is designed to be reusable: the solved code follows Flutter conventions and can be integrated directly into your own app.\nWhat order should I follow? Start with beginner exercises (setState, ListView, forms, navigation) and move towards intermediate ones (API, state management, persistence). Advanced exercises assume you understand the previous ones.\nAre the exercises null-safe and compatible with Flutter 3? Yes. All code uses null safety and is compatible with Flutter 3.x and later versions.",
+    "content": "A collection of solved Flutter exercises focused on concrete, real-world implementation patterns.\nWhat you will find 📱 Project-ready exercises Realistic Flutter scenarios you can adapt directly to your own apps.\n🧩 State and architecture Widgets, navigation, API usage, local persistence, and testing with practical focus.\n📈 Progressive difficulty Each exercise shows its level so you can practice in sequence and track your progress.\nAvailable exercises Widgets and UI Forms and navigation State and architecture API and async Persistence and data Testing and resources Tools \u0026 Code FAQ Do I need prior Flutter experience? Not for exercises tagged beginner. Knowing basic Dart syntax and having Flutter installed is enough to get started.\nCan I use these exercises in real projects? Yes. Each exercise is designed to be reusable: the solved code follows Flutter conventions and can be integrated directly into your own app.\nWhat order should I follow? Start with beginner exercises (setState, ListView, forms, navigation) and move towards intermediate ones (API, state management, persistence). Advanced exercises assume you understand the previous ones.\nAre the exercises null-safe and compatible with Flutter 3? Yes. All code uses null safety and is compatible with Flutter 3.x and later versions.",
     "description": "Solved Flutter exercises to practice state, widgets, forms, navigation, API calls, local persistence, and testing with practical examples.",
     "tags": [],
     "title": "Solved Flutter exercises (step by step)",
@@ -33,7 +33,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Almost every real app consumes external data. These exercises cover the full flow: REST API calls using the http package, loading and error state management with FutureBuilder, and infinite scroll pagination with ScrollController. Mastering these is essential for building connected apps.\nInfinite Scroll in Flutter: solved pagination exercise FutureBuilder in Flutter: solved exercise for loading states Flutter API Call with http: solved REST exercise",
+    "content": "Almost every real app consumes external data. These exercises cover the full flow: REST API calls using the http package, loading and error state management with FutureBuilder, and infinite scroll pagination with ScrollController. Mastering these is essential for building connected apps.\nFlutter timeout and retry: solved exercise Infinite Scroll in Flutter: solved pagination exercise FutureBuilder in Flutter: solved exercise for loading states Flutter API Call with http: solved REST exercise",
     "description": "Solved Flutter API and async exercises: REST calls with http, loading state management with FutureBuilder, and infinite scroll with pagination.",
     "tags": [],
     "title": "API and async",
@@ -54,6 +54,70 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Testing and resources",
     "uri": "/en/ejercicios/testing-recursos/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
+    "content": "Practical exercises on the tools and techniques that separate a demo project from a production-ready app: code generation, environment configuration, and battle-tested architecture patterns.",
+    "description": "Flutter exercises on code generation, advanced dependency injection, flavors, and productivity tools for production-ready projects.",
+    "tags": [
+      "Tools",
+      "Productivity",
+      "Architecture"
+    ],
+    "title": "Flutter Tools and Productivity",
+    "uri": "/en/ejercicios/herramientas-codigo/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Api",
+    "uri": "/en/tags/api/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Async",
+    "uri": "/en/tags/async/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e API and async",
+    "content": "Flutter timeout and retry: solved exercise Implement timeout and retry with backoff for HTTP calls in Flutter.\nProblem statement Build an HTTP call with timeout, progressive retry, and clear error feedback.\nFlutter solution 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 import 'package:flutter/material.dart'; void main() { runApp(const MaterialApp(home: ExercisePage())); } class ExercisePage extends StatefulWidget { const ExercisePage({super.key}); @override State\u003cExercisePage\u003e createState() =\u003e _ExercisePageState(); } class _ExercisePageState extends State\u003cExercisePage\u003e { bool loading = false; String message = 'Initial state'; Future\u003cvoid\u003e runExercise() async { setState(() { loading = true; message = 'Processing...'; }); await Future\u003cvoid\u003e.delayed(const Duration(milliseconds: 700)); if (!mounted) return; setState(() { loading = false; message = 'Exercise completed'; }); } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Flutter solved exercise')), body: Center( child: Column( mainAxisSize: MainAxisSize.min, children: [ Text(message), const SizedBox(height: 12), ElevatedButton( onPressed: loading ? null : runExercise, child: Text(loading ? 'Loading...' : 'Run'), ), ], ), ), ); } } Expected result A working minimal screen to practice: timeout, retry, backoff, error UX.\nCommon mistakes Not separating loading, success, and error states. Coupling UI and data in a single class. Skipping state validation before navigation or rendering. Practical use This pattern appears in real apps to improve robustness, maintainability, and UX.\nRecommended next exercise All Flutter exercises More Flutter exercises C exercises to strengthen fundamentals Guided practice and next step More Flutter exercises Programming in C in 100 Solved Exercises View the book on Amazon (included in Kindle Unlimited) Subscribe to the newsletter FAQ What do you practice in this exercise? You practice timeout, retry, backoff, error UX with a practical production-oriented scenario.\nIs this exercise useful for a portfolio? Yes. You can adapt it and present a clear implementation with technical rationale.\nWhat should I do next? Connect it to a real API or local persistence depending on your product goal.",
+    "description": "Implement timeout and retry with backoff for HTTP calls in Flutter.",
+    "tags": [
+      "Intermediate",
+      "Api",
+      "Async"
+    ],
+    "title": "Flutter timeout and retry: solved exercise",
+    "uri": "/en/ejercicios/api-async/flutter-timeout-retry-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Intermediate",
+    "uri": "/en/tags/intermediate/index.html"
+  },
+  {
+    "breadcrumb": "",
+    "content": "Practical resources to learn Flutter and Dart.\nSolved exercises",
+    "description": "Solved Flutter and Dart exercises step by step. From basics to complete apps.",
+    "tags": [],
+    "title": "Learn Flutter — solved exercises",
+    "uri": "/en/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tags",
+    "uri": "/en/tags/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
@@ -81,22 +145,6 @@ var relearn_searchindex = [
     ],
     "title": "Flutter + AI: 5 practical ideas to build useful apps",
     "uri": "/en/ejercicios/testing-recursos/flutter-ai-ideas-practicas/index.html"
-  },
-  {
-    "breadcrumb": "",
-    "content": "Practical resources to learn Flutter and Dart.\nSolved exercises",
-    "description": "Solved Flutter and Dart exercises step by step. From basics to complete apps.",
-    "tags": [],
-    "title": "Learn Flutter — solved exercises",
-    "uri": "/en/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tags",
-    "uri": "/en/tags/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Testing and resources",
@@ -153,14 +201,6 @@ var relearn_searchindex = [
     ],
     "title": "Flutter Widget Test: solved UI testing exercise",
     "uri": "/en/ejercicios/testing-recursos/flutter-widget-test-ejercicio-resuelto/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Intermediate",
-    "uri": "/en/tags/intermediate/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
@@ -276,14 +316,6 @@ var relearn_searchindex = [
     "uri": "/en/ejercicios/persistencia-datos/flutter-firebase-auth-login-ejercicio-resuelto/index.html"
   },
   {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Api",
-    "uri": "/en/tags/api/index.html"
-  },
-  {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e API and async",
     "content": "Infinite Scroll in Flutter: solved exercise If you are looking for infinite scroll in Flutter, this solved exercise gives you a practical implementation pattern you can reuse in real projects.\nProblem statement Build a screen with:\nload initial batch of records detect near-bottom scroll append next page safely Flutter solution 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 import 'package:flutter/material.dart'; void main() =\u003e runApp(const MaterialApp(home: InfinitePage())); class InfinitePage extends StatefulWidget { const InfinitePage({super.key}); @override State\u003cInfinitePage\u003e createState() =\u003e _InfinitePageState(); } class _InfinitePageState extends State\u003cInfinitePage\u003e { final controller = ScrollController(); final items = \u003cint\u003e[]; bool loading = false; @override void initState() { super.initState(); loadMore(); controller.addListener(() { if (controller.position.pixels \u003e= controller.position.maxScrollExtent - 120 \u0026\u0026 !loading) { loadMore(); } }); } Future\u003cvoid\u003e loadMore() async { setState(() =\u003e loading = true); await Future.delayed(const Duration(milliseconds: 700)); final start = items.length; items.addAll(List.generate(20, (i) =\u003e start + i + 1)); setState(() =\u003e loading = false); } @override void dispose() { controller.dispose(); super.dispose(); } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Scroll infinito')), body: ListView.builder( controller: controller, itemCount: items.length + (loading ? 1 : 0), itemBuilder: (_, i) { if (i \u003e= items.length) { return const Padding( padding: EdgeInsets.all(16), child: Center(child: CircularProgressIndicator()), ); } return ListTile(title: Text('Item ${items[i]}')); }, ), ); } } Expected result The list adds new items progressively while the user keeps scrolling.\nCommon mistakes Firing parallel loads. Forgetting to dispose ScrollController. Missing prefetch threshold. Practical use Widely used for social feeds, catalogs, activity logs, and search pages.\nRecommended next exercise Flutter API Call with http: solved REST exercise Firebase Auth Login in Flutter: solved email/password exercise FutureBuilder in Flutter: solved exercise for loading states All Flutter exercises Guided practice and next step More Flutter exercises C exercises to strengthen fundamentals Programming in C in 100 Solved Exercises View the C book on Amazon (included in Kindle Unlimited) Subscribe to the newsletter FAQ How do I prevent duplicate requests? Use a loading guard and track end-of-list state.\nDoes infinite scroll hurt performance? Not if you load in controlled batches and avoid heavy rebuilds.\nWhat is a good alternative? Classic pagination or a “Load more” interaction.",
     "description": "Solved Flutter infinite scroll exercise with batch pagination, ScrollController, and incremental load control.",
@@ -302,14 +334,6 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Tag :: Widgets",
     "uri": "/en/tags/widgets/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Async",
-    "uri": "/en/tags/async/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e API and async",
@@ -410,5 +434,21 @@ var relearn_searchindex = [
     ],
     "title": "Flutter Counter with setState: solved exercise step by step",
     "uri": "/en/ejercicios/estado-arquitectura/flutter-contador-con-setstate-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Productivity",
+    "uri": "/en/tags/productivity/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Tools",
+    "uri": "/en/tags/tools/index.html"
   }
 ]
