@@ -1,7 +1,7 @@
 var relearn_searchindex = [
   {
     "breadcrumb": "Learn Flutter — solved exercises",
-    "content": "A collection of solved Flutter exercises focused on concrete, real-world implementation patterns.\nWhat you will find 📱 Project-ready exercises Realistic Flutter scenarios you can adapt directly to your own apps.\n🧩 State and architecture Widgets, navigation, API usage, local persistence, and testing with practical focus.\n📈 Progressive difficulty Each exercise shows its level so you can practice in sequence and track your progress.\nAvailable exercises Widgets and UI Forms and navigation State and architecture API and async Persistence and data Testing and resources Tools \u0026 Code FAQ Do I need prior Flutter experience? Not for exercises tagged beginner. Knowing basic Dart syntax and having Flutter installed is enough to get started.\nCan I use these exercises in real projects? Yes. Each exercise is designed to be reusable: the solved code follows Flutter conventions and can be integrated directly into your own app.\nWhat order should I follow? Start with beginner exercises (setState, ListView, forms, navigation) and move towards intermediate ones (API, state management, persistence). Advanced exercises assume you understand the previous ones.\nAre the exercises null-safe and compatible with Flutter 3? Yes. All code uses null safety and is compatible with Flutter 3.x and later versions.",
+    "content": "A collection of solved Flutter exercises focused on concrete, real-world implementation patterns.\nWhat you will find 📱 Project-ready exercises Realistic Flutter scenarios you can adapt directly to your own apps.\n🧩 State and architecture Widgets, navigation, API usage, local persistence, and testing with practical focus.\n📈 Progressive difficulty Each exercise shows its level so you can practice in sequence and track your progress.\nAvailable exercises Widgets and UI Forms and navigation State and architecture API and async Persistence and data Testing and resources Device Tools \u0026 Code FAQ Do I need prior Flutter experience? Not for exercises tagged beginner. Knowing basic Dart syntax and having Flutter installed is enough to get started.\nCan I use these exercises in real projects? Yes. Each exercise is designed to be reusable: the solved code follows Flutter conventions and can be integrated directly into your own app.\nWhat order should I follow? Start with beginner exercises (setState, ListView, forms, navigation) and move towards intermediate ones (API, state management, persistence). Advanced exercises assume you understand the previous ones.\nAre the exercises null-safe and compatible with Flutter 3? Yes. All code uses null safety and is compatible with Flutter 3.x and later versions.",
     "description": "Solved Flutter exercises to practice state, widgets, forms, navigation, API calls, local persistence, and testing with practical examples.",
     "tags": [],
     "title": "Solved Flutter exercises (step by step)",
@@ -54,6 +54,14 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Testing and resources",
     "uri": "/en/ejercicios/testing-recursos/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
+    "content": "Access native device capabilities from Flutter. These exercises cover the most common patterns: requesting permissions with permission_handler, biometric authentication with local_auth, photo capture with the camera plugin and more. Essential for any app that interacts with hardware.",
+    "description": "Solved Flutter hardware access exercises: camera, biometrics, permissions with permission_handler, and device sensors.",
+    "tags": [],
+    "title": "Device",
+    "uri": "/en/ejercicios/dispositivo/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
