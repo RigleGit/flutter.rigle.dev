@@ -41,7 +41,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
-    "content": "Más allá de los ejercicios básicos, esta sección cubre tres áreas complementarias: cómo testear widgets con flutter_test para detectar regresiones antes de que lleguen a producción, cómo elegir plataforma de despliegue entre Android, Web y Windows, y cómo aplicar IA de forma práctica en apps Flutter.\nFlutter + IA: 5 ideas prácticas para crear apps útiles Flutter Android, Web o Windows: comparativa práctica para elegir plataforma Widget test en Flutter: ejercicio resuelto para testear UI",
+    "content": "Más allá de los ejercicios básicos, esta sección cubre tres áreas complementarias: cómo testear widgets con flutter_test para detectar regresiones antes de que lleguen a producción, cómo elegir plataforma de despliegue entre Android, Web y Windows, y cómo aplicar IA de forma práctica en apps Flutter.\nFlock vs Flutter 2026: qué es el fork de la comunidad y cuándo usarlo Flutter vs Kotlin Multiplatform 2026: comparativa para apps multiplataforma Flutter vs React Native 2026: comparativa actualizada para elegir stack Riverpod 3 vs BLoC 9 vs Provider 2026: cuál gestor de estado elegir en Flutter Flutter + IA: 5 ideas prácticas para crear apps útiles Flutter Android, Web o Windows: comparativa práctica para elegir plataforma Widget test en Flutter: ejercicio resuelto para testear UI",
     "description": "Testing y guías de Flutter: widget tests con flutter_test, comparativa multiplataforma Android, Web y Windows, e ideas prácticas con IA.",
     "tags": [],
     "title": "Testing y recursos",
@@ -76,6 +76,14 @@ var relearn_searchindex = [
     "uri": "/ejercicios/internacionalizacion/index.html"
   },
   {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Android",
+    "uri": "/tags/android/index.html"
+  },
+  {
     "breadcrumb": "",
     "content": "Recursos prácticos para aprender Flutter y Dart.\nEjercicios resueltos",
     "description": "Ejercicios resueltos de Flutter y Dart paso a paso. Desde lo básico hasta apps completas.",
@@ -84,12 +92,122 @@ var relearn_searchindex = [
     "uri": "/index.html"
   },
   {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Bloc",
+    "uri": "/tags/bloc/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Comunidad",
+    "uri": "/tags/comunidad/index.html"
+  },
+  {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos",
     "content": "Colección de ejercicios resueltos de Flutter para practicar con ejemplos concretos y aplicables a proyectos reales.\nQué encontrarás 📱 Ejercicios aplicables Casos de uso reales para construir apps Flutter que puedas reutilizar en proyectos propios.\n🧩 Estado y arquitectura Widgets, navegación, consumo de APIs, persistencia local y testing con enfoque práctico.\n📈 Dificultad progresiva Cada ejercicio muestra la dificultad para ayudarte a practicar en orden y medir tu progreso.\nEjercicios disponibles Widgets y UI Formularios y navegación Estado y arquitectura API y async Persistencia y datos Testing y recursos Dispositivo Herramientas y código Internacionalización FAQ ¿Hace falta experiencia previa con Flutter? No para los ejercicios marcados como principiante. Con conocer los conceptos básicos de Dart y haber instalado Flutter ya puedes empezar.\n¿Puedo usar estos ejercicios en mis proyectos reales? Sí. Cada ejercicio está pensado para ser extraíble: el código resuelto sigue las convenciones de Flutter y puede integrarse directamente en una app propia.\n¿En qué orden hago los ejercicios? Empieza por los de nivel principiante (setState, ListView, formularios, navegación) y avanza hacia los de nivel intermedio (API, estado global, persistencia). Los de nivel avanzado requieren entender bien los anteriores.\n¿Los ejercicios siguen null safety y Flutter 3? Sí. Todo el código usa null safety y es compatible con Flutter 3.x y versiones posteriores.",
     "description": "Ejercicios resueltos de Flutter, paso a paso, para practicar estado, widgets, formularios, navegación, consumo de APIs, persistencia local y testing.",
     "tags": [],
     "title": "Ejercicios resueltos de Flutter (paso a paso)",
     "uri": "/ejercicios/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Estado",
+    "uri": "/tags/estado/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Testing y recursos",
+    "content": "Flock vs Flutter: el fork que la comunidad creó en 2024 Flock es un fork del SDK de Flutter mantenido por la comunidad que nació a finales de 2024 tras los recortes de personal en el equipo de Flutter de Google.\nLa pregunta clave no es si Flock es mejor o peor, sino para qué escenario sirve cada uno.\nPor qué existe Flock Google tiene su propio ritmo de revisión y prioridades para el repositorio de Flutter. Con menos personas en el equipo, ciertos pull requests de la comunidad —incluyendo correcciones de bugs con múltiples votos— tardaban meses en fusionarse.\nFlock nació como respuesta directa: un fork que acepta esos PRs con mayor velocidad y los distribuye como SDK alternativo. No es una competencia con Flutter; es una forma de que la comunidad no tenga que esperar al calendario de Google para recibir correcciones.\nDiferencias reales entre Flock y Flutter Factor Flutter oficial Flock Mantenedor Google Comunidad voluntaria Versiones 3.x.y Sigue la misma numeración (3.x.y-flock) API pública Estándar Idéntica (compatible) Velocidad de merge Ritmo de Google Más rápido para PRs comunitarios Soporte a largo plazo Garantizado (Google) Depende de la comunidad pubspec.yaml Sin cambios Sin cambios Dart SDK Mismo Mismo Qué comparten al 100 % El lenguaje Dart y el compilador. La API de widgets (StatelessWidget, StatefulWidget, etc.). Los paquetes de pub.dev — cualquier paquete funciona igual en ambos. El proceso de compilación y despliegue. Las herramientas flutter build, flutter run, flutter test. Cuándo tiene sentido usar Flock Necesitas una corrección específica que Google no ha fusionado aún. Quieres contribuir a la revisión de PRs y ser parte de la gobernanza comunitaria. Tu empresa puede asumir el riesgo de un mantenedor externo a Google. Usas herramientas como fvm (Flutter Version Manager) y quieres apuntar a un canal alternativo. Cuándo NO usar Flock Si no tienes un problema concreto con Flutter oficial. Si trabajas en un equipo o empresa con auditoría de dependencias estricta. Si buscas soporte garantizado a largo plazo con respaldo corporativo. Si el proyecto está en producción y la estabilidad es prioritaria. Veredicto práctico para 2026 Para el 95 % de los proyectos: sigue con Flutter oficial. Flock es valioso para el ecosistema y para la comunidad, pero no es necesario para construir apps en producción.\nSi un bug específico te bloquea y está resuelto en Flock, úsalo temporalmente. En cuanto Google fusione la corrección, vuelve a la versión oficial.\nSiguientes recursos recomendados CI/CD con GitHub Actions en Flutter: ejercicio resuelto Flavors dev/prod en Flutter: ejercicio resuelto BLoC con Cubit en Flutter: ejercicio resuelto Todos los ejercicios de Flutter Práctica guiada y siguiente paso Más ejercicios de Flutter Ejercicios C para reforzar fundamentos Programación en C en 100 ejercicios resueltos Ver en Amazon (incluido en Kindle Unlimited) FAQ ¿Las apps compiladas con Flock funcionan en Google Play y App Store? Sí. El resultado de compilación es idéntico al de Flutter oficial. Google Play y App Store no distinguen con qué SDK se compiló la app.\n¿Flock tiene su propio canal de actualizaciones? Sí. Se puede instalar mediante fvm apuntando al canal de Flock o directamente desde el repositorio de la comunidad en GitHub.\n¿Google podría bloquear o tomar acciones legales contra Flock? No. Flutter es código abierto bajo licencia BSD. Cualquier persona o equipo puede hacer fork y distribuirlo libremente.",
+    "description": "Qué es Flock, el fork comunitario de Flutter, por qué existe, en qué se diferencia y si deberías migrar tu proyecto.",
+    "tags": [
+      "Multiplataforma",
+      "Comunidad"
+    ],
+    "title": "Flock vs Flutter 2026: qué es el fork de la comunidad y cuándo usarlo",
+    "uri": "/ejercicios/testing-recursos/flutter-flock-vs-flutter/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Testing y recursos",
+    "content": "Flutter vs Kotlin Multiplatform 2026: dos filosofías distintas Flutter y Kotlin Multiplatform (KMP) son las dos opciones más serias para desarrollo multiplataforma en 2026, pero responden a preguntas distintas.\nFlutter responde a: ¿cómo comparto la UI y la lógica en un solo codebase? KMP responde a: ¿cómo comparto la lógica sin tocar la UI nativa existente? Elegir entre ellos no es una cuestión de cuál es mejor — es una cuestión de qué necesitas mantener y qué quieres compartir.\nDiferencia fundamental de arquitectura Capa Flutter Kotlin Multiplatform UI Custom (Impeller, misma en iOS/Android) Nativa (Compose en Android, SwiftUI en iOS) Lógica de negocio Dart compartido Kotlin compartido Acceso a plataforma Plugins (platform channels) Kotlin/Native directo Lenguaje principal Dart Kotlin (+ interop Swift/ObjC) Comparativa por factores clave Factor Flutter KMP UI consistente cross-platform Sí (pixel-perfect) No (cada plataforma diseña su propia UI) UI 100 % nativa por SO No (aproximada) Sí Velocidad de desarrollo de UI Alta Media (dos UIs separadas) Reutilización de código ~90-100 % ~60-80 % (solo lógica) Curva de aprendizaje Dart Kotlin + Swift si quieres iOS Desktop Sí (macOS, Windows, Linux) JVM, macOS limitado Web Sí (WASM) Sí (Kotlin/JS) Empresa detrás Google JetBrains Cuándo elegir Flutter Quieres una sola base de código para UI y lógica: un equipo, un repositorio, una app. El producto tiene UX personalizada que debe ser visualmente consistente en todas las plataformas. El equipo empieza desde cero sin herencia de código nativo Android ni iOS. Necesitas soporte de desktop o web en el mismo proyecto sin coste adicional de equipo. Cuándo elegir KMP Tienes apps nativas existentes (Kotlin en Android, Swift en iOS) y quieres compartir lógica sin reescribir UI. La experiencia de UI nativa por plataforma es un requisito de negocio irrompible. Tu equipo es principalmente Android y quiere expandirse a iOS usando Kotlin. La app tiene lógica de dominio compleja ya probada en Kotlin que no quieres reescribir. El punto de convergencia KMP y Flutter no son necesariamente competidores. Hay equipos que usan Flutter para apps nuevas y KMP para compartir lógica entre apps legacy nativas. En 2026 ambas tecnologías son production-ready y tienen casos de uso claros en empresas grandes.\nVeredicto práctico Escenario Recomendación App nueva, equipo sin preferencia Flutter App nueva, equipo Android/Kotlin KMP Apps legacy nativas existentes KMP para compartir lógica UI personalizada o animaciones complejas Flutter Fidelidad nativa por plataforma es prioritaria KMP Un solo dev para todo Flutter Siguientes recursos recomendados Responsive con LayoutBuilder en Flutter: ejercicio resuelto CI/CD con GitHub Actions en Flutter: ejercicio resuelto Flavors dev/prod en Flutter: ejercicio resuelto Todos los ejercicios de Flutter Práctica guiada y siguiente paso Más ejercicios de Flutter Ejercicios C para reforzar fundamentos Programación en C en 100 ejercicios resueltos Ver en Amazon (incluido en Kindle Unlimited) FAQ ¿KMP reemplazará a Flutter? No a corto-medio plazo. Responden a necesidades distintas. KMP comparte lógica preservando UI nativa; Flutter comparte todo. Pueden coexistir en el mismo ecosistema de una empresa.\n¿Puede un dev de Flutter aprender KMP fácilmente? Si ya conoce conceptos de arquitectura limpia (repositorios, casos de uso, mappers), los conceptos de KMP son transferibles. La mayor diferencia es el lenguaje (Kotlin vs Dart) y la gestión de UI nativa por plataforma.\n¿Es KMP para iOS tan maduro como para Android? Está mejorando rápidamente. Kotlin/Native para iOS tiene casos de uso reales en producción en 2026, pero el tooling y la experiencia de desarrollo no son tan fluidos como en Android, donde el soporte de Gradle y el IDE es más maduro.",
+    "description": "Comparativa entre Flutter y Kotlin Multiplatform en 2026: diferencias de arquitectura, casos de uso y cuál elegir para apps multiplataforma.",
+    "tags": [
+      "Multiplataforma",
+      "Kotlin",
+      "Android"
+    ],
+    "title": "Flutter vs Kotlin Multiplatform 2026: comparativa para apps multiplataforma",
+    "uri": "/ejercicios/testing-recursos/flutter-vs-kotlin-multiplatform-2026/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Testing y recursos",
+    "content": "Flutter vs React Native 2026: cuál elegir En 2026 ambas opciones son maduras y production-ready. La pregunta ya no es cuál es “mejor” sino cuál encaja mejor con tu equipo y proyecto.\nComparativa por factores clave Factor Flutter React Native Lenguaje Dart JavaScript / TypeScript Renderizador Impeller (propio) Componentes nativos (Fabric) Rendimiento Alto y consistente Mejorado con Nueva Arquitectura Web Sí (WASM) Sí (React Native Web) Desktop macOS, Windows, Linux Soporte limitado Ecosistema pub.dev (creciendo) npm (muy grande) Curva de aprendizaje Media (requiere Dart) Baja para devs JS/React Empresa detrás Google Meta Fidelidad UI nativa Pixel-perfect propio Alta (usa componentes del SO) Flutter en 2026: lo nuevo que importa Impeller como renderer por defecto en iOS y Android: jank eliminado en la mayoría de casos. WASM: Flutter Web compila a WebAssembly, con rendimiento significativamente mejor que CanvasKit. Dart 3: records, patterns, class modifiers — código más expresivo con menos boilerplate. El ecosistema pub.dev supera los 60.000 paquetes publicados. React Native en 2026: lo nuevo que importa Nueva Arquitectura (Fabric + JSI): elimina el puente JS-nativo, reduciendo latencia en llamadas nativas. React Native 0.76+: Nueva Arquitectura habilitada por defecto en proyectos nuevos. TypeScript como estándar de facto en toda la comunidad. Expo SDK 52+: DX mejorada, managed workflow más completo con EAS. Cuándo elegir Flutter El equipo no tiene experiencia previa en React o JavaScript. Necesitas UI pixel-perfect consistente en todas las plataformas desde el día uno. Quieres soporte de desktop (macOS, Windows, Linux) en el mismo codebase. El producto tiene animaciones complejas o UX muy personalizada. Cuándo elegir React Native El equipo ya trabaja con React y TypeScript y no quiere aprender Dart. Necesitas que la UI se sienta 100% nativa por plataforma (iOS con componentes UIKit, Android con Material3 real). Tienes librerías JS específicas que no tienen equivalente en pub.dev. Ya tienes un proyecto con Expo y quieres expandirlo. Veredicto No hay respuesta universal. Ambos construyen apps de calidad en producción. El factor decisivo real es el equipo: un equipo de React devs será más productivo con React Native, y un equipo que empieza desde cero suele avanzar igual de rápido con Flutter gracias a su documentación, tipado y tooling.\nSiguientes recursos recomendados Responsive con LayoutBuilder en Flutter: ejercicio resuelto go_router en Flutter: ejercicio resuelto Provider para estado global en Flutter: ejercicio resuelto Todos los ejercicios de Flutter Práctica guiada y siguiente paso Más ejercicios de Flutter Ejercicios C para reforzar fundamentos Programación en C en 100 ejercicios resueltos Ver en Amazon (incluido en Kindle Unlimited) FAQ ¿Flutter o React Native para el primer proyecto móvil? Si no tienes base en React/JS, Flutter tiene una curva de entrada más previsible gracias a Dart y su sistema de tipos estricto. Si ya conoces React, React Native te resultará inmediato.\n¿Pueden coexistir Flutter y React Native en el mismo equipo? Sí, pero no es recomendable mezclarlos en el mismo producto. Mantener dos stacks distintos en un proyecto encarece el mantenimiento y la incorporación de nuevos devs.\n¿React Native Web es comparable a Flutter Web en rendimiento? En funcionalidad, sí. En rendimiento bruto, Flutter Web WASM tiene ventaja. Pero para la mayoría de apps de negocio, la diferencia no es perceptible por el usuario final.",
+    "description": "Comparativa completa entre Flutter y React Native en 2026: rendimiento, ecosistema, curva de aprendizaje y cuál elegir según el proyecto.",
+    "tags": [
+      "Multiplataforma",
+      "React-Native"
+    ],
+    "title": "Flutter vs React Native 2026: comparativa actualizada para elegir stack",
+    "uri": "/ejercicios/testing-recursos/flutter-vs-react-native-2026/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Kotlin",
+    "uri": "/tags/kotlin/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Multiplataforma",
+    "uri": "/tags/multiplataforma/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: React-Native",
+    "uri": "/tags/react-native/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Riverpod",
+    "uri": "/tags/riverpod/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Testing y recursos",
+    "content": "Riverpod 3 vs BLoC 9 vs Provider: la comparativa para 2026 La pregunta más repetida en proyectos Flutter sigue siendo la misma: ¿qué gestor de estado uso?\nLa respuesta honesta es: depende del tamaño del equipo y del proyecto. Aquí está la guía práctica.\nComparativa rápida Factor Provider Riverpod 3 BLoC 9 Curva de aprendizaje Baja Media Alta Boilerplate Bajo Medio (menor con code gen) Alto Escalabilidad Media Alta Alta Testabilidad Media Muy alta Muy alta Code generation No Opcional (riverpod_generator) No Auto-dispose No Sí (automático) No Reactividad granular No Sí No Debug experience Sencilla Media Trazable por eventos Ideal para Apps pequeñas / prototipos Apps medianas-grandes Equipos grandes Provider: cuándo tiene sentido en 2026 Provider sigue siendo válido para:\nProyectos pequeños o prototipos rápidos. Equipos que lo conocen y no tienen justificación para migrar. Cuando el estado es simple y no hay lógica asíncrona compleja. No uses Provider si tu app crece: vas a terminar con MultiProvider de diez niveles y código difícil de mantener. No es que sea malo; es que no escala con elegancia.\nRiverpod 3: el consenso actual Riverpod 3 con riverpod_generator y Notifier/AsyncNotifier es el punto de equilibrio entre ergonomía y escalabilidad:\n1 2 3 4 5 6 7 @riverpod class CartNotifier extends _$CartNotifier { @override List\u003cCartItem\u003e build() =\u003e []; void add(CartItem item) =\u003e state = [...state, item]; } Ventajas clave en 2026:\nAuto-dispose automático cuando el provider deja de tener listeners. Tests sin necesidad de BuildContext — creas un ProviderContainer en cada test. ref.watch y ref.read con comportamiento predecible y sin sorpresas de ciclo de vida. Compilación segura con generación de código: los errores aparecen en tiempo de compilación. BLoC 9: cuándo es la elección correcta BLoC brilla cuando la trazabilidad de lo que ocurre en el estado es crítica:\n1 2 3 4 5 6 class CartBloc extends Bloc\u003cCartEvent, CartState\u003e { CartBloc() : super(CartInitial()) { on\u003cCartItemAdded\u003e((event, emit) =\u003e emit(CartLoaded([...state.items, event.item]))); } } Úsalo cuando:\nEl equipo tiene más de tres devs y la trazabilidad de eventos importa. La app tiene flujos de negocio complejos (banca, seguros, salud, logística). Ya tienes una base de tests sobre BLoCs existentes que quieres mantener. El overhead de events/states es un coste que se paga con previsibilidad y facilidad de auditoría.\nRecomendación por tamaño de proyecto Escenario Recomendación Prototipo / \u003c 5 pantallas Provider App personal o startup temprana Riverpod 3 5-20 pantallas, equipo pequeño Riverpod 3 con code gen \u003e 20 pantallas, equipo \u003e 3 devs BLoC 9 App de finanzas, salud o logística BLoC 9 Siguientes recursos recomendados Riverpod contador en Flutter: ejercicio resuelto Provider estado global en Flutter: ejercicio resuelto BLoC con Cubit en Flutter: ejercicio resuelto BLoC events y states en Flutter: ejercicio resuelto Todos los ejercicios de Flutter Práctica guiada y siguiente paso Más ejercicios de Flutter Ejercicios C para reforzar fundamentos Programación en C en 100 ejercicios resueltos Ver en Amazon (incluido en Kindle Unlimited) FAQ ¿Puedo mezclar Provider y Riverpod en el mismo proyecto? Técnicamente sí, pero es una mala práctica. Elige uno y migra completamente. Mezclarlos genera confusión sobre cuál fuente de verdad prevalece en cada parte de la app.\n¿Riverpod reemplaza completamente a BLoC? No. BLoC sigue siendo la mejor opción para equipos grandes que necesitan trazabilidad explícita de cada evento de estado. Si esa trazabilidad no es un requisito, Riverpod es más ergonómico.\n¿GetX es una alternativa válida a estos tres? GetX ofrece menos control sobre el estado en apps grandes y tiende a mezclar responsabilidades (routing, DI, estado). Para proyectos serios, Riverpod o BLoC son más predecibles y testeables.",
+    "description": "Comparativa completa entre Riverpod 3, BLoC 9 y Provider para gestión de estado en Flutter 2026: cuándo usar cada uno y por qué.",
+    "tags": [
+      "Estado",
+      "Riverpod",
+      "Bloc"
+    ],
+    "title": "Riverpod 3 vs BLoC 9 vs Provider 2026: cuál gestor de estado elegir en Flutter",
+    "uri": "/ejercicios/testing-recursos/flutter-riverpod-vs-bloc-vs-provider-2026/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiquetas",
+    "uri": "/tags/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
@@ -114,14 +232,6 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Etiqueta :: Intermedio",
     "uri": "/tags/intermedio/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Etiquetas",
-    "uri": "/tags/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e API y async",
@@ -171,14 +281,6 @@ var relearn_searchindex = [
     ],
     "title": "Flutter Android, Web o Windows: comparativa práctica para elegir plataforma",
     "uri": "/ejercicios/testing-recursos/flutter-android-web-windows-comparativa/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Etiqueta :: Multiplataforma",
-    "uri": "/tags/multiplataforma/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Widgets y UI",
@@ -233,14 +335,6 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Etiqueta :: Arquitectura",
     "uri": "/tags/arquitectura/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Etiqueta :: Estado",
-    "uri": "/tags/estado/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Estado y arquitectura",
