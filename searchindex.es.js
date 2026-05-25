@@ -68,12 +68,12 @@ var relearn_searchindex = [
     "uri": "/ejercicios/herramientas-codigo/index.html"
   },
   {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
-    "content": "",
-    "description": "",
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
+    "content": "Ejercicios de internacionalización (i18n) en Flutter: flutter_localizations, archivos ARB, AppLocalizations, cambio de idioma en runtime y pluralización.",
+    "description": "Ejercicios de internacionalización en Flutter: flutter_localizations, archivos ARB, cambio de idioma en tiempo de ejecución y pluralización.",
     "tags": [],
-    "title": "Etiqueta :: Api",
-    "uri": "/tags/api/index.html"
+    "title": "Internacionalización",
+    "uri": "/ejercicios/internacionalizacion/index.html"
   },
   {
     "breadcrumb": "",
@@ -84,20 +84,28 @@ var relearn_searchindex = [
     "uri": "/index.html"
   },
   {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos",
+    "content": "Colección de ejercicios resueltos de Flutter para practicar con ejemplos concretos y aplicables a proyectos reales.\nQué encontrarás 📱 Ejercicios aplicables Casos de uso reales para construir apps Flutter que puedas reutilizar en proyectos propios.\n🧩 Estado y arquitectura Widgets, navegación, consumo de APIs, persistencia local y testing con enfoque práctico.\n📈 Dificultad progresiva Cada ejercicio muestra la dificultad para ayudarte a practicar en orden y medir tu progreso.\nEjercicios disponibles Widgets y UI Formularios y navegación Estado y arquitectura API y async Persistencia y datos Testing y recursos Dispositivo Herramientas y código Internacionalización FAQ ¿Hace falta experiencia previa con Flutter? No para los ejercicios marcados como principiante. Con conocer los conceptos básicos de Dart y haber instalado Flutter ya puedes empezar.\n¿Puedo usar estos ejercicios en mis proyectos reales? Sí. Cada ejercicio está pensado para ser extraíble: el código resuelto sigue las convenciones de Flutter y puede integrarse directamente en una app propia.\n¿En qué orden hago los ejercicios? Empieza por los de nivel principiante (setState, ListView, formularios, navegación) y avanza hacia los de nivel intermedio (API, estado global, persistencia). Los de nivel avanzado requieren entender bien los anteriores.\n¿Los ejercicios siguen null safety y Flutter 3? Sí. Todo el código usa null safety y es compatible con Flutter 3.x y versiones posteriores.",
+    "description": "Ejercicios resueltos de Flutter, paso a paso, para practicar estado, widgets, formularios, navegación, consumo de APIs, persistencia local y testing.",
+    "tags": [],
+    "title": "Ejercicios resueltos de Flutter (paso a paso)",
+    "uri": "/ejercicios/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Api",
+    "uri": "/tags/api/index.html"
+  },
+  {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
     "content": "",
     "description": "",
     "tags": [],
     "title": "Etiqueta :: Async",
     "uri": "/tags/async/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos",
-    "content": "Colección de ejercicios resueltos de Flutter para practicar con ejemplos concretos y aplicables a proyectos reales.\nQué encontrarás 📱 Ejercicios aplicables Casos de uso reales para construir apps Flutter que puedas reutilizar en proyectos propios.\n🧩 Estado y arquitectura Widgets, navegación, consumo de APIs, persistencia local y testing con enfoque práctico.\n📈 Dificultad progresiva Cada ejercicio muestra la dificultad para ayudarte a practicar en orden y medir tu progreso.\nEjercicios disponibles Widgets y UI Formularios y navegación Estado y arquitectura API y async Persistencia y datos Testing y recursos Dispositivo Herramientas y código FAQ ¿Hace falta experiencia previa con Flutter? No para los ejercicios marcados como principiante. Con conocer los conceptos básicos de Dart y haber instalado Flutter ya puedes empezar.\n¿Puedo usar estos ejercicios en mis proyectos reales? Sí. Cada ejercicio está pensado para ser extraíble: el código resuelto sigue las convenciones de Flutter y puede integrarse directamente en una app propia.\n¿En qué orden hago los ejercicios? Empieza por los de nivel principiante (setState, ListView, formularios, navegación) y avanza hacia los de nivel intermedio (API, estado global, persistencia). Los de nivel avanzado requieren entender bien los anteriores.\n¿Los ejercicios siguen null safety y Flutter 3? Sí. Todo el código usa null safety y es compatible con Flutter 3.x y versiones posteriores.",
-    "description": "Ejercicios resueltos de Flutter, paso a paso, para practicar estado, widgets, formularios, navegación, consumo de APIs, persistencia local y testing.",
-    "tags": [],
-    "title": "Ejercicios resueltos de Flutter (paso a paso)",
-    "uri": "/ejercicios/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
