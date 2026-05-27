@@ -33,7 +33,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Almost every real app consumes external data. These exercises cover the full flow: REST API calls using the http package, loading and error state management with FutureBuilder, and infinite scroll pagination with ScrollController. Mastering these is essential for building connected apps.\nFlutter timeout and retry: solved exercise Loading, error and empty states in Flutter: solved exercise Infinite Scroll in Flutter: solved pagination exercise FutureBuilder in Flutter: solved exercise for loading states Flutter API Call with http: solved REST exercise",
+    "content": "Almost every real app consumes external data. These exercises cover the full flow: REST API calls using the http package, loading and error state management with FutureBuilder, and infinite scroll pagination with ScrollController. Mastering these is essential for building connected apps.\nFlutter timeout and retry: solved exercise Loading, error and empty states in Flutter: solved exercise Typed JSON parsing in Flutter: solved exercise Infinite Scroll in Flutter: solved pagination exercise FutureBuilder in Flutter: solved exercise for loading states Flutter API Call with http: solved REST exercise",
     "description": "Solved Flutter API and async exercises: REST calls with http, loading state management with FutureBuilder, and infinite scroll with pagination.",
     "tags": [],
     "title": "API and async",
@@ -222,6 +222,14 @@ var relearn_searchindex = [
     "content": "",
     "description": "",
     "tags": [],
+    "title": "Tag :: Architecture",
+    "uri": "/en/tags/architecture/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
     "title": "Tag :: Async",
     "uri": "/en/tags/async/index.html"
   },
@@ -264,6 +272,18 @@ var relearn_searchindex = [
     ],
     "title": "Loading, error and empty states in Flutter: solved exercise",
     "uri": "/en/ejercicios/api-async/flutter-estados-carga-error-vacio-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e API and async",
+    "content": "Typed JSON parsing in Flutter: solved exercise Convert JSON into typed models to reduce bugs and improve maintainability.\nProblem statement Consume JSON and map it to domain classes with basic validation.\nFlutter solution 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 import 'package:flutter/material.dart'; void main() { runApp(const MaterialApp(home: ExercisePage())); } class ExercisePage extends StatefulWidget { const ExercisePage({super.key}); @override State\u003cExercisePage\u003e createState() =\u003e _ExercisePageState(); } class _ExercisePageState extends State\u003cExercisePage\u003e { bool loading = false; String message = 'Initial state'; Future\u003cvoid\u003e runExercise() async { setState(() { loading = true; message = 'Processing...'; }); await Future\u003cvoid\u003e.delayed(const Duration(milliseconds: 700)); if (!mounted) return; setState(() { loading = false; message = 'Exercise completed'; }); } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Flutter solved exercise')), body: Center( child: Column( mainAxisSize: MainAxisSize.min, children: [ Text(message), const SizedBox(height: 12), ElevatedButton( onPressed: loading ? null : runExercise, child: Text(loading ? 'Loading...' : 'Run'), ), ], ), ), ); } } Expected result A working minimal screen to practice: typed models, safety, maintainability.\nCommon mistakes Not separating loading, success, and error states. Coupling UI and data in a single class. Skipping state validation before navigation or rendering. Practical use This pattern appears in real apps to improve robustness, maintainability, and UX.\nRecommended next exercise All Flutter exercises More Flutter exercises C exercises to strengthen fundamentals Guided practice and next step More Flutter exercises Programming in C in 100 Solved Exercises View the book on Amazon (included in Kindle Unlimited) Subscribe to the newsletter FAQ What do you practice in this exercise? You practice typed models, safety, maintainability with a practical production-oriented scenario.\nIs this exercise useful for a portfolio? Yes. You can adapt it and present a clear implementation with technical rationale.\nWhat should I do next? Connect it to a real API or local persistence depending on your product goal.",
+    "description": "Convert JSON into typed models to reduce bugs and improve maintainability.",
+    "tags": [
+      "Intermediate",
+      "Api",
+      "Architecture"
+    ],
+    "title": "Typed JSON parsing in Flutter: solved exercise",
+    "uri": "/en/ejercicios/api-async/flutter-json-tipado-modelos-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
@@ -339,14 +359,6 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Tag :: Testing",
     "uri": "/en/tags/testing/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Architecture",
-    "uri": "/en/tags/architecture/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e State and architecture",
