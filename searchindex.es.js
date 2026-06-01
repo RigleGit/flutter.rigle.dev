@@ -17,7 +17,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
-    "content": "Gestionar el estado correctamente es la habilidad que separa una app funcional de una escalable. Estos ejercicios recorren los tres enfoques más usados en Flutter: setState para estado local en un solo widget, Provider con ChangeNotifier para estado global compartido, y Riverpod con StateProvider como alternativa moderna y testeable.\nArquitectura por capas en Flutter: ejercicio resuelto Inyeccion de dependencias con get_it en Flutter: ejercicio resuelto Mapper DTO a dominio en Flutter: ejercicio resuelto Repositorio y casos de uso en Flutter: ejercicio resuelto Riverpod en Flutter: ejercicio resuelto con contador Provider en Flutter para estado global: ejercicio resuelto Contador en Flutter con setState: ejercicio resuelto paso a paso",
+    "content": "Gestionar el estado correctamente es la habilidad que separa una app funcional de una escalable. Estos ejercicios recorren los tres enfoques más usados en Flutter: setState para estado local en un solo widget, Provider con ChangeNotifier para estado global compartido, y Riverpod con StateProvider como alternativa moderna y testeable.\nArquitectura por capas en Flutter: ejercicio resuelto Inyeccion con Riverpod providers: ejercicio resuelto Inyeccion de dependencias con get_it en Flutter: ejercicio resuelto Mapper DTO a dominio en Flutter: ejercicio resuelto Repositorio y casos de uso en Flutter: ejercicio resuelto Riverpod en Flutter: ejercicio resuelto con contador Provider en Flutter para estado global: ejercicio resuelto Contador en Flutter con setState: ejercicio resuelto paso a paso",
     "description": "Ejercicios resueltos de gestión de estado en Flutter: setState para estado local, Provider con ChangeNotifier y Riverpod con StateProvider.",
     "tags": [],
     "title": "Estado y arquitectura",
@@ -272,6 +272,18 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Etiqueta :: Intermedio",
     "uri": "/tags/intermedio/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Estado y arquitectura",
+    "content": "Inyeccion con Riverpod providers: ejercicio resuelto Usa Riverpod como capa de inyeccion para reemplazar implementaciones facilmente.\nEnunciado Inyectar repositorios y servicios via providers parametrizables.\nSolucion en Flutter 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 import 'package:flutter/material.dart'; void main() { runApp(const MaterialApp(home: ExercisePage())); } class ExercisePage extends StatefulWidget { const ExercisePage({super.key}); @override State\u003cExercisePage\u003e createState() =\u003e _ExercisePageState(); } class _ExercisePageState extends State\u003cExercisePage\u003e { bool loading = false; String message = 'Estado inicial'; Future\u003cvoid\u003e runExercise() async { setState(() { loading = true; message = 'Procesando...'; }); await Future\u003cvoid\u003e.delayed(const Duration(milliseconds: 700)); if (!mounted) return; setState(() { loading = false; message = 'Ejercicio completado'; }); } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Flutter ejercicio resuelto')), body: Center( child: Column( mainAxisSize: MainAxisSize.min, children: [ Text(message), const SizedBox(height: 12), ElevatedButton( onPressed: loading ? null : runExercise, child: Text(loading ? 'Cargando...' : 'Ejecutar'), ), ], ), ), ); } } Resultado esperado Pantalla funcional con flujo minimo reproducible para practicar: riverpod, di, modularidad.\nErrores frecuentes No separar estado de carga, exito y error. Acoplar UI y datos en una sola clase. No validar estados antes de navegar o renderizar. Aplicacion practica Este patron se usa en apps reales para mejorar robustez, mantenibilidad y experiencia de usuario.\nSiguiente ejercicio recomendado Todos los ejercicios Flutter Mas ejercicios de Flutter Ejercicios C para reforzar fundamentos Práctica guiada y siguiente paso Mas ejercicios de Flutter Programacion en C en 100 ejercicios resueltos Ver el libro en Amazon (incluido en Kindle Unlimited) Suscribirte a la newsletter FAQ Que se practica en este ejercicio? Se practica riverpod, di, modularidad con un caso util para proyectos reales.\nEste ejercicio sirve para portfolio? Si. Puedes adaptarlo y mostrar una implementacion clara con decisiones tecnicas.\nCual es el siguiente paso? Integrarlo con una API real o persistencia local segun el objetivo de tu app.",
+    "description": "Usa Riverpod como capa de inyeccion para reemplazar implementaciones facilmente.",
+    "tags": [
+      "Intermedio",
+      "Estado",
+      "Arquitectura"
+    ],
+    "title": "Inyeccion con Riverpod providers: ejercicio resuelto",
+    "uri": "/ejercicios/estado-arquitectura/flutter-inyeccion-riverpod-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Estado y arquitectura",
