@@ -41,7 +41,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Persisting data between sessions and authenticating users are standard requirements in professional apps. These exercises cover three main layers: SharedPreferences for simple key-value storage, sqflite for local relational databases with full CRUD operations, and Firebase Auth for secure email and password login.\nAuth with refresh token in Flutter: solved exercise SQLite with sqflite in Flutter: solved CRUD exercise SharedPreferences in Flutter: solved exercise for local settings Firebase Auth Login in Flutter: solved email/password exercise",
+    "content": "Persisting data between sessions and authenticating users are standard requirements in professional apps. These exercises cover three main layers: SharedPreferences for simple key-value storage, sqflite for local relational databases with full CRUD operations, and Firebase Auth for secure email and password login.\nAuth with refresh token in Flutter: solved exercise Global logout and session expiration: solved exercise SQLite with sqflite in Flutter: solved CRUD exercise SharedPreferences in Flutter: solved exercise for local settings Firebase Auth Login in Flutter: solved email/password exercise",
     "description": "Solved Flutter persistence exercises: SharedPreferences for local settings, SQLite with sqflite for full CRUD, and Firebase Auth for email/password login.",
     "tags": [],
     "title": "Persistence and data",
@@ -324,6 +324,18 @@ var relearn_searchindex = [
     ],
     "title": "Flutter timeout and retry: solved exercise",
     "uri": "/en/ejercicios/api-async/flutter-timeout-retry-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Persistence and data",
+    "content": "Global logout and session expiration: solved exercise Handle centralized logout when invalid session or token is detected.\nProblem statement Trigger global logout from interceptor and redirect to login.\nFlutter solution 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 import 'package:flutter/material.dart'; void main() { runApp(const MaterialApp(home: ExercisePage())); } class ExercisePage extends StatefulWidget { const ExercisePage({super.key}); @override State\u003cExercisePage\u003e createState() =\u003e _ExercisePageState(); } class _ExercisePageState extends State\u003cExercisePage\u003e { bool loading = false; String message = 'Initial state'; Future\u003cvoid\u003e runExercise() async { setState(() { loading = true; message = 'Processing...'; }); await Future\u003cvoid\u003e.delayed(const Duration(milliseconds: 700)); if (!mounted) return; setState(() { loading = false; message = 'Exercise completed'; }); } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Flutter solved exercise')), body: Center( child: Column( mainAxisSize: MainAxisSize.min, children: [ Text(message), const SizedBox(height: 12), ElevatedButton( onPressed: loading ? null : runExercise, child: Text(loading ? 'Loading...' : 'Run'), ), ], ), ), ); } } Expected result A working minimal screen to practice: global logout, security, flow.\nCommon mistakes Not separating loading, success, and error states. Coupling UI and data in a single class. Skipping state validation before navigation or rendering. Practical use This pattern appears in real apps to improve robustness, maintainability, and UX.\nRecommended next exercise All Flutter exercises More Flutter exercises C exercises to strengthen fundamentals Guided practice and next step More Flutter exercises Programming in C in 100 Solved Exercises View the book on Amazon (included in Kindle Unlimited) Subscribe to the newsletter FAQ What do you practice in this exercise? You practice global logout, security, flow with a practical production-oriented scenario.\nIs this exercise useful for a portfolio? Yes. You can adapt it and present a clear implementation with technical rationale.\nWhat should I do next? Connect it to a real API or local persistence depending on your product goal.",
+    "description": "Handle centralized logout when invalid session or token is detected.",
+    "tags": [
+      "Intermediate",
+      "Authentication",
+      "State"
+    ],
+    "title": "Global logout and session expiration: solved exercise",
+    "uri": "/en/ejercicios/persistencia-datos/flutter-logout-expiracion-global-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e State and architecture",
