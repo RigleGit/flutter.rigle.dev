@@ -9,7 +9,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
-    "content": "Capturar datos del usuario y moverse entre pantallas son las dos acciones más frecuentes en cualquier app. Estos ejercicios cubren los tres enfoques principales de Flutter: formularios con Form y TextFormField con validación en tiempo real, navegación básica con named routes y la solución declarativa actual con go_router.\ngo_router guards de autenticacion: ejercicio resuelto go_router en Flutter: ejercicio resuelto de navegación Navegación con named routes en Flutter: ejercicio resuelto Formulario con validación en Flutter: ejercicio resuelto",
+    "content": "Capturar datos del usuario y moverse entre pantallas son las dos acciones más frecuentes en cualquier app. Estos ejercicios cubren los tres enfoques principales de Flutter: formularios con Form y TextFormField con validación en tiempo real, navegación básica con named routes y la solución declarativa actual con go_router.\nDeep links con go_router en Flutter: ejercicio resuelto go_router guards de autenticacion: ejercicio resuelto go_router en Flutter: ejercicio resuelto de navegación Navegación con named routes en Flutter: ejercicio resuelto Formulario con validación en Flutter: ejercicio resuelto",
     "description": "Ejercicios resueltos de formularios y navegación en Flutter: validación con Form, named routes y navegación declarativa con go_router.",
     "tags": [],
     "title": "Formularios y navegación",
@@ -272,6 +272,18 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Etiqueta :: Avanzado",
     "uri": "/tags/avanzado/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Formularios y navegación",
+    "content": "Deep links con go_router en Flutter: ejercicio resuelto Configura deep links para abrir pantallas especificas desde URL externa.\nEnunciado Abrir detalle de producto desde una URL compartida.\nSolucion en Flutter 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 import 'package:flutter/material.dart'; void main() { runApp(const MaterialApp(home: ExercisePage())); } class ExercisePage extends StatefulWidget { const ExercisePage({super.key}); @override State\u003cExercisePage\u003e createState() =\u003e _ExercisePageState(); } class _ExercisePageState extends State\u003cExercisePage\u003e { bool loading = false; String message = 'Estado inicial'; Future\u003cvoid\u003e runExercise() async { setState(() { loading = true; message = 'Procesando...'; }); await Future\u003cvoid\u003e.delayed(const Duration(milliseconds: 700)); if (!mounted) return; setState(() { loading = false; message = 'Ejercicio completado'; }); } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Flutter ejercicio resuelto')), body: Center( child: Column( mainAxisSize: MainAxisSize.min, children: [ Text(message), const SizedBox(height: 12), ElevatedButton( onPressed: loading ? null : runExercise, child: Text(loading ? 'Cargando...' : 'Ejecutar'), ), ], ), ), ); } } Resultado esperado Pantalla funcional con flujo minimo reproducible para practicar: deep links, routing, ux.\nErrores frecuentes No separar estado de carga, exito y error. Acoplar UI y datos en una sola clase. No validar estados antes de navegar o renderizar. Aplicacion practica Este patron se usa en apps reales para mejorar robustez, mantenibilidad y experiencia de usuario.\nSiguiente ejercicio recomendado Todos los ejercicios Flutter Mas ejercicios de Flutter Ejercicios C para reforzar fundamentos Práctica guiada y siguiente paso Mas ejercicios de Flutter Programacion en C en 100 ejercicios resueltos Ver el libro en Amazon (incluido en Kindle Unlimited) Suscribirte a la newsletter FAQ Que se practica en este ejercicio? Se practica deep links, routing, ux con un caso util para proyectos reales.\nEste ejercicio sirve para portfolio? Si. Puedes adaptarlo y mostrar una implementacion clara con decisiones tecnicas.\nCual es el siguiente paso? Integrarlo con una API real o persistencia local segun el objetivo de tu app.",
+    "description": "Configura deep links para abrir pantallas especificas desde URL externa.",
+    "tags": [
+      "Avanzado",
+      "Navegacion",
+      "Multiplataforma"
+    ],
+    "title": "Deep links con go_router en Flutter: ejercicio resuelto",
+    "uri": "/ejercicios/formularios-navegacion/flutter-deep-links-go-router-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e API y async",
