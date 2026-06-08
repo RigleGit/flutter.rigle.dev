@@ -17,7 +17,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Capturing user input and moving between screens are the two most frequent actions in any app. These exercises cover Flutter’s three main approaches: forms with Form and TextFormField including real-time validation, basic navigation with named routes, and the modern declarative approach with go_router.\nDeep links with go_router in Flutter: solved exercise go_router auth guards: solved exercise go_router in Flutter: solved navigation exercise Named Routes in Flutter: solved navigation exercise Flutter Form Validation: solved exercise with TextFormField",
+    "content": "Capturing user input and moving between screens are the two most frequent actions in any app. These exercises cover Flutter’s three main approaches: forms with Form and TextFormField including real-time validation, basic navigation with named routes, and the modern declarative approach with go_router.\nDeep links with go_router in Flutter: solved exercise go_router auth guards: solved exercise Not found route in Flutter: solved exercise go_router in Flutter: solved navigation exercise Named Routes in Flutter: solved navigation exercise Flutter Form Validation: solved exercise with TextFormField",
     "description": "Solved Flutter exercises on forms and navigation: Form validation with TextFormField, named routes, and declarative navigation with go_router.",
     "tags": [],
     "title": "Forms and navigation",
@@ -412,6 +412,18 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Tag :: Navigation",
     "uri": "/en/tags/navigation/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Forms and navigation",
+    "content": "Not found route in Flutter: solved exercise Handle unknown routes with a friendly 404 screen.\nProblem statement Show fallback screen when user opens an invalid route.\nFlutter solution 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 import 'package:flutter/material.dart'; void main() { runApp(const MaterialApp(home: ExercisePage())); } class ExercisePage extends StatefulWidget { const ExercisePage({super.key}); @override State\u003cExercisePage\u003e createState() =\u003e _ExercisePageState(); } class _ExercisePageState extends State\u003cExercisePage\u003e { bool loading = false; String message = 'Initial state'; Future\u003cvoid\u003e runExercise() async { setState(() { loading = true; message = 'Processing...'; }); await Future\u003cvoid\u003e.delayed(const Duration(milliseconds: 700)); if (!mounted) return; setState(() { loading = false; message = 'Exercise completed'; }); } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Flutter solved exercise')), body: Center( child: Column( mainAxisSize: MainAxisSize.min, children: [ Text(message), const SizedBox(height: 12), ElevatedButton( onPressed: loading ? null : runExercise, child: Text(loading ? 'Loading...' : 'Run'), ), ], ), ), ); } } Expected result A working minimal screen to practice: 404, routes, robustness.\nCommon mistakes Not separating loading, success, and error states. Coupling UI and data in a single class. Skipping state validation before navigation or rendering. Practical use This pattern appears in real apps to improve robustness, maintainability, and UX.\nRecommended next exercise All Flutter exercises More Flutter exercises C exercises to strengthen fundamentals Guided practice and next step More Flutter exercises Programming in C in 100 Solved Exercises View the book on Amazon (included in Kindle Unlimited) Subscribe to the newsletter FAQ What do you practice in this exercise? You practice 404, routes, robustness with a practical production-oriented scenario.\nIs this exercise useful for a portfolio? Yes. You can adapt it and present a clear implementation with technical rationale.\nWhat should I do next? Connect it to a real API or local persistence depending on your product goal.",
+    "description": "Handle unknown routes with a friendly 404 screen.",
+    "tags": [
+      "Beginner",
+      "Navigation",
+      "Ui"
+    ],
+    "title": "Not found route in Flutter: solved exercise",
+    "uri": "/en/ejercicios/formularios-navegacion/flutter-ruta-not-found-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
