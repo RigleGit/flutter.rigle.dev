@@ -41,7 +41,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
-    "content": "Más allá de los ejercicios básicos, esta sección cubre tres áreas complementarias: cómo testear widgets con flutter_test para detectar regresiones antes de que lleguen a producción, cómo elegir plataforma de despliegue entre Android, Web y Windows, y cómo aplicar IA de forma práctica en apps Flutter.\nFlock vs Flutter 2026: qué es el fork de la comunidad y cuándo usarlo Flutter vs Kotlin Multiplatform 2026: comparativa para apps multiplataforma Flutter vs React Native 2026: comparativa actualizada para elegir stack Riverpod 3 vs BLoC 9 vs Provider 2026: cuál gestor de estado elegir en Flutter Integration test de login en Flutter: ejercicio resuelto Flutter + IA: 5 ideas prácticas para crear apps útiles Flutter Android, Web o Windows: comparativa práctica para elegir plataforma Widget test en Flutter: ejercicio resuelto para testear UI",
+    "content": "Más allá de los ejercicios básicos, esta sección cubre tres áreas complementarias: cómo testear widgets con flutter_test para detectar regresiones antes de que lleguen a producción, cómo elegir plataforma de despliegue entre Android, Web y Windows, y cómo aplicar IA de forma práctica en apps Flutter.\nFlock vs Flutter 2026: qué es el fork de la comunidad y cuándo usarlo Flutter vs Kotlin Multiplatform 2026: comparativa para apps multiplataforma Flutter vs React Native 2026: comparativa actualizada para elegir stack Riverpod 3 vs BLoC 9 vs Provider 2026: cuál gestor de estado elegir en Flutter Integration test de login en Flutter: ejercicio resuelto Integration test listado-detalle: ejercicio resuelto Flutter + IA: 5 ideas prácticas para crear apps útiles Flutter Android, Web o Windows: comparativa práctica para elegir plataforma Widget test en Flutter: ejercicio resuelto para testear UI",
     "description": "Testing y guías de Flutter: widget tests con flutter_test, comparativa multiplataforma Android, Web y Windows, e ideas prácticas con IA.",
     "tags": [],
     "title": "Testing y recursos",
@@ -328,6 +328,18 @@ var relearn_searchindex = [
     ],
     "title": "Integration test de login en Flutter: ejercicio resuelto",
     "uri": "/ejercicios/testing-recursos/flutter-integration-test-login-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Testing y recursos",
+    "content": "Integration test listado-detalle: ejercicio resuelto Valida recorrido listado -\u003e detalle con datos simulados.\nEnunciado Comprobar que al tocar item se abre detalle correcto.\nSolucion en Flutter 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 import 'package:flutter/material.dart'; void main() { runApp(const MaterialApp(home: ExercisePage())); } class ExercisePage extends StatefulWidget { const ExercisePage({super.key}); @override State\u003cExercisePage\u003e createState() =\u003e _ExercisePageState(); } class _ExercisePageState extends State\u003cExercisePage\u003e { bool loading = false; String message = 'Estado inicial'; Future\u003cvoid\u003e runExercise() async { setState(() { loading = true; message = 'Procesando...'; }); await Future\u003cvoid\u003e.delayed(const Duration(milliseconds: 700)); if (!mounted) return; setState(() { loading = false; message = 'Ejercicio completado'; }); } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Flutter ejercicio resuelto')), body: Center( child: Column( mainAxisSize: MainAxisSize.min, children: [ Text(message), const SizedBox(height: 12), ElevatedButton( onPressed: loading ? null : runExercise, child: Text(loading ? 'Cargando...' : 'Ejecutar'), ), ], ), ), ); } } Resultado esperado Pantalla funcional con flujo minimo reproducible para practicar: integration test, navegacion, flujo.\nErrores frecuentes No separar estado de carga, exito y error. Acoplar UI y datos en una sola clase. No validar estados antes de navegar o renderizar. Aplicacion practica Este patron se usa en apps reales para mejorar robustez, mantenibilidad y experiencia de usuario.\nSiguiente ejercicio recomendado Todos los ejercicios Flutter Mas ejercicios de Flutter Ejercicios C para reforzar fundamentos Práctica guiada y siguiente paso Mas ejercicios de Flutter Programacion en C en 100 ejercicios resueltos Ver el libro en Amazon (incluido en Kindle Unlimited) Suscribirte a la newsletter FAQ Que se practica en este ejercicio? Se practica integration test, navegacion, flujo con un caso util para proyectos reales.\nEste ejercicio sirve para portfolio? Si. Puedes adaptarlo y mostrar una implementacion clara con decisiones tecnicas.\nCual es el siguiente paso? Integrarlo con una API real o persistencia local segun el objetivo de tu app.",
+    "description": "Valida recorrido listado -\u003e detalle con datos simulados.",
+    "tags": [
+      "Avanzado",
+      "Testing",
+      "Api"
+    ],
+    "title": "Integration test listado-detalle: ejercicio resuelto",
+    "uri": "/ejercicios/testing-recursos/flutter-integration-test-listado-detalle-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
