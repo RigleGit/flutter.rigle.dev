@@ -9,7 +9,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Widgets are the core of Flutter — everything on screen is a widget. These exercises cover the most common UI patterns: dynamic lists with ListView.builder, tab navigation with BottomNavigationBar, dark mode with ThemeMode, and loading/error state handling with FutureBuilder. A great starting point for beginners.\nReduce unnecessary rebuilds in Flutter: solved exercise Dark Mode in Flutter with ThemeMode: solved exercise BottomNavigationBar in Flutter: solved exercise with IndexedStack ListView.builder in Flutter: solved exercise with dynamic list",
+    "content": "Widgets are the core of Flutter — everything on screen is a widget. These exercises cover the most common UI patterns: dynamic lists with ListView.builder, tab navigation with BottomNavigationBar, dark mode with ThemeMode, and loading/error state handling with FutureBuilder. A great starting point for beginners.\nLong lists and images in Flutter: solved exercise Reduce unnecessary rebuilds in Flutter: solved exercise Dark Mode in Flutter with ThemeMode: solved exercise BottomNavigationBar in Flutter: solved exercise with IndexedStack ListView.builder in Flutter: solved exercise with dynamic list",
     "description": "Solved Flutter widget exercises: ListView.builder, BottomNavigationBar, dark mode with ThemeMode, and async loading with FutureBuilder.",
     "tags": [],
     "title": "Widgets and UI",
@@ -452,6 +452,18 @@ var relearn_searchindex = [
     ],
     "title": "Loading, error and empty states in Flutter: solved exercise",
     "uri": "/en/ejercicios/api-async/flutter-estados-carga-error-vacio-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Widgets and UI",
+    "content": "Long lists and images in Flutter: solved exercise Improve long-list performance with image caching and efficient builders.\nProblem statement Render long feed with placeholders, cache, and moderate prefetch.\nFlutter solution 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 import 'package:flutter/material.dart'; void main() { runApp(const MaterialApp(home: ExercisePage())); } class ExercisePage extends StatefulWidget { const ExercisePage({super.key}); @override State\u003cExercisePage\u003e createState() =\u003e _ExercisePageState(); } class _ExercisePageState extends State\u003cExercisePage\u003e { bool loading = false; String message = 'Initial state'; Future\u003cvoid\u003e runExercise() async { setState(() { loading = true; message = 'Processing...'; }); await Future\u003cvoid\u003e.delayed(const Duration(milliseconds: 700)); if (!mounted) return; setState(() { loading = false; message = 'Exercise completed'; }); } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Flutter solved exercise')), body: Center( child: Column( mainAxisSize: MainAxisSize.min, children: [ Text(message), const SizedBox(height: 12), ElevatedButton( onPressed: loading ? null : runExercise, child: Text(loading ? 'Loading...' : 'Run'), ), ], ), ), ); } } Expected result A working minimal screen to practice: long lists, images, memory.\nCommon mistakes Not separating loading, success, and error states. Coupling UI and data in a single class. Skipping state validation before navigation or rendering. Practical use This pattern appears in real apps to improve robustness, maintainability, and UX.\nRecommended next exercise All Flutter exercises More Flutter exercises C exercises to strengthen fundamentals Guided practice and next step More Flutter exercises Programming in C in 100 Solved Exercises View the book on Amazon (included in Kindle Unlimited) Subscribe to the newsletter FAQ What do you practice in this exercise? You practice long lists, images, memory with a practical production-oriented scenario.\nIs this exercise useful for a portfolio? Yes. You can adapt it and present a clear implementation with technical rationale.\nWhat should I do next? Connect it to a real API or local persistence depending on your product goal.",
+    "description": "Improve long-list performance with image caching and efficient builders.",
+    "tags": [
+      "Intermediate",
+      "Ui",
+      "Async"
+    ],
+    "title": "Long lists and images in Flutter: solved exercise",
+    "uri": "/en/ejercicios/widgets-ui/flutter-listas-largas-imagenes-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Testing and resources",
