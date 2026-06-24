@@ -25,7 +25,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Managing state correctly is the skill that separates a functional app from a scalable one. These exercises cover Flutter’s three most popular approaches: setState for local single-widget state, Provider with ChangeNotifier for shared global state, and Riverpod with StateProvider as a modern, testable alternative.\nDependency injection with get_it in Flutter: solved exercise DTO to domain mapper in Flutter: solved exercise Feature module with DI and testing in Flutter: solved exercise Injection with Riverpod providers: solved exercise Layered architecture in Flutter: solved exercise Optimistic update in Flutter: solved exercise Repository and use cases in Flutter: solved exercise Riverpod in Flutter: solved counter exercise Provider in Flutter for global state: solved exercise Flutter Counter with setState: solved exercise step by step",
+    "content": "Managing state correctly is the skill that separates a functional app from a scalable one. These exercises cover Flutter’s three most popular approaches: setState for local single-widget state, Provider with ChangeNotifier for shared global state, and Riverpod with StateProvider as a modern, testable alternative.\nBLoC with Cubit in Flutter: solved exercise Dependency injection with get_it in Flutter: solved exercise DTO to domain mapper in Flutter: solved exercise Feature module with DI and testing in Flutter: solved exercise Injection with Riverpod providers: solved exercise Layered architecture in Flutter: solved exercise Optimistic update in Flutter: solved exercise Repository and use cases in Flutter: solved exercise Riverpod in Flutter: solved counter exercise Provider in Flutter for global state: solved exercise Flutter Counter with setState: solved exercise step by step",
     "description": "Solved Flutter state management exercises: setState for local state, Provider with ChangeNotifier, and Riverpod with StateProvider.",
     "tags": [],
     "title": "State and architecture",
@@ -96,8 +96,28 @@ var relearn_searchindex = [
     "content": "",
     "description": "",
     "tags": [],
+    "title": "Tag :: Architecture",
+    "uri": "/en/tags/architecture/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
     "title": "Tag :: Bloc",
     "uri": "/en/tags/bloc/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e State and architecture",
+    "content": "BLoC with Cubit in Flutter: solved exercise Cubit is the streamlined version of the BLoC pattern: it manages state by emitting typed values without requiring explicit event definitions. It is ideal for UI logic that does not need event histories or complex side effects.\nProblem statement Build a counter with three operations (increment, decrement, reset) using Cubit. The UI must react to every state change automatically without a single setState.\nDependencies 1 2 dependencies: flutter_bloc: ^8.1.6 Flutter solution 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 import 'package:flutter/material.dart'; import 'package:flutter_bloc/flutter_bloc.dart'; // ── Cubit ──────────────────────────────────────────────────────────────────── class CounterCubit extends Cubit\u003cint\u003e { CounterCubit() : super(0); void increment() =\u003e emit(state + 1); void decrement() =\u003e emit(state - 1); void reset() =\u003e emit(0); } // ── App ────────────────────────────────────────────────────────────────────── void main() { runApp( BlocProvider( create: (_) =\u003e CounterCubit(), child: const MaterialApp(home: CounterPage()), ), ); } // ── UI ─────────────────────────────────────────────────────────────────────── class CounterPage extends StatelessWidget { const CounterPage({super.key}); @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Cubit – Counter')), body: Center( child: BlocBuilder\u003cCounterCubit, int\u003e( builder: (context, count) { return Column( mainAxisSize: MainAxisSize.min, children: [ Text( '$count', style: Theme.of(context).textTheme.displayLarge, ), const SizedBox(height: 24), Row( mainAxisSize: MainAxisSize.min, children: [ FilledButton.icon( onPressed: () =\u003e context.read\u003cCounterCubit\u003e().decrement(), icon: const Icon(Icons.remove), label: const Text('Subtract'), ), const SizedBox(width: 8), OutlinedButton( onPressed: () =\u003e context.read\u003cCounterCubit\u003e().reset(), child: const Text('Reset'), ), const SizedBox(width: 8), FilledButton.icon( onPressed: () =\u003e context.read\u003cCounterCubit\u003e().increment(), icon: const Icon(Icons.add), label: const Text('Add'), ), ], ), ], ); }, ), ), ); } } Expected result Counter starts at 0. Each button calls a cubit method and the UI rebuilds automatically. No setState appears anywhere in the screen widget. Common mistakes Creating the cubit inside the widget instead of providing it with BlocProvider: the cubit is destroyed and recreated on every rebuild. Using context.read inside build (it is only safe in callbacks); use context.watch or BlocBuilder to observe state. Emitting the same primitive value: Cubit compares by equality and silently discards duplicates, which can be confusing when state is a mutable object. When to use Cubit vs BLoC Situation Cubit BLoC Simple state, few operations ✅ overkill Event history, audit logging ❌ ✅ Complex side effects per event ❌ ✅ External streams feeding state ❌ ✅ Practical use Cubit is the natural entry point into the BLoC ecosystem. It is used in production apps for forms, shopping carts, filters, user preferences, and any feature-level state that does not need event traceability.\nRecommended next exercise BLoC with typed events and states in Flutter: solved exercise Dependency injection with get_it in Flutter: solved exercise Provider in Flutter for global state: solved exercise All Flutter exercises Guided practice and next step More Flutter exercises C exercises to strengthen fundamentals Programming in C in 100 Solved Exercises View the book on Amazon (included in Kindle Unlimited) Subscribe to the newsletter FAQ Is Cubit officially part of flutter_bloc? Yes. Cubit is included in the flutter_bloc package maintained by Felix Angelov and is fully documented.\nCan I migrate from Cubit to BLoC without rewriting the UI? Yes. BlocBuilder works the same with both. Only the class managing the state changes.\nDo I need a BlocObserver from day one? Not required, but adding a global BlocObserver in development to log all state transitions is a highly recommended practice.",
+    "description": "Solved Flutter exercise using Cubit from flutter_bloc: emit typed states, BlocBuilder, and clean separation of logic and UI.",
+    "tags": [
+      "Intermediate",
+      "State",
+      "Architecture"
+    ],
+    "title": "BLoC with Cubit in Flutter: solved exercise",
+    "uri": "/en/ejercicios/estado-arquitectura/flutter-bloc-cubit-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
@@ -140,6 +160,14 @@ var relearn_searchindex = [
     ],
     "title": "Flutter vs React Native 2026: updated comparison to choose your stack",
     "uri": "/en/ejercicios/testing-recursos/flutter-vs-react-native-2026/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Intermediate",
+    "uri": "/en/tags/intermediate/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
@@ -198,6 +226,14 @@ var relearn_searchindex = [
     "content": "",
     "description": "",
     "tags": [],
+    "title": "Tag :: State",
+    "uri": "/en/tags/state/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
     "title": "Tag :: State-Management",
     "uri": "/en/tags/state-management/index.html"
   },
@@ -224,14 +260,6 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Tag :: Api",
     "uri": "/en/tags/api/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Architecture",
-    "uri": "/en/tags/architecture/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
@@ -396,14 +424,6 @@ var relearn_searchindex = [
     ],
     "title": "Injection with Riverpod providers: solved exercise",
     "uri": "/en/ejercicios/estado-arquitectura/flutter-inyeccion-riverpod-ejercicio-resuelto/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Intermediate",
-    "uri": "/en/tags/intermediate/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Testing and resources",
@@ -612,14 +632,6 @@ var relearn_searchindex = [
     ],
     "title": "Secure storage for tokens in Flutter: solved exercise",
     "uri": "/en/ejercicios/persistencia-datos/flutter-secure-storage-token-ejercicio-resuelto/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: State",
-    "uri": "/en/tags/state/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e API and async",

@@ -17,7 +17,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
-    "content": "Gestionar el estado correctamente es la habilidad que separa una app funcional de una escalable. Estos ejercicios recorren los tres enfoques más usados en Flutter: setState para estado local en un solo widget, Provider con ChangeNotifier para estado global compartido, y Riverpod con StateProvider como alternativa moderna y testeable.\nArquitectura por capas en Flutter: ejercicio resuelto Inyeccion con Riverpod providers: ejercicio resuelto Inyeccion de dependencias con get_it en Flutter: ejercicio resuelto Mapper DTO a dominio en Flutter: ejercicio resuelto Modulo feature con DI y testing en Flutter: ejercicio resuelto Optimistic update en Flutter: ejercicio resuelto Repositorio y casos de uso en Flutter: ejercicio resuelto Riverpod en Flutter: ejercicio resuelto con contador Provider en Flutter para estado global: ejercicio resuelto Contador en Flutter con setState: ejercicio resuelto paso a paso",
+    "content": "Gestionar el estado correctamente es la habilidad que separa una app funcional de una escalable. Estos ejercicios recorren los tres enfoques más usados en Flutter: setState para estado local en un solo widget, Provider con ChangeNotifier para estado global compartido, y Riverpod con StateProvider como alternativa moderna y testeable.\nBLoC con Cubit en Flutter: ejercicio resuelto Arquitectura por capas en Flutter: ejercicio resuelto Inyeccion con Riverpod providers: ejercicio resuelto Inyeccion de dependencias con get_it en Flutter: ejercicio resuelto Mapper DTO a dominio en Flutter: ejercicio resuelto Modulo feature con DI y testing en Flutter: ejercicio resuelto Optimistic update en Flutter: ejercicio resuelto Repositorio y casos de uso en Flutter: ejercicio resuelto Riverpod en Flutter: ejercicio resuelto con contador Provider en Flutter para estado global: ejercicio resuelto Contador en Flutter con setState: ejercicio resuelto paso a paso",
     "description": "Ejercicios resueltos de gestión de estado en Flutter: setState para estado local, Provider con ChangeNotifier y Riverpod con StateProvider.",
     "tags": [],
     "title": "Estado y arquitectura",
@@ -96,8 +96,28 @@ var relearn_searchindex = [
     "content": "",
     "description": "",
     "tags": [],
+    "title": "Etiqueta :: Arquitectura",
+    "uri": "/tags/arquitectura/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
     "title": "Etiqueta :: Bloc",
     "uri": "/tags/bloc/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Estado y arquitectura",
+    "content": "BLoC con Cubit en Flutter: ejercicio resuelto Cubit es la versión simplificada del patrón BLoC: gestiona estado emitiendo valores tipados sin necesidad de definir eventos explícitos. Es ideal para lógica de UI que no requiere historiales de eventos ni side effects complejos.\nEnunciado Implementa un contador con tres operaciones (incrementar, decrementar, reiniciar) usando Cubit. La UI debe reaccionar automáticamente a cada cambio de estado sin setState.\nDependencias 1 2 dependencies: flutter_bloc: ^8.1.6 Solución en Flutter 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 import 'package:flutter/material.dart'; import 'package:flutter_bloc/flutter_bloc.dart'; // ── Cubit ──────────────────────────────────────────────────────────────────── class CounterCubit extends Cubit\u003cint\u003e { CounterCubit() : super(0); void increment() =\u003e emit(state + 1); void decrement() =\u003e emit(state - 1); void reset() =\u003e emit(0); } // ── App ────────────────────────────────────────────────────────────────────── void main() { runApp( BlocProvider( create: (_) =\u003e CounterCubit(), child: const MaterialApp(home: CounterPage()), ), ); } // ── UI ─────────────────────────────────────────────────────────────────────── class CounterPage extends StatelessWidget { const CounterPage({super.key}); @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Cubit – Contador')), body: Center( child: BlocBuilder\u003cCounterCubit, int\u003e( builder: (context, count) { return Column( mainAxisSize: MainAxisSize.min, children: [ Text( '$count', style: Theme.of(context).textTheme.displayLarge, ), const SizedBox(height: 24), Row( mainAxisSize: MainAxisSize.min, children: [ FilledButton.icon( onPressed: () =\u003e context.read\u003cCounterCubit\u003e().decrement(), icon: const Icon(Icons.remove), label: const Text('Restar'), ), const SizedBox(width: 8), OutlinedButton( onPressed: () =\u003e context.read\u003cCounterCubit\u003e().reset(), child: const Text('Reset'), ), const SizedBox(width: 8), FilledButton.icon( onPressed: () =\u003e context.read\u003cCounterCubit\u003e().increment(), icon: const Icon(Icons.add), label: const Text('Sumar'), ), ], ), ], ); }, ), ), ); } } Resultado esperado El contador arranca en 0. Cada botón dispara un método del cubit y la UI se reconstruye sola. No hay ni un setState en la pantalla. Errores frecuentes Crear el cubit dentro del widget en lugar de proveerlo con BlocProvider: el cubit se destruye y recrea con cada rebuild. Usar context.read dentro de build (solo para callbacks); usar context.watch o BlocBuilder para leer el estado. Emitir el mismo valor cuando el estado es un primitivo: Cubit compara por igualdad y descarta duplicados, lo que puede confundir si el estado es un objeto mutable. Cuándo usar Cubit vs BLoC Situación Cubit BLoC Estado simple, pocas operaciones ✅ innecesario Historial de eventos, logging ❌ ✅ Side effects complejos por evento ❌ ✅ Streams externos que alimentan estado ❌ ✅ Aplicación práctica Cubit es el punto de entrada natural al ecosistema BLoC. Se usa en apps de producción para formularios, carrito de compra, filtros, preferencias de usuario y cualquier estado local de feature que no necesita trazabilidad de eventos.\nSiguiente ejercicio recomendado BLoC con eventos y estados tipados en Flutter: ejercicio resuelto Inyección de dependencias con get_it en Flutter: ejercicio resuelto Provider en Flutter para estado global: ejercicio resuelto Todos los ejercicios de Flutter Práctica guiada y siguiente paso Más ejercicios de Flutter Ejercicios C para reforzar fundamentos Programación en C en 100 ejercicios resueltos Ver el libro en Amazon (incluido en Kindle Unlimited) Suscribirte a la newsletter FAQ ¿Cubit es oficial del equipo de flutter_bloc? Sí. Cubit forma parte del paquete flutter_bloc de Felix Angelov y está documentado y mantenido oficialmente.\n¿Puedo migrar de Cubit a BLoC sin reescribir la UI? Sí. El widget BlocBuilder funciona igual con ambos. Solo cambia la clase que gestiona el estado.\n¿Necesito BlocObserver desde el principio? No es obligatorio, pero añadir un BlocObserver global en desarrollo para loguear transiciones de estado es una práctica muy recomendable.",
+    "description": "Ejercicio resuelto para gestionar estado en Flutter con Cubit de flutter_bloc: emisión de estados, BlocBuilder y separación clara de lógica y UI.",
+    "tags": [
+      "Intermedio",
+      "Estado",
+      "Arquitectura"
+    ],
+    "title": "BLoC con Cubit en Flutter: ejercicio resuelto",
+    "uri": "/ejercicios/estado-arquitectura/flutter-bloc-cubit-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
@@ -162,6 +182,14 @@ var relearn_searchindex = [
     "content": "",
     "description": "",
     "tags": [],
+    "title": "Etiqueta :: Intermedio",
+    "uri": "/tags/intermedio/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
     "title": "Etiqueta :: Kotlin",
     "uri": "/tags/kotlin/index.html"
   },
@@ -216,14 +244,6 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Etiqueta :: Api",
     "uri": "/tags/api/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Etiqueta :: Arquitectura",
-    "uri": "/tags/arquitectura/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Estado y arquitectura",
@@ -352,14 +372,6 @@ var relearn_searchindex = [
     ],
     "title": "Integration test listado-detalle: ejercicio resuelto",
     "uri": "/ejercicios/testing-recursos/flutter-integration-test-listado-detalle-ejercicio-resuelto/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Etiqueta :: Intermedio",
-    "uri": "/tags/intermedio/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Estado y arquitectura",
