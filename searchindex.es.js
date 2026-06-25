@@ -17,7 +17,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
-    "content": "Gestionar el estado correctamente es la habilidad que separa una app funcional de una escalable. Estos ejercicios recorren los tres enfoques más usados en Flutter: setState para estado local en un solo widget, Provider con ChangeNotifier para estado global compartido, y Riverpod con StateProvider como alternativa moderna y testeable.\nBLoC con Cubit en Flutter: ejercicio resuelto Arquitectura por capas en Flutter: ejercicio resuelto Inyeccion con Riverpod providers: ejercicio resuelto Inyeccion de dependencias con get_it en Flutter: ejercicio resuelto Mapper DTO a dominio en Flutter: ejercicio resuelto Modulo feature con DI y testing en Flutter: ejercicio resuelto Optimistic update en Flutter: ejercicio resuelto Repositorio y casos de uso en Flutter: ejercicio resuelto Riverpod en Flutter: ejercicio resuelto con contador Provider en Flutter para estado global: ejercicio resuelto Contador en Flutter con setState: ejercicio resuelto paso a paso",
+    "content": "Gestionar el estado correctamente es la habilidad que separa una app funcional de una escalable. Estos ejercicios recorren los tres enfoques más usados en Flutter: setState para estado local en un solo widget, Provider con ChangeNotifier para estado global compartido, y Riverpod con StateProvider como alternativa moderna y testeable.\nBLoC con Cubit en Flutter: ejercicio resuelto BLoC con eventos y estados tipados en Flutter: ejercicio resuelto Arquitectura por capas en Flutter: ejercicio resuelto Inyeccion con Riverpod providers: ejercicio resuelto Inyeccion de dependencias con get_it en Flutter: ejercicio resuelto Mapper DTO a dominio en Flutter: ejercicio resuelto Modulo feature con DI y testing en Flutter: ejercicio resuelto Optimistic update en Flutter: ejercicio resuelto Repositorio y casos de uso en Flutter: ejercicio resuelto Riverpod en Flutter: ejercicio resuelto con contador Provider en Flutter para estado global: ejercicio resuelto Contador en Flutter con setState: ejercicio resuelto paso a paso",
     "description": "Ejercicios resueltos de gestión de estado en Flutter: setState para estado local, Provider con ChangeNotifier y Riverpod con StateProvider.",
     "tags": [],
     "title": "Estado y arquitectura",
@@ -104,6 +104,14 @@ var relearn_searchindex = [
     "content": "",
     "description": "",
     "tags": [],
+    "title": "Etiqueta :: Avanzado",
+    "uri": "/tags/avanzado/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
     "title": "Etiqueta :: Bloc",
     "uri": "/tags/bloc/index.html"
   },
@@ -118,6 +126,18 @@ var relearn_searchindex = [
     ],
     "title": "BLoC con Cubit en Flutter: ejercicio resuelto",
     "uri": "/ejercicios/estado-arquitectura/flutter-bloc-cubit-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Estado y arquitectura",
+    "content": "BLoC con eventos y estados tipados en Flutter: ejercicio resuelto El patrón BLoC (Business Logic Component) separa la lógica de negocio de la UI mediante un flujo unidireccional: la UI dispara eventos, el BLoC los procesa y emite nuevos estados. Esto hace el código testeable y predecible.\nEnunciado Crea una pantalla que cargue una lista de posts desde una fuente remota simulada. Debe gestionar tres estados diferenciados: cargando, cargado y error. El usuario puede refrescar la lista con un botón.\nDependencias 1 2 dependencies: flutter_bloc: ^8.1.6 Solución en Flutter 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 import 'package:flutter/material.dart'; import 'package:flutter_bloc/flutter_bloc.dart'; // ── Modelo ─────────────────────────────────────────────────────────────────── class Post { final int id; final String title; const Post({required this.id, required this.title}); } // ── Repositorio (simulado) ──────────────────────────────────────────────────── class PostRepository { Future\u003cList\u003cPost\u003e\u003e fetchPosts() async { await Future\u003cvoid\u003e.delayed(const Duration(seconds: 1)); // Simula un error ocasional para probar el estado de error // throw Exception('Error de red'); return List.generate( 5, (i) =\u003e Post(id: i + 1, title: 'Post número ${i + 1}'), ); } } // ── Eventos (sealed = exhaustivos) ─────────────────────────────────────────── sealed class PostsEvent {} class PostsLoadRequested extends PostsEvent {} class PostsRefreshRequested extends PostsEvent {} // ── Estados ────────────────────────────────────────────────────────────────── sealed class PostsState {} class PostsInitial extends PostsState {} class PostsLoading extends PostsState {} class PostsLoaded extends PostsState { final List\u003cPost\u003e posts; PostsLoaded(this.posts); } class PostsError extends PostsState { final String message; PostsError(this.message); } // ── BLoC ───────────────────────────────────────────────────────────────────── class PostsBloc extends Bloc\u003cPostsEvent, PostsState\u003e { final PostRepository _repository; PostsBloc(this._repository) : super(PostsInitial()) { on\u003cPostsLoadRequested\u003e(_onLoad); on\u003cPostsRefreshRequested\u003e(_onRefresh); } Future\u003cvoid\u003e _onLoad( PostsLoadRequested event, Emitter\u003cPostsState\u003e emit, ) async { emit(PostsLoading()); await _loadPosts(emit); } Future\u003cvoid\u003e _onRefresh( PostsRefreshRequested event, Emitter\u003cPostsState\u003e emit, ) async { // Mantiene la lista visible mientras recarga if (state is PostsLoaded) { emit(PostsLoading()); } await _loadPosts(emit); } Future\u003cvoid\u003e _loadPosts(Emitter\u003cPostsState\u003e emit) async { try { final posts = await _repository.fetchPosts(); emit(PostsLoaded(posts)); } catch (e) { emit(PostsError(e.toString())); } } } // ── App ────────────────────────────────────────────────────────────────────── void main() { runApp( BlocProvider( create: (_) =\u003e PostsBloc(PostRepository())..add(PostsLoadRequested()), child: const MaterialApp(home: PostsPage()), ), ); } // ── UI ─────────────────────────────────────────────────────────────────────── class PostsPage extends StatelessWidget { const PostsPage({super.key}); @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar( title: const Text('Posts – BLoC'), actions: [ IconButton( icon: const Icon(Icons.refresh), onPressed: () =\u003e context.read\u003cPostsBloc\u003e().add(PostsRefreshRequested()), ), ], ), body: BlocBuilder\u003cPostsBloc, PostsState\u003e( builder: (context, state) =\u003e switch (state) { PostsInitial() =\u003e const SizedBox.shrink(), PostsLoading() =\u003e const Center(child: CircularProgressIndicator()), PostsLoaded(:final posts) =\u003e ListView.separated( itemCount: posts.length, separatorBuilder: (_, __) =\u003e const Divider(height: 1), itemBuilder: (_, i) =\u003e ListTile( leading: CircleAvatar(child: Text('${posts[i].id}')), title: Text(posts[i].title), ), ), PostsError(:final message) =\u003e Center( child: Column( mainAxisSize: MainAxisSize.min, children: [ const Icon(Icons.error_outline, size: 48, color: Colors.red), const SizedBox(height: 8), Text(message, textAlign: TextAlign.center), const SizedBox(height: 16), FilledButton( onPressed: () =\u003e context.read\u003cPostsBloc\u003e().add(PostsLoadRequested()), child: const Text('Reintentar'), ), ], ), ), }, ), ); } } Resultado esperado Al abrir la app aparece CircularProgressIndicator. Tras 1 segundo se renderiza la lista de 5 posts. El botón de refresco vuelve a mostrar el loader y recarga. Si descomentamos el throw, se muestra la pantalla de error con botón de reintento. Errores frecuentes Registrar el mismo tipo de evento dos veces con on\u003c\u003e: el segundo handler nunca se llama; consolida la lógica en uno solo. Emitir desde fuera del handler (ej. en un callback asíncrono anidado): usa emit solo dentro del handler o a través de Emitter directamente. Estados mutables: si el estado contiene listas, no las modifiques directamente; emite siempre un nuevo estado con una nueva lista. Diferencia entre Cubit y BLoC aquí Con Cubit llamarías postsBloc.load() desde la UI. Con BLoC la UI solo dispara PostsLoadRequested() y desconoce cómo se resuelve, lo que facilita:\nTestear el BLoC de forma aislada sin tocar la UI. Añadir logging/analytics por evento sin cambiar la UI. Transformar o debounce eventos antes de procesarlos. Aplicación práctica Este patrón es el estándar en equipos grandes y en apps con flujos de datos complejos: feeds, búsqueda con filtros, carrito de compra, notificaciones en tiempo real.\nSiguiente ejercicio recomendado Unit test de repositorio en Flutter: ejercicio resuelto Arquitectura por capas en Flutter: ejercicio resuelto Inyección de dependencias con get_it en Flutter: ejercicio resuelto Todos los ejercicios de Flutter Práctica guiada y siguiente paso Más ejercicios de Flutter Ejercicios C para reforzar fundamentos Programación en C en 100 ejercicios resueltos Ver el libro en Amazon (incluido en Kindle Unlimited) Suscribirte a la newsletter FAQ ¿Por qué usar sealed para eventos y estados? Con sealed el compilador de Dart garantiza que el switch sea exhaustivo: si añades un nuevo evento o estado sin actualizar el switch, el compilador avisa en tiempo de compilación.\n¿Cuándo usar BlocListener en lugar de BlocBuilder? BlocListener es para side effects (mostrar snackbar, navegar, reproducir sonido) que deben ocurrir una vez, no para reconstruir la UI.\n¿Se puede combinar BlocBuilder y BlocListener? Sí, con BlocConsumer, que combina ambos en un solo widget cuando necesitas reaccionar a cambios de estado tanto en UI como con side effects.",
+    "description": "Ejercicio resuelto con BLoC completo en Flutter: eventos sealed, estados tipados, carga remota y manejo de error con pattern matching.",
+    "tags": [
+      "Avanzado",
+      "Estado",
+      "Arquitectura"
+    ],
+    "title": "BLoC con eventos y estados tipados en Flutter: ejercicio resuelto",
+    "uri": "/ejercicios/estado-arquitectura/flutter-bloc-events-states-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
@@ -284,14 +304,6 @@ var relearn_searchindex = [
     ],
     "title": "Auth con refresh token en Flutter: ejercicio resuelto",
     "uri": "/ejercicios/persistencia-datos/flutter-auth-refresh-token-ejercicio-resuelto/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Etiqueta :: Avanzado",
-    "uri": "/tags/avanzado/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Persistencia y datos",

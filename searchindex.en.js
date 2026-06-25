@@ -25,7 +25,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Managing state correctly is the skill that separates a functional app from a scalable one. These exercises cover Flutter’s three most popular approaches: setState for local single-widget state, Provider with ChangeNotifier for shared global state, and Riverpod with StateProvider as a modern, testable alternative.\nBLoC with Cubit in Flutter: solved exercise Dependency injection with get_it in Flutter: solved exercise DTO to domain mapper in Flutter: solved exercise Feature module with DI and testing in Flutter: solved exercise Injection with Riverpod providers: solved exercise Layered architecture in Flutter: solved exercise Optimistic update in Flutter: solved exercise Repository and use cases in Flutter: solved exercise Riverpod in Flutter: solved counter exercise Provider in Flutter for global state: solved exercise Flutter Counter with setState: solved exercise step by step",
+    "content": "Managing state correctly is the skill that separates a functional app from a scalable one. These exercises cover Flutter’s three most popular approaches: setState for local single-widget state, Provider with ChangeNotifier for shared global state, and Riverpod with StateProvider as a modern, testable alternative.\nBLoC with Cubit in Flutter: solved exercise BLoC with typed events and states in Flutter: solved exercise Dependency injection with get_it in Flutter: solved exercise DTO to domain mapper in Flutter: solved exercise Feature module with DI and testing in Flutter: solved exercise Injection with Riverpod providers: solved exercise Layered architecture in Flutter: solved exercise Optimistic update in Flutter: solved exercise Repository and use cases in Flutter: solved exercise Riverpod in Flutter: solved counter exercise Provider in Flutter for global state: solved exercise Flutter Counter with setState: solved exercise step by step",
     "description": "Solved Flutter state management exercises: setState for local state, Provider with ChangeNotifier, and Riverpod with StateProvider.",
     "tags": [],
     "title": "State and architecture",
@@ -88,6 +88,14 @@ var relearn_searchindex = [
     "content": "",
     "description": "",
     "tags": [],
+    "title": "Tag :: Advanced",
+    "uri": "/en/tags/advanced/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
     "title": "Tag :: Android",
     "uri": "/en/tags/android/index.html"
   },
@@ -118,6 +126,18 @@ var relearn_searchindex = [
     ],
     "title": "BLoC with Cubit in Flutter: solved exercise",
     "uri": "/en/ejercicios/estado-arquitectura/flutter-bloc-cubit-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e State and architecture",
+    "content": "BLoC with typed events and states in Flutter: solved exercise The BLoC (Business Logic Component) pattern separates business logic from the UI through a unidirectional flow: the UI dispatches events, the BLoC processes them and emits new states. This makes code testable and predictable.\nProblem statement Build a screen that loads a list of posts from a simulated remote source. It must handle three distinct states: loading, loaded, and error. The user can refresh the list with a button.\nDependencies 1 2 dependencies: flutter_bloc: ^8.1.6 Flutter solution 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 import 'package:flutter/material.dart'; import 'package:flutter_bloc/flutter_bloc.dart'; // ── Model ──────────────────────────────────────────────────────────────────── class Post { final int id; final String title; const Post({required this.id, required this.title}); } // ── Repository (simulated) ──────────────────────────────────────────────────── class PostRepository { Future\u003cList\u003cPost\u003e\u003e fetchPosts() async { await Future\u003cvoid\u003e.delayed(const Duration(seconds: 1)); // Uncomment to test the error state: // throw Exception('Network error'); return List.generate( 5, (i) =\u003e Post(id: i + 1, title: 'Post number ${i + 1}'), ); } } // ── Events (sealed = exhaustive) ───────────────────────────────────────────── sealed class PostsEvent {} class PostsLoadRequested extends PostsEvent {} class PostsRefreshRequested extends PostsEvent {} // ── States ─────────────────────────────────────────────────────────────────── sealed class PostsState {} class PostsInitial extends PostsState {} class PostsLoading extends PostsState {} class PostsLoaded extends PostsState { final List\u003cPost\u003e posts; PostsLoaded(this.posts); } class PostsError extends PostsState { final String message; PostsError(this.message); } // ── BLoC ───────────────────────────────────────────────────────────────────── class PostsBloc extends Bloc\u003cPostsEvent, PostsState\u003e { final PostRepository _repository; PostsBloc(this._repository) : super(PostsInitial()) { on\u003cPostsLoadRequested\u003e(_onLoad); on\u003cPostsRefreshRequested\u003e(_onRefresh); } Future\u003cvoid\u003e _onLoad( PostsLoadRequested event, Emitter\u003cPostsState\u003e emit, ) async { emit(PostsLoading()); await _loadPosts(emit); } Future\u003cvoid\u003e _onRefresh( PostsRefreshRequested event, Emitter\u003cPostsState\u003e emit, ) async { if (state is PostsLoaded) { emit(PostsLoading()); } await _loadPosts(emit); } Future\u003cvoid\u003e _loadPosts(Emitter\u003cPostsState\u003e emit) async { try { final posts = await _repository.fetchPosts(); emit(PostsLoaded(posts)); } catch (e) { emit(PostsError(e.toString())); } } } // ── App ────────────────────────────────────────────────────────────────────── void main() { runApp( BlocProvider( create: (_) =\u003e PostsBloc(PostRepository())..add(PostsLoadRequested()), child: const MaterialApp(home: PostsPage()), ), ); } // ── UI ─────────────────────────────────────────────────────────────────────── class PostsPage extends StatelessWidget { const PostsPage({super.key}); @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar( title: const Text('Posts – BLoC'), actions: [ IconButton( icon: const Icon(Icons.refresh), onPressed: () =\u003e context.read\u003cPostsBloc\u003e().add(PostsRefreshRequested()), ), ], ), body: BlocBuilder\u003cPostsBloc, PostsState\u003e( builder: (context, state) =\u003e switch (state) { PostsInitial() =\u003e const SizedBox.shrink(), PostsLoading() =\u003e const Center(child: CircularProgressIndicator()), PostsLoaded(:final posts) =\u003e ListView.separated( itemCount: posts.length, separatorBuilder: (_, __) =\u003e const Divider(height: 1), itemBuilder: (_, i) =\u003e ListTile( leading: CircleAvatar(child: Text('${posts[i].id}')), title: Text(posts[i].title), ), ), PostsError(:final message) =\u003e Center( child: Column( mainAxisSize: MainAxisSize.min, children: [ const Icon(Icons.error_outline, size: 48, color: Colors.red), const SizedBox(height: 8), Text(message, textAlign: TextAlign.center), const SizedBox(height: 16), FilledButton( onPressed: () =\u003e context.read\u003cPostsBloc\u003e().add(PostsLoadRequested()), child: const Text('Retry'), ), ], ), ), }, ), ); } } Expected result On app open, a CircularProgressIndicator appears. After 1 second, a list of 5 posts is rendered. The refresh button shows the loader again and reloads. Uncommenting the throw shows the error screen with a retry button. Common mistakes Registering the same event type twice with on\u003c\u003e: the second handler is never called; consolidate the logic into one. Emitting outside the handler in a nested async callback: always use emit directly inside the handler or via the Emitter. Mutable state objects: never modify a list in place; always emit a new state with a new list instance. Cubit vs BLoC here With Cubit you would call postsBloc.load() from the UI. With BLoC the UI only dispatches PostsLoadRequested() and knows nothing about how it is resolved, which enables:\nTesting the BLoC in isolation without touching the UI. Adding logging or analytics per event without modifying the UI. Transforming or debouncing events before processing them. Practical use This pattern is the standard in large teams and apps with complex data flows: feeds, search with filters, shopping carts, real-time notifications.\nRecommended next exercise Unit test of repository in Flutter: solved exercise Layered architecture in Flutter: solved exercise Dependency injection with get_it in Flutter: solved exercise All Flutter exercises Guided practice and next step More Flutter exercises C exercises to strengthen fundamentals Programming in C in 100 Solved Exercises View the book on Amazon (included in Kindle Unlimited) Subscribe to the newsletter FAQ Why use sealed for events and states? With sealed, the Dart compiler guarantees that the switch is exhaustive: if you add a new event or state without updating the switch, the compiler warns you at compile time.\nWhen to use BlocListener instead of BlocBuilder? BlocListener is for side effects (showing a snackbar, navigating, playing a sound) that should happen once, not for rebuilding the UI.\nCan BlocBuilder and BlocListener be combined? Yes, with BlocConsumer, which merges both in a single widget when you need to react to state changes both in the UI and via side effects.",
+    "description": "Solved Flutter BLoC exercise: sealed events, typed states, remote data loading, error handling, and pattern matching in the UI.",
+    "tags": [
+      "Advanced",
+      "State",
+      "Architecture"
+    ],
+    "title": "BLoC with typed events and states in Flutter: solved exercise",
+    "uri": "/en/ejercicios/estado-arquitectura/flutter-bloc-events-states-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
@@ -244,14 +264,6 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Tags",
     "uri": "/en/tags/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Advanced",
-    "uri": "/en/tags/advanced/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
