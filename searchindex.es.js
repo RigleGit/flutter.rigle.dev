@@ -41,7 +41,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
-    "content": "Más allá de los ejercicios básicos, esta sección cubre tres áreas complementarias: cómo testear widgets con flutter_test para detectar regresiones antes de que lleguen a producción, cómo elegir plataforma de despliegue entre Android, Web y Windows, y cómo aplicar IA de forma práctica en apps Flutter.\nFlock vs Flutter 2026: qué es el fork de la comunidad y cuándo usarlo Flutter vs Kotlin Multiplatform 2026: comparativa para apps multiplataforma Flutter vs React Native 2026: comparativa actualizada para elegir stack Riverpod 3 vs BLoC 9 vs Provider 2026: cuál gestor de estado elegir en Flutter Integration test de login en Flutter: ejercicio resuelto Integration test listado-detalle: ejercicio resuelto Mock API en tests de Flutter: ejercicio resuelto Preferencias de notificaciones en Flutter: ejercicio resuelto Profiling de jank con DevTools: ejercicio resuelto Push con deep link a pantalla: ejercicio resuelto Push notifications con Firebase: ejercicio resuelto Flutter + IA: 5 ideas prácticas para crear apps útiles Flutter Android, Web o Windows: comparativa práctica para elegir plataforma Widget test en Flutter: ejercicio resuelto para testear UI",
+    "content": "Más allá de los ejercicios básicos, esta sección cubre tres áreas complementarias: cómo testear widgets con flutter_test para detectar regresiones antes de que lleguen a producción, cómo elegir plataforma de despliegue entre Android, Web y Windows, y cómo aplicar IA de forma práctica en apps Flutter.\nFlock vs Flutter 2026: qué es el fork de la comunidad y cuándo usarlo Flutter vs Kotlin Multiplatform 2026: comparativa para apps multiplataforma Flutter vs React Native 2026: comparativa actualizada para elegir stack Riverpod 3 vs BLoC 9 vs Provider 2026: cuál gestor de estado elegir en Flutter Unit test de repositorio con Mocktail en Flutter: ejercicio resuelto Integration test de login en Flutter: ejercicio resuelto Integration test listado-detalle: ejercicio resuelto Mock API en tests de Flutter: ejercicio resuelto Preferencias de notificaciones en Flutter: ejercicio resuelto Profiling de jank con DevTools: ejercicio resuelto Push con deep link a pantalla: ejercicio resuelto Push notifications con Firebase: ejercicio resuelto Flutter + IA: 5 ideas prácticas para crear apps útiles Flutter Android, Web o Windows: comparativa práctica para elegir plataforma Widget test en Flutter: ejercicio resuelto para testear UI",
     "description": "Testing y guías de Flutter: widget tests con flutter_test, comparativa multiplataforma Android, Web y Windows, e ideas prácticas con IA.",
     "tags": [],
     "title": "Testing y recursos",
@@ -256,6 +256,26 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Etiquetas",
     "uri": "/tags/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Testing",
+    "uri": "/tags/testing/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Testing y recursos",
+    "content": "Unit test de repositorio con Mocktail en Flutter: ejercicio resuelto Testear solo la UI no es suficiente. La lógica de negocio en repositorios y casos de uso necesita sus propios tests unitarios, aislados de la red y de Flutter. mocktail permite crear mocks sin generación de código, lo que simplifica el setup considerablemente.\nEnunciado Diseña un contrato PostRepository, un caso de uso GetPostsUseCase que filtra posts vacíos, y escribe tests unitarios que verifiquen el comportamiento correcto ante éxito y error, mockeando el repositorio.\nDependencias 1 2 3 4 5 6 7 dependencies: flutter: { sdk: flutter } dev_dependencies: flutter_test: sdk: flutter mocktail: ^1.0.4 Solución: clases de dominio 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 // lib/domain/models/post.dart class Post { final int id; final String title; const Post({required this.id, required this.title}); @override bool operator ==(Object other) =\u003e other is Post \u0026\u0026 other.id == id \u0026\u0026 other.title == title; @override int get hashCode =\u003e Object.hash(id, title); } // lib/domain/repositories/post_repository.dart abstract interface class PostRepository { Future\u003cList\u003cPost\u003e\u003e getPosts(); } // lib/domain/use_cases/get_posts_use_case.dart class GetPostsUseCase { final PostRepository _repository; const GetPostsUseCase(this._repository); /// Devuelve solo posts con título no vacío, ordenados por id. Future\u003cList\u003cPost\u003e\u003e call() async { final posts = await _repository.getPosts(); return posts .where((p) =\u003e p.title.trim().isNotEmpty) .toList() ..sort((a, b) =\u003e a.id.compareTo(b.id)); } } Solución: tests con Mocktail 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 // test/domain/get_posts_use_case_test.dart import 'package:mocktail/mocktail.dart'; import 'package:flutter_test/flutter_test.dart'; // Imports de tus clases de dominio // import 'package:mi_app/domain/...'; // ── Mock ───────────────────────────────────────────────────────────────────── class MockPostRepository extends Mock implements PostRepository {} void main() { late MockPostRepository repository; late GetPostsUseCase useCase; setUp(() { repository = MockPostRepository(); useCase = GetPostsUseCase(repository); }); group('GetPostsUseCase', () { test('devuelve lista filtrada y ordenada cuando el repositorio tiene éxito', () async { when(() =\u003e repository.getPosts()).thenAnswer( (_) async =\u003e [ const Post(id: 3, title: 'Tercero'), const Post(id: 1, title: 'Primero'), const Post(id: 2, title: ''), // debe filtrarse const Post(id: 4, title: ' '), // espacios → debe filtrarse ], ); final result = await useCase(); expect(result, [ const Post(id: 1, title: 'Primero'), const Post(id: 3, title: 'Tercero'), ]); verify(() =\u003e repository.getPosts()).called(1); }); test('propaga la excepción cuando el repositorio falla', () async { when(() =\u003e repository.getPosts()) .thenThrow(Exception('Error de red')); expect(() =\u003e useCase(), throwsA(isA\u003cException\u003e())); }); test('devuelve lista vacía si todos los posts tienen título vacío', () async { when(() =\u003e repository.getPosts()).thenAnswer( (_) async =\u003e [const Post(id: 1, title: '')], ); final result = await useCase(); expect(result, isEmpty); }); }); } Cómo ejecutar los tests 1 2 3 4 5 6 7 8 9 # Todos los tests flutter test # Solo este archivo flutter test test/domain/get_posts_use_case_test.dart # Con coverage flutter test --coverage genhtml coverage/lcov.info -o coverage/html Resultado esperado 1 00:01 +3: All tests passed! Tres casos pasan: lista filtrada y ordenada, excepción propagada, lista vacía.\nErrores frecuentes Mock no configurado: olvidar when(...) antes de llamar al método mockeado lanza MissingStubError. Configura el mock en setUp o al inicio del test. Igualdad no implementada en el modelo: si Post no sobreescribe ==, expect(result, [Post(...)]) siempre falla aunque los valores sean iguales. Verificar interacciones sin haber establecido el mock: verify funciona sobre mocks de mocktail, no sobre instancias reales. Por qué vale la pena escribir estos tests Se ejecutan en milisegundos, sin emulador ni red. Documentan el comportamiento esperado de la lógica de negocio. Detectan regresiones cuando cambias el caso de uso o el repositorio. Sirven de especificación ejecutable para el equipo. Aplicación práctica Cualquier caso de uso en una app con arquitectura limpia se beneficia de tests de este tipo: filtrado de listas, transformación de datos, reglas de negocio (descuentos, validaciones, permisos).\nSiguiente ejercicio recomendado Mock API en tests de Flutter: ejercicio resuelto Integration test de login en Flutter: ejercicio resuelto Repositorio y casos de uso en Flutter: ejercicio resuelto Todos los ejercicios de Flutter Práctica guiada y siguiente paso Más ejercicios de Flutter Ejercicios C para reforzar fundamentos Programación en C en 100 ejercicios resueltos Ver el libro en Amazon (incluido en Kindle Unlimited) Suscribirte a la newsletter FAQ ¿Por qué Mocktail en lugar de Mockito? Mocktail no requiere generación de código con build_runner. Escribes el mock con una línea y los tests corren sin pasos previos.\n¿Cuándo usar thenAnswer vs thenReturn? Usa thenReturn para valores sincrónicos. Usa thenAnswer cuando el stub devuelve un Future o Stream.\n¿Dónde pongo los tests de repositorio en el proyecto? En test/domain/ si sigues arquitectura limpia. La convención es espejar la estructura de lib/ dentro de test/.",
+    "description": "Ejercicio resuelto para escribir unit tests de capas de dominio en Flutter: contrato de repositorio, caso de uso y mock con mocktail sin generación de código.",
+    "tags": [
+      "Avanzado",
+      "Testing",
+      "Arquitectura"
+    ],
+    "title": "Unit test de repositorio con Mocktail en Flutter: ejercicio resuelto",
+    "uri": "/ejercicios/testing-recursos/flutter-unit-test-repositorio-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
@@ -660,14 +680,6 @@ var relearn_searchindex = [
     ],
     "title": "Secure storage para tokens en Flutter: ejercicio resuelto",
     "uri": "/ejercicios/persistencia-datos/flutter-secure-storage-token-ejercicio-resuelto/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Etiqueta :: Testing",
-    "uri": "/tags/testing/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e API y async",

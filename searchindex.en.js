@@ -49,7 +49,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Beyond the core exercises, this section covers three complementary areas: how to test widgets with flutter_test to catch regressions before they reach production, how to choose between Android, Web, and Windows as deployment targets, and how to apply AI practically in Flutter apps.\nFlock vs Flutter 2026: what the community fork is and when to use it Flutter vs Kotlin Multiplatform 2026: comparison for cross-platform apps Flutter vs React Native 2026: updated comparison to choose your stack Riverpod 3 vs BLoC 9 vs Provider 2026: which Flutter state manager to choose Firebase push notifications: solved exercise Flutter login integration test: solved exercise Jank profiling with DevTools: solved exercise List-detail integration test: solved exercise Mock API in Flutter tests: solved exercise Notification preferences in Flutter: solved exercise Push with deep link to screen: solved exercise Flutter + AI: 5 practical ideas to build useful apps Flutter Android, Web, or Windows: practical comparison to choose your platform Flutter Widget Test: solved UI testing exercise",
+    "content": "Beyond the core exercises, this section covers three complementary areas: how to test widgets with flutter_test to catch regressions before they reach production, how to choose between Android, Web, and Windows as deployment targets, and how to apply AI practically in Flutter apps.\nFlock vs Flutter 2026: what the community fork is and when to use it Flutter vs Kotlin Multiplatform 2026: comparison for cross-platform apps Flutter vs React Native 2026: updated comparison to choose your stack Riverpod 3 vs BLoC 9 vs Provider 2026: which Flutter state manager to choose Unit test of repository with Mocktail in Flutter: solved exercise Firebase push notifications: solved exercise Flutter login integration test: solved exercise Jank profiling with DevTools: solved exercise List-detail integration test: solved exercise Mock API in Flutter tests: solved exercise Notification preferences in Flutter: solved exercise Push with deep link to screen: solved exercise Flutter + AI: 5 practical ideas to build useful apps Flutter Android, Web, or Windows: practical comparison to choose your platform Flutter Widget Test: solved UI testing exercise",
     "description": "Flutter testing and guides: widget tests with flutter_test, Android/Web/Windows platform comparison, and practical AI integration ideas.",
     "tags": [],
     "title": "Testing and resources",
@@ -264,6 +264,26 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Tags",
     "uri": "/en/tags/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Testing",
+    "uri": "/en/tags/testing/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Testing and resources",
+    "content": "Unit test of repository with Mocktail in Flutter: solved exercise Testing only the UI is not enough. Business logic in repositories and use cases needs its own unit tests, isolated from the network and Flutter. mocktail lets you create mocks without code generation, which simplifies setup considerably.\nProblem statement Design a PostRepository contract, a GetPostsUseCase that filters empty posts, and write unit tests that verify correct behavior on success and error by mocking the repository.\nDependencies 1 2 3 4 5 6 7 dependencies: flutter: { sdk: flutter } dev_dependencies: flutter_test: sdk: flutter mocktail: ^1.0.4 Solution: domain classes 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 // lib/domain/models/post.dart class Post { final int id; final String title; const Post({required this.id, required this.title}); @override bool operator ==(Object other) =\u003e other is Post \u0026\u0026 other.id == id \u0026\u0026 other.title == title; @override int get hashCode =\u003e Object.hash(id, title); } // lib/domain/repositories/post_repository.dart abstract interface class PostRepository { Future\u003cList\u003cPost\u003e\u003e getPosts(); } // lib/domain/use_cases/get_posts_use_case.dart class GetPostsUseCase { final PostRepository _repository; const GetPostsUseCase(this._repository); /// Returns only posts with non-empty titles, sorted by id. Future\u003cList\u003cPost\u003e\u003e call() async { final posts = await _repository.getPosts(); return posts .where((p) =\u003e p.title.trim().isNotEmpty) .toList() ..sort((a, b) =\u003e a.id.compareTo(b.id)); } } Solution: tests with Mocktail 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 // test/domain/get_posts_use_case_test.dart import 'package:mocktail/mocktail.dart'; import 'package:flutter_test/flutter_test.dart'; // Import your domain classes // import 'package:my_app/domain/...'; // ── Mock ───────────────────────────────────────────────────────────────────── class MockPostRepository extends Mock implements PostRepository {} void main() { late MockPostRepository repository; late GetPostsUseCase useCase; setUp(() { repository = MockPostRepository(); useCase = GetPostsUseCase(repository); }); group('GetPostsUseCase', () { test('returns filtered and sorted list when repository succeeds', () async { when(() =\u003e repository.getPosts()).thenAnswer( (_) async =\u003e [ const Post(id: 3, title: 'Third'), const Post(id: 1, title: 'First'), const Post(id: 2, title: ''), // should be filtered const Post(id: 4, title: ' '), // whitespace → should be filtered ], ); final result = await useCase(); expect(result, [ const Post(id: 1, title: 'First'), const Post(id: 3, title: 'Third'), ]); verify(() =\u003e repository.getPosts()).called(1); }); test('propagates exception when repository fails', () async { when(() =\u003e repository.getPosts()) .thenThrow(Exception('Network error')); expect(() =\u003e useCase(), throwsA(isA\u003cException\u003e())); }); test('returns empty list if all posts have empty titles', () async { when(() =\u003e repository.getPosts()).thenAnswer( (_) async =\u003e [const Post(id: 1, title: '')], ); final result = await useCase(); expect(result, isEmpty); }); }); } How to run the tests 1 2 3 4 5 6 7 8 9 # All tests flutter test # This file only flutter test test/domain/get_posts_use_case_test.dart # With coverage flutter test --coverage genhtml coverage/lcov.info -o coverage/html Expected result 1 00:01 +3: All tests passed! Three cases pass: filtered and sorted list, propagated exception, empty list.\nCommon mistakes Unconfigured mock: forgetting when(...) before calling a mocked method throws MissingStubError. Configure stubs in setUp or at the start of each test. Equality not implemented in the model: if Post does not override ==, expect(result, [Post(...)]) always fails even when values match. Verifying without having set up the mock: verify works on mocktail mocks, not real instances. Why unit tests for domain classes are worth it They run in milliseconds, with no emulator or network needed. They document the expected behavior of business logic. They catch regressions when you change the use case or repository. They serve as executable specifications for the team. Practical use Any use case in a clean architecture app benefits from this type of test: list filtering, data transformation, business rules (discounts, validations, permissions).\nRecommended next exercise Mock API in Flutter tests: solved exercise Flutter login integration test: solved exercise Repository and use cases in Flutter: solved exercise All Flutter exercises Guided practice and next step More Flutter exercises C exercises to strengthen fundamentals Programming in C in 100 Solved Exercises View the book on Amazon (included in Kindle Unlimited) Subscribe to the newsletter FAQ Why Mocktail instead of Mockito? Mocktail requires no code generation with build_runner. You write the mock in one line and tests run without any pre-build step.\nWhen to use thenAnswer vs thenReturn? Use thenReturn for synchronous values. Use thenAnswer when the stub returns a Future or Stream.\nWhere do repository tests live in the project? In test/domain/ if you follow clean architecture. The convention is to mirror the lib/ structure inside test/.",
+    "description": "Solved Flutter exercise for unit testing domain layers: repository contract, use case, and mocking with mocktail without code generation.",
+    "tags": [
+      "Advanced",
+      "Testing",
+      "Architecture"
+    ],
+    "title": "Unit test of repository with Mocktail in Flutter: solved exercise",
+    "uri": "/en/ejercicios/testing-recursos/flutter-unit-test-repositorio-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
@@ -668,14 +688,6 @@ var relearn_searchindex = [
     ],
     "title": "Sync conflict resolution: solved exercise",
     "uri": "/en/ejercicios/persistencia-datos/flutter-resolucion-conflictos-sync-ejercicio-resuelto/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Testing",
-    "uri": "/en/tags/testing/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e API and async",
