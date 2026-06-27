@@ -33,7 +33,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Almost every real app consumes external data. These exercises cover the full flow: REST API calls using the http package, loading and error state management with FutureBuilder, and infinite scroll pagination with ScrollController. Mastering these is essential for building connected apps.\nFlutter timeout and retry: solved exercise Loading, error and empty states in Flutter: solved exercise Pagination with cache invalidation: solved exercise SWR-like pull to refresh in Flutter: solved exercise Typed JSON parsing in Flutter: solved exercise Infinite Scroll in Flutter: solved pagination exercise FutureBuilder in Flutter: solved exercise for loading states Flutter API Call with http: solved REST exercise",
+    "content": "Almost every real app consumes external data. These exercises cover the full flow: REST API calls using the http package, loading and error state management with FutureBuilder, and infinite scroll pagination with ScrollController. Mastering these is essential for building connected apps.\nDio with interceptors in Flutter: solved exercise Flutter timeout and retry: solved exercise Loading, error and empty states in Flutter: solved exercise Pagination with cache invalidation: solved exercise SWR-like pull to refresh in Flutter: solved exercise Typed JSON parsing in Flutter: solved exercise Infinite Scroll in Flutter: solved pagination exercise FutureBuilder in Flutter: solved exercise for loading states Flutter API Call with http: solved REST exercise",
     "description": "Solved Flutter API and async exercises: REST calls with http, loading state management with FutureBuilder, and infinite scroll with pagination.",
     "tags": [],
     "title": "API and async",
@@ -104,8 +104,24 @@ var relearn_searchindex = [
     "content": "",
     "description": "",
     "tags": [],
+    "title": "Tag :: Api",
+    "uri": "/en/tags/api/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
     "title": "Tag :: Architecture",
     "uri": "/en/tags/architecture/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Async",
+    "uri": "/en/tags/async/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
@@ -146,6 +162,18 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Tag :: Community",
     "uri": "/en/tags/community/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e API and async",
+    "content": "Dio with interceptors in Flutter: solved exercise The http package covers simple cases, but production apps need interceptors: logic that runs automatically on every request or response without repeating code. Dio implements them with a clean API and is the most widely used HTTP client in Flutter for production.\nProblem statement Configure a Dio client that:\nAutomatically adds the Authorization: Bearer \u003ctoken\u003e header to all requests. Logs method, URL, and response code to the console. Catches 401 errors (expired session) centrally and converts them to a typed exception. Build a screen that uses this client to load a post and shows loading, result, and error states.\nDependencies 1 2 dependencies: dio: ^5.7.0 Flutter solution 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 import 'package:dio/dio.dart'; import 'package:flutter/material.dart'; // ── Typed exception ─────────────────────────────────────────────────────────── class UnauthorizedException implements Exception { const UnauthorizedException(); @override String toString() =\u003e 'Session expired. Please log in again.'; } // ── Auth interceptor ────────────────────────────────────────────────────────── class AuthInterceptor extends Interceptor { final String token; AuthInterceptor(this.token); @override void onRequest(RequestOptions options, RequestInterceptorHandler handler) { options.headers['Authorization'] = 'Bearer $token'; handler.next(options); } @override void onError(DioException err, ErrorInterceptorHandler handler) { if (err.response?.statusCode == 401) { handler.reject( DioException( requestOptions: err.requestOptions, error: const UnauthorizedException(), type: DioExceptionType.badResponse, ), ); return; } handler.next(err); } } // ── Logging interceptor ─────────────────────────────────────────────────────── class LoggingInterceptor extends Interceptor { @override void onRequest(RequestOptions options, RequestInterceptorHandler handler) { debugPrint('→ ${options.method} ${options.uri}'); handler.next(options); } @override void onResponse(Response response, ResponseInterceptorHandler handler) { debugPrint('← ${response.statusCode} ${response.requestOptions.uri}'); handler.next(response); } @override void onError(DioException err, ErrorInterceptorHandler handler) { debugPrint('✗ ${err.response?.statusCode} ${err.requestOptions.uri}'); handler.next(err); } } // ── Configured HTTP client ──────────────────────────────────────────────────── Dio buildDioClient({required String token}) { return Dio( BaseOptions( baseUrl: 'https://jsonplaceholder.typicode.com', connectTimeout: const Duration(seconds: 10), receiveTimeout: const Duration(seconds: 10), ), ) ..interceptors.add(AuthInterceptor(token)) ..interceptors.add(LoggingInterceptor()); } // ── App ────────────────────────────────────────────────────────────────────── void main() =\u003e runApp(const MaterialApp(home: DioPage())); // ── UI ─────────────────────────────────────────────────────────────────────── class DioPage extends StatefulWidget { const DioPage({super.key}); @override State\u003cDioPage\u003e createState() =\u003e _DioPageState(); } class _DioPageState extends State\u003cDioPage\u003e { final _dio = buildDioClient(token: 'my-test-token'); String? _title; String? _error; bool _loading = false; Future\u003cvoid\u003e _fetchPost() async { setState(() { _loading = true; _title = null; _error = null; }); try { final response = await _dio.get\u003cMap\u003cString, dynamic\u003e\u003e('/posts/1'); setState(() =\u003e _title = response.data?['title'] as String?); } on DioException catch (e) { final err = e.error; setState(() =\u003e _error = err is UnauthorizedException ? err.toString() : 'Error: ${e.message}'); } finally { if (mounted) setState(() =\u003e _loading = false); } } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Dio + Interceptors')), body: Center( child: Padding( padding: const EdgeInsets.all(24), child: Column( mainAxisSize: MainAxisSize.min, children: [ if (_loading) const CircularProgressIndicator() else if (_error != null) Column( children: [ const Icon(Icons.error_outline, color: Colors.red, size: 40), const SizedBox(height: 8), Text(_error!, textAlign: TextAlign.center), ], ) else if (_title != null) Card( child: Padding( padding: const EdgeInsets.all(16), child: Text(_title!), ), ) else const Text('Press the button to load'), const SizedBox(height: 24), FilledButton.icon( onPressed: _loading ? null : _fetchPost, icon: const Icon(Icons.download), label: const Text('Load post'), ), ], ), ), ), ); } } Expected result Tapping the button shows the loader and logs → GET https://jsonplaceholder.typicode.com/posts/1 to console. After the response: ← 200 https://... and the post title on screen. The Authorization: Bearer my-test-token header is added automatically to all requests. Common mistakes Adding interceptors after the first request: interceptors are evaluated in the order they are added; add them when building the client, not in initState. Not calling handler.next(): if you forget to call next in onRequest, the request hangs indefinitely. Catching generic Exception instead of DioException: DioException contains response, requestOptions, and type; use those fields for precise diagnostics. When to use Dio vs http Need http Dio Simple GET without auth ✅ ✅ Global interceptors ❌ ✅ Request cancellation ❌ ✅ File upload (multipart) verbose ✅ Automatic retry manual ✅ (via plugin) Practical use In any app with an authenticated backend, this pattern eliminates copy-pasting the auth header on every request and centralizes expired session handling, which otherwise gets scattered throughout the app.\nRecommended next exercise Flutter timeout and retry: solved exercise Auth with refresh token in Flutter: solved exercise Loading, error and empty states in Flutter: solved exercise All Flutter exercises Guided practice and next step More Flutter exercises C exercises to strengthen fundamentals Programming in C in 100 Solved Exercises View the book on Amazon (included in Kindle Unlimited) Subscribe to the newsletter FAQ Can I have multiple active interceptors at once? Yes. Dio executes them as a chain in the order they were registered. Response and error interceptors run in reverse order.\nHow do I cancel an in-flight request? Pass a CancelToken to the request and call cancelToken.cancel() when needed (e.g., when the widget is unmounted).\nIs Dio compatible with null safety? Yes. Since version 5.x it is null-safe and supports generics: _dio.get\u003cMap\u003cString, dynamic\u003e\u003e(...) for strong typing.",
+    "description": "Solved Flutter exercise using Dio with auth and logging interceptors: add Bearer token automatically, handle 401 centrally, and log all requests.",
+    "tags": [
+      "Intermediate",
+      "Api",
+      "Async"
+    ],
+    "title": "Dio with interceptors in Flutter: solved exercise",
+    "uri": "/en/ejercicios/api-async/flutter-dio-interceptores-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Testing and resources",
@@ -284,22 +312,6 @@ var relearn_searchindex = [
     ],
     "title": "Unit test of repository with Mocktail in Flutter: solved exercise",
     "uri": "/en/ejercicios/testing-recursos/flutter-unit-test-repositorio-ejercicio-resuelto/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Api",
-    "uri": "/en/tags/api/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Async",
-    "uri": "/en/tags/async/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Persistence and data",

@@ -25,7 +25,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
-    "content": "Casi toda app real consume datos externos. Estos ejercicios cubren el flujo completo: llamadas REST con el paquete http, gestión de estados de carga y error con FutureBuilder, y scroll infinito con paginación usando ScrollController. Dominarlos es imprescindible para construir apps conectadas.\nEstados de carga, error y vacio en Flutter: ejercicio resuelto Paginacion con cache e invalidacion: ejercicio resuelto Parseo JSON tipado en Flutter: ejercicio resuelto Pull to refresh tipo SWR en Flutter: ejercicio resuelto Timeout y retry en Flutter: ejercicio resuelto Scroll infinito y paginacion en Flutter: ejercicio resuelto FutureBuilder en Flutter: ejercicio resuelto para estados de carga Consumo de API con http en Flutter: ejercicio resuelto",
+    "content": "Casi toda app real consume datos externos. Estos ejercicios cubren el flujo completo: llamadas REST con el paquete http, gestión de estados de carga y error con FutureBuilder, y scroll infinito con paginación usando ScrollController. Dominarlos es imprescindible para construir apps conectadas.\nDio con interceptores en Flutter: ejercicio resuelto Estados de carga, error y vacio en Flutter: ejercicio resuelto Paginacion con cache e invalidacion: ejercicio resuelto Parseo JSON tipado en Flutter: ejercicio resuelto Pull to refresh tipo SWR en Flutter: ejercicio resuelto Timeout y retry en Flutter: ejercicio resuelto Scroll infinito y paginacion en Flutter: ejercicio resuelto FutureBuilder en Flutter: ejercicio resuelto para estados de carga Consumo de API con http en Flutter: ejercicio resuelto",
     "description": "Ejercicios resueltos de APIs y programación asíncrona en Flutter: http con Future, FutureBuilder para estados de carga y scroll infinito con paginación.",
     "tags": [],
     "title": "API y async",
@@ -84,6 +84,14 @@ var relearn_searchindex = [
     "uri": "/tags/android/index.html"
   },
   {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Api",
+    "uri": "/tags/api/index.html"
+  },
+  {
     "breadcrumb": "",
     "content": "Recursos prácticos para aprender Flutter y Dart.\nEjercicios resueltos",
     "description": "Ejercicios resueltos de Flutter y Dart paso a paso. Desde lo básico hasta apps completas.",
@@ -98,6 +106,14 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Etiqueta :: Arquitectura",
     "uri": "/tags/arquitectura/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Async",
+    "uri": "/tags/async/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
@@ -146,6 +162,18 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Etiqueta :: Comunidad",
     "uri": "/tags/comunidad/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e API y async",
+    "content": "Dio con interceptores en Flutter: ejercicio resuelto El paquete http cubre casos simples, pero en apps reales necesitas interceptores: lógica que se ejecuta automáticamente en cada petición o respuesta sin repetir código. Dio los implementa con una API limpia y es el cliente HTTP más usado en Flutter para producción.\nEnunciado Configura un cliente Dio que:\nAñada automáticamente el header Authorization: Bearer \u003ctoken\u003e a todas las peticiones. Logee método, URL y código de respuesta en consola. Capture errores 401 (sesión expirada) de forma centralizada y los convierta en una excepción tipada. Implementa una pantalla que use ese cliente para cargar un post y muestre loading, resultado y error.\nDependencias 1 2 dependencies: dio: ^5.7.0 Solución en Flutter 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 import 'package:dio/dio.dart'; import 'package:flutter/material.dart'; // ── Excepción tipada ────────────────────────────────────────────────────────── class UnauthorizedException implements Exception { const UnauthorizedException(); @override String toString() =\u003e 'Sesión expirada. Vuelve a iniciar sesión.'; } // ── Interceptor de autenticación ────────────────────────────────────────────── class AuthInterceptor extends Interceptor { final String token; AuthInterceptor(this.token); @override void onRequest(RequestOptions options, RequestInterceptorHandler handler) { options.headers['Authorization'] = 'Bearer $token'; handler.next(options); } @override void onError(DioException err, ErrorInterceptorHandler handler) { if (err.response?.statusCode == 401) { handler.reject( DioException( requestOptions: err.requestOptions, error: const UnauthorizedException(), type: DioExceptionType.badResponse, ), ); return; } handler.next(err); } } // ── Interceptor de logging ──────────────────────────────────────────────────── class LoggingInterceptor extends Interceptor { @override void onRequest(RequestOptions options, RequestInterceptorHandler handler) { debugPrint('→ ${options.method} ${options.uri}'); handler.next(options); } @override void onResponse(Response response, ResponseInterceptorHandler handler) { debugPrint('← ${response.statusCode} ${response.requestOptions.uri}'); handler.next(response); } @override void onError(DioException err, ErrorInterceptorHandler handler) { debugPrint('✗ ${err.response?.statusCode} ${err.requestOptions.uri}'); handler.next(err); } } // ── Cliente HTTP configurado ────────────────────────────────────────────────── Dio buildDioClient({required String token}) { return Dio( BaseOptions( baseUrl: 'https://jsonplaceholder.typicode.com', connectTimeout: const Duration(seconds: 10), receiveTimeout: const Duration(seconds: 10), ), ) ..interceptors.add(AuthInterceptor(token)) ..interceptors.add(LoggingInterceptor()); } // ── App ────────────────────────────────────────────────────────────────────── void main() =\u003e runApp(const MaterialApp(home: DioPage())); // ── UI ─────────────────────────────────────────────────────────────────────── class DioPage extends StatefulWidget { const DioPage({super.key}); @override State\u003cDioPage\u003e createState() =\u003e _DioPageState(); } class _DioPageState extends State\u003cDioPage\u003e { final _dio = buildDioClient(token: 'mi-token-de-prueba'); String? _title; String? _error; bool _loading = false; Future\u003cvoid\u003e _fetchPost() async { setState(() { _loading = true; _title = null; _error = null; }); try { final response = await _dio.get\u003cMap\u003cString, dynamic\u003e\u003e('/posts/1'); setState(() =\u003e _title = response.data?['title'] as String?); } on DioException catch (e) { final err = e.error; setState(() =\u003e _error = err is UnauthorizedException ? err.toString() : 'Error: ${e.message}'); } finally { if (mounted) setState(() =\u003e _loading = false); } } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Dio + Interceptores')), body: Center( child: Padding( padding: const EdgeInsets.all(24), child: Column( mainAxisSize: MainAxisSize.min, children: [ if (_loading) const CircularProgressIndicator() else if (_error != null) Column( children: [ const Icon(Icons.error_outline, color: Colors.red, size: 40), const SizedBox(height: 8), Text(_error!, textAlign: TextAlign.center), ], ) else if (_title != null) Card( child: Padding( padding: const EdgeInsets.all(16), child: Text(_title!), ), ) else const Text('Pulsa el botón para cargar'), const SizedBox(height: 24), FilledButton.icon( onPressed: _loading ? null : _fetchPost, icon: const Icon(Icons.download), label: const Text('Cargar post'), ), ], ), ), ), ); } } Resultado esperado Al pulsar el botón, aparece el loader y en consola se imprime → GET https://jsonplaceholder.typicode.com/posts/1. Tras la respuesta: ← 200 https://... y el título del post en pantalla. El header Authorization: Bearer mi-token-de-prueba se añade automáticamente a todas las peticiones sin escribirlo manualmente. Errores frecuentes Añadir interceptores después de la primera petición: los interceptores se evalúan en el orden en que se añaden; añádelos al construir el cliente, no en el initState. No llamar a handler.next(): si olvidas llamar a next en onRequest, la petición queda colgada indefinidamente. Capturar Exception genérica en lugar de DioException: DioException contiene response, requestOptions y type; usa esos campos para diagnósticos precisos. Cuándo usar Dio vs http Necesidad http Dio GET sencillo sin auth ✅ ✅ Interceptores globales ❌ ✅ Cancelación de peticiones ❌ ✅ Subida de archivos (multipart) tedioso ✅ Retry automático manual ✅ (con plugin) Aplicación práctica En cualquier app con backend autenticado, este patrón elimina el copy-paste del header en cada petición y centraliza el manejo de sesión expirada, que de otro modo se dispersa por toda la app.\nSiguiente ejercicio recomendado Timeout y retry en Flutter: ejercicio resuelto Auth con refresh token en Flutter: ejercicio resuelto Estados de carga, error y vacío en Flutter: ejercicio resuelto Todos los ejercicios de Flutter Práctica guiada y siguiente paso Más ejercicios de Flutter Ejercicios C para reforzar fundamentos Programación en C en 100 ejercicios resueltos Ver el libro en Amazon (incluido en Kindle Unlimited) Suscribirte a la newsletter FAQ ¿Puedo tener varios interceptores activos a la vez? Sí. Dio los ejecuta en cadena en el orden en que los registras. Los de respuesta y error se ejecutan en orden inverso.\n¿Cómo cancelo una petición en curso? Pasa un CancelToken a la petición y llama a cancelToken.cancel() cuando necesites cancelarla (ej. al desmontar el widget).\n¿Dio es compatible con null safety? Sí. Desde la versión 5.x es null-safe y soporta tipos genéricos: _dio.get\u003cMap\u003cString, dynamic\u003e\u003e(...) para tipado fuerte.",
+    "description": "Ejercicio resuelto para usar Dio en Flutter con interceptores de autenticación y error: añadir token Bearer, gestionar 401 y centralizar logs de peticiones.",
+    "tags": [
+      "Intermedio",
+      "Api",
+      "Async"
+    ],
+    "title": "Dio con interceptores en Flutter: ejercicio resuelto",
+    "uri": "/ejercicios/api-async/flutter-dio-interceptores-ejercicio-resuelto/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos",
@@ -278,14 +306,6 @@ var relearn_searchindex = [
     "uri": "/ejercicios/testing-recursos/flutter-unit-test-repositorio-ejercicio-resuelto/index.html"
   },
   {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Etiqueta :: Api",
-    "uri": "/tags/api/index.html"
-  },
-  {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Estado y arquitectura",
     "content": "Arquitectura por capas en Flutter: ejercicio resuelto Organiza una app Flutter por capas y features para escalar sin caos.\nEnunciado Separar presentation, domain y data en una feature de tareas.\nSolucion en Flutter 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 import 'package:flutter/material.dart'; void main() { runApp(const MaterialApp(home: ExercisePage())); } class ExercisePage extends StatefulWidget { const ExercisePage({super.key}); @override State\u003cExercisePage\u003e createState() =\u003e _ExercisePageState(); } class _ExercisePageState extends State\u003cExercisePage\u003e { bool loading = false; String message = 'Estado inicial'; Future\u003cvoid\u003e runExercise() async { setState(() { loading = true; message = 'Procesando...'; }); await Future\u003cvoid\u003e.delayed(const Duration(milliseconds: 700)); if (!mounted) return; setState(() { loading = false; message = 'Ejercicio completado'; }); } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Flutter ejercicio resuelto')), body: Center( child: Column( mainAxisSize: MainAxisSize.min, children: [ Text(message), const SizedBox(height: 12), ElevatedButton( onPressed: loading ? null : runExercise, child: Text(loading ? 'Cargando...' : 'Ejecutar'), ), ], ), ), ); } } Resultado esperado Pantalla funcional con flujo minimo reproducible para practicar: capas, escalabilidad, orden.\nErrores frecuentes No separar estado de carga, exito y error. Acoplar UI y datos en una sola clase. No validar estados antes de navegar o renderizar. Aplicacion practica Este patron se usa en apps reales para mejorar robustez, mantenibilidad y experiencia de usuario.\nSiguiente ejercicio recomendado Todos los ejercicios Flutter Mas ejercicios de Flutter Ejercicios C para reforzar fundamentos Práctica guiada y siguiente paso Mas ejercicios de Flutter Programacion en C en 100 ejercicios resueltos Ver el libro en Amazon (incluido en Kindle Unlimited) Suscribirte a la newsletter FAQ Que se practica en este ejercicio? Se practica capas, escalabilidad, orden con un caso util para proyectos reales.\nEste ejercicio sirve para portfolio? Si. Puedes adaptarlo y mostrar una implementacion clara con decisiones tecnicas.\nCual es el siguiente paso? Integrarlo con una API real o persistencia local segun el objetivo de tu app.",
     "description": "Organiza una app Flutter por capas y features para escalar sin caos.",
@@ -296,14 +316,6 @@ var relearn_searchindex = [
     ],
     "title": "Arquitectura por capas en Flutter: ejercicio resuelto",
     "uri": "/ejercicios/estado-arquitectura/flutter-arquitectura-capas-feature-first-ejercicio-resuelto/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Etiqueta :: Async",
-    "uri": "/tags/async/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
