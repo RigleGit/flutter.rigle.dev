@@ -49,15 +49,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
-    "content": "Accede a las capacidades nativas del dispositivo desde Flutter. Estos ejercicios cubren los patrones más comunes: solicitud de permisos con permission_handler, autenticación biométrica con local_auth, captura de fotos con el plugin camera y más. Esenciales para cualquier app que interactúe con el hardware.",
-    "description": "Ejercicios resueltos de acceso a hardware en Flutter: cámara, biometría, permisos con permission_handler y sensores del dispositivo.",
-    "tags": [],
-    "title": "Dispositivo",
-    "uri": "/ejercicios/dispositivo/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
-    "content": "Ejercicios prácticos sobre las herramientas y técnicas que marcan la diferencia entre un proyecto de prueba y una app lista para producción: generación de código, configuración por entorno y patrones de arquitectura probados.",
+    "content": "Ejercicios prácticos sobre las herramientas y técnicas que marcan la diferencia entre un proyecto de prueba y una app lista para producción: generación de código, configuración por entorno y patrones de arquitectura probados.\nFreezed y json_serializable en Flutter: ejercicio resuelto",
     "description": "Ejercicios de Flutter sobre generación de código, inyección de dependencias avanzada, flavors y herramientas de productividad para proyectos reales.",
     "tags": [
       "Herramientas",
@@ -66,6 +58,14 @@ var relearn_searchindex = [
     ],
     "title": "Herramientas y productividad en Flutter",
     "uri": "/ejercicios/herramientas-codigo/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
+    "content": "Accede a las capacidades nativas del dispositivo desde Flutter. Estos ejercicios cubren los patrones más comunes: solicitud de permisos con permission_handler, autenticación biométrica con local_auth, captura de fotos con el plugin camera y más. Esenciales para cualquier app que interactúe con el hardware.",
+    "description": "Ejercicios resueltos de acceso a hardware en Flutter: cámara, biometría, permisos con permission_handler y sensores del dispositivo.",
+    "tags": [],
+    "title": "Dispositivo",
+    "uri": "/ejercicios/dispositivo/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
@@ -177,7 +177,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos",
-    "content": "Colección de ejercicios resueltos de Flutter para practicar con ejemplos concretos y aplicables a proyectos reales.\nQué encontrarás 📱 Ejercicios aplicables Casos de uso reales para construir apps Flutter que puedas reutilizar en proyectos propios.\n🧩 Estado y arquitectura Widgets, navegación, consumo de APIs, persistencia local y testing con enfoque práctico.\n📈 Dificultad progresiva Cada ejercicio muestra la dificultad para ayudarte a practicar en orden y medir tu progreso.\nEjercicios disponibles Widgets y UI Formularios y navegación Estado y arquitectura API y async Persistencia y datos Testing y recursos Dispositivo Herramientas y código Internacionalización FAQ ¿Hace falta experiencia previa con Flutter? No para los ejercicios marcados como principiante. Con conocer los conceptos básicos de Dart y haber instalado Flutter ya puedes empezar.\n¿Puedo usar estos ejercicios en mis proyectos reales? Sí. Cada ejercicio está pensado para ser extraíble: el código resuelto sigue las convenciones de Flutter y puede integrarse directamente en una app propia.\n¿En qué orden hago los ejercicios? Empieza por los de nivel principiante (setState, ListView, formularios, navegación) y avanza hacia los de nivel intermedio (API, estado global, persistencia). Los de nivel avanzado requieren entender bien los anteriores.\n¿Los ejercicios siguen null safety y Flutter 3? Sí. Todo el código usa null safety y es compatible con Flutter 3.x y versiones posteriores.",
+    "content": "Colección de ejercicios resueltos de Flutter para practicar con ejemplos concretos y aplicables a proyectos reales.\nQué encontrarás 📱 Ejercicios aplicables Casos de uso reales para construir apps Flutter que puedas reutilizar en proyectos propios.\n🧩 Estado y arquitectura Widgets, navegación, consumo de APIs, persistencia local y testing con enfoque práctico.\n📈 Dificultad progresiva Cada ejercicio muestra la dificultad para ayudarte a practicar en orden y medir tu progreso.\nEjercicios disponibles Widgets y UI Formularios y navegación Estado y arquitectura API y async Persistencia y datos Testing y recursos Herramientas y código Dispositivo Internacionalización FAQ ¿Hace falta experiencia previa con Flutter? No para los ejercicios marcados como principiante. Con conocer los conceptos básicos de Dart y haber instalado Flutter ya puedes empezar.\n¿Puedo usar estos ejercicios en mis proyectos reales? Sí. Cada ejercicio está pensado para ser extraíble: el código resuelto sigue las convenciones de Flutter y puede integrarse directamente en una app propia.\n¿En qué orden hago los ejercicios? Empieza por los de nivel principiante (setState, ListView, formularios, navegación) y avanza hacia los de nivel intermedio (API, estado global, persistencia). Los de nivel avanzado requieren entender bien los anteriores.\n¿Los ejercicios siguen null safety y Flutter 3? Sí. Todo el código usa null safety y es compatible con Flutter 3.x y versiones posteriores.",
     "description": "Ejercicios resueltos de Flutter, paso a paso, para practicar estado, widgets, formularios, navegación, consumo de APIs, persistencia local y testing.",
     "tags": [],
     "title": "Ejercicios resueltos de Flutter (paso a paso)",
@@ -226,6 +226,26 @@ var relearn_searchindex = [
     "uri": "/ejercicios/testing-recursos/flutter-vs-react-native-2026/index.html"
   },
   {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Herramientas y código",
+    "content": "Freezed y json_serializable en Flutter: ejercicio resuelto Freezed genera automáticamente copyWith, ==, hashCode, toString y fromJson/toJson para tus modelos. Elimina el boilerplate que de otro modo escribirías a mano y que es la fuente de errores más común al trabajar con datos inmutables.\nEnunciado Crea un modelo Post inmutable con id, title, body y isFavorite (con valor por defecto). Demuestra:\nCreación de instancias. copyWith para modificar un campo. Serialización a/desde JSON. Un tipo union ApiResult para modelar éxito y error. Dependencias 1 2 3 4 5 6 7 8 dependencies: freezed_annotation: ^2.4.1 json_annotation: ^4.9.0 dev_dependencies: build_runner: ^2.4.13 freezed: ^2.5.7 json_serializable: ^6.8.0 Cómo ejecutar build_runner 1 2 3 4 5 # Genera los archivos .freezed.dart y .g.dart por primera vez dart run build_runner build --delete-conflicting-outputs # Modo watch: regenera automáticamente al guardar dart run build_runner watch --delete-conflicting-outputs Solución: modelo Post 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 // lib/domain/models/post.dart import 'package:freezed_annotation/freezed_annotation.dart'; part 'post.freezed.dart'; part 'post.g.dart'; @freezed class Post with _$Post { const factory Post({ required int id, required String title, required String body, @Default(false) bool isFavorite, }) = _Post; factory Post.fromJson(Map\u003cString, dynamic\u003e json) =\u003e _$PostFromJson(json); } Solución: tipo union ApiResult 1 2 3 4 5 6 7 8 9 10 // lib/domain/models/api_result.dart import 'package:freezed_annotation/freezed_annotation.dart'; part 'api_result.freezed.dart'; @freezed sealed class ApiResult\u003cT\u003e with _$ApiResult\u003cT\u003e { const factory ApiResult.success(T data) = Success\u003cT\u003e; const factory ApiResult.failure(String message) = Failure\u003cT\u003e; } Uso completo en una app 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 // lib/main.dart import 'package:flutter/material.dart'; // Importa tus modelos generados // import 'domain/models/post.dart'; // import 'domain/models/api_result.dart'; void main() { // ── Modelo Post ────────────────────────────────────────────────────────── const post = Post(id: 1, title: 'Hola Freezed', body: 'Cuerpo del post'); // copyWith: crea una copia con isFavorite cambiado final favoritePost = post.copyWith(isFavorite: true); // Serialización JSON final json = post.toJson(); final fromJson = Post.fromJson({'id': 2, 'title': 'Test', 'body': 'Body'}); // == funciona correctamente (generado por Freezed) assert(post == const Post(id: 1, title: 'Hola Freezed', body: 'Cuerpo del post')); assert(post != favoritePost); debugPrint('post: $post'); // Post(id: 1, title: Hola Freezed, body: Cuerpo del post, isFavorite: false) debugPrint('favoritePost: $favoritePost'); // Post(id: 1, title: Hola Freezed, body: Cuerpo del post, isFavorite: true) debugPrint('json: $json'); // {id: 1, title: Hola Freezed, body: Cuerpo del post, isFavorite: false} debugPrint('fromJson: $fromJson'); // Post(id: 2, title: Test, body: Body, isFavorite: false) // ── Union type ApiResult ───────────────────────────────────────────────── const ApiResult\u003cPost\u003e result = ApiResult.success(post); final message = switch (result) { Success(:final data) =\u003e 'Cargado: ${data.title}', Failure(:final message) =\u003e 'Error: $message', }; debugPrint(message); // Cargado: Hola Freezed runApp(const MaterialApp(home: Scaffold(body: Center(child: Text('Freezed OK'))))); } Archivos generados por build_runner Después de ejecutar build_runner build aparecen dos archivos que no debes editar a mano:\n1 2 3 4 lib/domain/models/ ├── post.dart ← solo editas este ├── post.freezed.dart ← generado automáticamente └── post.g.dart ← generado automáticamente (fromJson/toJson) Añade estos patrones a .gitignore si prefieres no versionar los archivos generados (requiere regenerar en CI):\n1 2 3 # .gitignore (opcional) *.freezed.dart *.g.dart O bien versiónalos para evitar regenerar en cada build de CI.\nErrores frecuentes Olvidar part 'post.freezed.dart': el compilador no encuentra los tipos generados y falla con _$Post not found. No ejecutar build_runner después de un cambio: los archivos .freezed.dart quedan desactualizados y aparecen errores de tipos. Modificar un archivo .freezed.dart a mano: se sobreescribe en el siguiente build; cualquier cambio va en el archivo fuente anotado. Cuándo merece la pena Freezed Modelos que viajen por varias capas (API → dominio → UI). Modelos que se copian frecuentemente con pequeñas modificaciones. Estados de BLoC/Cubit con múltiples variantes (union types). Cualquier proyecto de más de un par de semanas. Aplicación práctica Freezed es el estándar de facto para modelos de dominio en Flutter. Lo encontrarás en casi todos los proyectos de producción con arquitectura limpia, junto a Riverpod o BLoC.\nSiguiente ejercicio recomendado json_serializable sin Freezed: ejercicio resuelto Mapper DTO a dominio en Flutter: ejercicio resuelto Arquitectura por capas en Flutter: ejercicio resuelto Todos los ejercicios de Flutter Práctica guiada y siguiente paso Más ejercicios de Flutter Ejercicios C para reforzar fundamentos Programación en C en 100 ejercicios resueltos Ver el libro en Amazon (incluido en Kindle Unlimited) Suscribirte a la newsletter FAQ ¿Tengo que regenerar en cada flutter run? No. Los archivos generados persisten. Solo regeneras cuando cambias la clase anotada.\n¿Freezed es compatible con Riverpod? Sí, y se complementan muy bien. Los estados de StateNotifier o AsyncNotifier de Riverpod suelen modelarse con Freezed.\n¿Puedo usar Freezed sin json_serializable? Sí. Si no necesitas fromJson/toJson, omite json_annotation y el part '*.g.dart'. Obtendrás copyWith, == y toString igual.",
+    "description": "Ejercicio resuelto para crear modelos inmutables en Flutter con Freezed: copyWith automático, fromJson/toJson, union types y build_runner paso a paso.",
+    "tags": [
+      "Intermedio",
+      "Herramientas",
+      "Arquitectura"
+    ],
+    "title": "Freezed y json_serializable en Flutter: ejercicio resuelto",
+    "uri": "/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Herramientas",
+    "uri": "/tags/herramientas/index.html"
+  },
+  {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
     "content": "",
     "description": "",
@@ -248,6 +268,14 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Etiqueta :: Multiplataforma",
     "uri": "/tags/multiplataforma/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Productividad",
+    "uri": "/tags/productividad/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
@@ -940,21 +968,5 @@ var relearn_searchindex = [
     ],
     "title": "Contador en Flutter con setState: ejercicio resuelto paso a paso",
     "uri": "/ejercicios/estado-arquitectura/flutter-contador-con-setstate-ejercicio-resuelto/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Etiqueta :: Herramientas",
-    "uri": "/tags/herramientas/index.html"
-  },
-  {
-    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Etiqueta :: Productividad",
-    "uri": "/tags/productividad/index.html"
   }
 ]

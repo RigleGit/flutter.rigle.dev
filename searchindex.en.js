@@ -1,7 +1,7 @@
 var relearn_searchindex = [
   {
     "breadcrumb": "Learn Flutter — solved exercises",
-    "content": "A collection of solved Flutter exercises focused on concrete, real-world implementation patterns.\nWhat you will find 📱 Project-ready exercises Realistic Flutter scenarios you can adapt directly to your own apps.\n🧩 State and architecture Widgets, navigation, API usage, local persistence, and testing with practical focus.\n📈 Progressive difficulty Each exercise shows its level so you can practice in sequence and track your progress.\nAvailable exercises Widgets and UI Forms and navigation State and architecture API and async Persistence and data Testing and resources Device Tools \u0026 Code Internationalization FAQ Do I need prior Flutter experience? Not for exercises tagged beginner. Knowing basic Dart syntax and having Flutter installed is enough to get started.\nCan I use these exercises in real projects? Yes. Each exercise is designed to be reusable: the solved code follows Flutter conventions and can be integrated directly into your own app.\nWhat order should I follow? Start with beginner exercises (setState, ListView, forms, navigation) and move towards intermediate ones (API, state management, persistence). Advanced exercises assume you understand the previous ones.\nAre the exercises null-safe and compatible with Flutter 3? Yes. All code uses null safety and is compatible with Flutter 3.x and later versions.",
+    "content": "A collection of solved Flutter exercises focused on concrete, real-world implementation patterns.\nWhat you will find 📱 Project-ready exercises Realistic Flutter scenarios you can adapt directly to your own apps.\n🧩 State and architecture Widgets, navigation, API usage, local persistence, and testing with practical focus.\n📈 Progressive difficulty Each exercise shows its level so you can practice in sequence and track your progress.\nAvailable exercises Widgets and UI Forms and navigation State and architecture API and async Persistence and data Testing and resources Tools \u0026 Code Device Internationalization FAQ Do I need prior Flutter experience? Not for exercises tagged beginner. Knowing basic Dart syntax and having Flutter installed is enough to get started.\nCan I use these exercises in real projects? Yes. Each exercise is designed to be reusable: the solved code follows Flutter conventions and can be integrated directly into your own app.\nWhat order should I follow? Start with beginner exercises (setState, ListView, forms, navigation) and move towards intermediate ones (API, state management, persistence). Advanced exercises assume you understand the previous ones.\nAre the exercises null-safe and compatible with Flutter 3? Yes. All code uses null safety and is compatible with Flutter 3.x and later versions.",
     "description": "Solved Flutter exercises to practice state, widgets, forms, navigation, API calls, local persistence, and testing with practical examples.",
     "tags": [],
     "title": "Solved Flutter exercises (step by step)",
@@ -57,15 +57,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Access native device capabilities from Flutter. These exercises cover the most common patterns: requesting permissions with permission_handler, biometric authentication with local_auth, photo capture with the camera plugin and more. Essential for any app that interacts with hardware.",
-    "description": "Solved Flutter hardware access exercises: camera, biometrics, permissions with permission_handler, and device sensors.",
-    "tags": [],
-    "title": "Device",
-    "uri": "/en/ejercicios/dispositivo/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Practical exercises on the tools and techniques that separate a demo project from a production-ready app: code generation, environment configuration, and battle-tested architecture patterns.",
+    "content": "Practical exercises on the tools and techniques that separate a demo project from a production-ready app: code generation, environment configuration, and battle-tested architecture patterns.\nFreezed and json_serializable in Flutter: solved exercise",
     "description": "Flutter exercises on code generation, advanced dependency injection, flavors, and productivity tools for production-ready projects.",
     "tags": [
       "Tools",
@@ -74,6 +66,14 @@ var relearn_searchindex = [
     ],
     "title": "Flutter Tools and Productivity",
     "uri": "/en/ejercicios/herramientas-codigo/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
+    "content": "Access native device capabilities from Flutter. These exercises cover the most common patterns: requesting permissions with permission_handler, biometric authentication with local_auth, photo capture with the camera plugin and more. Essential for any app that interacts with hardware.",
+    "description": "Solved Flutter hardware access exercises: camera, biometrics, permissions with permission_handler, and device sensors.",
+    "tags": [],
+    "title": "Device",
+    "uri": "/en/ejercicios/dispositivo/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
@@ -210,6 +210,18 @@ var relearn_searchindex = [
     "uri": "/en/ejercicios/testing-recursos/flutter-vs-react-native-2026/index.html"
   },
   {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Tools \u0026 Code",
+    "content": "Freezed and json_serializable in Flutter: solved exercise Freezed automatically generates copyWith, ==, hashCode, toString, and fromJson/toJson for your models. It eliminates the boilerplate you would otherwise write by hand — the most common source of bugs when working with immutable data.\nProblem statement Create an immutable Post model with id, title, body, and isFavorite (with a default value). Demonstrate:\nInstance creation. copyWith to change a single field. Serialization to/from JSON. A union type ApiResult to model success and failure. Dependencies 1 2 3 4 5 6 7 8 dependencies: freezed_annotation: ^2.4.1 json_annotation: ^4.9.0 dev_dependencies: build_runner: ^2.4.13 freezed: ^2.5.7 json_serializable: ^6.8.0 Running build_runner 1 2 3 4 5 # Generate .freezed.dart and .g.dart for the first time dart run build_runner build --delete-conflicting-outputs # Watch mode: regenerates automatically on save dart run build_runner watch --delete-conflicting-outputs Solution: Post model 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 // lib/domain/models/post.dart import 'package:freezed_annotation/freezed_annotation.dart'; part 'post.freezed.dart'; part 'post.g.dart'; @freezed class Post with _$Post { const factory Post({ required int id, required String title, required String body, @Default(false) bool isFavorite, }) = _Post; factory Post.fromJson(Map\u003cString, dynamic\u003e json) =\u003e _$PostFromJson(json); } Solution: ApiResult union type 1 2 3 4 5 6 7 8 9 10 // lib/domain/models/api_result.dart import 'package:freezed_annotation/freezed_annotation.dart'; part 'api_result.freezed.dart'; @freezed sealed class ApiResult\u003cT\u003e with _$ApiResult\u003cT\u003e { const factory ApiResult.success(T data) = Success\u003cT\u003e; const factory ApiResult.failure(String message) = Failure\u003cT\u003e; } Full usage in an app 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 // lib/main.dart import 'package:flutter/material.dart'; // Import your generated models // import 'domain/models/post.dart'; // import 'domain/models/api_result.dart'; void main() { // ── Post model ─────────────────────────────────────────────────────────── const post = Post(id: 1, title: 'Hello Freezed', body: 'Post body'); // copyWith: creates a copy with isFavorite changed final favoritePost = post.copyWith(isFavorite: true); // JSON serialization final json = post.toJson(); final fromJson = Post.fromJson({'id': 2, 'title': 'Test', 'body': 'Body'}); // == works correctly (generated by Freezed) assert(post == const Post(id: 1, title: 'Hello Freezed', body: 'Post body')); assert(post != favoritePost); debugPrint('post: $post'); // Post(id: 1, title: Hello Freezed, body: Post body, isFavorite: false) debugPrint('favoritePost: $favoritePost'); // Post(id: 1, title: Hello Freezed, body: Post body, isFavorite: true) debugPrint('json: $json'); // {id: 1, title: Hello Freezed, body: Post body, isFavorite: false} debugPrint('fromJson: $fromJson'); // Post(id: 2, title: Test, body: Body, isFavorite: false) // ── ApiResult union type ───────────────────────────────────────────────── const ApiResult\u003cPost\u003e result = ApiResult.success(post); final message = switch (result) { Success(:final data) =\u003e 'Loaded: ${data.title}', Failure(:final message) =\u003e 'Error: $message', }; debugPrint(message); // Loaded: Hello Freezed runApp(const MaterialApp(home: Scaffold(body: Center(child: Text('Freezed OK'))))); } Files generated by build_runner After running build_runner build, two files appear that you must not edit manually:\n1 2 3 4 lib/domain/models/ ├── post.dart ← only edit this one ├── post.freezed.dart ← auto-generated └── post.g.dart ← auto-generated (fromJson/toJson) Add these patterns to .gitignore if you prefer not to version the generated files (requires regeneration in CI):\n1 2 3 # .gitignore (optional) *.freezed.dart *.g.dart Or commit them to avoid regenerating on every CI build.\nCommon mistakes Forgetting part 'post.freezed.dart': the compiler cannot find the generated types and fails with _$Post not found. Not running build_runner after a change: .freezed.dart files become stale and type errors appear. Editing a .freezed.dart file by hand: it gets overwritten on the next build; all changes go in the annotated source file. When Freezed is worth it Models that travel across multiple layers (API → domain → UI). Models that are frequently copied with small modifications. BLoC/Cubit states with multiple variants (union types). Any project lasting more than a couple of weeks. Practical use Freezed is the de facto standard for domain models in Flutter. You will find it in almost every production project with clean architecture, alongside Riverpod or BLoC.\nRecommended next exercise json_serializable without Freezed: solved exercise DTO to domain mapper in Flutter: solved exercise Layered architecture in Flutter: solved exercise All Flutter exercises Guided practice and next step More Flutter exercises C exercises to strengthen fundamentals Programming in C in 100 Solved Exercises View the book on Amazon (included in Kindle Unlimited) Subscribe to the newsletter FAQ Do I need to regenerate on every flutter run? No. Generated files persist. You only regenerate when you change the annotated class.\nIs Freezed compatible with Riverpod? Yes, and they complement each other very well. StateNotifier or AsyncNotifier states in Riverpod are typically modeled with Freezed.\nCan I use Freezed without json_serializable? Yes. If you do not need fromJson/toJson, omit json_annotation and the part '*.g.dart'. You still get copyWith, ==, and toString.",
+    "description": "Solved Flutter exercise for immutable models with Freezed: automatic copyWith, fromJson/toJson, union types, and step-by-step build_runner setup.",
+    "tags": [
+      "Intermediate",
+      "Tools",
+      "Architecture"
+    ],
+    "title": "Freezed and json_serializable in Flutter: solved exercise",
+    "uri": "/en/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html"
+  },
+  {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
     "content": "",
     "description": "",
@@ -240,6 +252,14 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Tag :: Multiplatform",
     "uri": "/en/tags/multiplatform/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Productivity",
+    "uri": "/en/tags/productivity/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
@@ -300,6 +320,14 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Tag :: Testing",
     "uri": "/en/tags/testing/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Tools",
+    "uri": "/en/tags/tools/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Testing and resources",
@@ -948,21 +976,5 @@ var relearn_searchindex = [
     ],
     "title": "Flutter Counter with setState: solved exercise step by step",
     "uri": "/en/ejercicios/estado-arquitectura/flutter-contador-con-setstate-ejercicio-resuelto/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Productivity",
-    "uri": "/en/tags/productivity/index.html"
-  },
-  {
-    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Tag :: Tools",
-    "uri": "/en/tags/tools/index.html"
   }
 ]
