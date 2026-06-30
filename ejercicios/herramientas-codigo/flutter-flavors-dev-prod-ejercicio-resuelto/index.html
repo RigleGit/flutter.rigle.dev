@@ -1,0 +1,349 @@
+<!doctype html><html id=R-html lang=es dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Ejercicio resuelto para configurar Flavors en Flutter con dart-define: múltiples entornos dev/staging/prod con API URLs distintas, nombre de app y logging diferenciado."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="Flavors dev, staging y prod en Flutter: ejercicio resuelto :: Flutter en rigle.dev"><meta name=twitter:description content="Ejercicio resuelto para configurar Flavors en Flutter con dart-define: múltiples entornos dev/staging/prod con API URLs distintas, nombre de app y logging diferenciado."><meta property="og:url" content="https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="Flavors dev, staging y prod en Flutter: ejercicio resuelto :: Flutter en rigle.dev"><meta property="og:description" content="Ejercicio resuelto para configurar Flavors en Flutter con dart-define: múltiples entornos dev/staging/prod con API URLs distintas, nombre de app y logging diferenciado."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="Ejercicios resueltos de Flutter (paso a paso)"><meta property="article:published_time" content="2026-06-30T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Avanzado"><meta property="article:tag" content="Herramientas"><meta property="article:tag" content="Arquitectura"><meta itemprop=name content="Flavors dev, staging y prod en Flutter: ejercicio resuelto :: Flutter en rigle.dev"><meta itemprop=description content="Ejercicio resuelto para configurar Flavors en Flutter con dart-define: múltiples entornos dev/staging/prod con API URLs distintas, nombre de app y logging diferenciado."><meta itemprop=datePublished content="2026-06-30T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1078"><meta itemprop=keywords content="Avanzado,Herramientas,Arquitectura"><title>Flavors dev, staging y prod en Flutter: ejercicio resuelto :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1782796421 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1782796421 defer></script><script src=/js/search-lunr.min.js?1782796421 defer></script><script src=/js/search.min.js?1782796421 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.es.js?1782796421"</script><script src=/js/lunr/lunr.min.js?1782796421 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1782796421 defer></script><script src=/js/lunr/lunr.multi.min.js?1782796421 defer></script><script src=/js/lunr/lunr.es.min.js?1782796421 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["es"]</script><link href=/fonts/fontawesome/css/all.min.css?1782796421 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1782796421 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1782796421 rel=stylesheet><link href=/css/theme.min.css?1782796421 rel=stylesheet><link href=/css/format-html.min.css?1782796421 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copiar texto al portapapeles`,window.T_Copied_to_clipboard=`¡Texto copiado al portapapeles!`,window.T_Link_copied_to_clipboard=`¡Enlace copiado al portapapeles!`,window.T_Reset_view=`Restablecer vista`,window.T_View_reset=`¡Ver reajuste!`,window.T_No_results_found=`No se han encontrado resultados para "{0}"`,window.T_N_results_found=`{1} resultados encontrados para "{0}"`,window.T_Browser_unsupported_feature=`Este navegador no admite esta función`,window.relearn.themevariants=["auto"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1782796421 rel=stylesheet></head><body class="mobile-support html" data-origin=/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menú (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Tabla de contenido (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#flavors-dev-staging-y-prod-en-flutter-ejercicio-resuelto>Flavors dev, staging y prod en Flutter: ejercicio resuelto</a></li><li><a href=#enunciado>Enunciado</a></li><li><a href=#enfoque-recomendado-dart-define-from-file>Enfoque recomendado: dart-define-from-file</a></li><li><a href=#solución-appconfig>Solución: AppConfig</a></li><li><a href=#solución-logger-condicional>Solución: Logger condicional</a></li><li><a href=#solución-maindart-y-pantalla-de-info>Solución: main.dart y pantalla de info</a></li><li><a href=#cómo-ejecutar-cada-entorno>Cómo ejecutar cada entorno</a></li><li><a href=#integración-con-vs-code-launchjson>Integración con VS Code (launch.json)</a></li><li><a href=#resultado-esperado>Resultado esperado</a></li><li><a href=#errores-frecuentes>Errores frecuentes</a></li><li><a href=#alternativa-native-flavors-androidios>Alternativa: native flavors (Android/iOS)</a></li><li><a href=#aplicación-práctica>Aplicación práctica</a></li><li><a href=#siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado</a></li><li><a href=#práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#dart-define-reemplaza-completamente-los-native-flavors>¿dart-define reemplaza completamente los native flavors?</a></li><li><a href=#los-valores-de-dart-define-son-seguros-para-secretos-de-api>¿Los valores de dart-define son seguros para secretos de API?</a></li><li><a href=#funciona-con-github-actions>¿Funciona con GitHub Actions?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/index.html><span itemprop=name>Aprende Flutter — ejercicios resueltos</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/index.html><span itemprop=name>Ejercicios</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/herramientas-codigo/index.html><span itemprop=name>Herramientas y código</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Flavors dev, staging y prod en Flutter: ejercicio resuelto</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/herramientas-codigo/index.html title="Herramientas y productividad en Flutter (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html title="Freezed y json_serializable en Flutter: ejercicio resuelto (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=Más><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Etiquetas style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/tags/arquitectura/index.html>Arquitectura</a></li><li><a class=term-link href=/tags/avanzado/index.html>Avanzado</a></li><li><a class=term-link href=/tags/herramientas/index.html>Herramientas</a></li></ul></div></header><h1 id=flavors-dev-staging-y-prod-en-flutter-ejercicio-resuelto>Flavors dev, staging y prod en Flutter: ejercicio resuelto</h1><h2 id=flavors-dev-staging-y-prod-en-flutter-ejercicio-resuelto>Flavors dev, staging y prod en Flutter: ejercicio resuelto<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Ninguna app de producción real tiene un solo entorno. <strong>Flavors</strong> (o variantes de build) permiten ejecutar la misma base de código con configuraciones distintas sin un solo <code>if</code> en la lógica de negocio. La forma más portable en Flutter es usar <code>--dart-define</code> o <code>--dart-define-from-file</code>.</p><h2 id=enunciado>Enunciado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Configura tres entornos — <code>dev</code>, <code>staging</code> y <code>prod</code> — con:</p><ul><li>URL de API distinta por entorno.</li><li>Nombre de app diferenciado (visible en el lanzador del dispositivo).</li><li>Logging habilitado solo en <code>dev</code>.</li><li>Una pantalla que muestre la configuración activa.</li></ul><h2 id=enfoque-recomendado-dart-define-from-file>Enfoque recomendado: dart-define-from-file<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Crea un archivo JSON por entorno (no los versiones con secretos):</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=c1>// envs/dev.json
+</span></span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;APP_ENV&#34;</span><span class=p>:</span> <span class=s2>&#34;dev&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;APP_NAME&#34;</span><span class=p>:</span> <span class=s2>&#34;MiApp Dev&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;API_BASE_URL&#34;</span><span class=p>:</span> <span class=s2>&#34;https://dev.api.example.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;ENABLE_LOGGING&#34;</span><span class=p>:</span> <span class=s2>&#34;true&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=c1>// envs/staging.json
+</span></span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;APP_ENV&#34;</span><span class=p>:</span> <span class=s2>&#34;staging&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;APP_NAME&#34;</span><span class=p>:</span> <span class=s2>&#34;MiApp Staging&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;API_BASE_URL&#34;</span><span class=p>:</span> <span class=s2>&#34;https://staging.api.example.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;ENABLE_LOGGING&#34;</span><span class=p>:</span> <span class=s2>&#34;true&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=c1>// envs/prod.json
+</span></span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;APP_ENV&#34;</span><span class=p>:</span> <span class=s2>&#34;prod&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;APP_NAME&#34;</span><span class=p>:</span> <span class=s2>&#34;MiApp&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;API_BASE_URL&#34;</span><span class=p>:</span> <span class=s2>&#34;https://api.example.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;ENABLE_LOGGING&#34;</span><span class=p>:</span> <span class=s2>&#34;false&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><p>Añade <code>envs/</code> al <code>.gitignore</code> si contienen secretos (o usa variables de entorno en CI).</p><h2 id=solución-appconfig>Solución: AppConfig<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=c1>// lib/core/config/app_config.dart
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>/// Lee los valores inyectados por --dart-define-from-file en tiempo de compilación.
+</span></span></span><span class=line><span class=cl><span class=c1>/// Si no se pasan, usa los valores de dev como fallback seguro.
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>AppConfig</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=n>env</span> <span class=o>=</span> <span class=kt>String</span><span class=p>.</span><span class=n>fromEnvironment</span><span class=p>(</span><span class=s1>&#39;APP_ENV&#39;</span><span class=p>,</span> <span class=nl>defaultValue:</span> <span class=s1>&#39;dev&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=n>appName</span> <span class=o>=</span> <span class=kt>String</span><span class=p>.</span><span class=n>fromEnvironment</span><span class=p>(</span><span class=s1>&#39;APP_NAME&#39;</span><span class=p>,</span> <span class=nl>defaultValue:</span> <span class=s1>&#39;MiApp Dev&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=n>apiBaseUrl</span> <span class=o>=</span> <span class=kt>String</span><span class=p>.</span><span class=n>fromEnvironment</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;API_BASE_URL&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>defaultValue:</span> <span class=s1>&#39;https://dev.api.example.com&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=n>enableLogging</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>      <span class=kt>bool</span><span class=p>.</span><span class=n>fromEnvironment</span><span class=p>(</span><span class=s1>&#39;ENABLE_LOGGING&#39;</span><span class=p>,</span> <span class=nl>defaultValue:</span> <span class=kc>true</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kt>bool</span> <span class=kd>get</span> <span class=n>isDev</span> <span class=o>=&gt;</span> <span class=n>env</span> <span class=o>==</span> <span class=s1>&#39;dev&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kt>bool</span> <span class=kd>get</span> <span class=n>isStaging</span> <span class=o>=&gt;</span> <span class=n>env</span> <span class=o>==</span> <span class=s1>&#39;staging&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kt>bool</span> <span class=kd>get</span> <span class=n>isProd</span> <span class=o>=&gt;</span> <span class=n>env</span> <span class=o>==</span> <span class=s1>&#39;prod&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=solución-logger-condicional>Solución: Logger condicional<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=c1>// lib/core/logger.dart
+</span></span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/foundation.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;app_config.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>log</span><span class=p>(</span><span class=kt>String</span> <span class=n>message</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=n>AppConfig</span><span class=p>.</span><span class=n>enableLogging</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>debugPrint</span><span class=p>(</span><span class=s1>&#39;[</span><span class=si>${</span><span class=n>AppConfig</span><span class=p>.</span><span class=n>env</span><span class=p>.</span><span class=n>toUpperCase</span><span class=p>()</span><span class=si>}</span><span class=s1>] </span><span class=si>$</span><span class=n>message</span><span class=s1>&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=solución-maindart-y-pantalla-de-info>Solución: main.dart y pantalla de info<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span><span class=lnt>90
+</span><span class=lnt>91
+</span><span class=lnt>92
+</span><span class=lnt>93
+</span><span class=lnt>94
+</span><span class=lnt>95
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=c1>// lib/main.dart
+</span></span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;core/config/app_config.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;core/logger.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>log</span><span class=p>(</span><span class=s1>&#39;App iniciada en entorno: </span><span class=si>${</span><span class=n>AppConfig</span><span class=p>.</span><span class=n>env</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>MyApp</span><span class=p>());</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>MyApp</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>MyApp</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>MaterialApp</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>title:</span> <span class=n>AppConfig</span><span class=p>.</span><span class=n>appName</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>theme:</span> <span class=n>ThemeData</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>colorScheme:</span> <span class=n>ColorScheme</span><span class=p>.</span><span class=n>fromSeed</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>seedColor:</span> <span class=n>AppConfig</span><span class=p>.</span><span class=n>isDev</span>
+</span></span><span class=line><span class=cl>              <span class=o>?</span> <span class=n>Colors</span><span class=p>.</span><span class=n>orange</span>
+</span></span><span class=line><span class=cl>              <span class=o>:</span> <span class=n>AppConfig</span><span class=p>.</span><span class=n>isStaging</span>
+</span></span><span class=line><span class=cl>                  <span class=o>?</span> <span class=n>Colors</span><span class=p>.</span><span class=n>blue</span>
+</span></span><span class=line><span class=cl>                  <span class=o>:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>home:</span> <span class=kd>const</span> <span class=n>EnvInfoPage</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>EnvInfoPage</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>EnvInfoPage</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>color</span> <span class=o>=</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>colorScheme</span><span class=p>.</span><span class=n>primary</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>title:</span> <span class=n>Text</span><span class=p>(</span><span class=n>AppConfig</span><span class=p>.</span><span class=n>appName</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>backgroundColor:</span> <span class=n>color</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>foregroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=n>_InfoRow</span><span class=p>(</span><span class=nl>label:</span> <span class=s1>&#39;Entorno&#39;</span><span class=p>,</span> <span class=nl>value:</span> <span class=n>AppConfig</span><span class=p>.</span><span class=n>env</span><span class=p>.</span><span class=n>toUpperCase</span><span class=p>()),</span>
+</span></span><span class=line><span class=cl>            <span class=n>_InfoRow</span><span class=p>(</span><span class=nl>label:</span> <span class=s1>&#39;API URL&#39;</span><span class=p>,</span> <span class=nl>value:</span> <span class=n>AppConfig</span><span class=p>.</span><span class=n>apiBaseUrl</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>_InfoRow</span><span class=p>(</span><span class=nl>label:</span> <span class=s1>&#39;Logging&#39;</span><span class=p>,</span> <span class=nl>value:</span> <span class=n>AppConfig</span><span class=p>.</span><span class=n>enableLogging</span> <span class=o>?</span> <span class=s1>&#39;Activado&#39;</span> <span class=o>:</span> <span class=s1>&#39;Desactivado&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>horizontal:</span> <span class=m>12</span><span class=p>,</span> <span class=nl>vertical:</span> <span class=m>6</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>color:</span> <span class=n>color</span><span class=p>.</span><span class=n>withOpacity</span><span class=p>(</span><span class=m>0.1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>6</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>border:</span> <span class=n>Border</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=nl>color:</span> <span class=n>color</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=n>AppConfig</span><span class=p>.</span><span class=n>isDev</span> <span class=o>?</span> <span class=s1>&#39;⚠️ Entorno de desarrollo&#39;</span> <span class=o>:</span> <span class=n>AppConfig</span><span class=p>.</span><span class=n>isProd</span> <span class=o>?</span> <span class=s1>&#39;✅ Producción&#39;</span> <span class=o>:</span> <span class=s1>&#39;🔵 Staging&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>color</span><span class=p>,</span> <span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_InfoRow</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>label</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_InfoRow</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>label</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>value</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>vertical:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>SizedBox</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>width:</span> <span class=m>100</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Expanded</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=n>value</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=cómo-ejecutar-cada-entorno>Cómo ejecutar cada entorno<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Desarrollo</span>
+</span></span><span class=line><span class=cl>flutter run --dart-define-from-file<span class=o>=</span>envs/dev.json
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Staging</span>
+</span></span><span class=line><span class=cl>flutter run --dart-define-from-file<span class=o>=</span>envs/staging.json
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Producción (build)</span>
+</span></span><span class=line><span class=cl>flutter build apk --dart-define-from-file<span class=o>=</span>envs/prod.json
+</span></span><span class=line><span class=cl>flutter build ios --dart-define-from-file<span class=o>=</span>envs/prod.json</span></span></code></pre></td></tr></table></div></div><h2 id=integración-con-vs-code-launchjson>Integración con VS Code (launch.json)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=c1>// .vscode/launch.json
+</span></span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;configurations&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Dev&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;request&#34;</span><span class=p>:</span> <span class=s2>&#34;launch&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;dart&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;args&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;--dart-define-from-file=envs/dev.json&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Staging&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;request&#34;</span><span class=p>:</span> <span class=s2>&#34;launch&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;dart&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;args&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;--dart-define-from-file=envs/staging.json&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Prod&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;request&#34;</span><span class=p>:</span> <span class=s2>&#34;launch&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;dart&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;args&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;--dart-define-from-file=envs/prod.json&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=resultado-esperado>Resultado esperado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><code>flutter run --dart-define-from-file=envs/dev.json</code> → pantalla naranja con &ldquo;DEV&rdquo; y URL de dev.</li><li><code>flutter run --dart-define-from-file=envs/prod.json</code> → pantalla verde con &ldquo;PROD&rdquo;, logging desactivado.</li><li>Sin pasar el flag → fallback a valores de dev (safe default).</li></ul><h2 id=errores-frecuentes>Errores frecuentes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>Leer <code>String.fromEnvironment</code> en tiempo de ejecución con <code>const</code></strong>: estos valores se resuelven en tiempo de compilación; si cambias el <code>json</code> tienes que recompilar, no basta con hot reload.</li><li><strong>Versionar archivos con secretos</strong>: usa <code>.gitignore</code> para los archivos <code>.json</code> con credenciales reales; en CI inyéctalos como variables de entorno o secretos del runner.</li><li><strong>Cambiar nombre de app solo en Dart</strong>: el nombre visible en el lanzador del dispositivo se configura en <code>AndroidManifest.xml</code> (Android) e <code>Info.plist</code> (iOS). Usa herramientas como <code>flutter_launcher_name</code> o configura manualmente.</li></ul><h2 id=alternativa-native-flavors-androidios>Alternativa: native flavors (Android/iOS)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Para cambios más profundos (íconos de app distintos, targets de Xcode separados), necesitas native flavors en Gradle y Xcode. <code>--dart-define-from-file</code> cubre el 80% de los casos con mucho menos configuración.</p><h2 id=aplicación-práctica>Aplicación práctica<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Es la primera cosa que configuras en un proyecto nuevo de producción, junto a la arquitectura base. Impide que se produzcan llamadas a producción desde una build de desarrollo y facilita el QA.</p><h2 id=siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/estado-arquitectura/flutter-arquitectura-capas-feature-first-ejercicio-resuelto/index.html>Arquitectura por capas en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/estado-arquitectura/flutter-inyeccion-dependencias-getit-ejercicio-resuelto/index.html>Inyección de dependencias con get_it en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/api-async/flutter-dio-interceptores-ejercicio-resuelto/index.html>Dio con interceptores en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/index.html>Todos los ejercicios de Flutter</a></li></ul><h2 id=práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/index.html>Más ejercicios de Flutter</a></li><li><a href=https://c.rigle.dev/ejercicios/ rel=external>Ejercicios C para reforzar fundamentos</a></li><li><a href=https://c.rigle.dev/c100/ rel=external>Programación en C en 100 ejercicios resueltos</a></li><li><a href=https://amzn.to/41weJIN rel=external>Ver el libro en Amazon (incluido en Kindle Unlimited)</a></li><li><a href=/ejercicios/index.html>Suscribirte a la newsletter</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=dart-define-reemplaza-completamente-los-native-flavors>¿dart-define reemplaza completamente los native flavors?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Para la mayoría de apps, sí. Los native flavors son necesarios si quieres íconos distintos, bundle IDs separados o configuraciones nativas por entorno en Android/iOS.</p><h3 id=los-valores-de-dart-define-son-seguros-para-secretos-de-api>¿Los valores de dart-define son seguros para secretos de API?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>No completamente. Están embebidos en el binario y son extraíbles con herramientas de análisis. Para secretos sensibles usa un servidor intermedio o servicios como Firebase Remote Config.</p><h3 id=funciona-con-github-actions>¿Funciona con GitHub Actions?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Sí. Pasa los valores como variables de entorno en el workflow y genera el JSON de entorno dinámicamente antes del build: <code>echo '{"API_BASE_URL":"${{ secrets.API_URL }}"}' > envs/prod.json</code>.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> 25 may. 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Buscar (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Buscar</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Buscar...>
+<button class=search-clear type=button data-search-clear title="Borrar búsqueda"><i class="fas fa-fw fa-times" title="Borrar búsqueda"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/index.html><a class=padding href=/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets y UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Formularios y navegación</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> Estado y arquitectura</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/api-async/index.html><a class="padding default-animation" href=/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API y async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistencia y datos</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing y recursos</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li class=parent data-nav-id=/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Herramientas y código</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu><li class=active data-nav-id=/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html>Flavors dev, staging y prod en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html>Freezed y json_serializable en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/herramientas-codigo/flutter-json-serializable-buildrunner-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/herramientas-codigo/flutter-json-serializable-buildrunner-ejercicio-resuelto/index.html>json_serializable con build_runner en Flutter: ejercicio resuelto</a></li></ul></li><li data-nav-id=/ejercicios/dispositivo/index.html><a class=padding href=/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Dispositivo</a></li><li data-nav-id=/ejercicios/internacionalizacion/index.html><a class=padding href=/ejercicios/internacionalizacion/index.html>Internacionalización</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Idioma</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html lang=es selected data-selected></option><option id=R-select-language-en value=en data-url=/en/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html lang=en></option></select></div><div class=clear></div></div></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1782796421 defer></script><script src=/js/theme.min.js?1782796421 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
