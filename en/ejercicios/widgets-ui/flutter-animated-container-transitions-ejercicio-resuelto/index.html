@@ -1,0 +1,400 @@
+<!doctype html><html id=R-html lang=en dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Solved Flutter exercise for implicit animations: AnimatedContainer, AnimatedOpacity, AnimatedSwitcher and TweenAnimationBuilder with real examples."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="Implicit animations in Flutter: solved exercise :: Flutter en rigle.dev"><meta name=twitter:description content="Solved Flutter exercise for implicit animations: AnimatedContainer, AnimatedOpacity, AnimatedSwitcher and TweenAnimationBuilder with real examples."><meta property="og:url" content="https://flutter.rigle.dev/en/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="Implicit animations in Flutter: solved exercise :: Flutter en rigle.dev"><meta property="og:description" content="Solved Flutter exercise for implicit animations: AnimatedContainer, AnimatedOpacity, AnimatedSwitcher and TweenAnimationBuilder with real examples."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="Solved Flutter exercises (step by step)"><meta property="article:published_time" content="2026-07-03T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermediate"><meta property="article:tag" content="Widgets"><meta property="article:tag" content="Animations"><meta itemprop=name content="Implicit animations in Flutter: solved exercise :: Flutter en rigle.dev"><meta itemprop=description content="Solved Flutter exercise for implicit animations: AnimatedContainer, AnimatedOpacity, AnimatedSwitcher and TweenAnimationBuilder with real examples."><meta itemprop=datePublished content="2026-07-03T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1125"><meta itemprop=keywords content="Intermediate,Widgets,Animations"><title>Implicit animations in Flutter: solved exercise :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1783054296 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1783054296 defer></script><script src=/js/search-lunr.min.js?1783054296 defer></script><script src=/js/search.min.js?1783054296 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.en.js?1783054296"</script><script src=/js/lunr/lunr.min.js?1783054296 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1783054296 defer></script><script src=/js/lunr/lunr.multi.min.js?1783054296 defer></script><script src=/js/lunr/lunr.en.min.js?1783054296 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/fonts/fontawesome/css/all.min.css?1783054296 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1783054296 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1783054296 rel=stylesheet><link href=/css/theme.min.css?1783054296 rel=stylesheet><link href=/css/format-html.min.css?1783054296 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/en/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["auto"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1783054296 rel=stylesheet></head><body class="mobile-support html" data-origin=/en/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#implicit-animations-in-flutter-solved-exercise>Implicit animations in Flutter: solved exercise</a></li><li><a href=#problem-statement>Problem statement</a></li><li><a href=#dependencies>Dependencies</a></li><li><a href=#full-solution>Full solution</a></li><li><a href=#expected-result>Expected result</a></li><li><a href=#most-used-implicit-animation-widgets>Most-used implicit animation widgets</a></li><li><a href=#when-to-use-explicit-animations>When to use explicit animations</a></li><li><a href=#common-mistakes>Common mistakes</a></li><li><a href=#practical-use>Practical use</a></li><li><a href=#recommended-next-exercise>Recommended next exercise</a></li><li><a href=#guided-practice-and-next-step>Guided practice and next step</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#do-implicit-animations-affect-performance>Do implicit animations affect performance?</a></li><li><a href=#can-i-combine-animatedcontainer-with-gesturedetector>Can I combine <code>AnimatedContainer</code> with <code>GestureDetector</code>?</a></li><li><a href=#does-animatedswitcher-work-with-any-widget>Does <code>AnimatedSwitcher</code> work with any widget?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/index.html><span itemprop=name>Learn Flutter — solved exercises</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/index.html><span itemprop=name>Exercises</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/widgets-ui/index.html><span itemprop=name>Widgets and UI</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Implicit animations in Flutter: solved exercise</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/widgets-ui/flutter-custom-painter-ejercicio-resuelto/index.html title="CustomPainter in Flutter: solved exercise (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/widgets-ui/flutter-sliver-appbar-collapsible-ejercicio-resuelto/index.html title="SliverAppBar collapsible in Flutter: solved exercise (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Tags style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/en/tags/animations/index.html>Animations</a></li><li><a class=term-link href=/en/tags/intermediate/index.html>Intermediate</a></li><li><a class=term-link href=/en/tags/widgets/index.html>Widgets</a></li></ul></div></header><h1 id=implicit-animations-in-flutter-solved-exercise>Implicit animations in Flutter: solved exercise</h1><h2 id=implicit-animations-in-flutter-solved-exercise>Implicit animations in Flutter: solved exercise<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><strong>Implicit animations</strong> are the easiest to implement in Flutter: you change a value and the widget automatically animates the transition. No <code>AnimationController</code> or explicit <code>Tween</code> needed. The rule: if an <code>AnimatedFoo</code> exists for your <code>Foo</code> widget, use it.</p><h2 id=problem-statement>Problem statement<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Build a demo screen showing:</p><ol><li><strong><code>AnimatedContainer</code></strong>: a card that changes size, color, and border radius.</li><li><strong><code>AnimatedOpacity</code></strong>: a panel that fades in and out.</li><li><strong><code>AnimatedSwitcher</code></strong>: a number that scales when it changes.</li><li><strong><code>TweenAnimationBuilder</code></strong>: a custom animated progress bar.</li></ol><h2 id=dependencies>Dependencies<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Flutter SDK only.</p><h2 id=full-solution>Full solution<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=c1>// lib/main.dart
+</span></span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>MaterialApp</span><span class=p>(</span><span class=nl>home:</span> <span class=n>AnimationsDemo</span><span class=p>()));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>AnimationsDemo</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>AnimationsDemo</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>AnimationsDemo</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_AnimationsDemoState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_AnimationsDemoState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>AnimationsDemo</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// AnimatedContainer state
+</span></span></span><span class=line><span class=cl>  <span class=kt>bool</span> <span class=n>_expanded</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// AnimatedOpacity state
+</span></span></span><span class=line><span class=cl>  <span class=kt>bool</span> <span class=n>_visible</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// AnimatedSwitcher state
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>_counter</span> <span class=o>=</span> <span class=m>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// TweenAnimationBuilder state
+</span></span></span><span class=line><span class=cl>  <span class=kt>double</span> <span class=n>_targetProgress</span> <span class=o>=</span> <span class=m>0.3</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Implicit animations&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>ListView</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>20</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// ── 1. AnimatedContainer ─────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>          <span class=n>_SectionTitle</span><span class=p>(</span><span class=s1>&#39;1. AnimatedContainer&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>AnimatedContainer</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>duration:</span> <span class=kd>const</span> <span class=n>Duration</span><span class=p>(</span><span class=nl>milliseconds:</span> <span class=m>400</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>curve:</span> <span class=n>Curves</span><span class=p>.</span><span class=n>easeInOut</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>width:</span> <span class=n>_expanded</span> <span class=o>?</span> <span class=m>280</span> <span class=o>:</span> <span class=m>140</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>height:</span> <span class=n>_expanded</span> <span class=o>?</span> <span class=m>140</span> <span class=o>:</span> <span class=m>70</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>color:</span> <span class=n>_expanded</span> <span class=o>?</span> <span class=n>Colors</span><span class=p>.</span><span class=n>indigo</span> <span class=o>:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>blue</span><span class=p>.</span><span class=n>shade200</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=n>_expanded</span> <span class=o>?</span> <span class=m>24</span> <span class=o>:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>boxShadow:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                  <span class=n>BoxShadow</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>black</span><span class=p>.</span><span class=n>withOpacity</span><span class=p>(</span><span class=m>0.15</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>blurRadius:</span> <span class=n>_expanded</span> <span class=o>?</span> <span class=m>16</span> <span class=o>:</span> <span class=m>4</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>offset:</span> <span class=kd>const</span> <span class=n>Offset</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=m>4</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>],</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>child:</span> <span class=n>AnimatedDefaultTextStyle</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>duration:</span> <span class=kd>const</span> <span class=n>Duration</span><span class=p>(</span><span class=nl>milliseconds:</span> <span class=m>400</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>fontSize:</span> <span class=n>_expanded</span> <span class=o>?</span> <span class=m>22</span> <span class=o>:</span> <span class=m>14</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=n>_expanded</span> <span class=o>?</span> <span class=s1>&#39;Expanded!&#39;</span> <span class=o>:</span> <span class=s1>&#39;Tap to expand&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>ElevatedButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_expanded</span> <span class=o>=</span> <span class=o>!</span><span class=n>_expanded</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=n>_expanded</span> <span class=o>?</span> <span class=s1>&#39;Collapse&#39;</span> <span class=o>:</span> <span class=s1>&#39;Expand&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>32</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=c1>// ── 2. AnimatedOpacity ───────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>          <span class=n>_SectionTitle</span><span class=p>(</span><span class=s1>&#39;2. AnimatedOpacity&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>AnimatedOpacity</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>opacity:</span> <span class=n>_visible</span> <span class=o>?</span> <span class=m>1.0</span> <span class=o>:</span> <span class=m>0.0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>duration:</span> <span class=kd>const</span> <span class=n>Duration</span><span class=p>(</span><span class=nl>milliseconds:</span> <span class=m>500</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>.</span><span class=n>shade50</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>border:</span> <span class=n>Border</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                  <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>check_circle</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=n>SizedBox</span><span class=p>(</span><span class=nl>width:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Panel with fade in/out&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>],</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>ElevatedButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_visible</span> <span class=o>=</span> <span class=o>!</span><span class=n>_visible</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=n>_visible</span> <span class=o>?</span> <span class=s1>&#39;Hide&#39;</span> <span class=o>:</span> <span class=s1>&#39;Show&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>32</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=c1>// ── 3. AnimatedSwitcher ──────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>          <span class=n>_SectionTitle</span><span class=p>(</span><span class=s1>&#39;3. AnimatedSwitcher&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>AnimatedSwitcher</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>duration:</span> <span class=kd>const</span> <span class=n>Duration</span><span class=p>(</span><span class=nl>milliseconds:</span> <span class=m>300</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>transitionBuilder:</span> <span class=p>(</span><span class=n>child</span><span class=p>,</span> <span class=n>animation</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>ScaleTransition</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>scale:</span> <span class=n>animation</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>child:</span> <span class=n>child</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=s1>&#39;</span><span class=si>$</span><span class=n>_counter</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>key:</span> <span class=n>ValueKey</span><span class=p>(</span><span class=n>_counter</span><span class=p>),</span> <span class=c1>// key is required to detect the change
+</span></span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>64</span><span class=p>,</span> <span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>mainAxisAlignment:</span> <span class=n>MainAxisAlignment</span><span class=p>.</span><span class=n>center</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=n>IconButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>remove</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_counter</span><span class=o>--</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>width:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=n>IconButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>add</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_counter</span><span class=o>++</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>32</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=c1>// ── 4. TweenAnimationBuilder ─────────────────────────────────────
+</span></span></span><span class=line><span class=cl>          <span class=n>_SectionTitle</span><span class=p>(</span><span class=s1>&#39;4. TweenAnimationBuilder&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>TweenAnimationBuilder</span><span class=o>&lt;</span><span class=kt>double</span><span class=o>&gt;</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>tween:</span> <span class=n>Tween</span><span class=p>(</span><span class=nl>begin:</span> <span class=m>0</span><span class=p>,</span> <span class=nl>end:</span> <span class=n>_targetProgress</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>duration:</span> <span class=kd>const</span> <span class=n>Duration</span><span class=p>(</span><span class=nl>milliseconds:</span> <span class=m>600</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>curve:</span> <span class=n>Curves</span><span class=p>.</span><span class=n>easeOut</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>builder:</span> <span class=p>(</span><span class=n>context</span><span class=p>,</span> <span class=n>value</span><span class=p>,</span> <span class=n>_</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=k>return</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                  <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=s1>&#39;</span><span class=si>${</span><span class=p>(</span><span class=n>value</span> <span class=o>*</span> <span class=m>100</span><span class=p>).</span><span class=n>toInt</span><span class=p>()</span><span class=si>}</span><span class=s1>%&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>6</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=n>ClipRRect</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>child:</span> <span class=n>LinearProgressIndicator</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>value:</span> <span class=n>value</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>minHeight:</span> <span class=m>20</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>backgroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>.</span><span class=n>shade200</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>valueColor:</span> <span class=n>AlwaysStoppedAnimation</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                        <span class=n>Color</span><span class=p>.</span><span class=n>lerp</span><span class=p>(</span><span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>,</span> <span class=n>value</span><span class=p>)</span><span class=o>!</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>],</span>
+</span></span><span class=line><span class=cl>              <span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=p>},</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Slider</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>value:</span> <span class=n>_targetProgress</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onChanged:</span> <span class=p>(</span><span class=n>v</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_targetProgress</span> <span class=o>=</span> <span class=n>v</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>40</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_SectionTitle</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>text</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_SectionTitle</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=n>text</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>only</span><span class=p>(</span><span class=nl>bottom:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>text</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=expected-result>Expected result<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li>The blue card smoothly expands to double size with rounded corners when the button is tapped.</li><li>The green panel fades in and out with <code>AnimatedOpacity</code>.</li><li>The number scales when it changes instead of cutting abruptly.</li><li>The progress bar fills with an animation and its color transitions from red to green.</li></ul><h2 id=most-used-implicit-animation-widgets>Most-used implicit animation widgets<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Widget</th><th>What it animates</th></tr></thead><tbody><tr><td><code>AnimatedContainer</code></td><td>Any <code>Container</code> property</td></tr><tr><td><code>AnimatedOpacity</code></td><td>Opacity</td></tr><tr><td><code>AnimatedPadding</code></td><td>Padding</td></tr><tr><td><code>AnimatedAlign</code></td><td>Alignment</td></tr><tr><td><code>AnimatedDefaultTextStyle</code></td><td>Text style in the subtree</td></tr><tr><td><code>AnimatedPositioned</code></td><td>Position in a <code>Stack</code></td></tr><tr><td><code>AnimatedSwitcher</code></td><td>Transition between different widgets</td></tr><tr><td><code>TweenAnimationBuilder</code></td><td>Any value with customizable interpolation</td></tr></tbody></table><h2 id=when-to-use-explicit-animations>When to use explicit animations<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>If you need:</p><ul><li>Fine cycle control (pause, reverse, loop): <code>AnimationController</code>.</li><li>Coordinated animations across multiple widgets: <code>AnimatedBuilder</code>.</li><li>Physics-based animations (spring, bounce): <code>SpringSimulation</code>.</li></ul><h2 id=common-mistakes>Common mistakes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong><code>AnimatedSwitcher</code> without a <code>ValueKey</code></strong>: if the new widget has the same type as the previous one, Flutter reuses the element and does not animate the transition.</li><li><strong>Changing <code>curve</code> without enough <code>duration</code></strong>: curves like <code>Curves.bounceOut</code> need sufficient duration or the bounce gets clipped.</li><li><strong><code>TweenAnimationBuilder</code> with a <code>tween</code> that always creates a new instance</strong>: move the <code>Tween</code> outside <code>build</code> or use <code>begin: null</code> to animate from the previous value.</li></ul><h2 id=practical-use>Practical use<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Implicit animations turn a flat UI into a fluid experience with no extra complexity. Use them by default; switch to explicit animations only when you need control that implicit widgets do not provide.</p><h2 id=recommended-next-exercise>Recommended next exercise<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/>Modal BottomSheet in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/widgets-ui/flutter-hero-navigation-ejercicio-resuelto/>Hero animations in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/widgets-ui/flutter-custom-painter-ejercicio-resuelto/>CustomPainter in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/>All Flutter exercises</a></li></ul><h2 id=guided-practice-and-next-step>Guided practice and next step<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/>More Flutter exercises</a></li><li><a href=https://c.rigle.dev/en/ejercicios/ rel=external>C exercises to strengthen fundamentals</a></li><li><a href=https://c.rigle.dev/en/c100/ rel=external>Programming in C in 100 Solved Exercises</a></li><li><a href=https://www.amazon.com/dp/B0FZ4QHW8L rel=external>View the book on Amazon (included in Kindle Unlimited)</a></li><li><a href=/en/ejercicios/>Subscribe to the newsletter</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=do-implicit-animations-affect-performance>Do implicit animations affect performance?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Minimally. Flutter optimizes repaints to only the changed area. If many cards animate simultaneously, make sure each <code>AnimatedContainer</code> is in a separate widget to isolate rebuilds.</p><h3 id=can-i-combine-animatedcontainer-with-gesturedetector>Can I combine <code>AnimatedContainer</code> with <code>GestureDetector</code>?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Yes. <code>AnimatedContainer</code> is a regular widget; wrap it in <code>GestureDetector</code> or <code>InkWell</code> to make the card tappable.</p><h3 id=does-animatedswitcher-work-with-any-widget>Does <code>AnimatedSwitcher</code> work with any widget?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Yes, but each entering and leaving widget must have a different <code>Key</code> (usually <code>ValueKey</code>) so Flutter detects the change and applies the transition.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> May 25, 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/en/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/en/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/en/index.html><a class=padding href=/en/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=parent data-nav-id=/en/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/en/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets and UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu><li data-nav-id=/en/ejercicios/widgets-ui/flutter-custom-painter-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-custom-painter-ejercicio-resuelto/index.html>CustomPainter in Flutter: solved exercise</a></li><li class=active data-nav-id=/en/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html>Implicit animations in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-sliver-appbar-collapsible-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-sliver-appbar-collapsible-ejercicio-resuelto/index.html>SliverAppBar collapsible in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-listas-largas-imagenes-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-listas-largas-imagenes-ejercicio-resuelto/index.html>Long lists and images in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-rendimiento-rebuilds-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-rendimiento-rebuilds-ejercicio-resuelto/index.html>Reduce unnecessary rebuilds in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-theme-dark-mode-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-theme-dark-mode-ejercicio-resuelto/index.html>Dark Mode in Flutter with ThemeMode: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-bottom-navigation-bar-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-bottom-navigation-bar-ejercicio-resuelto/index.html>BottomNavigationBar in Flutter: solved exercise with IndexedStack</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-listview-builder-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-listview-builder-ejercicio-resuelto/index.html>ListView.builder in Flutter: solved exercise with dynamic list</a></li></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/en/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Forms and navigation</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/en/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> State and architecture</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/api-async/index.html><a class="padding default-animation" href=/en/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API and async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/en/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistence and data</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/en/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing and resources</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li data-nav-id=/en/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/en/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Tools & Code</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu></ul></li><li data-nav-id=/en/ejercicios/dispositivo/index.html><a class=padding href=/en/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Device</a></li><li data-nav-id=/en/ejercicios/internacionalizacion/index.html><a class=padding href=/en/ejercicios/internacionalizacion/index.html>Internationalization</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Language</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html lang=es></option><option id=R-select-language-en value=en data-url=/en/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html lang=en selected data-selected></option></select></div><div class=clear></div></div></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1783054296 defer></script><script src=/js/theme.min.js?1783054296 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
