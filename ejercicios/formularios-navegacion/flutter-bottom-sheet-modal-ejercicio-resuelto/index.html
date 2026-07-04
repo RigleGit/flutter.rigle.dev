@@ -1,0 +1,633 @@
+<!doctype html><html id=R-html lang=es dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Ejercicio resuelto de BottomSheet modal en Flutter: showModalBottomSheet, DraggableScrollableSheet, panel de filtros y confirmation dialog desde abajo."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="BottomSheet modal en Flutter: ejercicio resuelto :: Flutter en rigle.dev"><meta name=twitter:description content="Ejercicio resuelto de BottomSheet modal en Flutter: showModalBottomSheet, DraggableScrollableSheet, panel de filtros y confirmation dialog desde abajo."><meta property="og:url" content="https://flutter.rigle.dev/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="BottomSheet modal en Flutter: ejercicio resuelto :: Flutter en rigle.dev"><meta property="og:description" content="Ejercicio resuelto de BottomSheet modal en Flutter: showModalBottomSheet, DraggableScrollableSheet, panel de filtros y confirmation dialog desde abajo."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="Ejercicios resueltos de Flutter (paso a paso)"><meta property="article:published_time" content="2026-07-04T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermedio"><meta property="article:tag" content="Navegacion"><meta property="article:tag" content="Widgets"><meta itemprop=name content="BottomSheet modal en Flutter: ejercicio resuelto :: Flutter en rigle.dev"><meta itemprop=description content="Ejercicio resuelto de BottomSheet modal en Flutter: showModalBottomSheet, DraggableScrollableSheet, panel de filtros y confirmation dialog desde abajo."><meta itemprop=datePublished content="2026-07-04T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1419"><meta itemprop=keywords content="Intermedio,Navegacion,Widgets"><title>BottomSheet modal en Flutter: ejercicio resuelto :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1783140200 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1783140200 defer></script><script src=/js/search-lunr.min.js?1783140200 defer></script><script src=/js/search.min.js?1783140200 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.es.js?1783140200"</script><script src=/js/lunr/lunr.min.js?1783140200 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1783140200 defer></script><script src=/js/lunr/lunr.multi.min.js?1783140200 defer></script><script src=/js/lunr/lunr.es.min.js?1783140200 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["es"]</script><link href=/fonts/fontawesome/css/all.min.css?1783140200 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1783140200 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1783140200 rel=stylesheet><link href=/css/theme.min.css?1783140200 rel=stylesheet><link href=/css/format-html.min.css?1783140200 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copiar texto al portapapeles`,window.T_Copied_to_clipboard=`¡Texto copiado al portapapeles!`,window.T_Link_copied_to_clipboard=`¡Enlace copiado al portapapeles!`,window.T_Reset_view=`Restablecer vista`,window.T_View_reset=`¡Ver reajuste!`,window.T_No_results_found=`No se han encontrado resultados para "{0}"`,window.T_N_results_found=`{1} resultados encontrados para "{0}"`,window.T_Browser_unsupported_feature=`Este navegador no admite esta función`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1783140200 rel=stylesheet></head><body class="mobile-support html" data-origin=/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menú (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Tabla de contenido (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#bottomsheet-modal-en-flutter-ejercicio-resuelto>BottomSheet modal en Flutter: ejercicio resuelto</a></li><li><a href=#enunciado>Enunciado</a></li><li><a href=#dependencias>Dependencias</a></li><li><a href=#solución-bottomsheet-de-acciones>Solución: BottomSheet de acciones</a></li><li><a href=#solución-bottomsheet-de-filtros-con-formulario>Solución: BottomSheet de filtros con formulario</a></li><li><a href=#solución-draggablescrollablesheet>Solución: DraggableScrollableSheet</a></li><li><a href=#pantalla-principal>Pantalla principal</a></li><li><a href=#errores-frecuentes>Errores frecuentes</a></li><li><a href=#aplicación-práctica>Aplicación práctica</a></li><li><a href=#siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado</a></li><li><a href=#práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#cómo-evito-que-el-sheet-se-cierre-al-pulsar-fuera>¿Cómo evito que el sheet se cierre al pulsar fuera?</a></li><li><a href=#puedo-abrir-un-bottomsheet-desde-otro-bottomsheet>¿Puedo abrir un BottomSheet desde otro BottomSheet?</a></li><li><a href=#qué-diferencia-hay-entre-bottomsheet-modal-y-persistente>¿Qué diferencia hay entre BottomSheet modal y persistente?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/index.html><span itemprop=name>Aprende Flutter — ejercicios resueltos</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/index.html><span itemprop=name>Ejercicios</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/formularios-navegacion/index.html><span itemprop=name>Formularios y navegación</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>BottomSheet modal en Flutter: ejercicio resuelto</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/formularios-navegacion/index.html title="Formularios y navegación (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/formularios-navegacion/flutter-deep-links-go-router-ejercicio-resuelto/index.html title="Deep links con go_router en Flutter: ejercicio resuelto (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=Más><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Etiquetas style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/tags/intermedio/index.html>Intermedio</a></li><li><a class=term-link href=/tags/navegacion/index.html>Navegacion</a></li><li><a class=term-link href=/tags/widgets/index.html>Widgets</a></li></ul></div></header><h1 id=bottomsheet-modal-en-flutter-ejercicio-resuelto>BottomSheet modal en Flutter: ejercicio resuelto</h1><h2 id=bottomsheet-modal-en-flutter-ejercicio-resuelto>BottomSheet modal en Flutter: ejercicio resuelto<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><code>showModalBottomSheet</code> es la forma estándar de mostrar paneles temporales desde la parte inferior: filtros, acciones contextuales, confirmaciones, selección de opciones. Es más natural en móvil que un <code>AlertDialog</code> centrado cuando la acción está relacionada con una lista o contenido debajo.</p><h2 id=enunciado>Enunciado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Implementa tres variantes de BottomSheet:</p><ol><li><strong>BottomSheet básico</strong>: lista de acciones (compartir, editar, eliminar).</li><li><strong>BottomSheet con formulario</strong>: panel de filtros con switches y aplicar/cancelar.</li><li><strong>DraggableScrollableSheet</strong>: panel arrastrable con lista larga de ítems.</li></ol><h2 id=dependencias>Dependencias<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Solo Flutter SDK.</p><h2 id=solución-bottomsheet-de-acciones>Solución: BottomSheet de acciones<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=c1>// lib/sheets/actions_sheet.dart
+</span></span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Future</span><span class=o>&lt;</span><span class=kt>String</span><span class=o>?&gt;</span> <span class=n>showActionsSheet</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>showModalBottomSheet</span><span class=o>&lt;</span><span class=kt>String</span><span class=o>&gt;</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>context:</span> <span class=n>context</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>shape:</span> <span class=kd>const</span> <span class=n>RoundedRectangleBorder</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>vertical</span><span class=p>(</span><span class=nl>top:</span> <span class=n>Radius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>16</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=nl>builder:</span> <span class=p>(</span><span class=n>_</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>SafeArea</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>mainAxisSize:</span> <span class=n>MainAxisSize</span><span class=p>.</span><span class=n>min</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// Handle visual
+</span></span></span><span class=line><span class=cl>          <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>margin:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>vertical:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>width:</span> <span class=m>40</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>height:</span> <span class=m>4</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>.</span><span class=n>shade300</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>padding:</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Opciones&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>16</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>Divider</span><span class=p>(</span><span class=nl>height:</span> <span class=m>1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>_ActionTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>icon:</span> <span class=n>Icons</span><span class=p>.</span><span class=n>share</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>label:</span> <span class=s1>&#39;Compartir&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onTap:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>Navigator</span><span class=p>.</span><span class=n>pop</span><span class=p>(</span><span class=n>context</span><span class=p>,</span> <span class=s1>&#39;compartir&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>_ActionTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>icon:</span> <span class=n>Icons</span><span class=p>.</span><span class=n>edit</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>label:</span> <span class=s1>&#39;Editar&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onTap:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>Navigator</span><span class=p>.</span><span class=n>pop</span><span class=p>(</span><span class=n>context</span><span class=p>,</span> <span class=s1>&#39;editar&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>_ActionTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>icon:</span> <span class=n>Icons</span><span class=p>.</span><span class=n>delete</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>label:</span> <span class=s1>&#39;Eliminar&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onTap:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>Navigator</span><span class=p>.</span><span class=n>pop</span><span class=p>(</span><span class=n>context</span><span class=p>,</span> <span class=s1>&#39;eliminar&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_ActionTile</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>IconData</span> <span class=n>icon</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>label</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>VoidCallback</span> <span class=n>onTap</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>Color</span><span class=o>?</span> <span class=n>color</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_ActionTile</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>icon</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>label</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>onTap</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=n>color</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>effectiveColor</span> <span class=o>=</span> <span class=n>color</span> <span class=o>??</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>textTheme</span><span class=p>.</span><span class=n>bodyLarge</span><span class=o>?</span><span class=p>.</span><span class=n>color</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>ListTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>leading:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>icon</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>effectiveColor</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>title:</span> <span class=n>Text</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>effectiveColor</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>onTap:</span> <span class=n>onTap</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=solución-bottomsheet-de-filtros-con-formulario>Solución: BottomSheet de filtros con formulario<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=c1>// lib/sheets/filters_sheet.dart
+</span></span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>FilterOptions</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>bool</span> <span class=n>onlyFavorites</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>bool</span> <span class=n>onlyPublished</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>sortBy</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>FilterOptions</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=n>onlyFavorites</span> <span class=o>=</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=n>onlyPublished</span> <span class=o>=</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=n>sortBy</span> <span class=o>=</span> <span class=s1>&#39;date&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Future</span><span class=o>&lt;</span><span class=n>FilterOptions</span><span class=o>?&gt;</span> <span class=n>showFiltersSheet</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=n>BuildContext</span> <span class=n>context</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>FilterOptions</span> <span class=n>initial</span> <span class=o>=</span> <span class=kd>const</span> <span class=n>FilterOptions</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>showModalBottomSheet</span><span class=o>&lt;</span><span class=n>FilterOptions</span><span class=o>&gt;</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>context:</span> <span class=n>context</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>isScrollControlled:</span> <span class=kc>true</span><span class=p>,</span> <span class=c1>// permite altura custom
+</span></span></span><span class=line><span class=cl>    <span class=nl>shape:</span> <span class=kd>const</span> <span class=n>RoundedRectangleBorder</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>vertical</span><span class=p>(</span><span class=nl>top:</span> <span class=n>Radius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>20</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=nl>builder:</span> <span class=p>(</span><span class=n>_</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>_FiltersSheet</span><span class=p>(</span><span class=nl>initial:</span> <span class=n>initial</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_FiltersSheet</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>FilterOptions</span> <span class=n>initial</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_FiltersSheet</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>initial</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>_FiltersSheet</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_FiltersSheetState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_FiltersSheetState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>_FiltersSheet</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>late</span> <span class=kt>bool</span> <span class=n>_onlyFavorites</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>late</span> <span class=kt>bool</span> <span class=n>_onlyPublished</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>late</span> <span class=kt>String</span> <span class=n>_sortBy</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>initState</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>initState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>_onlyFavorites</span> <span class=o>=</span> <span class=n>widget</span><span class=p>.</span><span class=n>initial</span><span class=p>.</span><span class=n>onlyFavorites</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>_onlyPublished</span> <span class=o>=</span> <span class=n>widget</span><span class=p>.</span><span class=n>initial</span><span class=p>.</span><span class=n>onlyPublished</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>_sortBy</span> <span class=o>=</span> <span class=n>widget</span><span class=p>.</span><span class=n>initial</span><span class=p>.</span><span class=n>sortBy</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// evita que el teclado tape el formulario
+</span></span></span><span class=line><span class=cl>      <span class=nl>padding:</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>only</span><span class=p>(</span><span class=nl>bottom:</span> <span class=n>MediaQuery</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>viewInsets</span><span class=p>.</span><span class=n>bottom</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>mainAxisSize:</span> <span class=n>MainAxisSize</span><span class=p>.</span><span class=n>min</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>width:</span> <span class=m>40</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>height:</span> <span class=m>4</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>.</span><span class=n>shade300</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>padding:</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Filtros&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>18</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>SwitchListTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Solo favoritos&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>value:</span> <span class=n>_onlyFavorites</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onChanged:</span> <span class=p>(</span><span class=n>v</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_onlyFavorites</span> <span class=o>=</span> <span class=n>v</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>SwitchListTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Solo publicados&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>value:</span> <span class=n>_onlyPublished</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onChanged:</span> <span class=p>(</span><span class=n>v</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_onlyPublished</span> <span class=o>=</span> <span class=n>v</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>horizontal:</span> <span class=m>16</span><span class=p>,</span> <span class=nl>vertical:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>DropdownButtonFormField</span><span class=o>&lt;</span><span class=kt>String</span><span class=o>&gt;</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>value:</span> <span class=n>_sortBy</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>decoration:</span> <span class=kd>const</span> <span class=n>InputDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>labelText:</span> <span class=s1>&#39;Ordenar por&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>border:</span> <span class=n>OutlineInputBorder</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>items:</span> <span class=kd>const</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=n>DropdownMenuItem</span><span class=p>(</span><span class=nl>value:</span> <span class=s1>&#39;date&#39;</span><span class=p>,</span> <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Fecha&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                <span class=n>DropdownMenuItem</span><span class=p>(</span><span class=nl>value:</span> <span class=s1>&#39;title&#39;</span><span class=p>,</span> <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Título&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                <span class=n>DropdownMenuItem</span><span class=p>(</span><span class=nl>value:</span> <span class=s1>&#39;views&#39;</span><span class=p>,</span> <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Visualizaciones&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>              <span class=p>],</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onChanged:</span> <span class=p>(</span><span class=n>v</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_sortBy</span> <span class=o>=</span> <span class=n>v</span><span class=o>!</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>horizontal:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>child:</span> <span class=n>OutlinedButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>Navigator</span><span class=p>.</span><span class=n>pop</span><span class=p>(</span><span class=n>context</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Cancelar&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>width:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>child:</span> <span class=n>FilledButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>Navigator</span><span class=p>.</span><span class=n>pop</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=n>context</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=n>FilterOptions</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>onlyFavorites:</span> <span class=n>_onlyFavorites</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>onlyPublished:</span> <span class=n>_onlyPublished</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>sortBy:</span> <span class=n>_sortBy</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Aplicar&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>],</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=solución-draggablescrollablesheet>Solución: DraggableScrollableSheet<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=c1>// lib/sheets/draggable_sheet.dart
+</span></span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>showDraggableSheet</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>showModalBottomSheet</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>context:</span> <span class=n>context</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>isScrollControlled:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>backgroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>transparent</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>builder:</span> <span class=p>(</span><span class=n>_</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>DraggableScrollableSheet</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>initialChildSize:</span> <span class=m>0.5</span><span class=p>,</span>   <span class=c1>// 50% de la pantalla al abrir
+</span></span></span><span class=line><span class=cl>      <span class=nl>minChildSize:</span> <span class=m>0.25</span><span class=p>,</span>      <span class=c1>// mínimo 25%
+</span></span></span><span class=line><span class=cl>      <span class=nl>maxChildSize:</span> <span class=m>0.95</span><span class=p>,</span>      <span class=c1>// máximo 95%
+</span></span></span><span class=line><span class=cl>      <span class=nl>expand:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>builder:</span> <span class=p>(</span><span class=n>_</span><span class=p>,</span> <span class=n>scrollController</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>decoration:</span> <span class=kd>const</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>vertical</span><span class=p>(</span><span class=nl>top:</span> <span class=n>Radius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>20</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>margin:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>vertical:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>width:</span> <span class=m>40</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>height:</span> <span class=m>4</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>.</span><span class=n>shade300</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>padding:</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Todos los ítems&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>16</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>ListView</span><span class=p>.</span><span class=n>builder</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>controller:</span> <span class=n>scrollController</span><span class=p>,</span> <span class=c1>// necesario para integrar con el drag
+</span></span></span><span class=line><span class=cl>                <span class=nl>itemCount:</span> <span class=m>40</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>itemBuilder:</span> <span class=p>(</span><span class=n>_</span><span class=p>,</span> <span class=n>i</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>ListTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>leading:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>article_outlined</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>title:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Ítem </span><span class=si>${</span><span class=n>i</span> <span class=o>+</span> <span class=m>1</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>subtitle:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Descripción del ítem </span><span class=si>${</span><span class=n>i</span> <span class=o>+</span> <span class=m>1</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=pantalla-principal>Pantalla principal<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=c1>// lib/main.dart
+</span></span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>// import &#39;sheets/actions_sheet.dart&#39;;
+</span></span></span><span class=line><span class=cl><span class=c1>// import &#39;sheets/filters_sheet.dart&#39;;
+</span></span></span><span class=line><span class=cl><span class=c1>// import &#39;sheets/draggable_sheet.dart&#39;;
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>MaterialApp</span><span class=p>(</span><span class=nl>home:</span> <span class=n>BottomSheetDemo</span><span class=p>()));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>BottomSheetDemo</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>BottomSheetDemo</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>BottomSheetDemo</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_BottomSheetDemoState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_BottomSheetDemoState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>BottomSheetDemo</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>String</span> <span class=n>_lastAction</span> <span class=o>=</span> <span class=s1>&#39;—&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>FilterOptions</span> <span class=n>_filters</span> <span class=o>=</span> <span class=kd>const</span> <span class=n>FilterOptions</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;BottomSheet Demo&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>mainAxisAlignment:</span> <span class=n>MainAxisAlignment</span><span class=p>.</span><span class=n>center</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Última acción: </span><span class=si>$</span><span class=n>_lastAction</span><span class=s1>&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Filtros: favoritos=</span><span class=si>${</span><span class=n>_filters</span><span class=p>.</span><span class=n>onlyFavorites</span><span class=si>}</span><span class=s1>, orden=</span><span class=si>${</span><span class=n>_filters</span><span class=p>.</span><span class=n>sortBy</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>32</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>ElevatedButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=kd>final</span> <span class=n>action</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>showActionsSheet</span><span class=p>(</span><span class=n>context</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=p>(</span><span class=n>action</span> <span class=o>!=</span> <span class=kc>null</span><span class=p>)</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_lastAction</span> <span class=o>=</span> <span class=n>action</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>              <span class=p>},</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Sheet de acciones&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>ElevatedButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=kd>final</span> <span class=n>result</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>showFiltersSheet</span><span class=p>(</span><span class=n>context</span><span class=p>,</span> <span class=nl>initial:</span> <span class=n>_filters</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=p>(</span><span class=n>result</span> <span class=o>!=</span> <span class=kc>null</span><span class=p>)</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_filters</span> <span class=o>=</span> <span class=n>result</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>              <span class=p>},</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Sheet de filtros&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>ElevatedButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>showDraggableSheet</span><span class=p>(</span><span class=n>context</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;DraggableScrollableSheet&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=errores-frecuentes>Errores frecuentes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong><code>isScrollControlled: false</code> con formulario</strong>: el sheet tiene altura fija y el teclado lo tapa. Usa siempre <code>isScrollControlled: true</code> cuando haya campos de texto.</li><li><strong><code>DraggableScrollableSheet</code> sin pasar <code>scrollController</code> al <code>ListView</code></strong>: el drag y el scroll entran en conflicto. Pasa siempre el controller del builder.</li><li><strong>Cerrar el sheet con <code>Navigator.pop(context)</code> pasando un valor</strong>: el tipo del valor debe coincidir con el genérico <code>showModalBottomSheet&lt;T></code>, si no el resultado es <code>null</code>.</li></ul><h2 id=aplicación-práctica>Aplicación práctica<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Filtros de búsqueda, menús de acciones contextuales, confirmación de eliminación, selección de imagen/archivo, pago en carrito — cualquier flujo secundario que no merece una ruta completa.</p><h2 id=siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html>Animaciones implícitas en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/formularios-navegacion/flutter-go-router-guards-auth-ejercicio-resuelto/index.html>go_router con guards en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/formularios-navegacion/flutter-formulario-con-validacion-ejercicio-resuelto/index.html>Formulario con validación en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/index.html>Todos los ejercicios de Flutter</a></li></ul><h2 id=práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/index.html>Más ejercicios de Flutter</a></li><li><a href=https://c.rigle.dev/ejercicios/ rel=external>Ejercicios C para reforzar fundamentos</a></li><li><a href=https://c.rigle.dev/c100/ rel=external>Programación en C en 100 ejercicios resueltos</a></li><li><a href=https://amzn.to/41weJIN rel=external>Ver el libro en Amazon (incluido en Kindle Unlimited)</a></li><li><a href=/ejercicios/index.html>Suscribirte a la newsletter</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=cómo-evito-que-el-sheet-se-cierre-al-pulsar-fuera>¿Cómo evito que el sheet se cierre al pulsar fuera?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Pasa <code>isDismissible: false</code> a <code>showModalBottomSheet</code>. Útil para confirmaciones críticas o formularios con datos no guardados.</p><h3 id=puedo-abrir-un-bottomsheet-desde-otro-bottomsheet>¿Puedo abrir un BottomSheet desde otro BottomSheet?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Técnicamente sí, pero la UX es confusa. En su lugar usa un <code>Navigator.push</code> dentro del sheet para ir a una pantalla completa si necesitas más profundidad.</p><h3 id=qué-diferencia-hay-entre-bottomsheet-modal-y-persistente>¿Qué diferencia hay entre BottomSheet modal y persistente?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>El <strong>modal</strong> bloquea la interacción con el resto de la pantalla (showModalBottomSheet). El <strong>persistente</strong> convive con la pantalla debajo (<code>Scaffold.showBottomSheet</code>). Para la mayoría de casos, el modal es la elección correcta.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> 25 may. 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Buscar (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Buscar</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Buscar...>
+<button class=search-clear type=button data-search-clear title="Borrar búsqueda"><i class="fas fa-fw fa-times" title="Borrar búsqueda"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/index.html><a class=padding href=/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets y UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=parent data-nav-id=/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Formularios y navegación</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu><li class=active data-nav-id=/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/index.html>BottomSheet modal en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/formularios-navegacion/flutter-deep-links-go-router-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/formularios-navegacion/flutter-deep-links-go-router-ejercicio-resuelto/index.html>Deep links con go_router en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/formularios-navegacion/flutter-go-router-guards-auth-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/formularios-navegacion/flutter-go-router-guards-auth-ejercicio-resuelto/index.html>go_router guards de autenticacion: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/formularios-navegacion/flutter-ruta-not-found-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/formularios-navegacion/flutter-ruta-not-found-ejercicio-resuelto/index.html>Ruta not found en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/formularios-navegacion/flutter-go-router-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/formularios-navegacion/flutter-go-router-ejercicio-resuelto/index.html>go_router en Flutter: ejercicio resuelto de navegación</a></li><li data-nav-id=/ejercicios/formularios-navegacion/flutter-navegacion-con-named-routes-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/formularios-navegacion/flutter-navegacion-con-named-routes-ejercicio-resuelto/index.html>Navegación con named routes en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/formularios-navegacion/flutter-formulario-con-validacion-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/formularios-navegacion/flutter-formulario-con-validacion-ejercicio-resuelto/index.html>Formulario con validación en Flutter: ejercicio resuelto</a></li></ul></li><li class=alwaysopen data-nav-id=/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> Estado y arquitectura</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/api-async/index.html><a class="padding default-animation" href=/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API y async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistencia y datos</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing y recursos</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li data-nav-id=/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Herramientas y código</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu></ul></li><li data-nav-id=/ejercicios/dispositivo/index.html><a class=padding href=/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Dispositivo</a></li><li data-nav-id=/ejercicios/internacionalizacion/index.html><a class=padding href=/ejercicios/internacionalizacion/index.html>Internacionalización</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Idioma</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/index.html lang=es selected data-selected></option><option id=R-select-language-en value=en data-url=/en/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/index.html lang=en></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Tema</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1783140200 defer></script><script src=/js/theme.min.js?1783140200 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
