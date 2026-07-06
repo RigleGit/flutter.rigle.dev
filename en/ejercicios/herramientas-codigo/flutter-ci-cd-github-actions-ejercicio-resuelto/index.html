@@ -1,0 +1,349 @@
+<!doctype html><html id=R-html lang=en dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Solved Flutter CI/CD exercise with GitHub Actions: static analysis, tests, APK and IPA builds, Dart version matrix, and automatic deployment."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="CI/CD with GitHub Actions in Flutter: solved exercise :: Flutter en rigle.dev"><meta name=twitter:description content="Solved Flutter CI/CD exercise with GitHub Actions: static analysis, tests, APK and IPA builds, Dart version matrix, and automatic deployment."><meta property="og:url" content="https://flutter.rigle.dev/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="CI/CD with GitHub Actions in Flutter: solved exercise :: Flutter en rigle.dev"><meta property="og:description" content="Solved Flutter CI/CD exercise with GitHub Actions: static analysis, tests, APK and IPA builds, Dart version matrix, and automatic deployment."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="Solved Flutter exercises (step by step)"><meta property="article:published_time" content="2026-07-06T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Advanced"><meta property="article:tag" content="Tools"><meta property="article:tag" content="Ci-Cd"><meta itemprop=name content="CI/CD with GitHub Actions in Flutter: solved exercise :: Flutter en rigle.dev"><meta itemprop=description content="Solved Flutter CI/CD exercise with GitHub Actions: static analysis, tests, APK and IPA builds, Dart version matrix, and automatic deployment."><meta itemprop=datePublished content="2026-07-06T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1062"><meta itemprop=keywords content="Advanced,Tools,Ci-Cd"><title>CI/CD with GitHub Actions in Flutter: solved exercise :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1783315172 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1783315172 defer></script><script src=/js/search-lunr.min.js?1783315172 defer></script><script src=/js/search.min.js?1783315172 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.en.js?1783315172"</script><script src=/js/lunr/lunr.min.js?1783315172 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1783315172 defer></script><script src=/js/lunr/lunr.multi.min.js?1783315172 defer></script><script src=/js/lunr/lunr.en.min.js?1783315172 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/fonts/fontawesome/css/all.min.css?1783315172 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1783315172 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1783315172 rel=stylesheet><link href=/css/theme.min.css?1783315172 rel=stylesheet><link href=/css/format-html.min.css?1783315172 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1783315172 rel=stylesheet></head><body class="mobile-support html" data-origin=/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#cicd-with-github-actions-in-flutter-solved-exercise>CI/CD with GitHub Actions in Flutter: solved exercise</a></li><li><a href=#problem-statement>Problem statement</a></li><li><a href=#file-structure>File structure</a></li><li><a href=#solution-ciyml-analysis--tests>Solution: ci.yml (analysis + tests)</a></li><li><a href=#solution-releaseyml-apk-build>Solution: release.yml (APK build)</a></li><li><a href=#adding-badges-to-readme>Adding badges to README</a></li><li><a href=#required-github-secrets>Required GitHub secrets</a></li><li><a href=#signing-the-apk-in-ci-advanced>Signing the APK in CI (advanced)</a></li><li><a href=#approximate-execution-times>Approximate execution times</a></li><li><a href=#common-mistakes>Common mistakes</a></li><li><a href=#practical-use>Practical use</a></li><li><a href=#recommended-next-exercise>Recommended next exercise</a></li><li><a href=#guided-practice-and-next-step>Guided practice and next step</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#how-many-github-actions-minutes-does-the-free-plan-include>How many GitHub Actions minutes does the free plan include?</a></li><li><a href=#can-i-deploy-automatically-to-the-play-store>Can I deploy automatically to the Play Store?</a></li><li><a href=#how-do-i-prevent-a-pr-from-reaching-main-without-passing-tests>How do I prevent a PR from reaching main without passing tests?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/index.html><span itemprop=name>Learn Flutter — solved exercises</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/index.html><span itemprop=name>Exercises</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/herramientas-codigo/index.html><span itemprop=name>Tools & Code</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>CI/CD with GitHub Actions in Flutter: solved exercise</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/herramientas-codigo/index.html title="Flutter Tools and Productivity (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html title="Flutter Flavors dev, staging and prod: solved exercise (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Tags style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/en/tags/advanced/index.html>Advanced</a></li><li><a class=term-link href=/en/tags/ci-cd/index.html>Ci-Cd</a></li><li><a class=term-link href=/en/tags/tools/index.html>Tools</a></li></ul></div></header><h1 id=cicd-with-github-actions-in-flutter-solved-exercise>CI/CD with GitHub Actions in Flutter: solved exercise</h1><h2 id=cicd-with-github-actions-in-flutter-solved-exercise>CI/CD with GitHub Actions in Flutter: solved exercise<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Without CI/CD, code quality depends on every developer remembering to run tests and analysis before each push. With GitHub Actions, those checks run automatically on every PR and every merge to <code>main</code>, with no manual intervention.</p><h2 id=problem-statement>Problem statement<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Create a GitHub Actions pipeline for a Flutter project that:</p><ol><li><strong>Analysis and tests</strong>: runs on every push and PR to <code>main</code>.</li><li><strong>APK build</strong>: generates a release APK on every merge to <code>main</code>.</li><li><strong>Pub cache</strong>: reduces setup time from ~2 min to ~15 s.</li><li><strong>Version matrix</strong>: tests against Flutter stable and beta.</li></ol><h2 id=file-structure>File structure<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>.github/
+</span></span><span class=line><span class=cl>└── workflows/
+</span></span><span class=line><span class=cl>    ├── ci.yml       ← analysis + tests (pull requests)
+</span></span><span class=line><span class=cl>    └── release.yml  ← APK/IPA build (push to main)</span></span></code></pre></td></tr></table></div></div><h2 id=solution-ciyml-analysis--tests>Solution: ci.yml (analysis + tests)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># .github/workflows/ci.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>CI</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>on</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>main, develop]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>pull_request</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>main]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>analyze_and_test</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Analyze &amp; Test (Flutter ${{ matrix.flutter_channel }})</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>strategy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>matrix</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>flutter_channel</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>stable, beta]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>fail-fast</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>  </span><span class=c># does not cancel the other channel if one fails</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout code</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Set up Flutter</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>subosito/flutter-action@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>flutter-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;&#39;</span><span class=w> </span><span class=c># uses the latest for the channel</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>channel</span><span class=p>:</span><span class=w> </span><span class=l>${{ matrix.flutter_channel }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>cache</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>         </span><span class=c># caches the Flutter SDK</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Cache pub packages</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/cache@v4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>            ~/.pub-cache
+</span></span></span><span class=line><span class=cl><span class=sd>            .dart_tool</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=l>pub-${{ runner.os }}-${{ hashFiles(&#39;**/pubspec.lock&#39;) }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>restore-keys</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>            pub-${{ runner.os }}-</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Install dependencies</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>flutter pub get</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Check formatting</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>dart format --set-exit-if-changed .</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Static analysis</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>dart analyze --fatal-warnings</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Unit and widget tests</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>flutter test --coverage</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Upload coverage to Codecov</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>if</span><span class=p>:</span><span class=w> </span><span class=l>matrix.flutter_channel == &#39;stable&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>codecov/codecov-action@v4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.CODECOV_TOKEN }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>files</span><span class=p>:</span><span class=w> </span><span class=l>coverage/lcov.info</span></span></span></code></pre></td></tr></table></div></div><h2 id=solution-releaseyml-apk-build>Solution: release.yml (APK build)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># .github/workflows/release.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Release Build</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>on</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>main]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>workflow_dispatch</span><span class=p>:</span><span class=w>  </span><span class=c># allows manual trigger from GitHub UI</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>build_apk</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build APK (prod)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>subosito/flutter-action@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>channel</span><span class=p>:</span><span class=w> </span><span class=l>stable</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>cache</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Cache pub</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/cache@v4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>~/.pub-cache</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=l>pub-${{ runner.os }}-${{ hashFiles(&#39;**/pubspec.lock&#39;) }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Install dependencies</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>flutter pub get</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Create production env</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>          echo &#39;{
+</span></span></span><span class=line><span class=cl><span class=sd>            &#34;APP_ENV&#34;: &#34;prod&#34;,
+</span></span></span><span class=line><span class=cl><span class=sd>            &#34;APP_NAME&#34;: &#34;MyApp&#34;,
+</span></span></span><span class=line><span class=cl><span class=sd>            &#34;API_BASE_URL&#34;: &#34;${{ secrets.PROD_API_URL }}&#34;,
+</span></span></span><span class=line><span class=cl><span class=sd>            &#34;ENABLE_LOGGING&#34;: &#34;false&#34;
+</span></span></span><span class=line><span class=cl><span class=sd>          }&#39; &gt; envs/prod.json</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build release APK</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>flutter build apk --release --dart-define-from-file=envs/prod.json</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Upload APK as artifact</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/upload-artifact@v4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>app-release-${{ github.sha }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>build/app/outputs/flutter-apk/app-release.apk</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>retention-days</span><span class=p>:</span><span class=w> </span><span class=m>14</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>build_ios</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build IPA (prod)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>macos-latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>if</span><span class=p>:</span><span class=w> </span><span class=l>github.ref == &#39;refs/heads/main&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>subosito/flutter-action@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>channel</span><span class=p>:</span><span class=w> </span><span class=l>stable</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>cache</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>flutter pub get</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build iOS (unsigned — for internal distribution)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>flutter build ios --release --no-codesign</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Create unsigned IPA</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>          mkdir -p build/ios/ipa
+</span></span></span><span class=line><span class=cl><span class=sd>          cd build/ios/iphoneos
+</span></span></span><span class=line><span class=cl><span class=sd>          mkdir Payload
+</span></span></span><span class=line><span class=cl><span class=sd>          cp -r Runner.app Payload/
+</span></span></span><span class=line><span class=cl><span class=sd>          zip -r ../ipa/app-release.ipa Payload</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/upload-artifact@v4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>app-ios-release-${{ github.sha }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>build/ios/ipa/app-release.ipa</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>retention-days</span><span class=p>:</span><span class=w> </span><span class=m>14</span></span></span></code></pre></td></tr></table></div></div><h2 id=adding-badges-to-readme>Adding badges to README<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>&lt;!-- README.md --&gt;
+</span></span><span class=line><span class=cl>[<span class=nt>![CI</span>](<span class=na>https://github.com/yourusername/yourrepo/actions/workflows/ci.yml/badge.svg</span>)](https://github.com/yourusername/yourrepo/actions/workflows/ci.yml)
+</span></span><span class=line><span class=cl>[<span class=nt>![codecov</span>](<span class=na>https://codecov.io/gh/yourusername/yourrepo/branch/main/graph/badge.svg</span>)](https://codecov.io/gh/yourusername/yourrepo)</span></span></code></pre></td></tr></table></div></div><h2 id=required-github-secrets>Required GitHub secrets<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>In <strong>Settings → Secrets and variables → Actions</strong>:</p><table><thead><tr><th>Secret</th><th>Usage</th></tr></thead><tbody><tr><td><code>CODECOV_TOKEN</code></td><td>Upload coverage to Codecov</td></tr><tr><td><code>PROD_API_URL</code></td><td>Production API URL (not in code)</td></tr><tr><td><code>KEYSTORE_BASE64</code></td><td>Android keystore encoded in base64 (for signing)</td></tr><tr><td><code>KEYSTORE_PASSWORD</code></td><td>Keystore password</td></tr></tbody></table><h2 id=signing-the-apk-in-ci-advanced>Signing the APK in CI (advanced)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># Additional steps in build_apk to sign the APK</span><span class=w>
+</span></span></span><span class=line><span class=cl>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Decode keystore</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>    echo &#34;${{ secrets.KEYSTORE_BASE64 }}&#34; | base64 --decode &gt; android/app/keystore.jks</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build signed APK</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>KEYSTORE_PASSWORD</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.KEYSTORE_PASSWORD }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>KEY_ALIAS</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.KEY_ALIAS }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>KEY_PASSWORD</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.KEY_PASSWORD }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>    flutter build apk --release \
+</span></span></span><span class=line><span class=cl><span class=sd>      --dart-define-from-file=envs/prod.json</span></span></span></code></pre></td></tr></table></div></div><p>And in <code>android/app/build.gradle</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-groovy data-lang=groovy><span class=line><span class=cl><span class=n>android</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>signingConfigs</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>release</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>storeFile</span> <span class=nf>file</span><span class=o>(</span><span class=s2>&#34;keystore.jks&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>storePassword</span> <span class=n>System</span><span class=o>.</span><span class=na>getenv</span><span class=o>(</span><span class=s2>&#34;KEYSTORE_PASSWORD&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>keyAlias</span> <span class=n>System</span><span class=o>.</span><span class=na>getenv</span><span class=o>(</span><span class=s2>&#34;KEY_ALIAS&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>keyPassword</span> <span class=n>System</span><span class=o>.</span><span class=na>getenv</span><span class=o>(</span><span class=s2>&#34;KEY_PASSWORD&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>buildTypes</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>release</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>signingConfig</span> <span class=n>signingConfigs</span><span class=o>.</span><span class=na>release</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=approximate-execution-times>Approximate execution times<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Job</th><th>Time without cache</th><th>Time with cache</th></tr></thead><tbody><tr><td>flutter pub get</td><td>~90 s</td><td>~10 s</td></tr><tr><td>dart analyze</td><td>~20 s</td><td>~20 s</td></tr><tr><td>flutter test</td><td>~30–120 s</td><td>~30–120 s</td></tr><tr><td>flutter build apk</td><td>~3–5 min</td><td>~2–3 min</td></tr></tbody></table><h2 id=common-mistakes>Common mistakes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong><code>dart analyze</code> passes locally but fails in CI</strong>: different Dart version. Pin the version in <code>flutter-action</code> with <code>flutter-version: '3.32.0'</code> or use the same channel as locally.</li><li><strong>Tests fail in CI but not locally</strong>: usually tests using <code>DateTime.now()</code> or timezone-dependent logic. Use fixed dates in tests.</li><li><strong>APK too large</strong>: add <code>--split-debug-info=build/debug-info</code> and <code>--obfuscate</code> to reduce size and obfuscate code.</li></ul><h2 id=practical-use>Practical use<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>With this pipeline: every PR goes through automatic analysis and tests, reviewers see the result before approving, and every merge to main produces an APK ready for internal distribution or Play Store upload.</p><h2 id=recommended-next-exercise>Recommended next exercise<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/herramientas-codigo/flutter-linting-analysis-options-ejercicio-resuelto/>Linting and analysis_options in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/>Flutter flavors dev, staging and prod: solved exercise</a></li><li><a href=/en/ejercicios/testing-recursos/flutter-widget-test-ejercicio-resuelto/>Flutter widget tests: solved exercise</a></li><li><a href=/en/ejercicios/>All Flutter exercises</a></li></ul><h2 id=guided-practice-and-next-step>Guided practice and next step<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/>More Flutter exercises</a></li><li><a href=https://c.rigle.dev/en/ejercicios/ rel=external>C exercises to strengthen fundamentals</a></li><li><a href=https://c.rigle.dev/en/c100/ rel=external>Programming in C in 100 Solved Exercises</a></li><li><a href=https://www.amazon.com/dp/B0FZ4QHW8L rel=external>View the book on Amazon (included in Kindle Unlimited)</a></li><li><a href=/en/ejercicios/>Subscribe to the newsletter</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=how-many-github-actions-minutes-does-the-free-plan-include>How many GitHub Actions minutes does the free plan include?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>2,000 minutes/month on Linux for private repositories. For public repositories, Linux runners are free and unlimited. macOS runners consume 10× more minutes than Linux.</p><h3 id=can-i-deploy-automatically-to-the-play-store>Can I deploy automatically to the Play Store?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Yes, using <a href=https://fastlane.tools/ rel=external>fastlane</a> or the <code>r0adkll/upload-google-play</code> action. You need a Google Play API key and must upload an AAB instead of an APK.</p><h3 id=how-do-i-prevent-a-pr-from-reaching-main-without-passing-tests>How do I prevent a PR from reaching main without passing tests?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>In <strong>Settings → Branches → Branch protection rules</strong>, enable &ldquo;Require status checks to pass before merging&rdquo; and select the CI job as a required check.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> May 25, 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/en/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/en/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/en/index.html><a class=padding href=/en/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/en/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/en/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets and UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/en/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Forms and navigation</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/en/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> State and architecture</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/api-async/index.html><a class="padding default-animation" href=/en/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API and async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/en/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistence and data</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/en/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing and resources</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li class=parent data-nav-id=/en/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/en/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Tools & Code</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu><li class=active data-nav-id=/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html>CI/CD with GitHub Actions in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html>Flutter Flavors dev, staging and prod: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html>Freezed and json_serializable in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-json-serializable-buildrunner-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-json-serializable-buildrunner-ejercicio-resuelto/index.html>json_serializable with build_runner in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-linting-analysis-options-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-linting-analysis-options-ejercicio-resuelto/index.html>Linting and analysis_options in Flutter: solved exercise</a></li></ul></li><li data-nav-id=/en/ejercicios/dispositivo/index.html><a class=padding href=/en/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Device</a></li><li data-nav-id=/en/ejercicios/internacionalizacion/index.html><a class=padding href=/en/ejercicios/internacionalizacion/index.html>Internationalization</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Language</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html lang=es></option><option id=R-select-language-en value=en data-url=/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html lang=en selected data-selected></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Theme</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1783315172 defer></script><script src=/js/theme.min.js?1783315172 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
