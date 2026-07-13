@@ -1,0 +1,716 @@
+<!doctype html><html id=R-html lang=en dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Solved Flutter responsive design exercise: LayoutBuilder, MediaQuery, OrientationBuilder and adaptive scaffold to adapt the UI to any screen size."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="Responsive design in Flutter: solved exercise with LayoutBuilder and MediaQuery :: Flutter en rigle.dev"><meta name=twitter:description content="Solved Flutter responsive design exercise: LayoutBuilder, MediaQuery, OrientationBuilder and adaptive scaffold to adapt the UI to any screen size."><meta property="og:url" content="https://flutter.rigle.dev/en/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="Responsive design in Flutter: solved exercise with LayoutBuilder and MediaQuery :: Flutter en rigle.dev"><meta property="og:description" content="Solved Flutter responsive design exercise: LayoutBuilder, MediaQuery, OrientationBuilder and adaptive scaffold to adapt the UI to any screen size."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="Solved Flutter exercises (step by step)"><meta property="article:published_time" content="2026-07-13T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermediate"><meta property="article:tag" content="Responsive"><meta property="article:tag" content="Widgets"><meta itemprop=name content="Responsive design in Flutter: solved exercise with LayoutBuilder and MediaQuery :: Flutter en rigle.dev"><meta itemprop=description content="Solved Flutter responsive design exercise: LayoutBuilder, MediaQuery, OrientationBuilder and adaptive scaffold to adapt the UI to any screen size."><meta itemprop=datePublished content="2026-07-13T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1764"><meta itemprop=keywords content="Intermediate,Responsive,Widgets"><title>Responsive design in Flutter: solved exercise with LayoutBuilder and MediaQuery :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1783917441 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1783917441 defer></script><script src=/js/search-lunr.min.js?1783917441 defer></script><script src=/js/search.min.js?1783917441 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.en.js?1783917441"</script><script src=/js/lunr/lunr.min.js?1783917441 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1783917441 defer></script><script src=/js/lunr/lunr.multi.min.js?1783917441 defer></script><script src=/js/lunr/lunr.en.min.js?1783917441 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/fonts/fontawesome/css/all.min.css?1783917441 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1783917441 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1783917441 rel=stylesheet><link href=/css/theme.min.css?1783917441 rel=stylesheet><link href=/css/format-html.min.css?1783917441 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/en/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1783917441 rel=stylesheet></head><body class="mobile-support html" data-origin=/en/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#responsive-design-in-flutter-solved-exercise-with-layoutbuilder-and-mediaquery>Responsive design in Flutter: solved exercise with LayoutBuilder and MediaQuery</a></li><li><a href=#problem-statement>Problem statement</a></li><li><a href=#dependencies>Dependencies</a></li><li><a href=#full-solution>Full solution</a></li><li><a href=#when-to-use-each-tool>When to use each tool</a></li><li><a href=#common-mistakes>Common mistakes</a></li><li><a href=#practical-use>Practical use</a></li><li><a href=#recommended-next-exercise>Recommended next exercise</a></li><li><a href=#guided-practice-and-next-step>Guided practice and next step</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#does-flutter-have-an-official-adaptivescaffold>Does Flutter have an official <code>AdaptiveScaffold</code>?</a></li><li><a href=#should-i-use-mediaquery-or-layoutbuilder-for-an-adaptive-grid>Should I use <code>MediaQuery</code> or <code>LayoutBuilder</code> for an adaptive grid?</a></li><li><a href=#does-flutter-web-require-more-responsive-work-than-mobile>Does Flutter Web require more responsive work than mobile?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/index.html><span itemprop=name>Learn Flutter — solved exercises</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/index.html><span itemprop=name>Exercises</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/widgets-ui/index.html><span itemprop=name>Widgets and UI</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Responsive design in Flutter: solved exercise with LayoutBuilder and MediaQuery</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html title="Implicit animations in Flutter: solved exercise (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/widgets-ui/flutter-sliver-appbar-collapsible-ejercicio-resuelto/index.html title="SliverAppBar collapsible in Flutter: solved exercise (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Tags style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/en/tags/intermediate/index.html>Intermediate</a></li><li><a class=term-link href=/en/tags/responsive/index.html>Responsive</a></li><li><a class=term-link href=/en/tags/widgets/index.html>Widgets</a></li></ul></div></header><h1 id=responsive-design-in-flutter-solved-exercise-with-layoutbuilder-and-mediaquery>Responsive design in Flutter: solved exercise with LayoutBuilder and MediaQuery</h1><h2 id=responsive-design-in-flutter-solved-exercise-with-layoutbuilder-and-mediaquery>Responsive design in Flutter: solved exercise with LayoutBuilder and MediaQuery<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>A Flutter app runs on mobile (360 dp), tablet (768 dp), and desktop (1280 dp). Without responsive design, the same screen that looks great on iPhone appears broken on iPad. Flutter provides three main tools to adapt to available space: <code>MediaQuery</code>, <code>LayoutBuilder</code>, and <code>OrientationBuilder</code>.</p><h2 id=problem-statement>Problem statement<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Implement a news app that:</p><ul><li>On <strong>mobile</strong>: shows a vertical list of cards.</li><li>On <strong>tablet/landscape</strong>: shows a list on the left and the detail on the right (master-detail).</li><li>On <strong>desktop</strong>: adds a side navigation rail.</li><li>Uses <code>LayoutBuilder</code> for internal layouts and <code>MediaQuery</code> for adaptive typography and padding.</li></ul><h2 id=dependencies>Dependencies<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Flutter SDK only.</p><h2 id=full-solution>Full solution<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span><span class=lnt>308
+</span><span class=lnt>309
+</span><span class=lnt>310
+</span><span class=lnt>311
+</span><span class=lnt>312
+</span><span class=lnt>313
+</span><span class=lnt>314
+</span><span class=lnt>315
+</span><span class=lnt>316
+</span><span class=lnt>317
+</span><span class=lnt>318
+</span><span class=lnt>319
+</span><span class=lnt>320
+</span><span class=lnt>321
+</span><span class=lnt>322
+</span><span class=lnt>323
+</span><span class=lnt>324
+</span><span class=lnt>325
+</span><span class=lnt>326
+</span><span class=lnt>327
+</span><span class=lnt>328
+</span><span class=lnt>329
+</span><span class=lnt>330
+</span><span class=lnt>331
+</span><span class=lnt>332
+</span><span class=lnt>333
+</span><span class=lnt>334
+</span><span class=lnt>335
+</span><span class=lnt>336
+</span><span class=lnt>337
+</span><span class=lnt>338
+</span><span class=lnt>339
+</span><span class=lnt>340
+</span><span class=lnt>341
+</span><span class=lnt>342
+</span><span class=lnt>343
+</span><span class=lnt>344
+</span><span class=lnt>345
+</span><span class=lnt>346
+</span><span class=lnt>347
+</span><span class=lnt>348
+</span><span class=lnt>349
+</span><span class=lnt>350
+</span><span class=lnt>351
+</span><span class=lnt>352
+</span><span class=lnt>353
+</span><span class=lnt>354
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>MaterialApp</span><span class=p>(</span><span class=nl>home:</span> <span class=n>NewsApp</span><span class=p>()));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Model ──────────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Article</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>int</span> <span class=n>id</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>title</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>category</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>body</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>Color</span> <span class=n>color</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>Article</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>category</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>body</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>color</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>const</span> <span class=n>_articles</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>  <span class=n>Article</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>id:</span> <span class=m>1</span><span class=p>,</span> <span class=nl>category:</span> <span class=s1>&#39;Technology&#39;</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>blue</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>title:</span> <span class=s1>&#39;Flutter 4.0 arrives with native AI support&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>body:</span> <span class=s1>&#39;The Flutter team has announced version 4.0, which includes native &#39;</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;integration with language models, improved ahead-of-time compilation, &#39;</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;and full Impeller support across all platforms.&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>Article</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>id:</span> <span class=m>2</span><span class=p>,</span> <span class=nl>category:</span> <span class=s1>&#39;Design&#39;</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>purple</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>title:</span> <span class=s1>&#39;Material You becomes the de facto standard&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>body:</span> <span class=s1>&#39;Two years after its introduction, Material You has consolidated as &#39;</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;the preferred design system for Android and iOS developers. &#39;</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;Its dynamic color system reduces design time by 40%.&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>Article</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>id:</span> <span class=m>3</span><span class=p>,</span> <span class=nl>category:</span> <span class=s1>&#39;Backend&#39;</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>title:</span> <span class=s1>&#39;Dart on the server: benchmarks vs Node.js&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>body:</span> <span class=s1>&#39;A comparative study shows that Dart on the server with the Shelf &#39;</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;framework outperforms Node.js in HTTP request throughput by 23%, &#39;</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;with lower memory consumption.&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>Article</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>id:</span> <span class=m>4</span><span class=p>,</span> <span class=nl>category:</span> <span class=s1>&#39;Community&#39;</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>orange</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>title:</span> <span class=s1>&#39;FlutterConf 2026 surpasses 10,000 attendees&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>body:</span> <span class=s1>&#39;The annual Flutter conference breaks its historical attendance record. &#39;</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;The most demanded topics were AI, Impeller, and the new incremental &#39;</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;compilation system.&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>Article</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>id:</span> <span class=m>5</span><span class=p>,</span> <span class=nl>category:</span> <span class=s1>&#39;Open Source&#39;</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>teal</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>title:</span> <span class=s1>&#39;Riverpod 4.0 simplifies state management&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>body:</span> <span class=s1>&#39;The latest version of Riverpod eliminates the need to generate code &#39;</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;with build_runner for most use cases, reducing boilerplate &#39;</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;by 60% according to its authors.&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Breakpoints ────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Breakpoints</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=kt>double</span> <span class=n>mobile</span> <span class=o>=</span> <span class=m>600</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=kt>double</span> <span class=n>tablet</span> <span class=o>=</span> <span class=m>900</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=kt>double</span> <span class=n>desktop</span> <span class=o>=</span> <span class=m>1200</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kt>bool</span> <span class=n>isMobile</span><span class=p>(</span><span class=kt>double</span> <span class=n>width</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>width</span> <span class=o>&lt;</span> <span class=n>mobile</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kt>bool</span> <span class=n>isTablet</span><span class=p>(</span><span class=kt>double</span> <span class=n>width</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>width</span> <span class=o>&gt;=</span> <span class=n>mobile</span> <span class=o>&amp;&amp;</span> <span class=n>width</span> <span class=o>&lt;</span> <span class=n>desktop</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kt>bool</span> <span class=n>isDesktop</span><span class=p>(</span><span class=kt>double</span> <span class=n>width</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>width</span> <span class=o>&gt;=</span> <span class=n>desktop</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Root app ───────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>NewsApp</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>NewsApp</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>NewsApp</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_NewsAppState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_NewsAppState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>NewsApp</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>_selectedIndex</span> <span class=o>=</span> <span class=m>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>Article</span><span class=o>?</span> <span class=n>_selectedArticle</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// MediaQuery.sizeOf is more efficient than MediaQuery.of(context).size
+</span></span></span><span class=line><span class=cl>    <span class=c1>// (only rebuilds when size changes, not on every MediaQuery change)
+</span></span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>width</span> <span class=o>=</span> <span class=n>MediaQuery</span><span class=p>.</span><span class=n>sizeOf</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>width</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Breakpoints</span><span class=p>.</span><span class=n>isDesktop</span><span class=p>(</span><span class=n>width</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=o>?</span> <span class=n>_DesktopLayout</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>selectedIndex:</span> <span class=n>_selectedIndex</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onIndexChanged:</span> <span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_selectedIndex</span> <span class=o>=</span> <span class=n>i</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>selectedArticle:</span> <span class=n>_selectedArticle</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onArticleSelected:</span> <span class=p>(</span><span class=n>a</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_selectedArticle</span> <span class=o>=</span> <span class=n>a</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=o>:</span> <span class=n>_MobileTabletLayout</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>width:</span> <span class=n>width</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>selectedArticle:</span> <span class=n>_selectedArticle</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onArticleSelected:</span> <span class=p>(</span><span class=n>a</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_selectedArticle</span> <span class=o>=</span> <span class=n>a</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>bottomNavigationBar:</span> <span class=n>Breakpoints</span><span class=p>.</span><span class=n>isMobile</span><span class=p>(</span><span class=n>width</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=o>?</span> <span class=n>NavigationBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>selectedIndex:</span> <span class=n>_selectedIndex</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onDestinationSelected:</span> <span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_selectedIndex</span> <span class=o>=</span> <span class=n>i</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>destinations:</span> <span class=kd>const</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=n>NavigationDestination</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>article</span><span class=p>),</span> <span class=nl>label:</span> <span class=s1>&#39;News&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>NavigationDestination</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>bookmark</span><span class=p>),</span> <span class=nl>label:</span> <span class=s1>&#39;Saved&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>NavigationDestination</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>person</span><span class=p>),</span> <span class=nl>label:</span> <span class=s1>&#39;Profile&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>],</span>
+</span></span><span class=line><span class=cl>            <span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=o>:</span> <span class=kc>null</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Mobile / tablet layout ─────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_MobileTabletLayout</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>double</span> <span class=n>width</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>Article</span><span class=o>?</span> <span class=n>selectedArticle</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>ValueChanged</span><span class=o>&lt;</span><span class=n>Article</span><span class=o>&gt;</span> <span class=n>onArticleSelected</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_MobileTabletLayout</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>width</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>selectedArticle</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>onArticleSelected</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>isTablet</span> <span class=o>=</span> <span class=n>Breakpoints</span><span class=p>.</span><span class=n>isTablet</span><span class=p>(</span><span class=n>width</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>isTablet</span> <span class=o>&amp;&amp;</span> <span class=n>selectedArticle</span> <span class=o>!=</span> <span class=kc>null</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>SizedBox</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>width:</span> <span class=m>360</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>_ArticleList</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onArticleSelected:</span> <span class=n>onArticleSelected</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>selectedId:</span> <span class=n>selectedArticle</span><span class=o>!</span><span class=p>.</span><span class=n>id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>VerticalDivider</span><span class=p>(</span><span class=nl>width:</span> <span class=m>1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Expanded</span><span class=p>(</span><span class=nl>child:</span> <span class=n>_ArticleDetail</span><span class=p>(</span><span class=nl>article:</span> <span class=n>selectedArticle</span><span class=o>!</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>isTablet</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>SizedBox</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>width:</span> <span class=m>360</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>_ArticleList</span><span class=p>(</span><span class=nl>onArticleSelected:</span> <span class=n>onArticleSelected</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>VerticalDivider</span><span class=p>(</span><span class=nl>width:</span> <span class=m>1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Select an article&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>_ArticleList</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>onArticleSelected:</span> <span class=p>(</span><span class=n>article</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Navigator</span><span class=p>.</span><span class=n>push</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=n>context</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=n>MaterialPageRoute</span><span class=p>(</span><span class=nl>builder:</span> <span class=p>(</span><span class=n>_</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>_ArticleDetail</span><span class=p>(</span><span class=nl>article:</span> <span class=n>article</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>        <span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Desktop layout ─────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_DesktopLayout</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>int</span> <span class=n>selectedIndex</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>ValueChanged</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>onIndexChanged</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>Article</span><span class=o>?</span> <span class=n>selectedArticle</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>ValueChanged</span><span class=o>&lt;</span><span class=n>Article</span><span class=o>&gt;</span> <span class=n>onArticleSelected</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_DesktopLayout</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>selectedIndex</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>onIndexChanged</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>selectedArticle</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>onArticleSelected</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=n>NavigationRail</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>selectedIndex:</span> <span class=n>selectedIndex</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>onDestinationSelected:</span> <span class=n>onIndexChanged</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>labelType:</span> <span class=n>NavigationRailLabelType</span><span class=p>.</span><span class=n>all</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>destinations:</span> <span class=kd>const</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=n>NavigationRailDestination</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>article</span><span class=p>),</span> <span class=nl>label:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;News&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=n>NavigationRailDestination</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>bookmark</span><span class=p>),</span> <span class=nl>label:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Saved&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=n>NavigationRailDestination</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>person</span><span class=p>),</span> <span class=nl>label:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Profile&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=kd>const</span> <span class=n>VerticalDivider</span><span class=p>(</span><span class=nl>width:</span> <span class=m>1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=n>SizedBox</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>width:</span> <span class=m>400</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>_ArticleList</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onArticleSelected:</span> <span class=n>onArticleSelected</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>selectedId:</span> <span class=n>selectedArticle</span><span class=o>?</span><span class=p>.</span><span class=n>id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=kd>const</span> <span class=n>VerticalDivider</span><span class=p>(</span><span class=nl>width:</span> <span class=m>1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>selectedArticle</span> <span class=o>!=</span> <span class=kc>null</span>
+</span></span><span class=line><span class=cl>              <span class=o>?</span> <span class=n>_ArticleDetail</span><span class=p>(</span><span class=nl>article:</span> <span class=n>selectedArticle</span><span class=o>!</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>              <span class=o>:</span> <span class=kd>const</span> <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Select an article&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Article list ───────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_ArticleList</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>ValueChanged</span><span class=o>&lt;</span><span class=n>Article</span><span class=o>&gt;</span> <span class=n>onArticleSelected</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>int</span><span class=o>?</span> <span class=n>selectedId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_ArticleList</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>onArticleSelected</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=n>selectedId</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Flutter News&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>LayoutBuilder</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>builder:</span> <span class=p>(</span><span class=n>context</span><span class=p>,</span> <span class=n>constraints</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=kd>final</span> <span class=n>hPadding</span> <span class=o>=</span> <span class=n>constraints</span><span class=p>.</span><span class=n>maxWidth</span> <span class=o>&gt;</span> <span class=m>500</span> <span class=o>?</span> <span class=m>24.0</span> <span class=o>:</span> <span class=m>12.0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=n>ListView</span><span class=p>.</span><span class=n>separated</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>padding:</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>horizontal:</span> <span class=n>hPadding</span><span class=p>,</span> <span class=nl>vertical:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>itemCount:</span> <span class=n>_articles</span><span class=p>.</span><span class=n>length</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>separatorBuilder:</span> <span class=p>(</span><span class=n>_</span><span class=p>,</span> <span class=n>__</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>itemBuilder:</span> <span class=p>(</span><span class=n>_</span><span class=p>,</span> <span class=n>i</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=kd>final</span> <span class=n>article</span> <span class=o>=</span> <span class=n>_articles</span><span class=p>[</span><span class=n>i</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>              <span class=kd>final</span> <span class=n>isSelected</span> <span class=o>=</span> <span class=n>article</span><span class=p>.</span><span class=n>id</span> <span class=o>==</span> <span class=n>selectedId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>              <span class=k>return</span> <span class=n>_ArticleCard</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>article:</span> <span class=n>article</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>isSelected:</span> <span class=n>isSelected</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>onTap:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>onArticleSelected</span><span class=p>(</span><span class=n>article</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=p>},</span>
+</span></span><span class=line><span class=cl>          <span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_ArticleCard</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>Article</span> <span class=n>article</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>bool</span> <span class=n>isSelected</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>VoidCallback</span> <span class=n>onTap</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_ArticleCard</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>article</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>onTap</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=n>isSelected</span> <span class=o>=</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Card</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>color:</span> <span class=n>isSelected</span>
+</span></span><span class=line><span class=cl>          <span class=o>?</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>colorScheme</span><span class=p>.</span><span class=n>primaryContainer</span>
+</span></span><span class=line><span class=cl>          <span class=o>:</span> <span class=kc>null</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>InkWell</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>onTap:</span> <span class=n>onTap</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=n>CircleAvatar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>backgroundColor:</span> <span class=n>article</span><span class=p>.</span><span class=n>color</span><span class=p>.</span><span class=n>withOpacity</span><span class=p>(</span><span class=m>0.2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>child:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>article</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>article</span><span class=p>.</span><span class=n>color</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>width:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                    <span class=n>Text</span><span class=p>(</span><span class=n>article</span><span class=p>.</span><span class=n>category</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                            <span class=nl>color:</span> <span class=n>article</span><span class=p>.</span><span class=n>color</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                            <span class=nl>fontSize:</span> <span class=m>11</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                            <span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>w600</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                    <span class=n>Text</span><span class=p>(</span><span class=n>article</span><span class=p>.</span><span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>maxLines:</span> <span class=m>2</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>overflow:</span> <span class=n>TextOverflow</span><span class=p>.</span><span class=n>ellipsis</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>],</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Article detail ─────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_ArticleDetail</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>Article</span> <span class=n>article</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_ArticleDetail</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>article</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>LayoutBuilder</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>builder:</span> <span class=p>(</span><span class=n>context</span><span class=p>,</span> <span class=n>constraints</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kd>final</span> <span class=n>isWide</span> <span class=o>=</span> <span class=n>constraints</span><span class=p>.</span><span class=n>maxWidth</span> <span class=o>&gt;</span> <span class=m>600</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kd>final</span> <span class=n>hPadding</span> <span class=o>=</span> <span class=n>isWide</span> <span class=o>?</span> <span class=n>constraints</span><span class=p>.</span><span class=n>maxWidth</span> <span class=o>*</span> <span class=m>0.1</span> <span class=o>:</span> <span class=m>24.0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kd>final</span> <span class=n>titleSize</span> <span class=o>=</span> <span class=n>isWide</span> <span class=o>?</span> <span class=m>28.0</span> <span class=o>:</span> <span class=m>22.0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=n>Text</span><span class=p>(</span><span class=n>article</span><span class=p>.</span><span class=n>category</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>body:</span> <span class=n>SingleChildScrollView</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>padding:</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>horizontal:</span> <span class=n>hPadding</span><span class=p>,</span> <span class=nl>vertical:</span> <span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>height:</span> <span class=n>isWide</span> <span class=o>?</span> <span class=m>240</span> <span class=o>:</span> <span class=m>160</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>color:</span> <span class=n>article</span><span class=p>.</span><span class=n>color</span><span class=p>.</span><span class=n>withOpacity</span><span class=p>(</span><span class=m>0.15</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>child:</span> <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>child:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>article</span><span class=p>,</span> <span class=nl>size:</span> <span class=n>isWide</span> <span class=o>?</span> <span class=m>80</span> <span class=o>:</span> <span class=m>60</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>color:</span> <span class=n>article</span><span class=p>.</span><span class=n>color</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>Text</span><span class=p>(</span><span class=n>article</span><span class=p>.</span><span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>fontSize:</span> <span class=n>titleSize</span><span class=p>,</span> <span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>Text</span><span class=p>(</span><span class=n>article</span><span class=p>.</span><span class=n>body</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>fontSize:</span> <span class=n>isWide</span> <span class=o>?</span> <span class=m>16</span> <span class=o>:</span> <span class=m>14</span><span class=p>,</span> <span class=nl>height:</span> <span class=m>1.6</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>              <span class=p>],</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=when-to-use-each-tool>When to use each tool<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Tool</th><th>When to use it</th></tr></thead><tbody><tr><td><code>MediaQuery.sizeOf(context)</code></td><td>Global app breakpoints (mobile/tablet/desktop)</td></tr><tr><td><code>LayoutBuilder</code></td><td>Adapt a widget to the space provided by its parent</td></tr><tr><td><code>OrientationBuilder</code></td><td>Change layout when the device rotates</td></tr><tr><td><code>AspectRatio</code></td><td>Maintain a fixed proportion regardless of size</td></tr><tr><td><code>FractionallySizedBox</code></td><td>Dimensions as a percentage of the parent</td></tr><tr><td><code>Flexible</code> / <code>Expanded</code></td><td>Distribute space in <code>Row</code>/<code>Column</code></td></tr></tbody></table><h2 id=common-mistakes>Common mistakes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong><code>MediaQuery.of(context).size</code> instead of <code>MediaQuery.sizeOf</code></strong>: the old version rebuilds the widget on any <code>MediaQuery</code> change (rotation, keyboard, status bar), not just size changes. Use <code>sizeOf</code> from Flutter 3.10+.</li><li><strong>Hardcoded breakpoints in multiple places</strong>: centralize breakpoints in a class or constants to maintain consistency.</li><li><strong>Not testing on tablet with Flutter DevTools</strong>: the web desktop emulator is the fastest way to test multiple sizes. Enable responsive mode with Ctrl+Shift+M in Chrome.</li></ul><h2 id=practical-use>Practical use<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Responsive design is mandatory if your app targets Play Store + iPad (App Store) + web. The same Flutter code can adapt to all of them if you use <code>LayoutBuilder</code> and breakpoints from the start.</p><h2 id=recommended-next-exercise>Recommended next exercise<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/widgets-ui/flutter-sliver-appbar-collapsible-ejercicio-resuelto/>SliverAppBar collapsible in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/formularios-navegacion/flutter-bottom-sheet-modal-ejercicio-resuelto/>BottomSheet modal in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/>All Flutter exercises</a></li></ul><h2 id=guided-practice-and-next-step>Guided practice and next step<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/>More Flutter exercises</a></li><li><a href=https://www.amazon.com/dp/B0FZ4QHW8L rel=external>View the book on Amazon (included in Kindle Unlimited)</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=does-flutter-have-an-official-adaptivescaffold>Does Flutter have an official <code>AdaptiveScaffold</code>?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Yes. The <code>flutter_adaptive_scaffold</code> package (from the Flutter team) provides an <code>AdaptiveScaffold</code> that automatically uses <code>BottomNavigationBar</code> on mobile, <code>NavigationRail</code> on tablet, and <code>NavigationDrawer</code> on desktop. It&rsquo;s a good foundation to avoid reinventing the wheel.</p><h3 id=should-i-use-mediaquery-or-layoutbuilder-for-an-adaptive-grid>Should I use <code>MediaQuery</code> or <code>LayoutBuilder</code> for an adaptive grid?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><code>LayoutBuilder</code>. An adaptive grid depends on the space given by its parent widget, not the full screen size. <code>LayoutBuilder</code> gives you the exact available <code>BoxConstraints</code>.</p><h3 id=does-flutter-web-require-more-responsive-work-than-mobile>Does Flutter Web require more responsive work than mobile?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Yes, the size range is wider (320 dp to 4K) and users resize windows. Plan from the start with <code>LayoutBuilder</code> and min/max widths for content containers.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> May 25, 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/en/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/en/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/en/index.html><a class=padding href=/en/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=parent data-nav-id=/en/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/en/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets and UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu><li data-nav-id=/en/ejercicios/widgets-ui/flutter-animation-controller-tween-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-animation-controller-tween-ejercicio-resuelto/index.html>AnimationController and Tween in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-custom-painter-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-custom-painter-ejercicio-resuelto/index.html>CustomPainter in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-hero-navigation-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-hero-navigation-ejercicio-resuelto/index.html>Hero animations in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html>Implicit animations in Flutter: solved exercise</a></li><li class=active data-nav-id=/en/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html>Responsive design in Flutter: solved exercise with LayoutBuilder and MediaQuery</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-sliver-appbar-collapsible-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-sliver-appbar-collapsible-ejercicio-resuelto/index.html>SliverAppBar collapsible in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-listas-largas-imagenes-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-listas-largas-imagenes-ejercicio-resuelto/index.html>Long lists and images in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-rendimiento-rebuilds-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-rendimiento-rebuilds-ejercicio-resuelto/index.html>Reduce unnecessary rebuilds in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-theme-dark-mode-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-theme-dark-mode-ejercicio-resuelto/index.html>Dark Mode in Flutter with ThemeMode: solved exercise</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-bottom-navigation-bar-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-bottom-navigation-bar-ejercicio-resuelto/index.html>BottomNavigationBar in Flutter: solved exercise with IndexedStack</a></li><li data-nav-id=/en/ejercicios/widgets-ui/flutter-listview-builder-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/widgets-ui/flutter-listview-builder-ejercicio-resuelto/index.html>ListView.builder in Flutter: solved exercise with dynamic list</a></li></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/en/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Forms and navigation</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/en/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> State and architecture</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/api-async/index.html><a class="padding default-animation" href=/en/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API and async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/en/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistence and data</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/en/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing and resources</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li data-nav-id=/en/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/en/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Tools & Code</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu></ul></li><li data-nav-id=/en/ejercicios/dispositivo/index.html><a class=padding href=/en/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Device</a></li><li data-nav-id=/en/ejercicios/internacionalizacion/index.html><a class=padding href=/en/ejercicios/internacionalizacion/index.html>Internationalization</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Language</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html lang=es></option><option id=R-select-language-en value=en data-url=/en/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html lang=en selected data-selected></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Theme</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1783917441 defer></script><script src=/js/theme.min.js?1783917441 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
