@@ -1,0 +1,678 @@
+<!doctype html><html id=R-html lang=es dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Ejercicio resuelto de notificaciones locales en Flutter: flutter_local_notifications, canales Android, notificaciones programadas, payload y navegación desde notificación."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="Notificaciones locales en Flutter: ejercicio resuelto con flutter_local_notifications :: Flutter en rigle.dev"><meta name=twitter:description content="Ejercicio resuelto de notificaciones locales en Flutter: flutter_local_notifications, canales Android, notificaciones programadas, payload y navegación desde notificación."><meta property="og:url" content="https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="Notificaciones locales en Flutter: ejercicio resuelto con flutter_local_notifications :: Flutter en rigle.dev"><meta property="og:description" content="Ejercicio resuelto de notificaciones locales en Flutter: flutter_local_notifications, canales Android, notificaciones programadas, payload y navegación desde notificación."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="Ejercicios resueltos de Flutter (paso a paso)"><meta property="article:published_time" content="2026-07-14T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermedio"><meta property="article:tag" content="Notificaciones"><meta property="article:tag" content="Herramientas"><meta itemprop=name content="Notificaciones locales en Flutter: ejercicio resuelto con flutter_local_notifications :: Flutter en rigle.dev"><meta itemprop=description content="Ejercicio resuelto de notificaciones locales en Flutter: flutter_local_notifications, canales Android, notificaciones programadas, payload y navegación desde notificación."><meta itemprop=datePublished content="2026-07-14T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1585"><meta itemprop=keywords content="Intermedio,Notificaciones,Herramientas"><title>Notificaciones locales en Flutter: ejercicio resuelto con flutter_local_notifications :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1784002249 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1784002249 defer></script><script src=/js/search-lunr.min.js?1784002249 defer></script><script src=/js/search.min.js?1784002249 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.es.js?1784002249"</script><script src=/js/lunr/lunr.min.js?1784002249 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1784002249 defer></script><script src=/js/lunr/lunr.multi.min.js?1784002249 defer></script><script src=/js/lunr/lunr.es.min.js?1784002249 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["es"]</script><link href=/fonts/fontawesome/css/all.min.css?1784002249 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1784002249 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1784002249 rel=stylesheet><link href=/css/theme.min.css?1784002249 rel=stylesheet><link href=/css/format-html.min.css?1784002249 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copiar texto al portapapeles`,window.T_Copied_to_clipboard=`¡Texto copiado al portapapeles!`,window.T_Link_copied_to_clipboard=`¡Enlace copiado al portapapeles!`,window.T_Reset_view=`Restablecer vista`,window.T_View_reset=`¡Ver reajuste!`,window.T_No_results_found=`No se han encontrado resultados para "{0}"`,window.T_N_results_found=`{1} resultados encontrados para "{0}"`,window.T_Browser_unsupported_feature=`Este navegador no admite esta función`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1784002249 rel=stylesheet></head><body class="mobile-support html" data-origin=/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menú (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Tabla de contenido (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#notificaciones-locales-en-flutter-ejercicio-resuelto-con-flutter_local_notifications>Notificaciones locales en Flutter: ejercicio resuelto con flutter_local_notifications</a></li><li><a href=#enunciado>Enunciado</a></li><li><a href=#dependencias>Dependencias</a><ul><li><a href=#configuración-android>Configuración Android</a></li><li><a href=#configuración-ios>Configuración iOS</a></li></ul></li><li><a href=#solución-completa>Solución completa</a></li><li><a href=#canales-de-android-guía-rápida>Canales de Android: guía rápida</a></li><li><a href=#errores-frecuentes>Errores frecuentes</a></li><li><a href=#aplicación-práctica>Aplicación práctica</a></li><li><a href=#siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado</a></li><li><a href=#práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#flutter_local_notifications-funciona-en-flutter-web>¿<code>flutter_local_notifications</code> funciona en Flutter Web?</a></li><li><a href=#cómo-reprogramar-notificaciones-recurrentes>¿Cómo reprogramar notificaciones recurrentes?</a></li><li><a href=#puedo-mostrar-una-notificación-con-imagen-o-botones-de-acción>¿Puedo mostrar una notificación con imagen o botones de acción?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/index.html><span itemprop=name>Aprende Flutter — ejercicios resueltos</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/index.html><span itemprop=name>Ejercicios</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/herramientas-codigo/index.html><span itemprop=name>Herramientas y código</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Notificaciones locales en Flutter: ejercicio resuelto con flutter_local_notifications</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/herramientas-codigo/flutter-linting-analysis-options-ejercicio-resuelto/index.html title="Linting y analysis_options en Flutter: ejercicio resuelto (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/dispositivo/index.html title="Dispositivo (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=Más><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Etiquetas style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/tags/herramientas/index.html>Herramientas</a></li><li><a class=term-link href=/tags/intermedio/index.html>Intermedio</a></li><li><a class=term-link href=/tags/notificaciones/index.html>Notificaciones</a></li></ul></div></header><h1 id=notificaciones-locales-en-flutter-ejercicio-resuelto-con-flutter_local_notifications>Notificaciones locales en Flutter: ejercicio resuelto con flutter_local_notifications</h1><h2 id=notificaciones-locales-en-flutter-ejercicio-resuelto-con-flutter_local_notifications>Notificaciones locales en Flutter: ejercicio resuelto con flutter_local_notifications<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Las notificaciones locales se lanzan desde la propia app sin servidor — son ideales para recordatorios, alarmas, progreso de descarga y cualquier aviso que no depende de un backend. <code>flutter_local_notifications</code> es el paquete estándar para esto en Flutter.</p><h2 id=enunciado>Enunciado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Implementa un sistema de notificaciones que:</p><ul><li>Muestra una notificación inmediata con título, cuerpo e icono.</li><li>Programa una notificación para dentro de 5 segundos.</li><li>Al pulsar la notificación, navega a una pantalla de detalle pasando un payload.</li><li>Crea canales de notificación diferenciados en Android (alta y baja importancia).</li><li>Cancela notificaciones por ID.</li></ul><h2 id=dependencias>Dependencias<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># pubspec.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>flutter</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>sdk</span><span class=p>:</span><span class=w> </span><span class=l>flutter</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>flutter_local_notifications</span><span class=p>:</span><span class=w> </span><span class=l>^18.0.0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>timezone</span><span class=p>:</span><span class=w> </span><span class=l>^0.9.4</span></span></span></code></pre></td></tr></table></div></div><h3 id=configuración-android>Configuración Android<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>En <code>android/app/src/main/AndroidManifest.xml</code>, dentro de <code>&lt;manifest></code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.RECEIVE_BOOT_COMPLETED&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.SCHEDULE_EXACT_ALARM&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.POST_NOTIFICATIONS&#34;</span><span class=nt>/&gt;</span></span></span></code></pre></td></tr></table></div></div><p>Dentro de <code>&lt;application></code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;receiver</span> <span class=na>android:exported=</span><span class=s>&#34;false&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=na>android:name=</span><span class=s>&#34;com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;receiver</span> <span class=na>android:exported=</span><span class=s>&#34;false&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=na>android:name=</span><span class=s>&#34;com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;intent-filter&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;action</span> <span class=na>android:name=</span><span class=s>&#34;android.intent.action.BOOT_COMPLETED&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;/intent-filter&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/receiver&gt;</span></span></span></code></pre></td></tr></table></div></div><h3 id=configuración-ios>Configuración iOS<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>En <code>ios/Runner/Info.plist</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;key&gt;</span>UIBackgroundModes<span class=nt>&lt;/key&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;array&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;string&gt;</span>fetch<span class=nt>&lt;/string&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;string&gt;</span>remote-notification<span class=nt>&lt;/string&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/array&gt;</span></span></span></code></pre></td></tr></table></div></div><h2 id=solución-completa>Solución completa<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span><span class=lnt>308
+</span><span class=lnt>309
+</span><span class=lnt>310
+</span><span class=lnt>311
+</span><span class=lnt>312
+</span><span class=lnt>313
+</span><span class=lnt>314
+</span><span class=lnt>315
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;dart:async&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter_local_notifications/flutter_local_notifications.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:timezone/data/latest.dart&#39;</span> <span class=k>as</span> <span class=n>tz</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:timezone/timezone.dart&#39;</span> <span class=k>as</span> <span class=n>tz</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Servicio de notificaciones ─────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>NotificationService</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>final</span> <span class=n>NotificationService</span> <span class=n>_instance</span> <span class=o>=</span> <span class=n>NotificationService</span><span class=p>.</span><span class=n>_</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=kd>factory</span> <span class=n>NotificationService</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_instance</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>NotificationService</span><span class=p>.</span><span class=n>_</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>_plugin</span> <span class=o>=</span> <span class=n>FlutterLocalNotificationsPlugin</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Callback para manejar tap en notificación cuando la app está cerrada
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kt>String</span><span class=o>?</span> <span class=n>pendingPayload</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// ID de canal Android
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=n>_channelHighId</span> <span class=o>=</span> <span class=s1>&#39;high_importance&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=n>_channelLowId</span> <span class=o>=</span> <span class=s1>&#39;low_importance&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>initialize</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>tz</span><span class=p>.</span><span class=n>initializeTimeZones</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>const</span> <span class=n>androidSettings</span> <span class=o>=</span> <span class=n>AndroidInitializationSettings</span><span class=p>(</span><span class=s1>&#39;@mipmap/ic_launcher&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=kd>const</span> <span class=n>iosSettings</span> <span class=o>=</span> <span class=n>DarwinInitializationSettings</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>requestAlertPermission:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>requestBadgePermission:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>requestSoundPermission:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_plugin</span><span class=p>.</span><span class=n>initialize</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=kd>const</span> <span class=n>InitializationSettings</span><span class=p>(</span><span class=nl>android:</span> <span class=n>androidSettings</span><span class=p>,</span> <span class=nl>iOS:</span> <span class=n>iosSettings</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>onDidReceiveNotificationResponse:</span> <span class=p>(</span><span class=n>response</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// La app está en primer plano o background — manejar navegación aquí
+</span></span></span><span class=line><span class=cl>        <span class=n>pendingPayload</span> <span class=o>=</span> <span class=n>response</span><span class=p>.</span><span class=n>payload</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>_navigationKey</span><span class=p>.</span><span class=n>currentState</span>
+</span></span><span class=line><span class=cl>            <span class=o>?</span><span class=p>.</span><span class=n>pushNamed</span><span class=p>(</span><span class=s1>&#39;/detail&#39;</span><span class=p>,</span> <span class=nl>arguments:</span> <span class=n>response</span><span class=p>.</span><span class=n>payload</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// Solicitar permiso en Android 13+
+</span></span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_plugin</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>resolvePlatformSpecificImplementation</span><span class=o>&lt;</span>
+</span></span><span class=line><span class=cl>            <span class=n>AndroidFlutterLocalNotificationsPlugin</span><span class=o>&gt;</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=o>?</span><span class=p>.</span><span class=n>requestNotificationsPermission</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// Crear canales Android
+</span></span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_createAndroidChannels</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_createAndroidChannels</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>android</span> <span class=o>=</span> <span class=n>_plugin</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>resolvePlatformSpecificImplementation</span><span class=o>&lt;</span>
+</span></span><span class=line><span class=cl>            <span class=n>AndroidFlutterLocalNotificationsPlugin</span><span class=o>&gt;</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>android</span><span class=o>?</span><span class=p>.</span><span class=n>createNotificationChannel</span><span class=p>(</span><span class=kd>const</span> <span class=n>AndroidNotificationChannel</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=n>_channelHighId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;Notificaciones importantes&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>description:</span> <span class=s1>&#39;Alertas y recordatorios urgentes&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>importance:</span> <span class=n>Importance</span><span class=p>.</span><span class=n>high</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>playSound:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>android</span><span class=o>?</span><span class=p>.</span><span class=n>createNotificationChannel</span><span class=p>(</span><span class=kd>const</span> <span class=n>AndroidNotificationChannel</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=n>_channelLowId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;Notificaciones informativas&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>description:</span> <span class=s1>&#39;Actualizaciones y noticias&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>importance:</span> <span class=n>Importance</span><span class=p>.</span><span class=n>low</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>playSound:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>));</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Notificación inmediata
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>showNow</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>int</span> <span class=n>id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>body</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kt>String</span><span class=o>?</span> <span class=n>payload</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kt>bool</span> <span class=n>highImportance</span> <span class=o>=</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>channelId</span> <span class=o>=</span> <span class=n>highImportance</span> <span class=o>?</span> <span class=n>_channelHighId</span> <span class=o>:</span> <span class=n>_channelLowId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>importance</span> <span class=o>=</span> <span class=n>highImportance</span> <span class=o>?</span> <span class=n>Importance</span><span class=p>.</span><span class=n>high</span> <span class=o>:</span> <span class=n>Importance</span><span class=p>.</span><span class=n>low</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>priority</span> <span class=o>=</span> <span class=n>highImportance</span> <span class=o>?</span> <span class=n>Priority</span><span class=p>.</span><span class=n>high</span> <span class=o>:</span> <span class=n>Priority</span><span class=p>.</span><span class=n>defaultPriority</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_plugin</span><span class=p>.</span><span class=n>show</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=n>id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>body</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>NotificationDetails</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>android:</span> <span class=n>AndroidNotificationDetails</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=n>channelId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=n>highImportance</span> <span class=o>?</span> <span class=s1>&#39;Notificaciones importantes&#39;</span> <span class=o>:</span> <span class=s1>&#39;Notificaciones informativas&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>importance:</span> <span class=n>importance</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>priority:</span> <span class=n>priority</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>icon:</span> <span class=s1>&#39;@mipmap/ic_launcher&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>iOS:</span> <span class=kd>const</span> <span class=n>DarwinNotificationDetails</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>presentAlert:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>presentBadge:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>presentSound:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>payload:</span> <span class=n>payload</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Notificación programada (en segundos desde ahora)
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>scheduleAfterSeconds</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>int</span> <span class=n>id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>body</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>int</span> <span class=n>seconds</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kt>String</span><span class=o>?</span> <span class=n>payload</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>scheduledDate</span> <span class=o>=</span> <span class=n>tz</span><span class=p>.</span><span class=n>TZDateTime</span><span class=p>.</span><span class=n>now</span><span class=p>(</span><span class=n>tz</span><span class=p>.</span><span class=n>local</span><span class=p>).</span><span class=n>add</span><span class=p>(</span><span class=n>Duration</span><span class=p>(</span><span class=nl>seconds:</span> <span class=n>seconds</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_plugin</span><span class=p>.</span><span class=n>zonedSchedule</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=n>id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>body</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>scheduledDate</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=kd>const</span> <span class=n>NotificationDetails</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>android:</span> <span class=n>AndroidNotificationDetails</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=n>_channelHighId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=s1>&#39;Notificaciones importantes&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>importance:</span> <span class=n>Importance</span><span class=p>.</span><span class=n>high</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>priority:</span> <span class=n>Priority</span><span class=p>.</span><span class=n>high</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>iOS:</span> <span class=n>DarwinNotificationDetails</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>androidScheduleMode:</span> <span class=n>AndroidScheduleMode</span><span class=p>.</span><span class=n>exactAllowWhileIdle</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>uiLocalNotificationDateInterpretation:</span>
+</span></span><span class=line><span class=cl>          <span class=n>UILocalNotificationDateInterpretation</span><span class=p>.</span><span class=n>absoluteTime</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>payload:</span> <span class=n>payload</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Cancelar por ID
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>cancel</span><span class=p>(</span><span class=kt>int</span> <span class=n>id</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>_plugin</span><span class=p>.</span><span class=n>cancel</span><span class=p>(</span><span class=n>id</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Cancelar todas
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>cancelAll</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_plugin</span><span class=p>.</span><span class=n>cancelAll</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Clave global para navegación desde notificación ───────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>final</span> <span class=n>_navigationKey</span> <span class=o>=</span> <span class=n>GlobalKey</span><span class=o>&lt;</span><span class=n>NavigatorState</span><span class=o>&gt;</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Main ───────────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>main</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>WidgetsFlutterBinding</span><span class=p>.</span><span class=n>ensureInitialized</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=kd>await</span> <span class=n>NotificationService</span><span class=p>().</span><span class=n>initialize</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Comprobar si la app se abrió desde notificación (estaba cerrada)
+</span></span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>plugin</span> <span class=o>=</span> <span class=n>FlutterLocalNotificationsPlugin</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>launchDetails</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>plugin</span><span class=p>.</span><span class=n>getNotificationAppLaunchDetails</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=n>launchDetails</span><span class=o>?</span><span class=p>.</span><span class=n>didNotificationLaunchApp</span> <span class=o>==</span> <span class=kc>true</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>NotificationService</span><span class=p>.</span><span class=n>pendingPayload</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>        <span class=n>launchDetails</span><span class=o>!</span><span class=p>.</span><span class=n>notificationResponse</span><span class=o>?</span><span class=p>.</span><span class=n>payload</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>runApp</span><span class=p>(</span><span class=n>MaterialApp</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>navigatorKey:</span> <span class=n>_navigationKey</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>initialRoute:</span> <span class=s1>&#39;/&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>routes:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;/&#39;</span><span class=o>:</span> <span class=p>(</span><span class=n>_</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=kd>const</span> <span class=n>NotificationDemo</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;/detail&#39;</span><span class=o>:</span> <span class=p>(</span><span class=n>ctx</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>DetailPage</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>payload:</span> <span class=n>ModalRoute</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>ctx</span><span class=p>)</span><span class=o>!</span><span class=p>.</span><span class=n>settings</span><span class=p>.</span><span class=n>arguments</span> <span class=o>as</span> <span class=kt>String</span><span class=o>?</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>));</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Pantalla principal ─────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>NotificationDemo</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>NotificationDemo</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>NotificationDemo</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_NotificationDemoState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_NotificationDemoState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>NotificationDemo</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>_service</span> <span class=o>=</span> <span class=n>NotificationService</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>_logs</span> <span class=o>=</span> <span class=o>&lt;</span><span class=kt>String</span><span class=o>&gt;</span><span class=p>[];</span>
+</span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>_notifId</span> <span class=o>=</span> <span class=m>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>_log</span><span class=p>(</span><span class=kt>String</span> <span class=n>msg</span><span class=p>)</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_logs</span><span class=p>.</span><span class=n>insert</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=s1>&#39;</span><span class=si>${</span><span class=n>TimeOfDay</span><span class=p>.</span><span class=n>now</span><span class=p>().</span><span class=n>format</span><span class=p>(</span><span class=n>context</span><span class=p>)</span><span class=si>}</span><span class=s1> — </span><span class=si>$</span><span class=n>msg</span><span class=s1>&#39;</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_showImmediate</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>showNow</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>id:</span> <span class=n>_notifId</span><span class=o>++</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>title:</span> <span class=s1>&#39;🔔 Recordatorio&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=s1>&#39;¡No olvides revisar tus ejercicios de Flutter!&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>payload:</span> <span class=s1>&#39;payload_inmediata_</span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_log</span><span class=p>(</span><span class=s1>&#39;Notificación inmediata enviada (ID </span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>)&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_showScheduled</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>scheduleAfterSeconds</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>id:</span> <span class=n>_notifId</span><span class=o>++</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>title:</span> <span class=s1>&#39;⏰ Recordatorio programado&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=s1>&#39;Han pasado 5 segundos desde que lo programaste&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>seconds:</span> <span class=m>5</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>payload:</span> <span class=s1>&#39;payload_programada_</span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_log</span><span class=p>(</span><span class=s1>&#39;Notificación programada en 5 s (ID </span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>)&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_showLow</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>showNow</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>id:</span> <span class=n>_notifId</span><span class=o>++</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>title:</span> <span class=s1>&#39;📰 Novedad&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=s1>&#39;Nueva versión de Flutter disponible&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>highImportance:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>payload:</span> <span class=s1>&#39;payload_baja_</span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_log</span><span class=p>(</span><span class=s1>&#39;Notificación baja importancia (ID </span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>)&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_cancelAll</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>cancelAll</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>_log</span><span class=p>(</span><span class=s1>&#39;Todas las notificaciones canceladas&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Notificaciones locales&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>stretch</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=n>FilledButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=n>_showImmediate</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>notifications_active</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Notificación inmediata (alta importancia)&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>FilledButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=n>_showScheduled</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>schedule</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Programar en 5 segundos&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>style:</span> <span class=n>FilledButton</span><span class=p>.</span><span class=n>styleFrom</span><span class=p>(</span><span class=nl>backgroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>orange</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>OutlinedButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=n>_showLow</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>info_outline</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Notificación baja importancia&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>OutlinedButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=n>_cancelAll</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>cancel</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Cancelar todas&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>style:</span> <span class=n>OutlinedButton</span><span class=p>.</span><span class=n>styleFrom</span><span class=p>(</span><span class=nl>foregroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Divider</span><span class=p>(</span><span class=nl>height:</span> <span class=m>32</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Registro de acciones:&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>_logs</span><span class=p>.</span><span class=n>isEmpty</span>
+</span></span><span class=line><span class=cl>                  <span class=o>?</span> <span class=kd>const</span> <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Aún no hay acciones registradas&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                          <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                  <span class=o>:</span> <span class=n>ListView</span><span class=p>.</span><span class=n>builder</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>itemCount:</span> <span class=n>_logs</span><span class=p>.</span><span class=n>length</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>itemBuilder:</span> <span class=p>(</span><span class=n>_</span><span class=p>,</span> <span class=n>i</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>vertical:</span> <span class=m>2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=n>_logs</span><span class=p>[</span><span class=n>i</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>                            <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>13</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                      <span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Pantalla de detalle (destino del tap en notificación) ──────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>DetailPage</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span><span class=o>?</span> <span class=n>payload</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>DetailPage</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=n>payload</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Detalle de notificación&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>mainAxisSize:</span> <span class=n>MainAxisSize</span><span class=p>.</span><span class=n>min</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>notifications_active</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>size:</span> <span class=m>64</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>blue</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Abriste la app desde una notificación&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>18</span><span class=p>,</span> <span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>textAlign:</span> <span class=n>TextAlign</span><span class=p>.</span><span class=n>center</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Payload recibido: </span><span class=si>${</span><span class=n>payload</span> <span class=o>??</span> <span class=s1>&#39;(ninguno)&#39;</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=canales-de-android-guía-rápida>Canales de Android: guía rápida<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Canal</th><th>Importancia</th><th>Sonido</th><th>Vibración</th><th>Caso de uso</th></tr></thead><tbody><tr><td><code>Importance.max</code></td><td>Urgente</td><td>Sí</td><td>Sí</td><td>Llamadas, alarmas críticas</td></tr><tr><td><code>Importance.high</code></td><td>Alta</td><td>Sí</td><td>Sí</td><td>Mensajes, recordatorios</td></tr><tr><td><code>Importance.defaultImportance</code></td><td>Media</td><td>Sí</td><td>Sí</td><td>Actualizaciones generales</td></tr><tr><td><code>Importance.low</code></td><td>Baja</td><td>No</td><td>No</td><td>Noticias, publicidad</td></tr><tr><td><code>Importance.min</code></td><td>Mínima</td><td>No</td><td>No</td><td>Estado silencioso</td></tr></tbody></table><h2 id=errores-frecuentes>Errores frecuentes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong><code>MissingPluginException</code> al inicializar</strong>: asegúrate de llamar <code>WidgetsFlutterBinding.ensureInitialized()</code> antes de <code>initialize()</code>. Sin esto el plugin no puede registrarse.</li><li><strong>Notificaciones programadas que no llegan en Android</strong>: desde Android 12, las alarmas exactas requieren el permiso <code>SCHEDULE_EXACT_ALARM</code> y el usuario debe concederlo en Ajustes. Usa <code>AndroidScheduleMode.exactAllowWhileIdle</code> y verifica el estado del permiso.</li><li><strong>No gestionar el caso de app cerrada</strong>: cuando el usuario toca la notificación con la app cerrada, <code>onDidReceiveNotificationResponse</code> no se ejecuta. Usa <code>getNotificationAppLaunchDetails()</code> en <code>main()</code> para capturar ese caso.</li></ul><h2 id=aplicación-práctica>Aplicación práctica<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Las notificaciones locales son estándar en: apps de fitness (recordatorio de entrenamiento), apps de aprendizaje (streak diario), gestores de tareas (vencimiento de tareas), apps de salud (recordatorio de medicación).</p><h2 id=siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/testing-recursos/flutter-push-notifications-firebase-ejercicio-resuelto/>Push notifications con Firebase en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/testing-recursos/flutter-preferencias-notificaciones-ejercicio-resuelto/index.html>Preferencias de notificaciones en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/index.html>Todos los ejercicios de Flutter</a></li></ul><h2 id=práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/index.html>Más ejercicios de Flutter</a></li><li><a href=https://amzn.to/41weJIN rel=external>Ver el libro en Amazon (incluido en Kindle Unlimited)</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=flutter_local_notifications-funciona-en-flutter-web>¿<code>flutter_local_notifications</code> funciona en Flutter Web?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>No tiene soporte nativo en Web. Para Web puedes usar la API nativa de notificaciones del navegador (<code>js</code> package) o limitarte a notificaciones push con Firebase.</p><h3 id=cómo-reprogramar-notificaciones-recurrentes>¿Cómo reprogramar notificaciones recurrentes?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Usa <code>periodicallyShow</code> para intervalos fijos (diario, semanal) o llama a <code>zonedSchedule</code> con <code>matchDateTimeComponents</code> para repetir en un horario específico (ej. cada día a las 8:00).</p><h3 id=puedo-mostrar-una-notificación-con-imagen-o-botones-de-acción>¿Puedo mostrar una notificación con imagen o botones de acción?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Sí. En Android usa <code>BigPictureStyleInformation</code> para imágenes y <code>actions</code> en <code>AndroidNotificationDetails</code> para botones. En iOS usa <code>DarwinNotificationAction</code>. Consulta la documentación del paquete para cada plataforma.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> 25 may. 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Buscar (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Buscar</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Buscar...>
+<button class=search-clear type=button data-search-clear title="Borrar búsqueda"><i class="fas fa-fw fa-times" title="Borrar búsqueda"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/index.html><a class=padding href=/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets y UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Formularios y navegación</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> Estado y arquitectura</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/api-async/index.html><a class="padding default-animation" href=/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API y async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistencia y datos</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing y recursos</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li class=parent data-nav-id=/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Herramientas y código</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu><li data-nav-id=/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html>CI/CD con GitHub Actions en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html>Flavors dev, staging y prod en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/herramientas-codigo/flutter-hooks-usestate-useeffect-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/herramientas-codigo/flutter-hooks-usestate-useeffect-ejercicio-resuelto/index.html>flutter_hooks en Flutter: ejercicio resuelto con useState y useEffect</a></li><li data-nav-id=/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html>Freezed y json_serializable en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/herramientas-codigo/flutter-isolates-compute-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/herramientas-codigo/flutter-isolates-compute-ejercicio-resuelto/index.html>Isolates y compute en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/herramientas-codigo/flutter-json-serializable-buildrunner-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/herramientas-codigo/flutter-json-serializable-buildrunner-ejercicio-resuelto/index.html>json_serializable con build_runner en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/herramientas-codigo/flutter-linting-analysis-options-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/herramientas-codigo/flutter-linting-analysis-options-ejercicio-resuelto/index.html>Linting y analysis_options en Flutter: ejercicio resuelto</a></li><li class=active data-nav-id=/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html>Notificaciones locales en Flutter: ejercicio resuelto con flutter_local_notifications</a></li></ul></li><li data-nav-id=/ejercicios/dispositivo/index.html><a class=padding href=/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Dispositivo</a></li><li data-nav-id=/ejercicios/internacionalizacion/index.html><a class=padding href=/ejercicios/internacionalizacion/index.html>Internacionalización</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Idioma</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html lang=es selected data-selected></option><option id=R-select-language-en value=en data-url=/en/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html lang=en></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Tema</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1784002249 defer></script><script src=/js/theme.min.js?1784002249 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>

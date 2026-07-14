@@ -1,0 +1,678 @@
+<!doctype html><html id=R-html lang=en dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Solved Flutter local notifications exercise: flutter_local_notifications, Android channels, scheduled notifications, payload and navigation from notification tap."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="Local notifications in Flutter: solved exercise with flutter_local_notifications :: Flutter en rigle.dev"><meta name=twitter:description content="Solved Flutter local notifications exercise: flutter_local_notifications, Android channels, scheduled notifications, payload and navigation from notification tap."><meta property="og:url" content="https://flutter.rigle.dev/en/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="Local notifications in Flutter: solved exercise with flutter_local_notifications :: Flutter en rigle.dev"><meta property="og:description" content="Solved Flutter local notifications exercise: flutter_local_notifications, Android channels, scheduled notifications, payload and navigation from notification tap."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="Solved Flutter exercises (step by step)"><meta property="article:published_time" content="2026-07-14T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermediate"><meta property="article:tag" content="Notifications"><meta property="article:tag" content="Tools"><meta itemprop=name content="Local notifications in Flutter: solved exercise with flutter_local_notifications :: Flutter en rigle.dev"><meta itemprop=description content="Solved Flutter local notifications exercise: flutter_local_notifications, Android channels, scheduled notifications, payload and navigation from notification tap."><meta itemprop=datePublished content="2026-07-14T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1552"><meta itemprop=keywords content="Intermediate,Notifications,Tools"><title>Local notifications in Flutter: solved exercise with flutter_local_notifications :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1784002251 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1784002251 defer></script><script src=/js/search-lunr.min.js?1784002251 defer></script><script src=/js/search.min.js?1784002251 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.en.js?1784002251"</script><script src=/js/lunr/lunr.min.js?1784002251 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1784002251 defer></script><script src=/js/lunr/lunr.multi.min.js?1784002251 defer></script><script src=/js/lunr/lunr.en.min.js?1784002251 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/fonts/fontawesome/css/all.min.css?1784002251 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1784002251 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1784002251 rel=stylesheet><link href=/css/theme.min.css?1784002251 rel=stylesheet><link href=/css/format-html.min.css?1784002251 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/en/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1784002251 rel=stylesheet></head><body class="mobile-support html" data-origin=/en/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#local-notifications-in-flutter-solved-exercise-with-flutter_local_notifications>Local notifications in Flutter: solved exercise with flutter_local_notifications</a></li><li><a href=#problem-statement>Problem statement</a></li><li><a href=#dependencies>Dependencies</a><ul><li><a href=#android-setup>Android setup</a></li><li><a href=#ios-setup>iOS setup</a></li></ul></li><li><a href=#full-solution>Full solution</a></li><li><a href=#android-channels-quick-guide>Android channels quick guide</a></li><li><a href=#common-mistakes>Common mistakes</a></li><li><a href=#practical-use>Practical use</a></li><li><a href=#recommended-next-exercise>Recommended next exercise</a></li><li><a href=#guided-practice-and-next-step>Guided practice and next step</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#does-flutter_local_notifications-work-on-flutter-web>Does <code>flutter_local_notifications</code> work on Flutter Web?</a></li><li><a href=#how-do-i-schedule-recurring-notifications>How do I schedule recurring notifications?</a></li><li><a href=#can-i-show-a-notification-with-an-image-or-action-buttons>Can I show a notification with an image or action buttons?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/index.html><span itemprop=name>Learn Flutter — solved exercises</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/index.html><span itemprop=name>Exercises</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/herramientas-codigo/index.html><span itemprop=name>Tools & Code</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Local notifications in Flutter: solved exercise with flutter_local_notifications</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/herramientas-codigo/flutter-linting-analysis-options-ejercicio-resuelto/index.html title="Linting and analysis_options in Flutter: solved exercise (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/dispositivo/index.html title="Device (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Tags style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/en/tags/intermediate/index.html>Intermediate</a></li><li><a class=term-link href=/en/tags/notifications/index.html>Notifications</a></li><li><a class=term-link href=/en/tags/tools/index.html>Tools</a></li></ul></div></header><h1 id=local-notifications-in-flutter-solved-exercise-with-flutter_local_notifications>Local notifications in Flutter: solved exercise with flutter_local_notifications</h1><h2 id=local-notifications-in-flutter-solved-exercise-with-flutter_local_notifications>Local notifications in Flutter: solved exercise with flutter_local_notifications<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Local notifications are triggered by the app itself without a server — they are ideal for reminders, alarms, download progress, and any alert that doesn&rsquo;t depend on a backend. <code>flutter_local_notifications</code> is the standard package for this in Flutter.</p><h2 id=problem-statement>Problem statement<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Implement a notification system that:</p><ul><li>Shows an immediate notification with title, body, and icon.</li><li>Schedules a notification for 5 seconds from now.</li><li>When the notification is tapped, navigates to a detail screen passing a payload.</li><li>Creates differentiated notification channels on Android (high and low importance).</li><li>Cancels notifications by ID.</li></ul><h2 id=dependencies>Dependencies<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># pubspec.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>flutter</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>sdk</span><span class=p>:</span><span class=w> </span><span class=l>flutter</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>flutter_local_notifications</span><span class=p>:</span><span class=w> </span><span class=l>^18.0.0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>timezone</span><span class=p>:</span><span class=w> </span><span class=l>^0.9.4</span></span></span></code></pre></td></tr></table></div></div><h3 id=android-setup>Android setup<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>In <code>android/app/src/main/AndroidManifest.xml</code>, inside <code>&lt;manifest></code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.RECEIVE_BOOT_COMPLETED&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.SCHEDULE_EXACT_ALARM&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.POST_NOTIFICATIONS&#34;</span><span class=nt>/&gt;</span></span></span></code></pre></td></tr></table></div></div><p>Inside <code>&lt;application></code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;receiver</span> <span class=na>android:exported=</span><span class=s>&#34;false&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=na>android:name=</span><span class=s>&#34;com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;receiver</span> <span class=na>android:exported=</span><span class=s>&#34;false&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=na>android:name=</span><span class=s>&#34;com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;intent-filter&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;action</span> <span class=na>android:name=</span><span class=s>&#34;android.intent.action.BOOT_COMPLETED&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;/intent-filter&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/receiver&gt;</span></span></span></code></pre></td></tr></table></div></div><h3 id=ios-setup>iOS setup<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>In <code>ios/Runner/Info.plist</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;key&gt;</span>UIBackgroundModes<span class=nt>&lt;/key&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;array&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;string&gt;</span>fetch<span class=nt>&lt;/string&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;string&gt;</span>remote-notification<span class=nt>&lt;/string&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/array&gt;</span></span></span></code></pre></td></tr></table></div></div><h2 id=full-solution>Full solution<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span><span class=lnt>308
+</span><span class=lnt>309
+</span><span class=lnt>310
+</span><span class=lnt>311
+</span><span class=lnt>312
+</span><span class=lnt>313
+</span><span class=lnt>314
+</span><span class=lnt>315
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;dart:async&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter_local_notifications/flutter_local_notifications.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:timezone/data/latest.dart&#39;</span> <span class=k>as</span> <span class=n>tz</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:timezone/timezone.dart&#39;</span> <span class=k>as</span> <span class=n>tz</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Notification service ───────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>NotificationService</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>final</span> <span class=n>NotificationService</span> <span class=n>_instance</span> <span class=o>=</span> <span class=n>NotificationService</span><span class=p>.</span><span class=n>_</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=kd>factory</span> <span class=n>NotificationService</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_instance</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>NotificationService</span><span class=p>.</span><span class=n>_</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>_plugin</span> <span class=o>=</span> <span class=n>FlutterLocalNotificationsPlugin</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Callback to handle notification tap when app is closed
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kt>String</span><span class=o>?</span> <span class=n>pendingPayload</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Android channel IDs
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=n>_channelHighId</span> <span class=o>=</span> <span class=s1>&#39;high_importance&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=n>_channelLowId</span> <span class=o>=</span> <span class=s1>&#39;low_importance&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>initialize</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>tz</span><span class=p>.</span><span class=n>initializeTimeZones</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>const</span> <span class=n>androidSettings</span> <span class=o>=</span> <span class=n>AndroidInitializationSettings</span><span class=p>(</span><span class=s1>&#39;@mipmap/ic_launcher&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=kd>const</span> <span class=n>iosSettings</span> <span class=o>=</span> <span class=n>DarwinInitializationSettings</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>requestAlertPermission:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>requestBadgePermission:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>requestSoundPermission:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_plugin</span><span class=p>.</span><span class=n>initialize</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=kd>const</span> <span class=n>InitializationSettings</span><span class=p>(</span><span class=nl>android:</span> <span class=n>androidSettings</span><span class=p>,</span> <span class=nl>iOS:</span> <span class=n>iosSettings</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>onDidReceiveNotificationResponse:</span> <span class=p>(</span><span class=n>response</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// App is in foreground or background — handle navigation here
+</span></span></span><span class=line><span class=cl>        <span class=n>pendingPayload</span> <span class=o>=</span> <span class=n>response</span><span class=p>.</span><span class=n>payload</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>_navigationKey</span><span class=p>.</span><span class=n>currentState</span>
+</span></span><span class=line><span class=cl>            <span class=o>?</span><span class=p>.</span><span class=n>pushNamed</span><span class=p>(</span><span class=s1>&#39;/detail&#39;</span><span class=p>,</span> <span class=nl>arguments:</span> <span class=n>response</span><span class=p>.</span><span class=n>payload</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// Request permission on Android 13+
+</span></span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_plugin</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>resolvePlatformSpecificImplementation</span><span class=o>&lt;</span>
+</span></span><span class=line><span class=cl>            <span class=n>AndroidFlutterLocalNotificationsPlugin</span><span class=o>&gt;</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=o>?</span><span class=p>.</span><span class=n>requestNotificationsPermission</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// Create Android channels
+</span></span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_createAndroidChannels</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_createAndroidChannels</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>android</span> <span class=o>=</span> <span class=n>_plugin</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>resolvePlatformSpecificImplementation</span><span class=o>&lt;</span>
+</span></span><span class=line><span class=cl>            <span class=n>AndroidFlutterLocalNotificationsPlugin</span><span class=o>&gt;</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>android</span><span class=o>?</span><span class=p>.</span><span class=n>createNotificationChannel</span><span class=p>(</span><span class=kd>const</span> <span class=n>AndroidNotificationChannel</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=n>_channelHighId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;Important notifications&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>description:</span> <span class=s1>&#39;Urgent alerts and reminders&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>importance:</span> <span class=n>Importance</span><span class=p>.</span><span class=n>high</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>playSound:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>android</span><span class=o>?</span><span class=p>.</span><span class=n>createNotificationChannel</span><span class=p>(</span><span class=kd>const</span> <span class=n>AndroidNotificationChannel</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=n>_channelLowId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;Informational notifications&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>description:</span> <span class=s1>&#39;Updates and news&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>importance:</span> <span class=n>Importance</span><span class=p>.</span><span class=n>low</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>playSound:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>));</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Immediate notification
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>showNow</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>int</span> <span class=n>id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>body</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kt>String</span><span class=o>?</span> <span class=n>payload</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kt>bool</span> <span class=n>highImportance</span> <span class=o>=</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>channelId</span> <span class=o>=</span> <span class=n>highImportance</span> <span class=o>?</span> <span class=n>_channelHighId</span> <span class=o>:</span> <span class=n>_channelLowId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>importance</span> <span class=o>=</span> <span class=n>highImportance</span> <span class=o>?</span> <span class=n>Importance</span><span class=p>.</span><span class=n>high</span> <span class=o>:</span> <span class=n>Importance</span><span class=p>.</span><span class=n>low</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>priority</span> <span class=o>=</span> <span class=n>highImportance</span> <span class=o>?</span> <span class=n>Priority</span><span class=p>.</span><span class=n>high</span> <span class=o>:</span> <span class=n>Priority</span><span class=p>.</span><span class=n>defaultPriority</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_plugin</span><span class=p>.</span><span class=n>show</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=n>id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>body</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>NotificationDetails</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>android:</span> <span class=n>AndroidNotificationDetails</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=n>channelId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=n>highImportance</span> <span class=o>?</span> <span class=s1>&#39;Important notifications&#39;</span> <span class=o>:</span> <span class=s1>&#39;Informational notifications&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>importance:</span> <span class=n>importance</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>priority:</span> <span class=n>priority</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>icon:</span> <span class=s1>&#39;@mipmap/ic_launcher&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>iOS:</span> <span class=kd>const</span> <span class=n>DarwinNotificationDetails</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>presentAlert:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>presentBadge:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>presentSound:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>payload:</span> <span class=n>payload</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Scheduled notification (in seconds from now)
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>scheduleAfterSeconds</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>int</span> <span class=n>id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>body</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>int</span> <span class=n>seconds</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kt>String</span><span class=o>?</span> <span class=n>payload</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>scheduledDate</span> <span class=o>=</span> <span class=n>tz</span><span class=p>.</span><span class=n>TZDateTime</span><span class=p>.</span><span class=n>now</span><span class=p>(</span><span class=n>tz</span><span class=p>.</span><span class=n>local</span><span class=p>).</span><span class=n>add</span><span class=p>(</span><span class=n>Duration</span><span class=p>(</span><span class=nl>seconds:</span> <span class=n>seconds</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_plugin</span><span class=p>.</span><span class=n>zonedSchedule</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=n>id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>body</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>scheduledDate</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=kd>const</span> <span class=n>NotificationDetails</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>android:</span> <span class=n>AndroidNotificationDetails</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=n>_channelHighId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=s1>&#39;Important notifications&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>importance:</span> <span class=n>Importance</span><span class=p>.</span><span class=n>high</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>priority:</span> <span class=n>Priority</span><span class=p>.</span><span class=n>high</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>iOS:</span> <span class=n>DarwinNotificationDetails</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>androidScheduleMode:</span> <span class=n>AndroidScheduleMode</span><span class=p>.</span><span class=n>exactAllowWhileIdle</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>uiLocalNotificationDateInterpretation:</span>
+</span></span><span class=line><span class=cl>          <span class=n>UILocalNotificationDateInterpretation</span><span class=p>.</span><span class=n>absoluteTime</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>payload:</span> <span class=n>payload</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Cancel by ID
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>cancel</span><span class=p>(</span><span class=kt>int</span> <span class=n>id</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>_plugin</span><span class=p>.</span><span class=n>cancel</span><span class=p>(</span><span class=n>id</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Cancel all
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>cancelAll</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_plugin</span><span class=p>.</span><span class=n>cancelAll</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Global key for navigation from notification ────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>final</span> <span class=n>_navigationKey</span> <span class=o>=</span> <span class=n>GlobalKey</span><span class=o>&lt;</span><span class=n>NavigatorState</span><span class=o>&gt;</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Main ───────────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>main</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>WidgetsFlutterBinding</span><span class=p>.</span><span class=n>ensureInitialized</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=kd>await</span> <span class=n>NotificationService</span><span class=p>().</span><span class=n>initialize</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Check if app was opened from notification (was closed)
+</span></span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>plugin</span> <span class=o>=</span> <span class=n>FlutterLocalNotificationsPlugin</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>launchDetails</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>plugin</span><span class=p>.</span><span class=n>getNotificationAppLaunchDetails</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=n>launchDetails</span><span class=o>?</span><span class=p>.</span><span class=n>didNotificationLaunchApp</span> <span class=o>==</span> <span class=kc>true</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>NotificationService</span><span class=p>.</span><span class=n>pendingPayload</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>        <span class=n>launchDetails</span><span class=o>!</span><span class=p>.</span><span class=n>notificationResponse</span><span class=o>?</span><span class=p>.</span><span class=n>payload</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>runApp</span><span class=p>(</span><span class=n>MaterialApp</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>navigatorKey:</span> <span class=n>_navigationKey</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>initialRoute:</span> <span class=s1>&#39;/&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>routes:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;/&#39;</span><span class=o>:</span> <span class=p>(</span><span class=n>_</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=kd>const</span> <span class=n>NotificationDemo</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;/detail&#39;</span><span class=o>:</span> <span class=p>(</span><span class=n>ctx</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>DetailPage</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>payload:</span> <span class=n>ModalRoute</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>ctx</span><span class=p>)</span><span class=o>!</span><span class=p>.</span><span class=n>settings</span><span class=p>.</span><span class=n>arguments</span> <span class=o>as</span> <span class=kt>String</span><span class=o>?</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>));</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Main screen ────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>NotificationDemo</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>NotificationDemo</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>NotificationDemo</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_NotificationDemoState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_NotificationDemoState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>NotificationDemo</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>_service</span> <span class=o>=</span> <span class=n>NotificationService</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>_logs</span> <span class=o>=</span> <span class=o>&lt;</span><span class=kt>String</span><span class=o>&gt;</span><span class=p>[];</span>
+</span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>_notifId</span> <span class=o>=</span> <span class=m>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>_log</span><span class=p>(</span><span class=kt>String</span> <span class=n>msg</span><span class=p>)</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_logs</span><span class=p>.</span><span class=n>insert</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=s1>&#39;</span><span class=si>${</span><span class=n>TimeOfDay</span><span class=p>.</span><span class=n>now</span><span class=p>().</span><span class=n>format</span><span class=p>(</span><span class=n>context</span><span class=p>)</span><span class=si>}</span><span class=s1> — </span><span class=si>$</span><span class=n>msg</span><span class=s1>&#39;</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_showImmediate</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>showNow</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>id:</span> <span class=n>_notifId</span><span class=o>++</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>title:</span> <span class=s1>&#39;🔔 Reminder&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=s2>&#34;Don&#39;t forget to check your Flutter exercises!&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>payload:</span> <span class=s1>&#39;payload_immediate_</span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_log</span><span class=p>(</span><span class=s1>&#39;Immediate notification sent (ID </span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>)&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_showScheduled</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>scheduleAfterSeconds</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>id:</span> <span class=n>_notifId</span><span class=o>++</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>title:</span> <span class=s1>&#39;⏰ Scheduled reminder&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=s1>&#39;5 seconds have passed since you scheduled this&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>seconds:</span> <span class=m>5</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>payload:</span> <span class=s1>&#39;payload_scheduled_</span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_log</span><span class=p>(</span><span class=s1>&#39;Notification scheduled in 5 s (ID </span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>)&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_showLow</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>showNow</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>id:</span> <span class=n>_notifId</span><span class=o>++</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>title:</span> <span class=s1>&#39;📰 News&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=s1>&#39;New version of Flutter available&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>highImportance:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>payload:</span> <span class=s1>&#39;payload_low_</span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_log</span><span class=p>(</span><span class=s1>&#39;Low-importance notification (ID </span><span class=si>${</span><span class=n>_notifId</span> <span class=o>-</span> <span class=m>1</span><span class=si>}</span><span class=s1>)&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_cancelAll</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>cancelAll</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>_log</span><span class=p>(</span><span class=s1>&#39;All notifications cancelled&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Local notifications&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>stretch</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=n>FilledButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=n>_showImmediate</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>notifications_active</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Immediate notification (high importance)&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>FilledButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=n>_showScheduled</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>schedule</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Schedule in 5 seconds&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>style:</span> <span class=n>FilledButton</span><span class=p>.</span><span class=n>styleFrom</span><span class=p>(</span><span class=nl>backgroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>orange</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>OutlinedButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=n>_showLow</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>info_outline</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Low-importance notification&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>OutlinedButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=n>_cancelAll</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>cancel</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Cancel all&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>style:</span> <span class=n>OutlinedButton</span><span class=p>.</span><span class=n>styleFrom</span><span class=p>(</span><span class=nl>foregroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Divider</span><span class=p>(</span><span class=nl>height:</span> <span class=m>32</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Action log:&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>_logs</span><span class=p>.</span><span class=n>isEmpty</span>
+</span></span><span class=line><span class=cl>                  <span class=o>?</span> <span class=kd>const</span> <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;No actions logged yet&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                          <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                  <span class=o>:</span> <span class=n>ListView</span><span class=p>.</span><span class=n>builder</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>itemCount:</span> <span class=n>_logs</span><span class=p>.</span><span class=n>length</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>itemBuilder:</span> <span class=p>(</span><span class=n>_</span><span class=p>,</span> <span class=n>i</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>vertical:</span> <span class=m>2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=n>_logs</span><span class=p>[</span><span class=n>i</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>                            <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>13</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                      <span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Detail screen (notification tap destination) ───────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>DetailPage</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span><span class=o>?</span> <span class=n>payload</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>DetailPage</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=n>payload</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Notification detail&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>mainAxisSize:</span> <span class=n>MainAxisSize</span><span class=p>.</span><span class=n>min</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>notifications_active</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>size:</span> <span class=m>64</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>blue</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;You opened the app from a notification&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>18</span><span class=p>,</span> <span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>textAlign:</span> <span class=n>TextAlign</span><span class=p>.</span><span class=n>center</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Received payload: </span><span class=si>${</span><span class=n>payload</span> <span class=o>??</span> <span class=s1>&#39;(none)&#39;</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=android-channels-quick-guide>Android channels quick guide<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Channel</th><th>Importance</th><th>Sound</th><th>Vibration</th><th>Use case</th></tr></thead><tbody><tr><td><code>Importance.max</code></td><td>Urgent</td><td>Yes</td><td>Yes</td><td>Calls, critical alarms</td></tr><tr><td><code>Importance.high</code></td><td>High</td><td>Yes</td><td>Yes</td><td>Messages, reminders</td></tr><tr><td><code>Importance.defaultImportance</code></td><td>Medium</td><td>Yes</td><td>Yes</td><td>General updates</td></tr><tr><td><code>Importance.low</code></td><td>Low</td><td>No</td><td>No</td><td>News, informational</td></tr><tr><td><code>Importance.min</code></td><td>Minimal</td><td>No</td><td>No</td><td>Silent status</td></tr></tbody></table><h2 id=common-mistakes>Common mistakes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong><code>MissingPluginException</code> on initialize</strong>: make sure to call <code>WidgetsFlutterBinding.ensureInitialized()</code> before <code>initialize()</code>. Without this the plugin cannot register.</li><li><strong>Scheduled notifications not arriving on Android</strong>: from Android 12, exact alarms require the <code>SCHEDULE_EXACT_ALARM</code> permission and the user must grant it in Settings. Use <code>AndroidScheduleMode.exactAllowWhileIdle</code> and check permission state.</li><li><strong>Not handling the closed-app case</strong>: when the user taps the notification with the app closed, <code>onDidReceiveNotificationResponse</code> does not run. Use <code>getNotificationAppLaunchDetails()</code> in <code>main()</code> to capture that case.</li></ul><h2 id=practical-use>Practical use<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Local notifications are standard in: fitness apps (workout reminders), learning apps (daily streak), task managers (task due dates), health apps (medication reminders).</p><h2 id=recommended-next-exercise>Recommended next exercise<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/testing-recursos/flutter-push-notifications-firebase-ejercicio-resuelto/>Push notifications with Firebase in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/testing-recursos/flutter-preferencias-notificaciones-ejercicio-resuelto/>Notification preferences in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/>All Flutter exercises</a></li></ul><h2 id=guided-practice-and-next-step>Guided practice and next step<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/>More Flutter exercises</a></li><li><a href=https://www.amazon.com/dp/B0FZ4QHW8L rel=external>View the book on Amazon (included in Kindle Unlimited)</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=does-flutter_local_notifications-work-on-flutter-web>Does <code>flutter_local_notifications</code> work on Flutter Web?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>It has no native Web support. For Web you can use the browser&rsquo;s native Notifications API (via the <code>js</code> package) or limit yourself to push notifications with Firebase.</p><h3 id=how-do-i-schedule-recurring-notifications>How do I schedule recurring notifications?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Use <code>periodicallyShow</code> for fixed intervals (daily, weekly) or call <code>zonedSchedule</code> with <code>matchDateTimeComponents</code> to repeat on a specific schedule (e.g. every day at 8:00 AM).</p><h3 id=can-i-show-a-notification-with-an-image-or-action-buttons>Can I show a notification with an image or action buttons?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Yes. On Android use <code>BigPictureStyleInformation</code> for images and <code>actions</code> in <code>AndroidNotificationDetails</code> for buttons. On iOS use <code>DarwinNotificationAction</code>. Check the package documentation for each platform.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> May 25, 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/en/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/en/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/en/index.html><a class=padding href=/en/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/en/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/en/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets and UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/en/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Forms and navigation</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/en/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> State and architecture</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/api-async/index.html><a class="padding default-animation" href=/en/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API and async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/en/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistence and data</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/en/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing and resources</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li class=parent data-nav-id=/en/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/en/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Tools & Code</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html>CI/CD with GitHub Actions in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html>Flutter Flavors dev, staging and prod: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-hooks-usestate-useeffect-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-hooks-usestate-useeffect-ejercicio-resuelto/index.html>flutter_hooks in Flutter: solved exercise with useState and useEffect</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html>Freezed and json_serializable in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-isolates-compute-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-isolates-compute-ejercicio-resuelto/index.html>Isolates and compute in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-json-serializable-buildrunner-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-json-serializable-buildrunner-ejercicio-resuelto/index.html>json_serializable with build_runner in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-linting-analysis-options-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-linting-analysis-options-ejercicio-resuelto/index.html>Linting and analysis_options in Flutter: solved exercise</a></li><li class=active data-nav-id=/en/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html>Local notifications in Flutter: solved exercise with flutter_local_notifications</a></li></ul></li><li data-nav-id=/en/ejercicios/dispositivo/index.html><a class=padding href=/en/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Device</a></li><li data-nav-id=/en/ejercicios/internacionalizacion/index.html><a class=padding href=/en/ejercicios/internacionalizacion/index.html>Internationalization</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Language</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html lang=es></option><option id=R-select-language-en value=en data-url=/en/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html lang=en selected data-selected></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Theme</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1784002251 defer></script><script src=/js/theme.min.js?1784002251 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
