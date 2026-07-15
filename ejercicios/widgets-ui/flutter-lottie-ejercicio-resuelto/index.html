@@ -1,0 +1,474 @@
+<!doctype html><html id=R-html lang=es dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Ejercicio resuelto de Lottie en Flutter: reproducir animaciones JSON de LottieFiles, controlar velocidad, repetición y sincronizar con interacciones de usuario."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="Lottie en Flutter: ejercicio resuelto con animaciones JSON :: Flutter en rigle.dev"><meta name=twitter:description content="Ejercicio resuelto de Lottie en Flutter: reproducir animaciones JSON de LottieFiles, controlar velocidad, repetición y sincronizar con interacciones de usuario."><meta property="og:url" content="https://flutter.rigle.dev/ejercicios/widgets-ui/flutter-lottie-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="Lottie en Flutter: ejercicio resuelto con animaciones JSON :: Flutter en rigle.dev"><meta property="og:description" content="Ejercicio resuelto de Lottie en Flutter: reproducir animaciones JSON de LottieFiles, controlar velocidad, repetición y sincronizar con interacciones de usuario."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="Ejercicios resueltos de Flutter (paso a paso)"><meta property="article:published_time" content="2026-07-15T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermedio"><meta property="article:tag" content="Animaciones"><meta property="article:tag" content="Lottie"><meta itemprop=name content="Lottie en Flutter: ejercicio resuelto con animaciones JSON :: Flutter en rigle.dev"><meta itemprop=description content="Ejercicio resuelto de Lottie en Flutter: reproducir animaciones JSON de LottieFiles, controlar velocidad, repetición y sincronizar con interacciones de usuario."><meta itemprop=datePublished content="2026-07-15T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1176"><meta itemprop=keywords content="Intermedio,Animaciones,Lottie"><title>Lottie en Flutter: ejercicio resuelto con animaciones JSON :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/widgets-ui/flutter-lottie-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/widgets-ui/flutter-lottie-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/widgets-ui/flutter-lottie-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1784088723 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1784088723 defer></script><script src=/js/search-lunr.min.js?1784088723 defer></script><script src=/js/search.min.js?1784088723 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.es.js?1784088723"</script><script src=/js/lunr/lunr.min.js?1784088723 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1784088723 defer></script><script src=/js/lunr/lunr.multi.min.js?1784088723 defer></script><script src=/js/lunr/lunr.es.min.js?1784088723 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["es"]</script><link href=/fonts/fontawesome/css/all.min.css?1784088723 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1784088723 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1784088723 rel=stylesheet><link href=/css/theme.min.css?1784088723 rel=stylesheet><link href=/css/format-html.min.css?1784088723 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/ejercicios/widgets-ui/flutter-lottie-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copiar texto al portapapeles`,window.T_Copied_to_clipboard=`¡Texto copiado al portapapeles!`,window.T_Link_copied_to_clipboard=`¡Enlace copiado al portapapeles!`,window.T_Reset_view=`Restablecer vista`,window.T_View_reset=`¡Ver reajuste!`,window.T_No_results_found=`No se han encontrado resultados para "{0}"`,window.T_N_results_found=`{1} resultados encontrados para "{0}"`,window.T_Browser_unsupported_feature=`Este navegador no admite esta función`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1784088723 rel=stylesheet></head><body class="mobile-support html" data-origin=/ejercicios/widgets-ui/flutter-lottie-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menú (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Tabla de contenido (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#lottie-en-flutter-ejercicio-resuelto-con-animaciones-json>Lottie en Flutter: ejercicio resuelto con animaciones JSON</a></li><li><a href=#enunciado>Enunciado</a></li><li><a href=#dependencias>Dependencias</a></li><li><a href=#solución-completa>Solución completa</a></li><li><a href=#cómo-funciona-animationcontroller-con-lottie>Cómo funciona <code>AnimationController</code> con Lottie</a></li><li><a href=#errores-frecuentes>Errores frecuentes</a></li><li><a href=#aplicación-práctica>Aplicación práctica</a></li><li><a href=#siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado</a></li><li><a href=#práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#puedo-usar-archivos-lottie-de-lottie-web-en-flutter>¿Puedo usar archivos Lottie de Lottie Web en Flutter?</a></li><li><a href=#lottie-afecta-el-rendimiento>¿Lottie afecta el rendimiento?</a></li><li><a href=#puedo-cambiar-colores-de-la-animación-lottie-desde-flutter>¿Puedo cambiar colores de la animación Lottie desde Flutter?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/index.html><span itemprop=name>Aprende Flutter — ejercicios resueltos</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/index.html><span itemprop=name>Ejercicios</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/widgets-ui/index.html><span itemprop=name>Widgets y UI</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Lottie en Flutter: ejercicio resuelto con animaciones JSON</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/widgets-ui/flutter-hero-navigation-ejercicio-resuelto/index.html title="Hero animations en Flutter: ejercicio resuelto (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html title="Responsive design en Flutter: ejercicio resuelto con LayoutBuilder y MediaQuery (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=Más><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Etiquetas style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/tags/animaciones/index.html>Animaciones</a></li><li><a class=term-link href=/tags/intermedio/index.html>Intermedio</a></li><li><a class=term-link href=/tags/lottie/index.html>Lottie</a></li></ul></div></header><h1 id=lottie-en-flutter-ejercicio-resuelto-con-animaciones-json>Lottie en Flutter: ejercicio resuelto con animaciones JSON</h1><h2 id=lottie-en-flutter-ejercicio-resuelto-con-animaciones-json>Lottie en Flutter: ejercicio resuelto con animaciones JSON<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Lottie es el formato estándar para animaciones vectoriales exportadas desde Adobe After Effects. En Flutter, el paquete <code>lottie</code> permite reproducirlas con un solo widget, con control total sobre velocidad, bucles y sincronización con gestos o estado de la app.</p><h2 id=enunciado>Enunciado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Implementa una app que:</p><ul><li>Reproduce una animación Lottie en bucle con velocidad configurable.</li><li>Permite pausar y reanudar la animación desde un botón.</li><li>Muestra una segunda animación Lottie que responde a un slider (progreso manual).</li><li>Usa <code>AnimationController</code> para sincronizar Lottie con el estado de la app.</li></ul><h2 id=dependencias>Dependencias<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>lottie</span><span class=p>:</span><span class=w> </span><span class=l>^3.1.2</span></span></span></code></pre></td></tr></table></div></div><p>Descarga archivos <code>.json</code> gratuitos desde <a href=https://lottiefiles.com/featured rel=external>LottieFiles</a> y colócalos en <code>assets/animations/</code>.</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># pubspec.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>flutter</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>assets</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>assets/animations/loading.json</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>assets/animations/success.json</span></span></span></code></pre></td></tr></table></div></div><h2 id=solución-completa>Solución completa<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:lottie/lottie.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>MaterialApp</span><span class=p>(</span><span class=nl>home:</span> <span class=n>LottieDemo</span><span class=p>()));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>LottieDemo</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>LottieDemo</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>LottieDemo</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_LottieDemoState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_LottieDemoState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>LottieDemo</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>with</span> <span class=n>TickerProviderStateMixin</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// Controlador para la animación en bucle
+</span></span></span><span class=line><span class=cl>  <span class=n>late</span> <span class=kd>final</span> <span class=n>AnimationController</span> <span class=n>_loopController</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Controlador para la animación manual (slider)
+</span></span></span><span class=line><span class=cl>  <span class=n>late</span> <span class=kd>final</span> <span class=n>AnimationController</span> <span class=n>_manualController</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>double</span> <span class=n>_speed</span> <span class=o>=</span> <span class=m>1.0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kt>double</span> <span class=n>_manualProgress</span> <span class=o>=</span> <span class=m>0.0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kt>bool</span> <span class=n>_isPlaying</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>initState</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>initState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>_loopController</span> <span class=o>=</span> <span class=n>AnimationController</span><span class=p>(</span><span class=nl>vsync:</span> <span class=k>this</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_manualController</span> <span class=o>=</span> <span class=n>AnimationController</span><span class=p>(</span><span class=nl>vsync:</span> <span class=k>this</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>dispose</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>_loopController</span><span class=p>.</span><span class=n>dispose</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>_manualController</span><span class=p>.</span><span class=n>dispose</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>dispose</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>_togglePlayPause</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_isPlaying</span> <span class=o>=</span> <span class=o>!</span><span class=n>_isPlaying</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>_isPlaying</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>_loopController</span><span class=p>.</span><span class=n>forward</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>_loopController</span><span class=p>.</span><span class=n>stop</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>_onSpeedChanged</span><span class=p>(</span><span class=kt>double</span> <span class=n>value</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_speed</span> <span class=o>=</span> <span class=n>value</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_loopController</span><span class=p>.</span><span class=n>duration</span> <span class=o>=</span> <span class=n>_loopController</span><span class=p>.</span><span class=n>duration</span><span class=o>!</span> <span class=o>~/</span>
+</span></span><span class=line><span class=cl>        <span class=n>Duration</span><span class=p>(</span><span class=nl>microseconds:</span> <span class=p>(</span><span class=n>_speed</span> <span class=o>*</span> <span class=m>1000000</span><span class=p>).</span><span class=n>round</span><span class=p>())</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>        <span class=kd>const</span> <span class=n>Duration</span><span class=p>(</span><span class=nl>microseconds:</span> <span class=m>1000000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Forma más sencilla: simplemente recrear con repeat
+</span></span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>_onManualProgressChanged</span><span class=p>(</span><span class=kt>double</span> <span class=n>value</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_manualProgress</span> <span class=o>=</span> <span class=n>value</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_manualController</span><span class=p>.</span><span class=n>value</span> <span class=o>=</span> <span class=n>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Lottie en Flutter&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>SingleChildScrollView</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>stretch</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Animación en bucle ──────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Animación en bucle&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>16</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Lottie</span><span class=p>.</span><span class=n>asset</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;assets/animations/loading.json&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>controller:</span> <span class=n>_loopController</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>height:</span> <span class=m>180</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onLoaded:</span> <span class=p>(</span><span class=n>composition</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// Asignar duración y arrancar en bucle
+</span></span></span><span class=line><span class=cl>                <span class=n>_loopController</span>
+</span></span><span class=line><span class=cl>                  <span class=p>..</span><span class=n>duration</span> <span class=o>=</span> <span class=n>composition</span><span class=p>.</span><span class=n>duration</span>
+</span></span><span class=line><span class=cl>                  <span class=p>..</span><span class=n>repeat</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>              <span class=p>},</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>mainAxisAlignment:</span> <span class=n>MainAxisAlignment</span><span class=p>.</span><span class=n>center</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=n>FilledButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>onPressed:</span> <span class=n>_togglePlayPause</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>_isPlaying</span> <span class=o>?</span> <span class=n>Icons</span><span class=p>.</span><span class=n>pause</span> <span class=o>:</span> <span class=n>Icons</span><span class=p>.</span><span class=n>play_arrow</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>label:</span> <span class=n>Text</span><span class=p>(</span><span class=n>_isPlaying</span> <span class=o>?</span> <span class=s1>&#39;Pausar&#39;</span> <span class=o>:</span> <span class=s1>&#39;Reanudar&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>width:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// Control de velocidad
+</span></span></span><span class=line><span class=cl>                <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Velocidad:&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>SizedBox</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>width:</span> <span class=m>120</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>child:</span> <span class=n>Slider</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>min:</span> <span class=m>0.25</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>max:</span> <span class=m>3.0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>divisions:</span> <span class=m>11</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>label:</span> <span class=s1>&#39;</span><span class=si>${</span><span class=n>_speed</span><span class=p>.</span><span class=n>toStringAsFixed</span><span class=p>(</span><span class=m>2</span><span class=p>)</span><span class=si>}</span><span class=s1>x&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>value:</span> <span class=n>_speed</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>onChanged:</span> <span class=p>(</span><span class=n>v</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                      <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_speed</span> <span class=o>=</span> <span class=n>v</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                      <span class=c1>// Ajustar velocidad cambiando la duración
+</span></span></span><span class=line><span class=cl>                      <span class=kd>final</span> <span class=n>baseDuration</span> <span class=o>=</span> <span class=kd>const</span> <span class=n>Duration</span><span class=p>(</span><span class=nl>milliseconds:</span> <span class=m>2000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                      <span class=n>_loopController</span><span class=p>.</span><span class=n>duration</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>                          <span class=n>baseDuration</span> <span class=o>~/</span> <span class=n>v</span><span class=p>.</span><span class=n>round</span><span class=p>().</span><span class=n>clamp</span><span class=p>(</span><span class=m>1</span><span class=p>,</span> <span class=m>10</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                      <span class=k>if</span> <span class=p>(</span><span class=n>_isPlaying</span><span class=p>)</span> <span class=n>_loopController</span><span class=p>.</span><span class=n>repeat</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>                    <span class=p>},</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>${</span><span class=n>_speed</span><span class=p>.</span><span class=n>toStringAsFixed</span><span class=p>(</span><span class=m>1</span><span class=p>)</span><span class=si>}</span><span class=s1>x&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>],</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Divider</span><span class=p>(</span><span class=nl>height:</span> <span class=m>40</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Animación controlada manualmente ───────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Control manual de frame&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>16</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Lottie</span><span class=p>.</span><span class=n>asset</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;assets/animations/success.json&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>controller:</span> <span class=n>_manualController</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>height:</span> <span class=m>180</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onLoaded:</span> <span class=p>(</span><span class=n>composition</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>_manualController</span><span class=p>.</span><span class=n>duration</span> <span class=o>=</span> <span class=n>composition</span><span class=p>.</span><span class=n>duration</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>              <span class=p>},</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Progreso:&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>child:</span> <span class=n>Slider</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>min:</span> <span class=m>0.0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>max:</span> <span class=m>1.0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>value:</span> <span class=n>_manualProgress</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>onChanged:</span> <span class=n>_onManualProgressChanged</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>${</span><span class=p>(</span><span class=n>_manualProgress</span> <span class=o>*</span> <span class=m>100</span><span class=p>).</span><span class=n>round</span><span class=p>()</span><span class=si>}</span><span class=s1>%&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>],</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Divider</span><span class=p>(</span><span class=nl>height:</span> <span class=m>40</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Lottie desde red (URL) ──────────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Lottie desde URL&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>16</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Lottie</span><span class=p>.</span><span class=n>network</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;https://assets5.lottiefiles.com/packages/lf20_fcfjwiyb.json&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>height:</span> <span class=m>150</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>repeat:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>errorBuilder:</span> <span class=p>(</span><span class=n>_</span><span class=p>,</span> <span class=n>error</span><span class=p>,</span> <span class=n>__</span><span class=p>)</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>                  <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;No se pudo cargar la animación de red&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Divider</span><span class=p>(</span><span class=nl>height:</span> <span class=m>40</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Animación que responde a gestos ─────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Respuesta a tap&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>16</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>_TapLottie</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Widget de Lottie con respuesta a tap ───────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_TapLottie</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>_TapLottie</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_TapLottieState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_TapLottieState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>_TapLottie</span><span class=o>&gt;</span> <span class=kd>with</span> <span class=n>SingleTickerProviderStateMixin</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>late</span> <span class=kd>final</span> <span class=n>AnimationController</span> <span class=n>_controller</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kt>bool</span> <span class=n>_triggered</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>initState</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>initState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>_controller</span> <span class=o>=</span> <span class=n>AnimationController</span><span class=p>(</span><span class=nl>vsync:</span> <span class=k>this</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>dispose</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>_controller</span><span class=p>.</span><span class=n>dispose</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>dispose</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>_onTap</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>_triggered</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>_controller</span><span class=p>.</span><span class=n>reset</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>_controller</span><span class=p>.</span><span class=n>forward</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_triggered</span> <span class=o>=</span> <span class=o>!</span><span class=n>_triggered</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>GestureDetector</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>onTap:</span> <span class=n>_onTap</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>Lottie</span><span class=p>.</span><span class=n>asset</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;assets/animations/success.json&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>controller:</span> <span class=n>_controller</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>height:</span> <span class=m>150</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onLoaded:</span> <span class=p>(</span><span class=n>c</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>_controller</span><span class=p>.</span><span class=n>duration</span> <span class=o>=</span> <span class=n>c</span><span class=p>.</span><span class=n>duration</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=n>_triggered</span> <span class=o>?</span> <span class=s1>&#39;Toca para reiniciar&#39;</span> <span class=o>:</span> <span class=s1>&#39;Toca para animar&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=cómo-funciona-animationcontroller-con-lottie>Cómo funciona <code>AnimationController</code> con Lottie<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Modo</th><th>Código</th><th>Resultado</th></tr></thead><tbody><tr><td>Bucle automático</td><td><code>_controller.repeat()</code></td><td>Animación continua</td></tr><tr><td>Una vez</td><td><code>_controller.forward()</code></td><td>Reproduce y detiene</td></tr><tr><td>Inversa</td><td><code>_controller.reverse()</code></td><td>Reproduce al revés</td></tr><tr><td>Frame manual</td><td><code>_controller.value = 0.5</code></td><td>Salta al 50% de la animación</td></tr><tr><td>Velocidad</td><td>Cambiar <code>_controller.duration</code></td><td>Más corta = más rápida</td></tr></tbody></table><h2 id=errores-frecuentes>Errores frecuentes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>Pantalla negra al cargar Lottie</strong>: el asset no está declarado en <code>pubspec.yaml</code> o la ruta es incorrecta. Verifica <code>flutter pub get</code> y la ruta exacta.</li><li><strong><code>onLoaded</code> nunca se llama</strong>: es normal si usas <code>Lottie.network</code> y no hay conexión. Usa <code>errorBuilder</code> para manejarlo.</li><li><strong>Animación va muy rápida o muy lenta</strong>: debes asignar <code>_controller.duration = composition.duration</code> dentro de <code>onLoaded</code>. Si no lo haces, el controlador usará su duración por defecto (1 segundo).</li></ul><h2 id=aplicación-práctica>Aplicación práctica<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Lottie se usa para: pantallas de carga (loading spinners complejos), estados vacíos animados, celebraciones tras completar una acción, onboarding animado y botones con micro-animaciones.</p><h2 id=siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/widgets-ui/flutter-animation-controller-tween-ejercicio-resuelto/index.html>AnimationController y Tween en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html>Animaciones implícitas en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/index.html>Todos los ejercicios de Flutter</a></li></ul><h2 id=práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/index.html>Más ejercicios de Flutter</a></li><li><a href=https://amzn.to/41weJIN rel=external>Ver el libro en Amazon (incluido en Kindle Unlimited)</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=puedo-usar-archivos-lottie-de-lottie-web-en-flutter>¿Puedo usar archivos Lottie de Lottie Web en Flutter?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Sí. El formato JSON de Lottie es compatible entre plataformas. Descarga el archivo <code>.json</code> desde <a href=https://lottiefiles.com rel=external>LottieFiles</a> y úsalo como asset local o con <code>Lottie.network</code>.</p><h3 id=lottie-afecta-el-rendimiento>¿Lottie afecta el rendimiento?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Las animaciones Lottie simples tienen impacto mínimo. Para animaciones complejas con muchas capas, usa <code>RenderingStrategy.canvas</code> o considera simplificar el archivo en After Effects. Usa Flutter DevTools para verificar el frame rate.</p><h3 id=puedo-cambiar-colores-de-la-animación-lottie-desde-flutter>¿Puedo cambiar colores de la animación Lottie desde Flutter?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>El paquete soporta <code>delegates</code> para <code>LottieDelegates</code> que permiten sobrescribir colores de capas específicas. Úsalo cuando necesites theming dinámico sin modificar el archivo JSON.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> 25 may. 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Buscar (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Buscar</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Buscar...>
+<button class=search-clear type=button data-search-clear title="Borrar búsqueda"><i class="fas fa-fw fa-times" title="Borrar búsqueda"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/index.html><a class=padding href=/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=parent data-nav-id=/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets y UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu><li data-nav-id=/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-animated-container-transitions-ejercicio-resuelto/index.html>Animaciones implícitas en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/widgets-ui/flutter-animation-controller-tween-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-animation-controller-tween-ejercicio-resuelto/index.html>AnimationController y Tween en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/widgets-ui/flutter-custom-painter-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-custom-painter-ejercicio-resuelto/index.html>CustomPainter en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/widgets-ui/flutter-hero-navigation-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-hero-navigation-ejercicio-resuelto/index.html>Hero animations en Flutter: ejercicio resuelto</a></li><li class=active data-nav-id=/ejercicios/widgets-ui/flutter-lottie-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-lottie-ejercicio-resuelto/index.html>Lottie en Flutter: ejercicio resuelto con animaciones JSON</a></li><li data-nav-id=/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-responsive-layout-builder-ejercicio-resuelto/index.html>Responsive design en Flutter: ejercicio resuelto con LayoutBuilder y MediaQuery</a></li><li data-nav-id=/ejercicios/widgets-ui/flutter-sliver-appbar-collapsible-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-sliver-appbar-collapsible-ejercicio-resuelto/index.html>SliverAppBar collapsible en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/widgets-ui/flutter-listas-largas-imagenes-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-listas-largas-imagenes-ejercicio-resuelto/index.html>Listas largas e imagenes en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/widgets-ui/flutter-rendimiento-rebuilds-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-rendimiento-rebuilds-ejercicio-resuelto/index.html>Reducir rebuilds innecesarios en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/widgets-ui/flutter-theme-dark-mode-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-theme-dark-mode-ejercicio-resuelto/index.html>Dark mode en Flutter con ThemeMode: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/widgets-ui/flutter-bottom-navigation-bar-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-bottom-navigation-bar-ejercicio-resuelto/index.html>BottomNavigationBar en Flutter: ejercicio resuelto con IndexedStack</a></li><li data-nav-id=/ejercicios/widgets-ui/flutter-listview-builder-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/widgets-ui/flutter-listview-builder-ejercicio-resuelto/index.html>ListView.builder en Flutter: ejercicio resuelto con lista dinamica</a></li></ul></li><li class=alwaysopen data-nav-id=/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Formularios y navegación</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> Estado y arquitectura</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/api-async/index.html><a class="padding default-animation" href=/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API y async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistencia y datos</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing y recursos</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li data-nav-id=/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Herramientas y código</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu></ul></li><li data-nav-id=/ejercicios/dispositivo/index.html><a class=padding href=/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Dispositivo</a></li><li data-nav-id=/ejercicios/internacionalizacion/index.html><a class=padding href=/ejercicios/internacionalizacion/index.html>Internacionalización</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Idioma</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/widgets-ui/flutter-lottie-ejercicio-resuelto/index.html lang=es selected data-selected></option><option id=R-select-language-en value=en data-url=/en/ejercicios/widgets-ui/flutter-lottie-ejercicio-resuelto/index.html lang=en></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Tema</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1784088723 defer></script><script src=/js/theme.min.js?1784088723 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
