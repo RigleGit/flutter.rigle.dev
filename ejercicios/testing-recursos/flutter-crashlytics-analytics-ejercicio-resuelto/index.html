@@ -1,0 +1,632 @@
+<!doctype html><html id=R-html lang=es dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Ejercicio resuelto de Firebase Crashlytics y Analytics en Flutter: registro de crashes, eventos personalizados, propiedades de usuario, errores no fatales y pantalla de origen."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="Firebase Crashlytics y Analytics en Flutter: ejercicio resuelto :: Flutter en rigle.dev"><meta name=twitter:description content="Ejercicio resuelto de Firebase Crashlytics y Analytics en Flutter: registro de crashes, eventos personalizados, propiedades de usuario, errores no fatales y pantalla de origen."><meta property="og:url" content="https://flutter.rigle.dev/ejercicios/testing-recursos/flutter-crashlytics-analytics-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="Firebase Crashlytics y Analytics en Flutter: ejercicio resuelto :: Flutter en rigle.dev"><meta property="og:description" content="Ejercicio resuelto de Firebase Crashlytics y Analytics en Flutter: registro de crashes, eventos personalizados, propiedades de usuario, errores no fatales y pantalla de origen."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="Ejercicios resueltos de Flutter (paso a paso)"><meta property="article:published_time" content="2026-07-18T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Avanzado"><meta property="article:tag" content="Firebase"><meta property="article:tag" content="Testing"><meta itemprop=name content="Firebase Crashlytics y Analytics en Flutter: ejercicio resuelto :: Flutter en rigle.dev"><meta itemprop=description content="Ejercicio resuelto de Firebase Crashlytics y Analytics en Flutter: registro de crashes, eventos personalizados, propiedades de usuario, errores no fatales y pantalla de origen."><meta itemprop=datePublished content="2026-07-18T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1495"><meta itemprop=keywords content="Avanzado,Firebase,Testing"><title>Firebase Crashlytics y Analytics en Flutter: ejercicio resuelto :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/testing-recursos/flutter-crashlytics-analytics-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/testing-recursos/flutter-crashlytics-analytics-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/testing-recursos/flutter-crashlytics-analytics-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1784347653 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1784347653 defer></script><script src=/js/search-lunr.min.js?1784347653 defer></script><script src=/js/search.min.js?1784347653 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.es.js?1784347653"</script><script src=/js/lunr/lunr.min.js?1784347653 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1784347653 defer></script><script src=/js/lunr/lunr.multi.min.js?1784347653 defer></script><script src=/js/lunr/lunr.es.min.js?1784347653 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["es"]</script><link href=/fonts/fontawesome/css/all.min.css?1784347653 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1784347653 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1784347653 rel=stylesheet><link href=/css/theme.min.css?1784347653 rel=stylesheet><link href=/css/format-html.min.css?1784347653 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/ejercicios/testing-recursos/flutter-crashlytics-analytics-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copiar texto al portapapeles`,window.T_Copied_to_clipboard=`¡Texto copiado al portapapeles!`,window.T_Link_copied_to_clipboard=`¡Enlace copiado al portapapeles!`,window.T_Reset_view=`Restablecer vista`,window.T_View_reset=`¡Ver reajuste!`,window.T_No_results_found=`No se han encontrado resultados para "{0}"`,window.T_N_results_found=`{1} resultados encontrados para "{0}"`,window.T_Browser_unsupported_feature=`Este navegador no admite esta función`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1784347653 rel=stylesheet></head><body class="mobile-support html" data-origin=/ejercicios/testing-recursos/flutter-crashlytics-analytics-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menú (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Tabla de contenido (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#firebase-crashlytics-y-analytics-en-flutter-ejercicio-resuelto>Firebase Crashlytics y Analytics en Flutter: ejercicio resuelto</a></li><li><a href=#enunciado>Enunciado</a></li><li><a href=#dependencias>Dependencias</a></li><li><a href=#configuración-de-androidmanifest-y-infoplist>Configuración de AndroidManifest y Info.plist</a></li><li><a href=#solución-completa>Solución completa</a></li><li><a href=#datos-que-crashlytics-captura-automáticamente>Datos que Crashlytics captura automáticamente</a></li><li><a href=#errores-frecuentes>Errores frecuentes</a></li><li><a href=#aplicación-práctica>Aplicación práctica</a></li><li><a href=#siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado</a></li><li><a href=#práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#puedo-usar-crashlytics-sin-analytics>¿Puedo usar Crashlytics sin Analytics?</a></li><li><a href=#cómo-pruebo-que-crashlytics-funciona-sin-publicar-la-app>¿Cómo pruebo que Crashlytics funciona sin publicar la app?</a></li><li><a href=#puedo-cumplir-el-rgpd-con-firebase-analytics>¿Puedo cumplir el RGPD con Firebase Analytics?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/index.html><span itemprop=name>Aprende Flutter — ejercicios resueltos</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/index.html><span itemprop=name>Ejercicios</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/testing-recursos/index.html><span itemprop=name>Testing y recursos</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Firebase Crashlytics y Analytics en Flutter: ejercicio resuelto</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/testing-recursos/index.html title="Testing y recursos (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/testing-recursos/flutter-flock-vs-flutter/index.html title="Flock vs Flutter 2026: qué es el fork de la comunidad y cuándo usarlo (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=Más><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Etiquetas style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/tags/avanzado/index.html>Avanzado</a></li><li><a class=term-link href=/tags/firebase/index.html>Firebase</a></li><li><a class=term-link href=/tags/testing/index.html>Testing</a></li></ul></div></header><h1 id=firebase-crashlytics-y-analytics-en-flutter-ejercicio-resuelto>Firebase Crashlytics y Analytics en Flutter: ejercicio resuelto</h1><h2 id=firebase-crashlytics-y-analytics-en-flutter-ejercicio-resuelto>Firebase Crashlytics y Analytics en Flutter: ejercicio resuelto<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Crashlytics registra automáticamente los crashes de tu app y los agrupa por causa. Analytics recoge eventos de comportamiento del usuario. Juntos son la base de la observabilidad de cualquier app en producción.</p><h2 id=enunciado>Enunciado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Integra Firebase Crashlytics y Analytics en una app Flutter que:</p><ul><li>Registra crashes y errores no fatales con contexto (keys, logs).</li><li>Lanza un crash de prueba desde la UI.</li><li>Registra eventos de Analytics personalizados.</li><li>Registra la pantalla actual automáticamente al navegar.</li><li>Identifica al usuario autenticado en Crashlytics.</li></ul><h2 id=dependencias>Dependencias<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>firebase_core</span><span class=p>:</span><span class=w> </span><span class=l>^3.13.0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>firebase_crashlytics</span><span class=p>:</span><span class=w> </span><span class=l>^4.3.3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>firebase_analytics</span><span class=p>:</span><span class=w> </span><span class=l>^11.4.4</span></span></span></code></pre></td></tr></table></div></div><p>Inicializa Firebase con FlutterFire CLI:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>flutter pub add firebase_core firebase_crashlytics firebase_analytics
+</span></span><span class=line><span class=cl>flutterfire configure</span></span></code></pre></td></tr></table></div></div><h2 id=configuración-de-androidmanifest-y-infoplist>Configuración de AndroidManifest y Info.plist<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Crashlytics no requiere configuración adicional en el manifiesto. Asegúrate de que el archivo <code>google-services.json</code> (Android) y <code>GoogleService-Info.plist</code> (iOS) estén en las rutas correctas.</p><h2 id=solución-completa>Solución completa<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;dart:async&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:firebase_analytics/firebase_analytics.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:firebase_core/firebase_core.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:firebase_crashlytics/firebase_crashlytics.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/foundation.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Servicio de observabilidad ─────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>ObservabilityService</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>final</span> <span class=n>_crashlytics</span> <span class=o>=</span> <span class=n>FirebaseCrashlytics</span><span class=p>.</span><span class=n>instance</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>final</span> <span class=n>_analytics</span> <span class=o>=</span> <span class=n>FirebaseAnalytics</span><span class=p>.</span><span class=n>instance</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Inicializar y configurar handlers globales de errores
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>initialize</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Pasar todos los errores de Flutter a Crashlytics
+</span></span></span><span class=line><span class=cl>    <span class=n>FlutterError</span><span class=p>.</span><span class=n>onError</span> <span class=o>=</span> <span class=n>_crashlytics</span><span class=p>.</span><span class=n>recordFlutterFatalError</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// Capturar errores async fuera del árbol de widgets
+</span></span></span><span class=line><span class=cl>    <span class=n>PlatformDispatcher</span><span class=p>.</span><span class=n>instance</span><span class=p>.</span><span class=n>onError</span> <span class=o>=</span> <span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>stack</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>_crashlytics</span><span class=p>.</span><span class=n>recordError</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>stack</span><span class=p>,</span> <span class=nl>fatal:</span> <span class=kc>true</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=kc>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// En debug, deshabilitar Crashlytics (solo activo en release)
+</span></span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_crashlytics</span><span class=p>.</span><span class=n>setCrashlyticsCollectionEnabled</span><span class=p>(</span><span class=o>!</span><span class=n>kDebugMode</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// ── Crashlytics ──────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Identifica al usuario para que los crashes aparezcan con su ID
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>setUser</span><span class=p>({</span><span class=kd>required</span> <span class=kt>String</span> <span class=n>userId</span><span class=p>,</span> <span class=kt>String</span><span class=o>?</span> <span class=n>email</span><span class=p>})</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_crashlytics</span><span class=p>.</span><span class=n>setUserIdentifier</span><span class=p>(</span><span class=n>userId</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_crashlytics</span><span class=p>.</span><span class=n>setCustomKey</span><span class=p>(</span><span class=s1>&#39;user_email&#39;</span><span class=p>,</span> <span class=n>email</span> <span class=o>??</span> <span class=s1>&#39;unknown&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Añade contexto antes de una operación crítica
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>setContext</span><span class=p>(</span><span class=kt>String</span> <span class=n>key</span><span class=p>,</span> <span class=kt>String</span> <span class=n>value</span><span class=p>)</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_crashlytics</span><span class=p>.</span><span class=n>setCustomKey</span><span class=p>(</span><span class=n>key</span><span class=p>,</span> <span class=n>value</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Añade un log visible en el informe de crash
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kt>void</span> <span class=n>log</span><span class=p>(</span><span class=kt>String</span> <span class=n>message</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>_crashlytics</span><span class=p>.</span><span class=n>log</span><span class=p>(</span><span class=n>message</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Registra un error no fatal (no mata la app, pero sí aparece en Crashlytics)
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>recordError</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kt>Object</span> <span class=n>error</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>StackTrace</span><span class=o>?</span> <span class=n>stack</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>String</span><span class=o>?</span> <span class=n>reason</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kt>bool</span> <span class=n>fatal</span> <span class=o>=</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_crashlytics</span><span class=p>.</span><span class=n>recordError</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=n>error</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>stack</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>reason:</span> <span class=n>reason</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>fatal:</span> <span class=n>fatal</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// ── Analytics ────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Registra la pantalla actual (llamar al montar cada ruta)
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>setCurrentScreen</span><span class=p>(</span><span class=kt>String</span> <span class=n>screenName</span><span class=p>)</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_analytics</span><span class=p>.</span><span class=n>setCurrentScreen</span><span class=p>(</span><span class=nl>screenName:</span> <span class=n>screenName</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Evento de producto visto
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>logProductView</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>productId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>productName</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>double</span> <span class=n>price</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_analytics</span><span class=p>.</span><span class=n>logViewItem</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>items:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>AnalyticsEventItem</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>itemId:</span> <span class=n>productId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>itemName:</span> <span class=n>productName</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>price:</span> <span class=n>price</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Evento de compra completada
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>logPurchase</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>transactionId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>double</span> <span class=n>value</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>currency</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_analytics</span><span class=p>.</span><span class=n>logPurchase</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>transactionId:</span> <span class=n>transactionId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>value:</span> <span class=n>value</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>currency:</span> <span class=n>currency</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Evento personalizado
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>logEvent</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=kt>String</span> <span class=n>name</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>Map</span><span class=o>&lt;</span><span class=kt>String</span><span class=p>,</span> <span class=kt>Object</span><span class=o>&gt;?</span> <span class=n>parameters</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_analytics</span><span class=p>.</span><span class=n>logEvent</span><span class=p>(</span><span class=nl>name:</span> <span class=n>name</span><span class=p>,</span> <span class=nl>parameters:</span> <span class=n>parameters</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Propiedad de usuario (segmentación en Analytics)
+</span></span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>setUserProperty</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>name</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>value</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_analytics</span><span class=p>.</span><span class=n>setUserProperty</span><span class=p>(</span><span class=nl>name:</span> <span class=n>name</span><span class=p>,</span> <span class=nl>value:</span> <span class=n>value</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Main ───────────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>main</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>WidgetsFlutterBinding</span><span class=p>.</span><span class=n>ensureInitialized</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Capturar errores antes de Firebase.initializeApp
+</span></span></span><span class=line><span class=cl>  <span class=n>runZonedGuarded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=kd>await</span> <span class=n>Firebase</span><span class=p>.</span><span class=n>initializeApp</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>      <span class=kd>await</span> <span class=n>ObservabilityService</span><span class=p>.</span><span class=n>initialize</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=c1>// Simular usuario autenticado
+</span></span></span><span class=line><span class=cl>      <span class=kd>await</span> <span class=n>ObservabilityService</span><span class=p>.</span><span class=n>setUser</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>userId:</span> <span class=s1>&#39;user_12345&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>email:</span> <span class=s1>&#39;demo@flutter.dev&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>CrashlyticsDemo</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>stack</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>FirebaseCrashlytics</span><span class=p>.</span><span class=n>instance</span><span class=p>.</span><span class=n>recordError</span><span class=p>(</span><span class=n>error</span><span class=p>,</span> <span class=n>stack</span><span class=p>,</span> <span class=nl>fatal:</span> <span class=kc>true</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── App ────────────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>CrashlyticsDemo</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>CrashlyticsDemo</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>MaterialApp</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>title:</span> <span class=s1>&#39;Crashlytics + Analytics&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>navigatorObservers:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// Registrar automáticamente la pantalla en Analytics al navegar
+</span></span></span><span class=line><span class=cl>        <span class=n>FirebaseAnalyticsObserver</span><span class=p>(</span><span class=nl>analytics:</span> <span class=n>FirebaseAnalytics</span><span class=p>.</span><span class=n>instance</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=nl>home:</span> <span class=kd>const</span> <span class=n>HomePage</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Pantalla principal ─────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>HomePage</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>HomePage</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>HomePage</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_HomePageState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_HomePageState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>HomePage</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>_logs</span> <span class=o>=</span> <span class=o>&lt;</span><span class=kt>String</span><span class=o>&gt;</span><span class=p>[];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>initState</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>initState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>ObservabilityService</span><span class=p>.</span><span class=n>setCurrentScreen</span><span class=p>(</span><span class=s1>&#39;home&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>ObservabilityService</span><span class=p>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;HomePage montada&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>_addLog</span><span class=p>(</span><span class=kt>String</span> <span class=n>msg</span><span class=p>)</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_logs</span><span class=p>.</span><span class=n>insert</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=s1>&#39;</span><span class=si>${</span><span class=n>DateTime</span><span class=p>.</span><span class=n>now</span><span class=p>().</span><span class=n>toIso8601String</span><span class=p>().</span><span class=n>substring</span><span class=p>(</span><span class=m>11</span><span class=p>,</span> <span class=m>19</span><span class=p>)</span><span class=si>}</span><span class=s1> </span><span class=si>$</span><span class=n>msg</span><span class=s1>&#39;</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_testCrash</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>ObservabilityService</span><span class=p>.</span><span class=n>log</span><span class=p>(</span><span class=s1>&#39;Usuario pulsa crash de prueba&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>ObservabilityService</span><span class=p>.</span><span class=n>setContext</span><span class=p>(</span><span class=s1>&#39;last_action&#39;</span><span class=p>,</span> <span class=s1>&#39;test_crash&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// En release esto enviaría el crash a Crashlytics y cerraría la app
+</span></span></span><span class=line><span class=cl>    <span class=n>FirebaseCrashlytics</span><span class=p>.</span><span class=n>instance</span><span class=p>.</span><span class=n>crash</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>_addLog</span><span class=p>(</span><span class=s1>&#39;Crash de prueba enviado&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_logNonFatal</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>throw</span> <span class=n>StateError</span><span class=p>(</span><span class=s1>&#39;Estado inválido al procesar el pedido #42&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=n>e</span><span class=p>,</span> <span class=n>stack</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=kd>await</span> <span class=n>ObservabilityService</span><span class=p>.</span><span class=n>recordError</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>e</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>stack</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>reason:</span> <span class=s1>&#39;Error al procesar pedido en checkout&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>fatal:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=n>_addLog</span><span class=p>(</span><span class=s1>&#39;Error no fatal registrado en Crashlytics&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_logProductView</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>ObservabilityService</span><span class=p>.</span><span class=n>logProductView</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>productId:</span> <span class=s1>&#39;book_flutter_001&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>productName:</span> <span class=s1>&#39;Flutter en Profundidad&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>price:</span> <span class=m>29.99</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_addLog</span><span class=p>(</span><span class=s1>&#39;Analytics: view_item registrado&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_logPurchase</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>ObservabilityService</span><span class=p>.</span><span class=n>logPurchase</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>transactionId:</span> <span class=s1>&#39;txn_</span><span class=si>${</span><span class=n>DateTime</span><span class=p>.</span><span class=n>now</span><span class=p>().</span><span class=n>millisecondsSinceEpoch</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>value:</span> <span class=m>29.99</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>currency:</span> <span class=s1>&#39;EUR&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_addLog</span><span class=p>(</span><span class=s1>&#39;Analytics: purchase registrado&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_logCustomEvent</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>ObservabilityService</span><span class=p>.</span><span class=n>logEvent</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;tutorial_complete&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>parameters:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;tutorial_id&#39;</span><span class=o>:</span> <span class=s1>&#39;flutter_basics&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;success&#39;</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_addLog</span><span class=p>(</span><span class=s1>&#39;Analytics: tutorial_complete registrado&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_setUserProperty</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>ObservabilityService</span><span class=p>.</span><span class=n>setUserProperty</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>name:</span> <span class=s1>&#39;subscription_plan&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>value:</span> <span class=s1>&#39;premium&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_addLog</span><span class=p>(</span><span class=s1>&#39;Analytics: user property subscription_plan=premium&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Crashlytics + Analytics&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>stretch</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Crashlytics ────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Crashlytics&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>textTheme</span><span class=p>.</span><span class=n>titleMedium</span>
+</span></span><span class=line><span class=cl>                    <span class=o>?</span><span class=p>.</span><span class=n>copyWith</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>colorScheme</span><span class=p>.</span><span class=n>primary</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>FilledButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=n>_logNonFatal</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>warning_amber</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Registrar error no fatal&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>style:</span> <span class=n>FilledButton</span><span class=p>.</span><span class=n>styleFrom</span><span class=p>(</span><span class=nl>backgroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>orange</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>4</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>OutlinedButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span> <span class=n>_testCrash</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>dangerous</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Crash de prueba (solo release)&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>style:</span> <span class=n>OutlinedButton</span><span class=p>.</span><span class=n>styleFrom</span><span class=p>(</span><span class=nl>foregroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Divider</span><span class=p>(</span><span class=nl>height:</span> <span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Analytics ──────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Analytics&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>textTheme</span><span class=p>.</span><span class=n>titleMedium</span>
+</span></span><span class=line><span class=cl>                    <span class=o>?</span><span class=p>.</span><span class=n>copyWith</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>colorScheme</span><span class=p>.</span><span class=n>primary</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Wrap</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>spacing:</span> <span class=m>8</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>runSpacing:</span> <span class=m>8</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=n>FilledButton</span><span class=p>.</span><span class=n>tonal</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>onPressed:</span> <span class=n>_logProductView</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;view_item&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>FilledButton</span><span class=p>.</span><span class=n>tonal</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>onPressed:</span> <span class=n>_logPurchase</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;purchase&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>FilledButton</span><span class=p>.</span><span class=n>tonal</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>onPressed:</span> <span class=n>_logCustomEvent</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;tutorial_complete&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>FilledButton</span><span class=p>.</span><span class=n>tonal</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>onPressed:</span> <span class=n>_setUserProperty</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;user property&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>],</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Divider</span><span class=p>(</span><span class=nl>height:</span> <span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Registro local:&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>textTheme</span><span class=p>.</span><span class=n>labelLarge</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>_logs</span><span class=p>.</span><span class=n>isEmpty</span>
+</span></span><span class=line><span class=cl>                  <span class=o>?</span> <span class=kd>const</span> <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Pulsa un botón para registrar un evento&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                          <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                  <span class=o>:</span> <span class=n>ListView</span><span class=p>.</span><span class=n>builder</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>itemCount:</span> <span class=n>_logs</span><span class=p>.</span><span class=n>length</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>itemBuilder:</span> <span class=p>(</span><span class=n>_</span><span class=p>,</span> <span class=n>i</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>Text</span><span class=p>(</span><span class=n>_logs</span><span class=p>[</span><span class=n>i</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>                          <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>12</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                              <span class=nl>fontFamily:</span> <span class=s1>&#39;monospace&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                    <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=datos-que-crashlytics-captura-automáticamente>Datos que Crashlytics captura automáticamente<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Dato</th><th>Fuente</th></tr></thead><tbody><tr><td>Stack trace</td><td><code>FlutterError.onError</code> + <code>PlatformDispatcher.onError</code></td></tr><tr><td>Versión de app</td><td><code>pubspec.yaml</code> version</td></tr><tr><td>Dispositivo y OS</td><td>SDK de Firebase</td></tr><tr><td>Custom keys</td><td><code>setCustomKey</code></td></tr><tr><td>Logs</td><td><code>log()</code> (últimos 64 KB)</td></tr><tr><td>Usuario</td><td><code>setUserIdentifier</code></td></tr></tbody></table><h2 id=errores-frecuentes>Errores frecuentes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>Crashes no aparecen en la consola Firebase</strong>: Crashlytics solo envía reportes en modo <strong>release</strong>. En debug, usa <code>kDebugMode</code> para evitar colisiones. Espera también hasta 5 minutos para que aparezcan.</li><li><strong>Olvidar <code>runZonedGuarded</code></strong>: los errores async que ocurren fuera del árbol de widgets (timers, isolates) no son capturados por <code>FlutterError.onError</code>. <code>runZonedGuarded</code> los captura todos.</li><li><strong>Enviar datos PII a Analytics</strong>: los eventos de Analytics no deben incluir nombres, emails ni IDs en claro. Usa IDs anonimizados y configura <code>setAnalyticsCollectionEnabled(false)</code> cuando el usuario rechace el consentimiento.</li></ul><h2 id=aplicación-práctica>Aplicación práctica<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Crashlytics + Analytics son el mínimo de observabilidad para cualquier app en producción. Complementa con Firebase Performance para medir tiempos de respuesta de red y rendering.</p><h2 id=siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/testing-recursos/flutter-push-firebase-basico-ejercicio-resuelto/index.html>Push notifications con Firebase en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/testing-recursos/flutter-mock-api-test-ejercicio-resuelto/index.html>Testing unitario con mock en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/index.html>Todos los ejercicios de Flutter</a></li></ul><h2 id=práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/index.html>Más ejercicios de Flutter</a></li><li><a href=https://amzn.to/41weJIN rel=external>Ver el libro en Amazon (incluido en Kindle Unlimited)</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=puedo-usar-crashlytics-sin-analytics>¿Puedo usar Crashlytics sin Analytics?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Sí. Son paquetes independientes aunque complementarios. Puedes instalar solo <code>firebase_crashlytics</code> si no necesitas Analytics.</p><h3 id=cómo-pruebo-que-crashlytics-funciona-sin-publicar-la-app>¿Cómo pruebo que Crashlytics funciona sin publicar la app?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Usa <code>FirebaseCrashlytics.instance.crash()</code> en un build de release local (<code>flutter build apk --release</code>). Abre la app, pulsa el botón y en pocos minutos verás el crash en la consola Firebase.</p><h3 id=puedo-cumplir-el-rgpd-con-firebase-analytics>¿Puedo cumplir el RGPD con Firebase Analytics?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Sí. Desactiva la colección con <code>setAnalyticsCollectionEnabled(false)</code> hasta que el usuario acepte el consentimiento. Usa <code>resetAnalyticsData()</code> si el usuario revoca el consentimiento.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> 25 may. 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Buscar (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Buscar</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Buscar...>
+<button class=search-clear type=button data-search-clear title="Borrar búsqueda"><i class="fas fa-fw fa-times" title="Borrar búsqueda"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/index.html><a class=padding href=/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets y UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Formularios y navegación</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> Estado y arquitectura</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/api-async/index.html><a class="padding default-animation" href=/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API y async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistencia y datos</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=parent data-nav-id=/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing y recursos</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu><li class=active data-nav-id=/ejercicios/testing-recursos/flutter-crashlytics-analytics-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-crashlytics-analytics-ejercicio-resuelto/index.html>Firebase Crashlytics y Analytics en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-flock-vs-flutter/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-flock-vs-flutter/index.html>Flock vs Flutter 2026: qué es el fork de la comunidad y cuándo usarlo</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-vs-kotlin-multiplatform-2026/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-vs-kotlin-multiplatform-2026/index.html>Flutter vs Kotlin Multiplatform 2026: comparativa para apps multiplataforma</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-vs-react-native-2026/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-vs-react-native-2026/index.html>Flutter vs React Native 2026: comparativa actualizada para elegir stack</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-riverpod-vs-bloc-vs-provider-2026/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-riverpod-vs-bloc-vs-provider-2026/index.html>Riverpod 3 vs BLoC 9 vs Provider 2026: cuál gestor de estado elegir en Flutter</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-unit-test-repositorio-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-unit-test-repositorio-ejercicio-resuelto/index.html>Unit test de repositorio con Mocktail en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-integration-test-login-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-integration-test-login-ejercicio-resuelto/index.html>Integration test de login en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-integration-test-listado-detalle-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-integration-test-listado-detalle-ejercicio-resuelto/index.html>Integration test listado-detalle: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-mock-api-test-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-mock-api-test-ejercicio-resuelto/index.html>Mock API en tests de Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-preferencias-notificaciones-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-preferencias-notificaciones-ejercicio-resuelto/index.html>Preferencias de notificaciones en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-profiling-jank-devtools-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-profiling-jank-devtools-ejercicio-resuelto/index.html>Profiling de jank con DevTools: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-push-deep-link-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-push-deep-link-ejercicio-resuelto/index.html>Push con deep link a pantalla: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-push-firebase-basico-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-push-firebase-basico-ejercicio-resuelto/index.html>Push notifications con Firebase: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-ai-ideas-practicas/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-ai-ideas-practicas/index.html>Flutter + IA: 5 ideas prácticas para crear apps útiles</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-android-web-windows-comparativa/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-android-web-windows-comparativa/index.html>Flutter Android, Web o Windows: comparativa práctica para elegir plataforma</a></li><li data-nav-id=/ejercicios/testing-recursos/flutter-widget-test-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/testing-recursos/flutter-widget-test-ejercicio-resuelto/index.html>Widget test en Flutter: ejercicio resuelto para testear UI</a></li></ul></li><li data-nav-id=/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Herramientas y código</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu></ul></li><li data-nav-id=/ejercicios/dispositivo/index.html><a class=padding href=/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Dispositivo</a></li><li data-nav-id=/ejercicios/internacionalizacion/index.html><a class=padding href=/ejercicios/internacionalizacion/index.html>Internacionalización</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Idioma</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/testing-recursos/flutter-crashlytics-analytics-ejercicio-resuelto/index.html lang=es selected data-selected></option><option id=R-select-language-en value=en data-url=/en/ejercicios/testing-recursos/flutter-crashlytics-analytics-ejercicio-resuelto/index.html lang=en></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Tema</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1784347653 defer></script><script src=/js/theme.min.js?1784347653 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
