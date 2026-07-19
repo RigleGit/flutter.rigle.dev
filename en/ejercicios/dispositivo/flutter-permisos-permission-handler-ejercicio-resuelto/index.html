@@ -1,0 +1,658 @@
+<!doctype html><html id=R-html lang=en dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Solved permission_handler Flutter exercise: request camera, microphone and location permissions, handle permanent denial, and redirect to system settings."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="permission_handler in Flutter: solved exercise with full permissions flow :: Flutter en rigle.dev"><meta name=twitter:description content="Solved permission_handler Flutter exercise: request camera, microphone and location permissions, handle permanent denial, and redirect to system settings."><meta property="og:url" content="https://flutter.rigle.dev/en/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="permission_handler in Flutter: solved exercise with full permissions flow :: Flutter en rigle.dev"><meta property="og:description" content="Solved permission_handler Flutter exercise: request camera, microphone and location permissions, handle permanent denial, and redirect to system settings."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="Solved Flutter exercises (step by step)"><meta property="article:published_time" content="2026-07-19T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermediate"><meta property="article:tag" content="Permissions"><meta property="article:tag" content="Device"><meta itemprop=name content="permission_handler in Flutter: solved exercise with full permissions flow :: Flutter en rigle.dev"><meta itemprop=description content="Solved permission_handler Flutter exercise: request camera, microphone and location permissions, handle permanent denial, and redirect to system settings."><meta itemprop=datePublished content="2026-07-19T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1569"><meta itemprop=keywords content="Intermediate,Permissions,Device"><title>permission_handler in Flutter: solved exercise with full permissions flow :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1784435315 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1784435315 defer></script><script src=/js/search-lunr.min.js?1784435315 defer></script><script src=/js/search.min.js?1784435315 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.en.js?1784435315"</script><script src=/js/lunr/lunr.min.js?1784435315 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1784435315 defer></script><script src=/js/lunr/lunr.multi.min.js?1784435315 defer></script><script src=/js/lunr/lunr.en.min.js?1784435315 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/fonts/fontawesome/css/all.min.css?1784435315 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1784435315 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1784435315 rel=stylesheet><link href=/css/theme.min.css?1784435315 rel=stylesheet><link href=/css/format-html.min.css?1784435315 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/en/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1784435315 rel=stylesheet></head><body class="mobile-support html" data-origin=/en/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#permission_handler-in-flutter-solved-exercise-with-full-permissions-flow>permission_handler in Flutter: solved exercise with full permissions flow</a></li><li><a href=#problem-statement>Problem statement</a></li><li><a href=#dependencies>Dependencies</a><ul><li><a href=#android-setup>Android setup</a></li><li><a href=#ios-setup>iOS setup</a></li></ul></li><li><a href=#full-solution>Full solution</a></li><li><a href=#recommended-permissions-flow>Recommended permissions flow</a></li><li><a href=#common-mistakes>Common mistakes</a></li><li><a href=#practical-use>Practical use</a></li><li><a href=#recommended-next-exercise>Recommended next exercise</a></li><li><a href=#guided-practice-and-next-step>Guided practice and next step</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#can-i-request-permissions-before-the-user-reaches-the-screen-that-needs-them>Can I request permissions before the user reaches the screen that needs them?</a></li><li><a href=#does-permission_handler-work-on-web-and-desktop>Does <code>permission_handler</code> work on Web and Desktop?</a></li><li><a href=#what-is-the-difference-between-denied-and-permanentlydenied>What is the difference between <code>denied</code> and <code>permanentlyDenied</code>?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/index.html><span itemprop=name>Learn Flutter — solved exercises</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/index.html><span itemprop=name>Exercises</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/dispositivo/index.html><span itemprop=name>Device</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>permission_handler in Flutter: solved exercise with full permissions flow</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/dispositivo/index.html title="Device (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/herramientas-codigo/index.html title="Flutter Tools and Productivity (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Tags style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/en/tags/device/index.html>Device</a></li><li><a class=term-link href=/en/tags/intermediate/index.html>Intermediate</a></li><li><a class=term-link href=/en/tags/permissions/index.html>Permissions</a></li></ul></div></header><h1 id=permission_handler-in-flutter-solved-exercise-with-full-permissions-flow>permission_handler in Flutter: solved exercise with full permissions flow</h1><h2 id=permission_handler-in-flutter-solved-exercise-with-full-permissions-flow>permission_handler in Flutter: solved exercise with full permissions flow<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Requesting permissions correctly is one of the leading sources of poor user experience in mobile apps. <code>permission_handler</code> provides a unified API to request and check permissions on Android and iOS, handle the <code>permanentlyDenied</code> state, and open system settings.</p><h2 id=problem-statement>Problem statement<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Implement a permissions flow that:</p><ul><li>Checks camera, microphone, and location permission status before requesting.</li><li>Shows the user context before the system dialog.</li><li>Handles all four states: <code>granted</code>, <code>denied</code>, <code>permanentlyDenied</code>, <code>restricted</code>.</li><li>Redirects to system settings when a permission is permanently denied.</li><li>Requests multiple permissions at once.</li></ul><h2 id=dependencies>Dependencies<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>permission_handler</span><span class=p>:</span><span class=w> </span><span class=l>^11.3.1</span></span></span></code></pre></td></tr></table></div></div><h3 id=android-setup>Android setup<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>In <code>android/app/src/main/AndroidManifest.xml</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.CAMERA&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.RECORD_AUDIO&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.ACCESS_FINE_LOCATION&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.ACCESS_COARSE_LOCATION&#34;</span><span class=nt>/&gt;</span></span></span></code></pre></td></tr></table></div></div><h3 id=ios-setup>iOS setup<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>In <code>ios/Runner/Info.plist</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;key&gt;</span>NSCameraUsageDescription<span class=nt>&lt;/key&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;string&gt;</span>We need camera access to scan documents<span class=nt>&lt;/string&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;key&gt;</span>NSMicrophoneUsageDescription<span class=nt>&lt;/key&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;string&gt;</span>We need the microphone to record voice notes<span class=nt>&lt;/string&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;key&gt;</span>NSLocationWhenInUseUsageDescription<span class=nt>&lt;/key&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;string&gt;</span>We use your location to show nearby stores<span class=nt>&lt;/string&gt;</span></span></span></code></pre></td></tr></table></div></div><h2 id=full-solution>Full solution<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span><span class=lnt>308
+</span><span class=lnt>309
+</span><span class=lnt>310
+</span><span class=lnt>311
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:permission_handler/permission_handler.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>MaterialApp</span><span class=p>(</span><span class=nl>home:</span> <span class=n>PermissionsDemo</span><span class=p>()));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Permission definitions with metadata ───────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>PermissionItem</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>Permission</span> <span class=n>permission</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>IconData</span> <span class=n>icon</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>rationale</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>PermissionItem</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>permission</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>name</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>icon</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>rationale</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>const</span> <span class=n>_permissions</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>  <span class=n>PermissionItem</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>permission:</span> <span class=n>Permission</span><span class=p>.</span><span class=n>camera</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>name:</span> <span class=s1>&#39;Camera&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>icon:</span> <span class=n>Icons</span><span class=p>.</span><span class=n>camera_alt</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>rationale:</span> <span class=s1>&#39;We need camera access to scan documents and QR codes.&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>PermissionItem</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>permission:</span> <span class=n>Permission</span><span class=p>.</span><span class=n>microphone</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>name:</span> <span class=s1>&#39;Microphone&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>icon:</span> <span class=n>Icons</span><span class=p>.</span><span class=n>mic</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>rationale:</span> <span class=s1>&#39;We use the microphone to record voice notes.&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>PermissionItem</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>permission:</span> <span class=n>Permission</span><span class=p>.</span><span class=n>locationWhenInUse</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>name:</span> <span class=s1>&#39;Location&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>icon:</span> <span class=n>Icons</span><span class=p>.</span><span class=n>location_on</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nl>rationale:</span> <span class=s1>&#39;Your location lets us show you nearby stores.&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Main screen ────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>PermissionsDemo</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>PermissionsDemo</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>PermissionsDemo</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_PermissionsDemoState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_PermissionsDemoState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>PermissionsDemo</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>with</span> <span class=n>WidgetsBindingObserver</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>_statuses</span> <span class=o>=</span> <span class=o>&lt;</span><span class=n>Permission</span><span class=p>,</span> <span class=n>PermissionStatus</span><span class=o>&gt;</span><span class=p>{};</span>
+</span></span><span class=line><span class=cl>  <span class=kt>bool</span> <span class=n>_loading</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>initState</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>initState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>WidgetsBinding</span><span class=p>.</span><span class=n>instance</span><span class=p>.</span><span class=n>addObserver</span><span class=p>(</span><span class=k>this</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_checkAll</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>dispose</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>WidgetsBinding</span><span class=p>.</span><span class=n>instance</span><span class=p>.</span><span class=n>removeObserver</span><span class=p>(</span><span class=k>this</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>dispose</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Refresh statuses when returning from system Settings
+</span></span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>didChangeAppLifecycleState</span><span class=p>(</span><span class=n>AppLifecycleState</span> <span class=n>state</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>state</span> <span class=o>==</span> <span class=n>AppLifecycleState</span><span class=p>.</span><span class=n>resumed</span><span class=p>)</span> <span class=n>_checkAll</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_checkAll</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_loading</span> <span class=o>=</span> <span class=kc>true</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>results</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>Future</span><span class=p>.</span><span class=n>wait</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=n>_permissions</span><span class=p>.</span><span class=n>map</span><span class=p>((</span><span class=n>p</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>p</span><span class=p>.</span><span class=n>permission</span><span class=p>.</span><span class=n>status</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>for</span> <span class=p>(</span><span class=kd>var</span> <span class=n>i</span> <span class=o>=</span> <span class=m>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>_permissions</span><span class=p>.</span><span class=n>length</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>_statuses</span><span class=p>[</span><span class=n>_permissions</span><span class=p>[</span><span class=n>i</span><span class=p>].</span><span class=n>permission</span><span class=p>]</span> <span class=o>=</span> <span class=n>results</span><span class=p>[</span><span class=n>i</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=n>_loading</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_requestPermission</span><span class=p>(</span><span class=n>PermissionItem</span> <span class=n>item</span><span class=p>)</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>current</span> <span class=o>=</span> <span class=n>_statuses</span><span class=p>[</span><span class=n>item</span><span class=p>.</span><span class=n>permission</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>current</span> <span class=o>==</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=n>permanentlyDenied</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>_showPermanentlyDeniedDialog</span><span class=p>(</span><span class=n>item</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>current</span> <span class=o>!=</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=n>granted</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=kd>final</span> <span class=n>proceed</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>_showRationaleDialog</span><span class=p>(</span><span class=n>item</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>proceed</span><span class=p>)</span> <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>status</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>item</span><span class=p>.</span><span class=n>permission</span><span class=p>.</span><span class=n>request</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_statuses</span><span class=p>[</span><span class=n>item</span><span class=p>.</span><span class=n>permission</span><span class=p>]</span> <span class=o>=</span> <span class=n>status</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>status</span> <span class=o>==</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=n>permanentlyDenied</span> <span class=o>&amp;&amp;</span> <span class=n>mounted</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>_showPermanentlyDeniedDialog</span><span class=p>(</span><span class=n>item</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_requestAll</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>notGranted</span> <span class=o>=</span> <span class=n>_permissions</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>where</span><span class=p>((</span><span class=n>p</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>_statuses</span><span class=p>[</span><span class=n>p</span><span class=p>.</span><span class=n>permission</span><span class=p>]</span> <span class=o>!=</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=n>granted</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>toList</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>notGranted</span><span class=p>.</span><span class=n>isEmpty</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>ScaffoldMessenger</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>showSnackBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=kd>const</span> <span class=n>SnackBar</span><span class=p>(</span><span class=nl>content:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;All permissions already granted ✅&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>results</span> <span class=o>=</span> <span class=kd>await</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=k>for</span> <span class=p>(</span><span class=kd>final</span> <span class=n>p</span> <span class=k>in</span> <span class=n>notGranted</span><span class=p>)</span> <span class=n>p</span><span class=p>.</span><span class=n>permission</span>
+</span></span><span class=line><span class=cl>    <span class=p>].</span><span class=n>request</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>for</span> <span class=p>(</span><span class=kd>final</span> <span class=n>entry</span> <span class=k>in</span> <span class=n>results</span><span class=p>.</span><span class=n>entries</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>_statuses</span><span class=p>[</span><span class=n>entry</span><span class=p>.</span><span class=n>key</span><span class=p>]</span> <span class=o>=</span> <span class=n>entry</span><span class=p>.</span><span class=n>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>denied</span> <span class=o>=</span> <span class=n>results</span><span class=p>.</span><span class=n>entries</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>where</span><span class=p>((</span><span class=n>e</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>e</span><span class=p>.</span><span class=n>value</span> <span class=o>==</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=n>permanentlyDenied</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>toList</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>denied</span><span class=p>.</span><span class=n>isNotEmpty</span> <span class=o>&amp;&amp;</span> <span class=n>mounted</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>ScaffoldMessenger</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>showSnackBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>SnackBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>content:</span> <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;</span><span class=si>${</span><span class=n>denied</span><span class=p>.</span><span class=n>length</span><span class=si>}</span><span class=s1> permission(s) permanently denied. &#39;</span>
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;Go to Settings to enable them.&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>action:</span> <span class=n>SnackBarAction</span><span class=p>(</span><span class=nl>label:</span> <span class=s1>&#39;Settings&#39;</span><span class=p>,</span> <span class=nl>onPressed:</span> <span class=n>openAppSettings</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>bool</span><span class=o>&gt;</span> <span class=n>_showRationaleDialog</span><span class=p>(</span><span class=n>PermissionItem</span> <span class=n>item</span><span class=p>)</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kd>await</span> <span class=n>showDialog</span><span class=o>&lt;</span><span class=kt>bool</span><span class=o>&gt;</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>context:</span> <span class=n>context</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>builder:</span> <span class=p>(</span><span class=n>ctx</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>AlertDialog</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>title:</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=n>Icon</span><span class=p>(</span><span class=n>item</span><span class=p>.</span><span class=n>icon</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>width:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Permission: </span><span class=si>${</span><span class=n>item</span><span class=p>.</span><span class=n>name</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>],</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>content:</span> <span class=n>Text</span><span class=p>(</span><span class=n>item</span><span class=p>.</span><span class=n>rationale</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>actions:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=n>TextButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>Navigator</span><span class=p>.</span><span class=n>pop</span><span class=p>(</span><span class=n>ctx</span><span class=p>,</span> <span class=kc>false</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Not now&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=n>FilledButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>Navigator</span><span class=p>.</span><span class=n>pop</span><span class=p>(</span><span class=n>ctx</span><span class=p>,</span> <span class=kc>true</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Continue&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>)</span> <span class=o>??</span>
+</span></span><span class=line><span class=cl>        <span class=kc>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>_showPermanentlyDeniedDialog</span><span class=p>(</span><span class=n>PermissionItem</span> <span class=n>item</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>showDialog</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>context:</span> <span class=n>context</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>builder:</span> <span class=p>(</span><span class=n>ctx</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>AlertDialog</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Permission permanently denied&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>content:</span> <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=s1>&#39;The &#34;</span><span class=si>${</span><span class=n>item</span><span class=p>.</span><span class=n>name</span><span class=si>}</span><span class=s1>&#34; permission was permanently denied. &#39;</span>
+</span></span><span class=line><span class=cl>          <span class=s1>&#39;To enable it, go to Settings &gt; Apps &gt; </span><span class=si>${</span><span class=n>item</span><span class=p>.</span><span class=n>name</span><span class=si>}</span><span class=s1>.&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>actions:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>TextButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>Navigator</span><span class=p>.</span><span class=n>pop</span><span class=p>(</span><span class=n>ctx</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Cancel&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>FilledButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onPressed:</span> <span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=n>Navigator</span><span class=p>.</span><span class=n>pop</span><span class=p>(</span><span class=n>ctx</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>              <span class=n>openAppSettings</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>            <span class=p>},</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Open Settings&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Permissions with permission_handler&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>actions:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>IconButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>refresh</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>tooltip:</span> <span class=s1>&#39;Check statuses&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onPressed:</span> <span class=n>_checkAll</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>_loading</span>
+</span></span><span class=line><span class=cl>          <span class=o>?</span> <span class=kd>const</span> <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>CircularProgressIndicator</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>          <span class=o>:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>stretch</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                  <span class=p>...</span><span class=n>List</span><span class=p>.</span><span class=n>generate</span><span class=p>(</span><span class=n>_permissions</span><span class=p>.</span><span class=n>length</span><span class=p>,</span> <span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                    <span class=kd>final</span> <span class=n>item</span> <span class=o>=</span> <span class=n>_permissions</span><span class=p>[</span><span class=n>i</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>                    <span class=kd>final</span> <span class=n>status</span> <span class=o>=</span> <span class=n>_statuses</span><span class=p>[</span><span class=n>item</span><span class=p>.</span><span class=n>permission</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>                    <span class=k>return</span> <span class=n>Card</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>margin:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>only</span><span class=p>(</span><span class=nl>bottom:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>child:</span> <span class=n>ListTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>leading:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>item</span><span class=p>.</span><span class=n>icon</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>_statusColor</span><span class=p>(</span><span class=n>status</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>title:</span> <span class=n>Text</span><span class=p>(</span><span class=n>item</span><span class=p>.</span><span class=n>name</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>subtitle:</span> <span class=n>Text</span><span class=p>(</span><span class=n>_statusLabel</span><span class=p>(</span><span class=n>status</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>trailing:</span> <span class=n>_StatusChip</span><span class=p>(</span><span class=nl>status:</span> <span class=n>status</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>onTap:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_requestPermission</span><span class=p>(</span><span class=n>item</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                      <span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=p>);</span>
+</span></span><span class=line><span class=cl>                  <span class=p>}),</span>
+</span></span><span class=line><span class=cl>                  <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=n>FilledButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>onPressed:</span> <span class=n>_requestAll</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>shield</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Request all permissions&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=n>OutlinedButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>onPressed:</span> <span class=n>openAppSettings</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>settings</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Open system settings&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=kd>const</span> <span class=n>Spacer</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>                  <span class=kd>const</span> <span class=n>_Legend</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>                <span class=p>],</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Color</span> <span class=n>_statusColor</span><span class=p>(</span><span class=n>PermissionStatus</span><span class=o>?</span> <span class=n>s</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>switch</span> <span class=p>(</span><span class=n>s</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=nl>granted:</span> <span class=k>return</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=nl>denied:</span> <span class=k>return</span> <span class=n>Colors</span><span class=p>.</span><span class=n>orange</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=nl>permanentlyDenied:</span> <span class=k>return</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>default</span><span class=o>:</span> <span class=k>return</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>String</span> <span class=n>_statusLabel</span><span class=p>(</span><span class=n>PermissionStatus</span><span class=o>?</span> <span class=n>s</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>switch</span> <span class=p>(</span><span class=n>s</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=nl>granted:</span> <span class=k>return</span> <span class=s1>&#39;Granted — tap to revoke in Settings&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=nl>denied:</span> <span class=k>return</span> <span class=s1>&#39;Denied — tap to request&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=nl>permanentlyDenied:</span> <span class=k>return</span> <span class=s1>&#39;Permanently denied — tap to open Settings&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=nl>restricted:</span> <span class=k>return</span> <span class=s1>&#39;Restricted by device policy&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=n>PermissionStatus</span><span class=p>.</span><span class=nl>limited:</span> <span class=k>return</span> <span class=s1>&#39;Limited access (iOS)&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>default</span><span class=o>:</span> <span class=k>return</span> <span class=s1>&#39;Unknown status&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_StatusChip</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>PermissionStatus</span><span class=o>?</span> <span class=n>status</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_StatusChip</span><span class=p>({</span><span class=k>this</span><span class=p>.</span><span class=n>status</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=n>color</span><span class=p>)</span> <span class=o>=</span> <span class=k>switch</span> <span class=p>(</span><span class=n>status</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>PermissionStatus</span><span class=p>.</span><span class=n>granted</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=s1>&#39;✅ OK&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>PermissionStatus</span><span class=p>.</span><span class=n>denied</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=s1>&#39;⚠️ Denied&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>orange</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>PermissionStatus</span><span class=p>.</span><span class=n>permanentlyDenied</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=s1>&#39;🚫 Perm.&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>PermissionStatus</span><span class=p>.</span><span class=n>restricted</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=s1>&#39;🔒 Restr.&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>_</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=s1>&#39;❓&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Chip</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>label:</span> <span class=n>Text</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>11</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>backgroundColor:</span> <span class=n>color</span><span class=p>.</span><span class=n>withOpacity</span><span class=p>(</span><span class=m>0.1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>side:</span> <span class=n>BorderSide</span><span class=p>(</span><span class=nl>color:</span> <span class=n>color</span><span class=p>.</span><span class=n>withOpacity</span><span class=p>(</span><span class=m>0.3</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>padding:</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>zero</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>visualDensity:</span> <span class=n>VisualDensity</span><span class=p>.</span><span class=n>compact</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_Legend</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_Legend</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Permission statuses:&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>textTheme</span><span class=p>.</span><span class=n>labelMedium</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>4</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;✅ granted — access granted&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>12</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>        <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;⚠️ denied — denied (can ask again)&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>12</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>        <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;🚫 permanentlyDenied — only via Settings&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>12</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>        <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;🔒 restricted — blocked by MDM/parental controls&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>12</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=recommended-permissions-flow>Recommended permissions flow<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>check() → granted? → use feature
+</span></span><span class=line><span class=cl>        → denied? → show rationale → request() → granted/denied/permanentlyDenied
+</span></span><span class=line><span class=cl>        → permanentlyDenied? → openAppSettings()
+</span></span><span class=line><span class=cl>        → restricted? → show explanatory message</span></span></code></pre></td></tr></table></div></div><h2 id=common-mistakes>Common mistakes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>Not declaring the permission in AndroidManifest or Info.plist</strong>: the plugin returns <code>denied</code> even though the user never saw a dialog. Always check the native config files first.</li><li><strong>Not refreshing status when returning from Settings</strong>: when the user enables a permission in system Settings and returns to the app, the status is not updated automatically. Use <code>WidgetsBindingObserver.didChangeAppLifecycleState</code> to refresh.</li><li><strong>Showing the system dialog without prior context</strong>: Apple and Google may reject your app if you request permissions without first explaining why you need them. Always show a rationale before the native dialog.</li></ul><h2 id=practical-use>Practical use<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Any app using camera, location, microphone, notifications, contacts, or Bluetooth needs this flow. It is especially critical in health and fintech apps where permissions are auditable.</p><h2 id=recommended-next-exercise>Recommended next exercise<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/>Biometrics with local_auth in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/dispositivo/flutter-camera-ejercicio-resuelto/>Camera in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/>All Flutter exercises</a></li></ul><h2 id=guided-practice-and-next-step>Guided practice and next step<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/>More Flutter exercises</a></li><li><a href=https://www.amazon.com/dp/B0FZ4QHW8L rel=external>View the book on Amazon (included in Kindle Unlimited)</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=can-i-request-permissions-before-the-user-reaches-the-screen-that-needs-them>Can I request permissions before the user reaches the screen that needs them?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Not recommended. Request permissions just before the action that requires them, with a clear rationale. Requesting them at app launch drastically reduces grant rates.</p><h3 id=does-permission_handler-work-on-web-and-desktop>Does <code>permission_handler</code> work on Web and Desktop?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>It has limited support. On Web some permissions are managed by the browser. On Desktop (Windows/macOS/Linux) support varies by platform and permission.</p><h3 id=what-is-the-difference-between-denied-and-permanentlydenied>What is the difference between <code>denied</code> and <code>permanentlyDenied</code>?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><code>denied</code> means the user rejected the dialog but can be asked again. <code>permanentlyDenied</code> (Android: &ldquo;Don&rsquo;t ask again&rdquo;) means the system will no longer show the dialog — only <code>openAppSettings()</code> can resolve it.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> May 25, 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/en/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/en/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/en/index.html><a class=padding href=/en/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/en/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/en/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets and UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/en/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Forms and navigation</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/en/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> State and architecture</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/api-async/index.html><a class="padding default-animation" href=/en/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API and async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/en/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistence and data</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/en/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing and resources</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li class=parent data-nav-id=/en/ejercicios/dispositivo/index.html><a class="padding default-animation" href=/en/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Device</a><ul id=R-subsections-bff77604e23f257e9d87870fab19bd83 class=collapsible-menu><li class=active data-nav-id=/en/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html>permission_handler in Flutter: solved exercise with full permissions flow</a></li></ul></li><li data-nav-id=/en/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/en/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Tools & Code</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu></ul></li><li data-nav-id=/en/ejercicios/internacionalizacion/index.html><a class=padding href=/en/ejercicios/internacionalizacion/index.html>Internationalization</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Language</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html lang=es></option><option id=R-select-language-en value=en data-url=/en/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html lang=en selected data-selected></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Theme</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1784435315 defer></script><script src=/js/theme.min.js?1784435315 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
