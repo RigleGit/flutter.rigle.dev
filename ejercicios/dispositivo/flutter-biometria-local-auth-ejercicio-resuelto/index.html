@@ -1,0 +1,712 @@
+<!doctype html><html id=R-html lang=es dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Ejercicio resuelto de biometría en Flutter: local_auth, autenticación con huella dactilar y Face ID, fallback a PIN, verificar disponibilidad y combinación con flutter_secure_storage."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="Biometría en Flutter: ejercicio resuelto con local_auth y huella dactilar / Face ID :: Flutter en rigle.dev"><meta name=twitter:description content="Ejercicio resuelto de biometría en Flutter: local_auth, autenticación con huella dactilar y Face ID, fallback a PIN, verificar disponibilidad y combinación con flutter_secure_storage."><meta property="og:url" content="https://flutter.rigle.dev/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="Biometría en Flutter: ejercicio resuelto con local_auth y huella dactilar / Face ID :: Flutter en rigle.dev"><meta property="og:description" content="Ejercicio resuelto de biometría en Flutter: local_auth, autenticación con huella dactilar y Face ID, fallback a PIN, verificar disponibilidad y combinación con flutter_secure_storage."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="Ejercicios resueltos de Flutter (paso a paso)"><meta property="article:published_time" content="2026-07-20T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermedio"><meta property="article:tag" content="Biometria"><meta property="article:tag" content="Seguridad"><meta itemprop=name content="Biometría en Flutter: ejercicio resuelto con local_auth y huella dactilar / Face ID :: Flutter en rigle.dev"><meta itemprop=description content="Ejercicio resuelto de biometría en Flutter: local_auth, autenticación con huella dactilar y Face ID, fallback a PIN, verificar disponibilidad y combinación con flutter_secure_storage."><meta itemprop=datePublished content="2026-07-20T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1776"><meta itemprop=keywords content="Intermedio,Biometria,Seguridad"><title>Biometría en Flutter: ejercicio resuelto con local_auth y huella dactilar / Face ID :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1784522602 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1784522602 defer></script><script src=/js/search-lunr.min.js?1784522602 defer></script><script src=/js/search.min.js?1784522602 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.es.js?1784522602"</script><script src=/js/lunr/lunr.min.js?1784522602 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1784522602 defer></script><script src=/js/lunr/lunr.multi.min.js?1784522602 defer></script><script src=/js/lunr/lunr.es.min.js?1784522602 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["es"]</script><link href=/fonts/fontawesome/css/all.min.css?1784522602 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1784522602 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1784522602 rel=stylesheet><link href=/css/theme.min.css?1784522602 rel=stylesheet><link href=/css/format-html.min.css?1784522602 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copiar texto al portapapeles`,window.T_Copied_to_clipboard=`¡Texto copiado al portapapeles!`,window.T_Link_copied_to_clipboard=`¡Enlace copiado al portapapeles!`,window.T_Reset_view=`Restablecer vista`,window.T_View_reset=`¡Ver reajuste!`,window.T_No_results_found=`No se han encontrado resultados para "{0}"`,window.T_N_results_found=`{1} resultados encontrados para "{0}"`,window.T_Browser_unsupported_feature=`Este navegador no admite esta función`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1784522602 rel=stylesheet></head><body class="mobile-support html" data-origin=/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menú (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Tabla de contenido (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#biometría-en-flutter-ejercicio-resuelto-con-local_auth-y-face-id--huella-dactilar>Biometría en Flutter: ejercicio resuelto con local_auth y Face ID / huella dactilar</a></li><li><a href=#enunciado>Enunciado</a></li><li><a href=#dependencias>Dependencias</a><ul><li><a href=#configuración-android>Configuración Android</a></li><li><a href=#configuración-ios>Configuración iOS</a></li></ul></li><li><a href=#solución-completa>Solución completa</a></li><li><a href=#casos-de-error-de-local_auth>Casos de error de <code>local_auth</code></a></li><li><a href=#errores-frecuentes>Errores frecuentes</a></li><li><a href=#aplicación-práctica>Aplicación práctica</a></li><li><a href=#siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado</a></li><li><a href=#práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#la-biometría-funciona-en-el-emulador-de-android>¿La biometría funciona en el emulador de Android?</a></li><li><a href=#local_auth-guarda-las-huellas-o-el-face-id-en-la-app>¿<code>local_auth</code> guarda las huellas o el Face ID en la app?</a></li><li><a href=#puedo-usar-biometría-para-proteger-solo-una-sección-de-la-app>¿Puedo usar biometría para proteger solo una sección de la app?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/index.html><span itemprop=name>Aprende Flutter — ejercicios resueltos</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/index.html><span itemprop=name>Ejercicios</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/dispositivo/index.html><span itemprop=name>Dispositivo</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Biometría en Flutter: ejercicio resuelto con local_auth y huella dactilar / Face ID</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/dispositivo/index.html title="Dispositivo (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html title="permission_handler en Flutter: ejercicio resuelto con flujo completo de permisos (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=Más><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Etiquetas style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/tags/biometria/index.html>Biometria</a></li><li><a class=term-link href=/tags/intermedio/index.html>Intermedio</a></li><li><a class=term-link href=/tags/seguridad/index.html>Seguridad</a></li></ul></div></header><h1 id=biometría-en-flutter-ejercicio-resuelto-con-local_auth-y-huella-dactilar--face-id>Biometría en Flutter: ejercicio resuelto con local_auth y huella dactilar / Face ID</h1><h2 id=biometría-en-flutter-ejercicio-resuelto-con-local_auth-y-face-id--huella-dactilar>Biometría en Flutter: ejercicio resuelto con local_auth y Face ID / huella dactilar<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p><code>local_auth</code> permite autenticar al usuario con huella dactilar, Face ID o el PIN/patrón del dispositivo, sin enviar credenciales a ningún servidor. Es ideal para proteger pantallas sensibles dentro de una app ya autenticada.</p><h2 id=enunciado>Enunciado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Implementa una pantalla de autenticación biométrica que:</p><ul><li>Verifica si el dispositivo soporta biometría y qué tipos están disponibles.</li><li>Solicita autenticación biométrica con fallback a PIN/patrón.</li><li>Muestra el resultado (éxito, fallo, error) con feedback claro.</li><li>Combina la biometría con <code>flutter_secure_storage</code> para leer un token protegido.</li></ul><h2 id=dependencias>Dependencias<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>local_auth</span><span class=p>:</span><span class=w> </span><span class=l>^2.3.0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>flutter_secure_storage</span><span class=p>:</span><span class=w> </span><span class=l>^9.2.2</span></span></span></code></pre></td></tr></table></div></div><h3 id=configuración-android>Configuración Android<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>En <code>android/app/src/main/AndroidManifest.xml</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.USE_BIOMETRIC&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.USE_FINGERPRINT&#34;</span><span class=nt>/&gt;</span></span></span></code></pre></td></tr></table></div></div><p>La activity principal debe usar el tema <code>FlutterFragmentActivity</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=line><span class=cl><span class=c1>// android/app/src/main/kotlin/.../MainActivity.kt
+</span></span></span><span class=line><span class=cl><span class=k>import</span> <span class=nn>io.flutter.embedding.android.FlutterFragmentActivity</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>MainActivity</span> <span class=p>:</span> <span class=n>FlutterFragmentActivity</span><span class=p>()</span></span></span></code></pre></td></tr></table></div></div><h3 id=configuración-ios>Configuración iOS<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>En <code>ios/Runner/Info.plist</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;key&gt;</span>NSFaceIDUsageDescription<span class=nt>&lt;/key&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;string&gt;</span>Usamos Face ID para proteger tu cuenta<span class=nt>&lt;/string&gt;</span></span></span></code></pre></td></tr></table></div></div><h2 id=solución-completa>Solución completa<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span><span class=lnt>308
+</span><span class=lnt>309
+</span><span class=lnt>310
+</span><span class=lnt>311
+</span><span class=lnt>312
+</span><span class=lnt>313
+</span><span class=lnt>314
+</span><span class=lnt>315
+</span><span class=lnt>316
+</span><span class=lnt>317
+</span><span class=lnt>318
+</span><span class=lnt>319
+</span><span class=lnt>320
+</span><span class=lnt>321
+</span><span class=lnt>322
+</span><span class=lnt>323
+</span><span class=lnt>324
+</span><span class=lnt>325
+</span><span class=lnt>326
+</span><span class=lnt>327
+</span><span class=lnt>328
+</span><span class=lnt>329
+</span><span class=lnt>330
+</span><span class=lnt>331
+</span><span class=lnt>332
+</span><span class=lnt>333
+</span><span class=lnt>334
+</span><span class=lnt>335
+</span><span class=lnt>336
+</span><span class=lnt>337
+</span><span class=lnt>338
+</span><span class=lnt>339
+</span><span class=lnt>340
+</span><span class=lnt>341
+</span><span class=lnt>342
+</span><span class=lnt>343
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/services.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter_secure_storage/flutter_secure_storage.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:local_auth/local_auth.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:local_auth/error_codes.dart&#39;</span> <span class=k>as</span> <span class=n>auth_error</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Servicio de biometría ──────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>BiometricService</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>_auth</span> <span class=o>=</span> <span class=n>LocalAuthentication</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>_storage</span> <span class=o>=</span> <span class=kd>const</span> <span class=n>FlutterSecureStorage</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kd>const</span> <span class=n>_tokenKey</span> <span class=o>=</span> <span class=s1>&#39;auth_token&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Verifica si el dispositivo puede usar biometría
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=n>BiometricAvailability</span><span class=o>&gt;</span> <span class=n>checkAvailability</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>canCheck</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>_auth</span><span class=p>.</span><span class=n>canCheckBiometrics</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>isDeviceSupported</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>_auth</span><span class=p>.</span><span class=n>isDeviceSupported</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>isDeviceSupported</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=n>BiometricAvailability</span><span class=p>.</span><span class=n>notSupported</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>canCheck</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=n>BiometricAvailability</span><span class=p>.</span><span class=n>notEnrolled</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>BiometricAvailability</span><span class=p>.</span><span class=n>available</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Devuelve los tipos de biometría disponibles en el dispositivo
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=n>List</span><span class=o>&lt;</span><span class=n>BiometricType</span><span class=o>&gt;&gt;</span> <span class=n>getAvailableBiometrics</span><span class=p>()</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_auth</span><span class=p>.</span><span class=n>getAvailableBiometrics</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Autentica al usuario. Devuelve [AuthResult] con el resultado.
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=n>AuthResult</span><span class=o>&gt;</span> <span class=n>authenticate</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=kt>String</span> <span class=n>reason</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kt>bool</span> <span class=n>biometricOnly</span> <span class=o>=</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>})</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=kd>final</span> <span class=n>success</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>_auth</span><span class=p>.</span><span class=n>authenticate</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>localizedReason:</span> <span class=n>reason</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>options:</span> <span class=n>AuthenticationOptions</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>biometricOnly:</span> <span class=n>biometricOnly</span><span class=p>,</span> <span class=c1>// false = permite fallback a PIN
+</span></span></span><span class=line><span class=cl>          <span class=nl>stickyAuth:</span> <span class=kc>true</span><span class=p>,</span> <span class=c1>// mantiene el diálogo si la app va al background
+</span></span></span><span class=line><span class=cl>          <span class=nl>useErrorDialogs:</span> <span class=kc>true</span><span class=p>,</span> <span class=c1>// diálogo de error nativo
+</span></span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=n>success</span> <span class=o>?</span> <span class=n>AuthResult</span><span class=p>.</span><span class=n>success</span> <span class=o>:</span> <span class=n>AuthResult</span><span class=p>.</span><span class=n>failed</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=n>on</span> <span class=n>PlatformException</span> <span class=k>catch</span> <span class=p>(</span><span class=n>e</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=k>switch</span> <span class=p>(</span><span class=n>e</span><span class=p>.</span><span class=n>code</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>auth_error</span><span class=p>.</span><span class=n>notAvailable</span> <span class=o>=&gt;</span> <span class=n>AuthResult</span><span class=p>.</span><span class=n>notAvailable</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>auth_error</span><span class=p>.</span><span class=n>notEnrolled</span> <span class=o>=&gt;</span> <span class=n>AuthResult</span><span class=p>.</span><span class=n>notEnrolled</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>auth_error</span><span class=p>.</span><span class=n>lockedOut</span> <span class=o>=&gt;</span> <span class=n>AuthResult</span><span class=p>.</span><span class=n>lockedOut</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>auth_error</span><span class=p>.</span><span class=n>permanentlyLockedOut</span> <span class=o>=&gt;</span> <span class=n>AuthResult</span><span class=p>.</span><span class=n>permanentlyLockedOut</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>_</span> <span class=o>=&gt;</span> <span class=n>AuthResult</span><span class=p>.</span><span class=n>error</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// ── Integración con flutter_secure_storage ─────────────────────────────────
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>saveToken</span><span class=p>(</span><span class=kt>String</span> <span class=n>token</span><span class=p>)</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_storage</span><span class=p>.</span><span class=n>write</span><span class=p>(</span><span class=nl>key:</span> <span class=n>_tokenKey</span><span class=p>,</span> <span class=nl>value:</span> <span class=n>token</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>/// Lee el token solo si la biometría es exitosa
+</span></span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>String</span><span class=o>?&gt;</span> <span class=n>readTokenWithBiometrics</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>result</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>authenticate</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>reason:</span> <span class=s1>&#39;Autentícate para ver tu token de sesión&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>result</span> <span class=o>!=</span> <span class=n>AuthResult</span><span class=p>.</span><span class=n>success</span><span class=p>)</span> <span class=k>return</span> <span class=kc>null</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>_storage</span><span class=p>.</span><span class=n>read</span><span class=p>(</span><span class=nl>key:</span> <span class=n>_tokenKey</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>deleteToken</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_storage</span><span class=p>.</span><span class=n>delete</span><span class=p>(</span><span class=nl>key:</span> <span class=n>_tokenKey</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>enum</span> <span class=n>BiometricAvailability</span> <span class=p>{</span> <span class=n>available</span><span class=p>,</span> <span class=n>notSupported</span><span class=p>,</span> <span class=n>notEnrolled</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>enum</span> <span class=n>AuthResult</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>success</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>failed</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>notAvailable</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>notEnrolled</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>lockedOut</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>permanentlyLockedOut</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>error</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Main ───────────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>MaterialApp</span><span class=p>(</span><span class=nl>home:</span> <span class=n>BiometricDemo</span><span class=p>()));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Pantalla de biometría ──────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>BiometricDemo</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>BiometricDemo</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>BiometricDemo</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_BiometricDemoState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_BiometricDemoState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>BiometricDemo</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>_service</span> <span class=o>=</span> <span class=n>BiometricService</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>BiometricAvailability</span><span class=o>?</span> <span class=n>_availability</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>List</span><span class=o>&lt;</span><span class=n>BiometricType</span><span class=o>&gt;</span> <span class=n>_biometrics</span> <span class=o>=</span> <span class=p>[];</span>
+</span></span><span class=line><span class=cl>  <span class=n>AuthResult</span><span class=o>?</span> <span class=n>_lastResult</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kt>String</span><span class=o>?</span> <span class=n>_token</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kt>bool</span> <span class=n>_loading</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>initState</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>initState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>_init</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_init</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_loading</span> <span class=o>=</span> <span class=kc>true</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Guardar un token de demo en secure storage
+</span></span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>saveToken</span><span class=p>(</span><span class=s1>&#39;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.demo&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>availability</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>checkAvailability</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>biometrics</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>getAvailableBiometrics</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>_availability</span> <span class=o>=</span> <span class=n>availability</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_biometrics</span> <span class=o>=</span> <span class=n>biometrics</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_loading</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_authenticate</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_loading</span> <span class=o>=</span> <span class=kc>true</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>result</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>authenticate</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>reason:</span> <span class=s1>&#39;Confirma tu identidad para acceder a la app&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>_lastResult</span> <span class=o>=</span> <span class=n>result</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_loading</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_readToken</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_loading</span> <span class=o>=</span> <span class=kc>true</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>token</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>_service</span><span class=p>.</span><span class=n>readTokenWithBiometrics</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>_token</span> <span class=o>=</span> <span class=n>token</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=n>_loading</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Biometría con local_auth&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>stretch</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Estado del dispositivo ───────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=n>_DeviceInfo</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>availability:</span> <span class=n>_availability</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>biometrics:</span> <span class=n>_biometrics</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>loading:</span> <span class=n>_loading</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Divider</span><span class=p>(</span><span class=nl>height:</span> <span class=m>32</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Acciones ─────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=n>FilledButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span>
+</span></span><span class=line><span class=cl>                  <span class=p>(</span><span class=n>_availability</span> <span class=o>==</span> <span class=n>BiometricAvailability</span><span class=p>.</span><span class=n>available</span> <span class=o>&amp;&amp;</span> <span class=o>!</span><span class=n>_loading</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                      <span class=o>?</span> <span class=n>_authenticate</span>
+</span></span><span class=line><span class=cl>                      <span class=o>:</span> <span class=kc>null</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>fingerprint</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Autenticar con biometría&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=n>FilledButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onPressed:</span>
+</span></span><span class=line><span class=cl>                  <span class=p>(</span><span class=n>_availability</span> <span class=o>==</span> <span class=n>BiometricAvailability</span><span class=p>.</span><span class=n>available</span> <span class=o>&amp;&amp;</span> <span class=o>!</span><span class=n>_loading</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                      <span class=o>?</span> <span class=n>_readToken</span>
+</span></span><span class=line><span class=cl>                      <span class=o>:</span> <span class=kc>null</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>lock_open</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Leer token protegido&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>style:</span> <span class=n>FilledButton</span><span class=p>.</span><span class=n>styleFrom</span><span class=p>(</span><span class=nl>backgroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>teal</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Resultado ─────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>_lastResult</span> <span class=o>!=</span> <span class=kc>null</span><span class=p>)</span> <span class=p>...[</span>
+</span></span><span class=line><span class=cl>              <span class=n>_ResultCard</span><span class=p>(</span><span class=nl>result:</span> <span class=n>_lastResult</span><span class=o>!</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Token recuperado ──────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>_token</span> <span class=o>!=</span> <span class=kc>null</span><span class=p>)</span> <span class=p>...[</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Token recuperado de Secure Storage:&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>4</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>.</span><span class=n>shade50</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>border:</span> <span class=n>Border</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>.</span><span class=n>shade200</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>child:</span> <span class=n>SelectableText</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=n>_token</span><span class=o>!</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontFamily:</span> <span class=s1>&#39;monospace&#39;</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Spacer</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Leyenda de biometría ────────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=n>_BiometricLegend</span><span class=p>(</span><span class=nl>biometrics:</span> <span class=n>_biometrics</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Widget: info del dispositivo ───────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_DeviceInfo</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>BiometricAvailability</span><span class=o>?</span> <span class=n>availability</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>List</span><span class=o>&lt;</span><span class=n>BiometricType</span><span class=o>&gt;</span> <span class=n>biometrics</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>bool</span> <span class=n>loading</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_DeviceInfo</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>availability</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>biometrics</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>loading</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>loading</span> <span class=o>&amp;&amp;</span> <span class=n>availability</span> <span class=o>==</span> <span class=kc>null</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=kd>const</span> <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>CircularProgressIndicator</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=p>(</span><span class=n>icon</span><span class=p>,</span> <span class=n>label</span><span class=p>,</span> <span class=n>color</span><span class=p>)</span> <span class=o>=</span> <span class=k>switch</span> <span class=p>(</span><span class=n>availability</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>BiometricAvailability</span><span class=p>.</span><span class=n>available</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>check_circle</span><span class=p>,</span> <span class=s1>&#39;Biometría disponible&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>BiometricAvailability</span><span class=p>.</span><span class=n>notEnrolled</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>warning_amber</span><span class=p>,</span> <span class=s1>&#39;Sin biometría configurada en el dispositivo&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>orange</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>BiometricAvailability</span><span class=p>.</span><span class=n>notSupported</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>error</span><span class=p>,</span> <span class=s1>&#39;Dispositivo no soporta biometría&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>_</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>help</span><span class=p>,</span> <span class=s1>&#39;Verificando...&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=n>Icon</span><span class=p>(</span><span class=n>icon</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>color</span><span class=p>,</span> <span class=nl>size:</span> <span class=m>32</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>width:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=n>Text</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>color</span><span class=p>,</span> <span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>              <span class=k>if</span> <span class=p>(</span><span class=n>biometrics</span><span class=p>.</span><span class=n>isNotEmpty</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=s1>&#39;Tipos: </span><span class=si>${</span><span class=n>biometrics</span><span class=p>.</span><span class=n>map</span><span class=p>(</span><span class=n>_biometricName</span><span class=p>).</span><span class=n>join</span><span class=p>(</span><span class=s1>&#39;, &#39;</span><span class=p>)</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>12</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>String</span> <span class=n>_biometricName</span><span class=p>(</span><span class=n>BiometricType</span> <span class=n>t</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=k>switch</span> <span class=p>(</span><span class=n>t</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>BiometricType</span><span class=p>.</span><span class=n>face</span> <span class=o>=&gt;</span> <span class=s1>&#39;Face ID&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>BiometricType</span><span class=p>.</span><span class=n>fingerprint</span> <span class=o>=&gt;</span> <span class=s1>&#39;Huella dactilar&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>BiometricType</span><span class=p>.</span><span class=n>iris</span> <span class=o>=&gt;</span> <span class=s1>&#39;Iris&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>BiometricType</span><span class=p>.</span><span class=n>strong</span> <span class=o>=&gt;</span> <span class=s1>&#39;Biometría fuerte&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>BiometricType</span><span class=p>.</span><span class=n>weak</span> <span class=o>=&gt;</span> <span class=s1>&#39;Biometría débil&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>_</span> <span class=o>=&gt;</span> <span class=n>t</span><span class=p>.</span><span class=n>toString</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Widget: tarjeta de resultado ───────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_ResultCard</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>AuthResult</span> <span class=n>result</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_ResultCard</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>result</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=p>(</span><span class=n>icon</span><span class=p>,</span> <span class=n>label</span><span class=p>,</span> <span class=n>color</span><span class=p>)</span> <span class=o>=</span> <span class=k>switch</span> <span class=p>(</span><span class=n>result</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>AuthResult</span><span class=p>.</span><span class=n>success</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>check_circle</span><span class=p>,</span> <span class=s1>&#39;✅ Autenticación exitosa&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>green</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>AuthResult</span><span class=p>.</span><span class=n>failed</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>cancel</span><span class=p>,</span> <span class=s1>&#39;❌ Autenticación fallida&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>AuthResult</span><span class=p>.</span><span class=n>lockedOut</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>lock</span><span class=p>,</span> <span class=s1>&#39;🔒 Demasiados intentos fallidos — espera un momento&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>orange</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>AuthResult</span><span class=p>.</span><span class=n>permanentlyLockedOut</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>lock_person</span><span class=p>,</span> <span class=s1>&#39;🚫 Biometría bloqueada — usa el PIN del dispositivo&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>AuthResult</span><span class=p>.</span><span class=n>notEnrolled</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>fingerprint</span><span class=p>,</span> <span class=s1>&#39;⚠️ No hay biometría configurada en el dispositivo&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>orange</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>AuthResult</span><span class=p>.</span><span class=n>notAvailable</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>block</span><span class=p>,</span> <span class=s1>&#39;⚠️ Biometría no disponible&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>_</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>error</span><span class=p>,</span> <span class=s1>&#39;❌ Error desconocido&#39;</span><span class=p>,</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>color:</span> <span class=n>color</span><span class=p>.</span><span class=n>withOpacity</span><span class=p>(</span><span class=m>0.1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>border:</span> <span class=n>Border</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=nl>color:</span> <span class=n>color</span><span class=p>.</span><span class=n>withOpacity</span><span class=p>(</span><span class=m>0.3</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>Icon</span><span class=p>(</span><span class=n>icon</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>color</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>width:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Expanded</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>color</span><span class=p>))),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Widget: leyenda de tipos de biometría ──────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_BiometricLegend</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>List</span><span class=o>&lt;</span><span class=n>BiometricType</span><span class=o>&gt;</span> <span class=n>biometrics</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_BiometricLegend</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>biometrics</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Wrap</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>spacing:</span> <span class=m>8</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>biometrics</span><span class=p>.</span><span class=n>contains</span><span class=p>(</span><span class=n>BiometricType</span><span class=p>.</span><span class=n>fingerprint</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>Chip</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>avatar:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>fingerprint</span><span class=p>,</span> <span class=nl>size:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>label:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Huella&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>11</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>biometrics</span><span class=p>.</span><span class=n>contains</span><span class=p>(</span><span class=n>BiometricType</span><span class=p>.</span><span class=n>face</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>Chip</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>avatar:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>face</span><span class=p>,</span> <span class=nl>size:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>label:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Face ID&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>11</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>biometrics</span><span class=p>.</span><span class=n>contains</span><span class=p>(</span><span class=n>BiometricType</span><span class=p>.</span><span class=n>iris</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>Chip</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>avatar:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>remove_red_eye</span><span class=p>,</span> <span class=nl>size:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>label:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Iris&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>11</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=casos-de-error-de-local_auth>Casos de error de <code>local_auth</code><span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Código de error</th><th>Causa</th><th>Solución</th></tr></thead><tbody><tr><td><code>notAvailable</code></td><td>Hardware no disponible</td><td>Verificar con <code>canCheckBiometrics</code></td></tr><tr><td><code>notEnrolled</code></td><td>Sin huella/Face ID configurado</td><td>Indicar al usuario que configure biometría</td></tr><tr><td><code>lockedOut</code></td><td>Demasiados intentos</td><td>Esperar timeout automático</td></tr><tr><td><code>permanentlyLockedOut</code></td><td>Bloqueado definitivo</td><td>Usar PIN/patrón del dispositivo</td></tr></tbody></table><h2 id=errores-frecuentes>Errores frecuentes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>No cambiar <code>FlutterActivity</code> a <code>FlutterFragmentActivity</code></strong>: <code>local_auth</code> en Android requiere <code>FlutterFragmentActivity</code>. Si no lo cambias, la biometría falla silenciosamente.</li><li><strong><code>biometricOnly: true</code> sin fallback</strong>: si el usuario no tiene biometría disponible y <code>biometricOnly</code> es true, la autenticación falla directamente. Usa <code>biometricOnly: false</code> para permitir fallback a PIN.</li><li><strong>Guardar el token en SharedPreferences en lugar de SecureStorage</strong>: los tokens de sesión deben guardarse en <code>flutter_secure_storage</code> (usa Keychain en iOS y Keystore en Android), nunca en SharedPreferences, que es legible sin root.</li></ul><h2 id=aplicación-práctica>Aplicación práctica<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>La biometría se usa en: banca móvil (confirmación de transferencias), apps de salud (acceso a historial médico), gestores de contraseñas y apps con datos sensibles donde el PIN ya fue introducido al inicio de sesión.</p><h2 id=siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/persistencia-datos/flutter-secure-storage-token-ejercicio-resuelto/index.html>flutter_secure_storage en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html>permission_handler en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/index.html>Todos los ejercicios de Flutter</a></li></ul><h2 id=práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/index.html>Más ejercicios de Flutter</a></li><li><a href=https://amzn.to/41weJIN rel=external>Ver el libro en Amazon (incluido en Kindle Unlimited)</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=la-biometría-funciona-en-el-emulador-de-android>¿La biometría funciona en el emulador de Android?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Sí. Ve a Configuración del emulador → Security → Fingerprint → Enroll. Después puedes simular el toque de la huella desde el menú extendido del emulador.</p><h3 id=local_auth-guarda-las-huellas-o-el-face-id-en-la-app>¿<code>local_auth</code> guarda las huellas o el Face ID en la app?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>No. Nunca. La biometría se procesa completamente en el chip seguro del dispositivo (Secure Enclave en iOS, TEE en Android). La app solo recibe un booleano de éxito o fracaso.</p><h3 id=puedo-usar-biometría-para-proteger-solo-una-sección-de-la-app>¿Puedo usar biometría para proteger solo una sección de la app?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Sí. El patrón habitual es: el usuario se autentica con usuario/contraseña al iniciar sesión → el token se guarda en SecureStorage → para operaciones sensibles (transferencias, ver datos de tarjeta) se pide biometría como segundo factor sin necesidad de volver a introducir la contraseña.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> 25 may. 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Buscar (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Buscar</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Buscar...>
+<button class=search-clear type=button data-search-clear title="Borrar búsqueda"><i class="fas fa-fw fa-times" title="Borrar búsqueda"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/index.html><a class=padding href=/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets y UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Formularios y navegación</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> Estado y arquitectura</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/api-async/index.html><a class="padding default-animation" href=/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API y async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistencia y datos</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing y recursos</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li class=parent data-nav-id=/ejercicios/dispositivo/index.html><a class="padding default-animation" href=/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Dispositivo</a><ul id=R-subsections-bff77604e23f257e9d87870fab19bd83 class=collapsible-menu><li class=active data-nav-id=/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html>Biometría en Flutter: ejercicio resuelto con local_auth y huella dactilar / Face ID</a></li><li data-nav-id=/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html>permission_handler en Flutter: ejercicio resuelto con flujo completo de permisos</a></li></ul></li><li data-nav-id=/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Herramientas y código</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu></ul></li><li data-nav-id=/ejercicios/internacionalizacion/index.html><a class=padding href=/ejercicios/internacionalizacion/index.html>Internacionalización</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Idioma</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html lang=es selected data-selected></option><option id=R-select-language-en value=en data-url=/en/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html lang=en></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Tema</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1784522602 defer></script><script src=/js/theme.min.js?1784522602 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
