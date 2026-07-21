@@ -1,0 +1,753 @@
+<!doctype html><html id=R-html lang=es dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Ejercicio resuelto de GraphQL en Flutter: graphql_flutter, GraphQLClient, Query widget, Mutation widget, variables, watchQuery y manejo de errores con una API pública."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="GraphQL en Flutter: ejercicio resuelto con graphql_flutter, queries y mutaciones :: Flutter en rigle.dev"><meta name=twitter:description content="Ejercicio resuelto de GraphQL en Flutter: graphql_flutter, GraphQLClient, Query widget, Mutation widget, variables, watchQuery y manejo de errores con una API pública."><meta property="og:url" content="https://flutter.rigle.dev/ejercicios/api-async/flutter-graphql-basico-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="GraphQL en Flutter: ejercicio resuelto con graphql_flutter, queries y mutaciones :: Flutter en rigle.dev"><meta property="og:description" content="Ejercicio resuelto de GraphQL en Flutter: graphql_flutter, GraphQLClient, Query widget, Mutation widget, variables, watchQuery y manejo de errores con una API pública."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="Ejercicios resueltos de Flutter (paso a paso)"><meta property="article:published_time" content="2026-07-21T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermedio"><meta property="article:tag" content="Networking"><meta property="article:tag" content="Graphql"><meta itemprop=name content="GraphQL en Flutter: ejercicio resuelto con graphql_flutter, queries y mutaciones :: Flutter en rigle.dev"><meta itemprop=description content="Ejercicio resuelto de GraphQL en Flutter: graphql_flutter, GraphQLClient, Query widget, Mutation widget, variables, watchQuery y manejo de errores con una API pública."><meta itemprop=datePublished content="2026-07-21T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1748"><meta itemprop=keywords content="Intermedio,Networking,Graphql"><title>GraphQL en Flutter: ejercicio resuelto con graphql_flutter, queries y mutaciones :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/api-async/flutter-graphql-basico-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/api-async/flutter-graphql-basico-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/api-async/flutter-graphql-basico-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1784607733 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1784607733 defer></script><script src=/js/search-lunr.min.js?1784607733 defer></script><script src=/js/search.min.js?1784607733 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.es.js?1784607733"</script><script src=/js/lunr/lunr.min.js?1784607733 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1784607733 defer></script><script src=/js/lunr/lunr.multi.min.js?1784607733 defer></script><script src=/js/lunr/lunr.es.min.js?1784607733 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["es"]</script><link href=/fonts/fontawesome/css/all.min.css?1784607733 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1784607733 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1784607733 rel=stylesheet><link href=/css/theme.min.css?1784607733 rel=stylesheet><link href=/css/format-html.min.css?1784607733 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/ejercicios/api-async/flutter-graphql-basico-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../..",window.relearn.relBaseUri="../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copiar texto al portapapeles`,window.T_Copied_to_clipboard=`¡Texto copiado al portapapeles!`,window.T_Link_copied_to_clipboard=`¡Enlace copiado al portapapeles!`,window.T_Reset_view=`Restablecer vista`,window.T_View_reset=`¡Ver reajuste!`,window.T_No_results_found=`No se han encontrado resultados para "{0}"`,window.T_N_results_found=`{1} resultados encontrados para "{0}"`,window.T_Browser_unsupported_feature=`Este navegador no admite esta función`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1784607733 rel=stylesheet></head><body class="mobile-support html" data-origin=/ejercicios/api-async/flutter-graphql-basico-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menú (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Tabla de contenido (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#graphql-en-flutter-ejercicio-resuelto-con-graphql_flutter>GraphQL en Flutter: ejercicio resuelto con graphql_flutter</a></li><li><a href=#enunciado>Enunciado</a></li><li><a href=#dependencias>Dependencias</a></li><li><a href=#solución-completa>Solución completa</a></li><li><a href=#diferencias-entre-rest-y-graphql>Diferencias entre REST y GraphQL</a></li><li><a href=#errores-frecuentes>Errores frecuentes</a></li><li><a href=#aplicación-práctica>Aplicación práctica</a></li><li><a href=#siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado</a></li><li><a href=#práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#necesito-un-servidor-graphql-propio-para-aprender>¿Necesito un servidor GraphQL propio para aprender?</a></li><li><a href=#cuándo-usar-watchquery-en-lugar-del-widget-query>¿Cuándo usar <code>watchQuery</code> en lugar del widget <code>Query</code>?</a></li><li><a href=#graphql_flutter-soporta-suscripciones-en-tiempo-real>¿<code>graphql_flutter</code> soporta suscripciones en tiempo real?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/index.html><span itemprop=name>Aprende Flutter — ejercicios resueltos</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/index.html><span itemprop=name>Ejercicios</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/ejercicios/api-async/index.html><span itemprop=name>API y async</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>GraphQL en Flutter: ejercicio resuelto con graphql_flutter, queries y mutaciones</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/api-async/flutter-dio-interceptores-ejercicio-resuelto/index.html title="Dio con interceptores en Flutter: ejercicio resuelto (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/ejercicios/api-async/flutter-websockets-tiempo-real-ejercicio-resuelto/index.html title="WebSockets en Flutter: ejercicio resuelto con web_socket_channel (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=Más><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Etiquetas style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/tags/graphql/index.html>Graphql</a></li><li><a class=term-link href=/tags/intermedio/index.html>Intermedio</a></li><li><a class=term-link href=/tags/networking/index.html>Networking</a></li></ul></div></header><h1 id=graphql-en-flutter-ejercicio-resuelto-con-graphql_flutter-queries-y-mutaciones>GraphQL en Flutter: ejercicio resuelto con graphql_flutter, queries y mutaciones</h1><h2 id=graphql-en-flutter-ejercicio-resuelto-con-graphql_flutter>GraphQL en Flutter: ejercicio resuelto con graphql_flutter<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>GraphQL es una alternativa a REST que permite al cliente especificar exactamente qué datos quiere. <code>graphql_flutter</code> proporciona un cliente completo con cache normalizado, widgets reactivos y soporte para suscripciones WebSocket.</p><h2 id=enunciado>Enunciado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Implementa una pantalla que:</p><ul><li>Configure <code>GraphQLClient</code> con <code>HttpLink</code> y cache en memoria.</li><li>Use el widget <code>Query</code> para listar países con su bandera y continente.</li><li>Use variables GraphQL para filtrar por continente.</li><li>Use el widget <code>Mutation</code> para votar por un país favorito.</li><li>Maneje estados de carga, error y datos vacíos.</li></ul><p>Usaremos la API pública <code>https://countries.trevorblades.com/</code> (GraphQL de países del mundo).</p><h2 id=dependencias>Dependencias<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>graphql_flutter</span><span class=p>:</span><span class=w> </span><span class=l>^5.2.0-beta.7</span></span></span></code></pre></td></tr></table></div></div><h2 id=solución-completa>Solución completa<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span><span class=lnt>308
+</span><span class=lnt>309
+</span><span class=lnt>310
+</span><span class=lnt>311
+</span><span class=lnt>312
+</span><span class=lnt>313
+</span><span class=lnt>314
+</span><span class=lnt>315
+</span><span class=lnt>316
+</span><span class=lnt>317
+</span><span class=lnt>318
+</span><span class=lnt>319
+</span><span class=lnt>320
+</span><span class=lnt>321
+</span><span class=lnt>322
+</span><span class=lnt>323
+</span><span class=lnt>324
+</span><span class=lnt>325
+</span><span class=lnt>326
+</span><span class=lnt>327
+</span><span class=lnt>328
+</span><span class=lnt>329
+</span><span class=lnt>330
+</span><span class=lnt>331
+</span><span class=lnt>332
+</span><span class=lnt>333
+</span><span class=lnt>334
+</span><span class=lnt>335
+</span><span class=lnt>336
+</span><span class=lnt>337
+</span><span class=lnt>338
+</span><span class=lnt>339
+</span><span class=lnt>340
+</span><span class=lnt>341
+</span><span class=lnt>342
+</span><span class=lnt>343
+</span><span class=lnt>344
+</span><span class=lnt>345
+</span><span class=lnt>346
+</span><span class=lnt>347
+</span><span class=lnt>348
+</span><span class=lnt>349
+</span><span class=lnt>350
+</span><span class=lnt>351
+</span><span class=lnt>352
+</span><span class=lnt>353
+</span><span class=lnt>354
+</span><span class=lnt>355
+</span><span class=lnt>356
+</span><span class=lnt>357
+</span><span class=lnt>358
+</span><span class=lnt>359
+</span><span class=lnt>360
+</span><span class=lnt>361
+</span><span class=lnt>362
+</span><span class=lnt>363
+</span><span class=lnt>364
+</span><span class=lnt>365
+</span><span class=lnt>366
+</span><span class=lnt>367
+</span><span class=lnt>368
+</span><span class=lnt>369
+</span><span class=lnt>370
+</span><span class=lnt>371
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:graphql_flutter/graphql_flutter.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Configuración del cliente GraphQL ─────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=n>ValueNotifier</span><span class=o>&lt;</span><span class=n>GraphQLClient</span><span class=o>&gt;</span> <span class=n>_buildClient</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>httpLink</span> <span class=o>=</span> <span class=n>HttpLink</span><span class=p>(</span><span class=s1>&#39;https://countries.trevorblades.com/&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>ValueNotifier</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>GraphQLClient</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>link:</span> <span class=n>httpLink</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>cache:</span> <span class=n>GraphQLCache</span><span class=p>(</span><span class=nl>store:</span> <span class=n>InMemoryStore</span><span class=p>()),</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Queries y mutaciones ───────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>/// Lista países filtrables por continente
+</span></span></span><span class=line><span class=cl><span class=kd>const</span> <span class=n>_listCountries</span> <span class=o>=</span> <span class=s1>r&#39;&#39;&#39;
+</span></span></span><span class=line><span class=cl><span class=s1>  query ListCountries($continent: String) {
+</span></span></span><span class=line><span class=cl><span class=s1>    countries(filter: { continent: { eq: $continent } }) {
+</span></span></span><span class=line><span class=cl><span class=s1>      code
+</span></span></span><span class=line><span class=cl><span class=s1>      name
+</span></span></span><span class=line><span class=cl><span class=s1>      emoji
+</span></span></span><span class=line><span class=cl><span class=s1>      capital
+</span></span></span><span class=line><span class=cl><span class=s1>      continent {
+</span></span></span><span class=line><span class=cl><span class=s1>        name
+</span></span></span><span class=line><span class=cl><span class=s1>      }
+</span></span></span><span class=line><span class=cl><span class=s1>      languages {
+</span></span></span><span class=line><span class=cl><span class=s1>        name
+</span></span></span><span class=line><span class=cl><span class=s1>      }
+</span></span></span><span class=line><span class=cl><span class=s1>    }
+</span></span></span><span class=line><span class=cl><span class=s1>  }
+</span></span></span><span class=line><span class=cl><span class=s1>&#39;&#39;&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>/// Detalle de un continente
+</span></span></span><span class=line><span class=cl><span class=kd>const</span> <span class=n>_getContinents</span> <span class=o>=</span> <span class=s1>r&#39;&#39;&#39;
+</span></span></span><span class=line><span class=cl><span class=s1>  query GetContinents {
+</span></span></span><span class=line><span class=cl><span class=s1>    continents {
+</span></span></span><span class=line><span class=cl><span class=s1>      code
+</span></span></span><span class=line><span class=cl><span class=s1>      name
+</span></span></span><span class=line><span class=cl><span class=s1>    }
+</span></span></span><span class=line><span class=cl><span class=s1>  }
+</span></span></span><span class=line><span class=cl><span class=s1>&#39;&#39;&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Tipos de dominio ───────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Country</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>code</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>emoji</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span><span class=o>?</span> <span class=n>capital</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>continent</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>List</span><span class=o>&lt;</span><span class=kt>String</span><span class=o>&gt;</span> <span class=n>languages</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>Country</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>code</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>name</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>emoji</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>capital</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>continent</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>languages</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>factory</span> <span class=n>Country</span><span class=p>.</span><span class=n>fromJson</span><span class=p>(</span><span class=n>Map</span><span class=o>&lt;</span><span class=kt>String</span><span class=p>,</span> <span class=kt>dynamic</span><span class=o>&gt;</span> <span class=n>json</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>Country</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>code:</span> <span class=n>json</span><span class=p>[</span><span class=s1>&#39;code&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=kt>String</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>name:</span> <span class=n>json</span><span class=p>[</span><span class=s1>&#39;name&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=kt>String</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>emoji:</span> <span class=n>json</span><span class=p>[</span><span class=s1>&#39;emoji&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=kt>String</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>capital:</span> <span class=n>json</span><span class=p>[</span><span class=s1>&#39;capital&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=kt>String</span><span class=o>?</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>continent:</span> <span class=p>(</span><span class=n>json</span><span class=p>[</span><span class=s1>&#39;continent&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=n>Map</span><span class=o>&lt;</span><span class=kt>String</span><span class=p>,</span> <span class=kt>dynamic</span><span class=o>&gt;</span><span class=p>)[</span><span class=s1>&#39;name&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=kt>String</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>languages:</span> <span class=p>(</span><span class=n>json</span><span class=p>[</span><span class=s1>&#39;languages&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=n>List</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>.</span><span class=n>map</span><span class=p>((</span><span class=n>l</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>l</span><span class=p>[</span><span class=s1>&#39;name&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=kt>String</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>.</span><span class=n>toList</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>      <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Continent</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>code</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>Continent</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>code</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>name</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=kd>factory</span> <span class=n>Continent</span><span class=p>.</span><span class=n>fromJson</span><span class=p>(</span><span class=n>Map</span><span class=o>&lt;</span><span class=kt>String</span><span class=p>,</span> <span class=kt>dynamic</span><span class=o>&gt;</span> <span class=n>json</span><span class=p>)</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=n>Continent</span><span class=p>(</span><span class=nl>code:</span> <span class=n>json</span><span class=p>[</span><span class=s1>&#39;code&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=kt>String</span><span class=p>,</span> <span class=nl>name:</span> <span class=n>json</span><span class=p>[</span><span class=s1>&#39;name&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=kt>String</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── App ────────────────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>await</span> <span class=n>initHiveForFlutter</span><span class=p>();</span> <span class=c1>// inicializa Hive para caché persistente opcional
+</span></span></span><span class=line><span class=cl>  <span class=n>runApp</span><span class=p>(</span><span class=n>GraphQLProvider</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nl>client:</span> <span class=n>_buildClient</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>    <span class=nl>child:</span> <span class=kd>const</span> <span class=n>MaterialApp</span><span class=p>(</span><span class=nl>home:</span> <span class=n>CountriesScreen</span><span class=p>()),</span>
+</span></span><span class=line><span class=cl>  <span class=p>));</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Pantalla principal ─────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>CountriesScreen</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>CountriesScreen</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>CountriesScreen</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_CountriesScreenState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_CountriesScreenState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>CountriesScreen</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>String</span><span class=o>?</span> <span class=n>_selectedContinent</span><span class=p>;</span> <span class=c1>// null = todos los continentes
+</span></span></span><span class=line><span class=cl>  <span class=kt>String</span><span class=o>?</span> <span class=n>_favoriteCountry</span><span class=p>;</span>   <span class=c1>// guardado localmente (sin backend real)
+</span></span></span><span class=line><span class=cl>  <span class=kt>String</span> <span class=n>_search</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;GraphQL + graphql_flutter&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>bottom:</span> <span class=n>PreferredSize</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>preferredSize:</span> <span class=kd>const</span> <span class=n>Size</span><span class=p>.</span><span class=n>fromHeight</span><span class=p>(</span><span class=m>96</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>horizontal:</span> <span class=m>12</span><span class=p>,</span> <span class=nl>vertical:</span> <span class=m>4</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// Filtro por continente
+</span></span></span><span class=line><span class=cl>                <span class=n>_ContinentFilter</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>selected:</span> <span class=n>_selectedContinent</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>onChanged:</span> <span class=p>(</span><span class=n>code</span><span class=p>)</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>                      <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_selectedContinent</span> <span class=o>=</span> <span class=n>code</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>4</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// Búsqueda local
+</span></span></span><span class=line><span class=cl>                <span class=n>TextField</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>decoration:</span> <span class=kd>const</span> <span class=n>InputDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>hintText:</span> <span class=s1>&#39;Buscar país...&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>prefixIcon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>search</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>isDense:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>border:</span> <span class=n>OutlineInputBorder</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>fillColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>filled:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>onChanged:</span> <span class=p>(</span><span class=n>v</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_search</span> <span class=o>=</span> <span class=n>v</span><span class=p>.</span><span class=n>toLowerCase</span><span class=p>()),</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>],</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Query</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>options:</span> <span class=n>QueryOptions</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>document:</span> <span class=n>gql</span><span class=p>(</span><span class=n>_listCountries</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>variables:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>_selectedContinent</span> <span class=o>!=</span> <span class=kc>null</span><span class=p>)</span> <span class=s1>&#39;continent&#39;</span><span class=o>:</span> <span class=n>_selectedContinent</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>},</span>
+</span></span><span class=line><span class=cl>          <span class=nl>fetchPolicy:</span> <span class=n>FetchPolicy</span><span class=p>.</span><span class=n>cacheAndNetwork</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>builder:</span> <span class=p>(</span><span class=n>result</span><span class=p>,</span> <span class=p>{</span><span class=n>fetchMore</span><span class=p>,</span> <span class=n>refetch</span><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// ── Estado de carga ───────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=p>(</span><span class=n>result</span><span class=p>.</span><span class=n>isLoading</span> <span class=o>&amp;&amp;</span> <span class=n>result</span><span class=p>.</span><span class=n>data</span> <span class=o>==</span> <span class=kc>null</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kd>const</span> <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>CircularProgressIndicator</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=c1>// ── Estado de error ───────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=p>(</span><span class=n>result</span><span class=p>.</span><span class=n>hasException</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>_ErrorView</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>message:</span> <span class=n>result</span><span class=p>.</span><span class=n>exception</span><span class=p>.</span><span class=n>toString</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onRetry:</span> <span class=n>refetch</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=p>);</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=c1>// ── Datos vacíos ──────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>          <span class=kd>final</span> <span class=n>rawList</span> <span class=o>=</span> <span class=n>result</span><span class=p>.</span><span class=n>data</span><span class=o>?</span><span class=p>[</span><span class=s1>&#39;countries&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=n>List</span><span class=o>?</span> <span class=o>??</span> <span class=p>[];</span>
+</span></span><span class=line><span class=cl>          <span class=kd>var</span> <span class=n>countries</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>              <span class=n>rawList</span><span class=p>.</span><span class=n>map</span><span class=p>((</span><span class=n>e</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>Country</span><span class=p>.</span><span class=n>fromJson</span><span class=p>(</span><span class=n>e</span> <span class=o>as</span> <span class=n>Map</span><span class=o>&lt;</span><span class=kt>String</span><span class=p>,</span> <span class=kt>dynamic</span><span class=o>&gt;</span><span class=p>)).</span><span class=n>toList</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=p>(</span><span class=n>_search</span><span class=p>.</span><span class=n>isNotEmpty</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>countries</span> <span class=o>=</span> <span class=n>countries</span>
+</span></span><span class=line><span class=cl>                <span class=p>.</span><span class=n>where</span><span class=p>((</span><span class=n>c</span><span class=p>)</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>                    <span class=n>c</span><span class=p>.</span><span class=n>name</span><span class=p>.</span><span class=n>toLowerCase</span><span class=p>().</span><span class=n>contains</span><span class=p>(</span><span class=n>_search</span><span class=p>)</span> <span class=o>||</span>
+</span></span><span class=line><span class=cl>                    <span class=n>c</span><span class=p>.</span><span class=n>capital</span><span class=o>?</span><span class=p>.</span><span class=n>toLowerCase</span><span class=p>().</span><span class=n>contains</span><span class=p>(</span><span class=n>_search</span><span class=p>)</span> <span class=o>==</span> <span class=kc>true</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=p>.</span><span class=n>toList</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=p>(</span><span class=n>countries</span><span class=p>.</span><span class=n>isEmpty</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kd>const</span> <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;No se encontraron países&#39;</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=c1>// ── Lista de países ───────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=n>RefreshIndicator</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onRefresh:</span> <span class=p>()</span> <span class=kd>async</span> <span class=o>=&gt;</span> <span class=n>refetch</span><span class=o>?</span><span class=p>.</span><span class=n>call</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>ListView</span><span class=p>.</span><span class=n>builder</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>itemCount:</span> <span class=n>countries</span><span class=p>.</span><span class=n>length</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>itemBuilder:</span> <span class=p>(</span><span class=n>context</span><span class=p>,</span> <span class=n>i</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=kd>final</span> <span class=n>c</span> <span class=o>=</span> <span class=n>countries</span><span class=p>[</span><span class=n>i</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>                <span class=kd>final</span> <span class=n>isFav</span> <span class=o>=</span> <span class=n>_favoriteCountry</span> <span class=o>==</span> <span class=n>c</span><span class=p>.</span><span class=n>code</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=n>ListTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>leading:</span> <span class=n>Text</span><span class=p>(</span><span class=n>c</span><span class=p>.</span><span class=n>emoji</span><span class=p>,</span> <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>28</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>title:</span> <span class=n>Text</span><span class=p>(</span><span class=n>c</span><span class=p>.</span><span class=n>name</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>subtitle:</span> <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=s1>&#39;</span><span class=si>${</span><span class=n>c</span><span class=p>.</span><span class=n>capital</span> <span class=o>??</span> <span class=s1>&#39;Sin capital&#39;</span><span class=si>}</span><span class=s1> · </span><span class=si>${</span><span class=n>c</span><span class=p>.</span><span class=n>continent</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>trailing:</span> <span class=n>IconButton</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=n>isFav</span> <span class=o>?</span> <span class=n>Icons</span><span class=p>.</span><span class=n>favorite</span> <span class=o>:</span> <span class=n>Icons</span><span class=p>.</span><span class=n>favorite_border</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>color:</span> <span class=n>isFav</span> <span class=o>?</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span> <span class=o>:</span> <span class=kc>null</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>                        <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_favoriteCountry</span> <span class=o>=</span> <span class=n>isFav</span> <span class=o>?</span> <span class=kc>null</span> <span class=o>:</span> <span class=n>c</span><span class=p>.</span><span class=n>code</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>tooltip:</span> <span class=n>isFav</span> <span class=o>?</span> <span class=s1>&#39;Quitar favorito&#39;</span> <span class=o>:</span> <span class=s1>&#39;Marcar favorito&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>onTap:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_showDetail</span><span class=p>(</span><span class=n>context</span><span class=p>,</span> <span class=n>c</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>);</span>
+</span></span><span class=line><span class=cl>              <span class=p>},</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>_showDetail</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>,</span> <span class=n>Country</span> <span class=n>c</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>showModalBottomSheet</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>context:</span> <span class=n>context</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>builder:</span> <span class=p>(</span><span class=n>_</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>_CountryDetail</span><span class=p>(</span><span class=nl>country:</span> <span class=n>c</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Filtro de continentes (usa su propia Query) ────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_ContinentFilter</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span><span class=o>?</span> <span class=n>selected</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>ValueChanged</span><span class=o>&lt;</span><span class=kt>String</span><span class=o>?&gt;</span> <span class=n>onChanged</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_ContinentFilter</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>selected</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>onChanged</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Query</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>options:</span> <span class=n>QueryOptions</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>document:</span> <span class=n>gql</span><span class=p>(</span><span class=n>_getContinents</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>fetchPolicy:</span> <span class=n>FetchPolicy</span><span class=p>.</span><span class=n>cacheFirst</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>builder:</span> <span class=p>(</span><span class=n>result</span><span class=p>,</span> <span class=p>{</span><span class=n>fetchMore</span><span class=p>,</span> <span class=n>refetch</span><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>result</span><span class=p>.</span><span class=n>isLoading</span><span class=p>)</span> <span class=k>return</span> <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>28</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=kd>final</span> <span class=n>raw</span> <span class=o>=</span> <span class=n>result</span><span class=p>.</span><span class=n>data</span><span class=o>?</span><span class=p>[</span><span class=s1>&#39;continents&#39;</span><span class=p>]</span> <span class=o>as</span> <span class=n>List</span><span class=o>?</span> <span class=o>??</span> <span class=p>[];</span>
+</span></span><span class=line><span class=cl>        <span class=kd>final</span> <span class=n>continents</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>            <span class=n>raw</span><span class=p>.</span><span class=n>map</span><span class=p>((</span><span class=n>e</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>Continent</span><span class=p>.</span><span class=n>fromJson</span><span class=p>(</span><span class=n>e</span> <span class=o>as</span> <span class=n>Map</span><span class=o>&lt;</span><span class=kt>String</span><span class=p>,</span> <span class=kt>dynamic</span><span class=o>&gt;</span><span class=p>)).</span><span class=n>toList</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>SizedBox</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>height:</span> <span class=m>28</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>ListView</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>scrollDirection:</span> <span class=n>Axis</span><span class=p>.</span><span class=n>horizontal</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=n>ChoiceChip</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Todos&#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>11</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>selected:</span> <span class=n>selected</span> <span class=o>==</span> <span class=kc>null</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>onSelected:</span> <span class=p>(</span><span class=n>_</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>onChanged</span><span class=p>(</span><span class=kc>null</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>padding:</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>zero</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>visualDensity:</span> <span class=n>VisualDensity</span><span class=p>.</span><span class=n>compact</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>...</span><span class=n>continents</span><span class=p>.</span><span class=n>map</span><span class=p>((</span><span class=n>cont</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>only</span><span class=p>(</span><span class=nl>left:</span> <span class=m>4</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>child:</span> <span class=n>ChoiceChip</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>label:</span> <span class=n>Text</span><span class=p>(</span><span class=n>cont</span><span class=p>.</span><span class=n>name</span><span class=p>,</span> <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>11</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>selected:</span> <span class=n>selected</span> <span class=o>==</span> <span class=n>cont</span><span class=p>.</span><span class=n>code</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>onSelected:</span> <span class=p>(</span><span class=n>_</span><span class=p>)</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>                          <span class=n>onChanged</span><span class=p>(</span><span class=n>selected</span> <span class=o>==</span> <span class=n>cont</span><span class=p>.</span><span class=n>code</span> <span class=o>?</span> <span class=kc>null</span> <span class=o>:</span> <span class=n>cont</span><span class=p>.</span><span class=n>code</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>padding:</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>zero</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>visualDensity:</span> <span class=n>VisualDensity</span><span class=p>.</span><span class=n>compact</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Detalle de país ────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_CountryDetail</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>Country</span> <span class=n>country</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_CountryDetail</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>country</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>mainAxisSize:</span> <span class=n>MainAxisSize</span><span class=p>.</span><span class=n>min</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>              <span class=n>Text</span><span class=p>(</span><span class=n>country</span><span class=p>.</span><span class=n>emoji</span><span class=p>,</span> <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>48</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>              <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>width:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=n>Expanded</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                    <span class=n>Text</span><span class=p>(</span><span class=n>country</span><span class=p>.</span><span class=n>name</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>style:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>textTheme</span><span class=p>.</span><span class=n>headlineSmall</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=n>Text</span><span class=p>(</span><span class=n>country</span><span class=p>.</span><span class=n>continent</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>],</span>
+</span></span><span class=line><span class=cl>                <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>],</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>Divider</span><span class=p>(</span><span class=nl>height:</span> <span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=p>(</span><span class=n>country</span><span class=p>.</span><span class=n>capital</span> <span class=o>!=</span> <span class=kc>null</span><span class=p>)</span> <span class=p>...[</span>
+</span></span><span class=line><span class=cl>            <span class=n>_DetailRow</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>location_city</span><span class=p>,</span> <span class=s1>&#39;Capital&#39;</span><span class=p>,</span> <span class=n>country</span><span class=p>.</span><span class=n>capital</span><span class=o>!</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>          <span class=n>_DetailRow</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>language</span><span class=p>,</span> <span class=s1>&#39;Idiomas&#39;</span><span class=p>,</span> <span class=n>country</span><span class=p>.</span><span class=n>languages</span><span class=p>.</span><span class=n>join</span><span class=p>(</span><span class=s1>&#39;, &#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=n>_DetailRow</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>code</span><span class=p>,</span> <span class=s1>&#39;Código&#39;</span><span class=p>,</span> <span class=n>country</span><span class=p>.</span><span class=n>code</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_DetailRow</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>IconData</span> <span class=n>icon</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>label</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_DetailRow</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=n>icon</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=n>label</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=n>value</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=n>Icon</span><span class=p>(</span><span class=n>icon</span><span class=p>,</span> <span class=nl>size:</span> <span class=m>18</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>width:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>$</span><span class=n>label</span><span class=s1>: &#39;</span><span class=p>,</span> <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>        <span class=n>Expanded</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=n>value</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ── Vista de error ─────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_ErrorView</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>message</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>VoidCallback</span><span class=o>?</span> <span class=n>onRetry</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_ErrorView</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>message</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=n>onRetry</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>mainAxisSize:</span> <span class=n>MainAxisSize</span><span class=p>.</span><span class=n>min</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>wifi_off</span><span class=p>,</span> <span class=nl>size:</span> <span class=m>48</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;Error de red&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>style:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>textTheme</span><span class=p>.</span><span class=n>titleMedium</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=n>message</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>textAlign:</span> <span class=n>TextAlign</span><span class=p>.</span><span class=n>center</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>onRetry</span> <span class=o>!=</span> <span class=kc>null</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>              <span class=n>FilledButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>onPressed:</span> <span class=n>onRetry</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>refresh</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>label:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Reintentar&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=diferencias-entre-rest-y-graphql>Diferencias entre REST y GraphQL<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Característica</th><th>REST</th><th>GraphQL</th></tr></thead><tbody><tr><td>Endpoint</td><td>Múltiples (<code>/countries</code>, <code>/continents</code>)</td><td>Único (<code>/graphql</code>)</td></tr><tr><td>Datos devueltos</td><td>Fijos por endpoint</td><td>Exactamente los que pides</td></tr><tr><td>Over-fetching</td><td>Frecuente</td><td>Imposible por diseño</td></tr><tr><td>Under-fetching</td><td>Requiere múltiples requests</td><td>Resuelto con un query</td></tr><tr><td>Cache</td><td>Por URL</td><td>Por fragmento en grafo</td></tr><tr><td>Suscripciones</td><td>WebSocket manual</td><td>Integrado (subscriptions)</td></tr></tbody></table><h2 id=errores-frecuentes>Errores frecuentes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>Olvidar <code>initHiveForFlutter()</code></strong>: la caché persistente de Hive requiere inicialización antes de <code>runApp</code>. Si no la llamas, Hive lanza una excepción. Si no necesitas persistencia, usa <code>InMemoryStore()</code>.</li><li><strong><code>gql()</code> fuera del widget build</strong>: <code>gql()</code> parsea el documento GraphQL. Llámalo una vez como constante (<code>final doc = gql(query)</code>) en lugar de dentro de <code>build()</code> para evitar re-parseos.</li><li><strong>No manejar <code>result.isLoading && result.data != null</code></strong>: cuando <code>FetchPolicy.cacheAndNetwork</code> refresca datos, <code>isLoading</code> es <code>true</code> pero <code>data</code> tiene el valor anterior del caché. Muestra los datos del caché durante la recarga en lugar de un spinner.</li></ul><h2 id=aplicación-práctica>Aplicación práctica<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>GraphQL es la elección estándar para apps con datos complejos interrelacionados: e-commerce (productos-variantes-stock-reseñas en un solo query), redes sociales (feed con posts-autores-likes) y dashboards analíticos.</p><h2 id=siguiente-ejercicio-recomendado>Siguiente ejercicio recomendado<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/api-async/flutter-websockets-tiempo-real-ejercicio-resuelto/index.html>WebSockets en Flutter: ejercicio resuelto</a></li><li><a href=/ejercicios/flutter-consumo-api-http-ejercicio-resuelto/>Consumo de API HTTP con http en Flutter</a></li><li><a href=/ejercicios/index.html>Todos los ejercicios de Flutter</a></li></ul><h2 id=práctica-guiada-y-siguiente-paso>Práctica guiada y siguiente paso<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/ejercicios/index.html>Más ejercicios de Flutter</a></li><li><a href=https://amzn.to/41weJIN rel=external>Ver el libro en Amazon (incluido en Kindle Unlimited)</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=necesito-un-servidor-graphql-propio-para-aprender>¿Necesito un servidor GraphQL propio para aprender?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>No. Existen APIs públicas de práctica: <code>countries.trevorblades.com</code> (países), <code>api.spacex.land/graphql</code> (SpaceX), <code>rickandmortyapi.com/graphql</code> (Rick & Morty). Usa cualquiera de ellas para aprender sin infraestructura propia.</p><h3 id=cuándo-usar-watchquery-en-lugar-del-widget-query>¿Cuándo usar <code>watchQuery</code> en lugar del widget <code>Query</code>?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><code>watchQuery</code> es útil cuando necesitas refrescar datos manualmente desde un <code>StatefulWidget</code> o desde un <code>ChangeNotifier</code>, sin depender del árbol de widgets. El widget <code>Query</code> es suficiente para el 90 % de los casos de lectura reactiva.</p><h3 id=graphql_flutter-soporta-suscripciones-en-tiempo-real>¿<code>graphql_flutter</code> soporta suscripciones en tiempo real?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copiar enlace al portapapeles"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Sí. Necesitas añadir <code>WebSocketLink</code> y combinarla con <code>HttpLink</code> usando <code>Link.split()</code>. Las suscripciones funcionan igual que las queries pero el builder se llama cada vez que el servidor emite un evento.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> 25 may. 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Buscar (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Buscar</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Buscar...>
+<button class=search-clear type=button data-search-clear title="Borrar búsqueda"><i class="fas fa-fw fa-times" title="Borrar búsqueda"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/index.html><a class=padding href=/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets y UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Formularios y navegación</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> Estado y arquitectura</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=parent data-nav-id=/ejercicios/api-async/index.html><a class="padding default-animation" href=/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API y async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu><li data-nav-id=/ejercicios/api-async/flutter-dio-interceptores-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/api-async/flutter-dio-interceptores-ejercicio-resuelto/index.html>Dio con interceptores en Flutter: ejercicio resuelto</a></li><li class=active data-nav-id=/ejercicios/api-async/flutter-graphql-basico-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/api-async/flutter-graphql-basico-ejercicio-resuelto/index.html>GraphQL en Flutter: ejercicio resuelto con graphql_flutter, queries y mutaciones</a></li><li data-nav-id=/ejercicios/api-async/flutter-websockets-tiempo-real-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/api-async/flutter-websockets-tiempo-real-ejercicio-resuelto/index.html>WebSockets en Flutter: ejercicio resuelto con web_socket_channel</a></li><li data-nav-id=/ejercicios/api-async/flutter-estados-carga-error-vacio-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/api-async/flutter-estados-carga-error-vacio-ejercicio-resuelto/index.html>Estados de carga, error y vacio en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/api-async/flutter-paginacion-cache-invalidacion-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/api-async/flutter-paginacion-cache-invalidacion-ejercicio-resuelto/index.html>Paginacion con cache e invalidacion: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/api-async/flutter-json-tipado-modelos-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/api-async/flutter-json-tipado-modelos-ejercicio-resuelto/index.html>Parseo JSON tipado en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/api-async/flutter-pull-to-refresh-swr-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/api-async/flutter-pull-to-refresh-swr-ejercicio-resuelto/index.html>Pull to refresh tipo SWR en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/api-async/flutter-timeout-retry-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/api-async/flutter-timeout-retry-ejercicio-resuelto/index.html>Timeout y retry en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/api-async/flutter-infinite-scroll-paginacion-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/api-async/flutter-infinite-scroll-paginacion-ejercicio-resuelto/index.html>Scroll infinito y paginacion en Flutter: ejercicio resuelto</a></li><li data-nav-id=/ejercicios/api-async/flutter-futurebuilder-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/api-async/flutter-futurebuilder-ejercicio-resuelto/index.html>FutureBuilder en Flutter: ejercicio resuelto para estados de carga</a></li><li data-nav-id=/ejercicios/api-async/flutter-consumo-api-http-ejercicio-resuelto/index.html><a class=padding href=/ejercicios/api-async/flutter-consumo-api-http-ejercicio-resuelto/index.html>Consumo de API con http en Flutter: ejercicio resuelto</a></li></ul></li><li class=alwaysopen data-nav-id=/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistencia y datos</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing y recursos</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/ejercicios/dispositivo/index.html><a class="padding default-animation" href=/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Dispositivo</a><ul id=R-subsections-bff77604e23f257e9d87870fab19bd83 class=collapsible-menu></ul></li><li data-nav-id=/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Herramientas y código</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu></ul></li><li data-nav-id=/ejercicios/internacionalizacion/index.html><a class=padding href=/ejercicios/internacionalizacion/index.html>Internacionalización</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Idioma</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/api-async/flutter-graphql-basico-ejercicio-resuelto/index.html lang=es selected data-selected></option><option id=R-select-language-en value=en data-url=/en/ejercicios/api-async/flutter-graphql-basico-ejercicio-resuelto/index.html lang=en></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Tema</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1784607733 defer></script><script src=/js/theme.min.js?1784607733 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
