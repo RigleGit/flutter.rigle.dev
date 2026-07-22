@@ -1,0 +1,646 @@
+<!doctype html><html id=R-html lang=en dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Solved Flutter camera exercise: camera plugin, real-time preview, photo capture, front/rear camera switching, flash modes, and a capture gallery."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="Camera in Flutter: solved exercise with the camera plugin :: Flutter en rigle.dev"><meta name=twitter:description content="Solved Flutter camera exercise: camera plugin, real-time preview, photo capture, front/rear camera switching, flash modes, and a capture gallery."><meta property="og:url" content="https://flutter.rigle.dev/en/ejercicios/dispositivo/flutter-camera-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="Camera in Flutter: solved exercise with the camera plugin :: Flutter en rigle.dev"><meta property="og:description" content="Solved Flutter camera exercise: camera plugin, real-time preview, photo capture, front/rear camera switching, flash modes, and a capture gallery."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="Solved Flutter exercises (step by step)"><meta property="article:published_time" content="2026-07-22T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermediate"><meta property="article:tag" content="Camera"><meta property="article:tag" content="Device"><meta itemprop=name content="Camera in Flutter: solved exercise with the camera plugin :: Flutter en rigle.dev"><meta itemprop=description content="Solved Flutter camera exercise: camera plugin, real-time preview, photo capture, front/rear camera switching, flash modes, and a capture gallery."><meta itemprop=datePublished content="2026-07-22T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1586"><meta itemprop=keywords content="Intermediate,Camera,Device"><title>Camera in Flutter: solved exercise with the camera plugin :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/dispositivo/flutter-camera-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/dispositivo/flutter-camera-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/dispositivo/flutter-camera-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1784694320 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1784694320 defer></script><script src=/js/search-lunr.min.js?1784694320 defer></script><script src=/js/search.min.js?1784694320 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.en.js?1784694320"</script><script src=/js/lunr/lunr.min.js?1784694320 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1784694320 defer></script><script src=/js/lunr/lunr.multi.min.js?1784694320 defer></script><script src=/js/lunr/lunr.en.min.js?1784694320 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/fonts/fontawesome/css/all.min.css?1784694320 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1784694320 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1784694320 rel=stylesheet><link href=/css/theme.min.css?1784694320 rel=stylesheet><link href=/css/format-html.min.css?1784694320 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/en/ejercicios/dispositivo/flutter-camera-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1784694320 rel=stylesheet></head><body class="mobile-support html" data-origin=/en/ejercicios/dispositivo/flutter-camera-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#camera-in-flutter-solved-exercise-with-the-camera-plugin>Camera in Flutter: solved exercise with the camera plugin</a></li><li><a href=#problem-statement>Problem statement</a></li><li><a href=#dependencies>Dependencies</a><ul><li><a href=#android-setup>Android setup</a></li><li><a href=#ios-setup>iOS setup</a></li></ul></li><li><a href=#full-solution>Full solution</a></li><li><a href=#main-cameracontroller-methods>Main <code>CameraController</code> methods</a></li><li><a href=#common-mistakes>Common mistakes</a></li><li><a href=#practical-use>Practical use</a></li><li><a href=#recommended-next-exercise>Recommended next exercise</a></li><li><a href=#guided-practice-and-next-step>Guided practice and next step</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#can-i-use-the-camera-plugin-on-the-android-emulator>Can I use the <code>camera</code> plugin on the Android emulator?</a></li><li><a href=#why-use-resolutionpresethigh-instead-of-max>Why use <code>ResolutionPreset.high</code> instead of <code>max</code>?</a></li><li><a href=#does-the-camera-plugin-support-qr-scanning>Does the <code>camera</code> plugin support QR scanning?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/index.html><span itemprop=name>Learn Flutter — solved exercises</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/index.html><span itemprop=name>Exercises</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/dispositivo/index.html><span itemprop=name>Device</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Camera in Flutter: solved exercise with the camera plugin</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html title="Biometrics in Flutter: solved exercise with local_auth and fingerprint / Face ID (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html title="permission_handler in Flutter: solved exercise with full permissions flow (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Tags style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/en/tags/camera/index.html>Camera</a></li><li><a class=term-link href=/en/tags/device/index.html>Device</a></li><li><a class=term-link href=/en/tags/intermediate/index.html>Intermediate</a></li></ul></div></header><h1 id=camera-in-flutter-solved-exercise-with-the-camera-plugin>Camera in Flutter: solved exercise with the camera plugin</h1><h2 id=camera-in-flutter-solved-exercise-with-the-camera-plugin>Camera in Flutter: solved exercise with the camera plugin<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>The <code>camera</code> plugin provides low-level access to camera hardware: real-time preview, photo capture, flash modes, zoom, and camera selection. It is the foundation for QR scanners, selfie apps, and video calls.</p><h2 id=problem-statement>Problem statement<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Build a camera screen that:</p><ul><li>Shows a real-time preview with <code>CameraPreview</code>.</li><li>Allows switching between front and rear cameras.</li><li>Captures a photo and displays it in a thumbnail gallery.</li><li>Controls flash mode (auto, on, off, torch).</li><li>Correctly handles the <code>CameraController</code> lifecycle.</li></ul><h2 id=dependencies>Dependencies<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>camera</span><span class=p>:</span><span class=w> </span><span class=l>^0.11.0+2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>path_provider</span><span class=p>:</span><span class=w> </span><span class=l>^2.1.4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>^1.9.0</span></span></span></code></pre></td></tr></table></div></div><h3 id=android-setup>Android setup<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>In <code>android/app/build.gradle</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gradle data-lang=gradle><span class=line><span class=cl><span class=n>android</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>defaultConfig</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>minSdkVersion</span> <span class=mi>21</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span></span></span></code></pre></td></tr></table></div></div><p>In <code>android/app/src/main/AndroidManifest.xml</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;uses-permission</span> <span class=na>android:name=</span><span class=s>&#34;android.permission.CAMERA&#34;</span><span class=nt>/&gt;</span></span></span></code></pre></td></tr></table></div></div><h3 id=ios-setup>iOS setup<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>In <code>ios/Runner/Info.plist</code>:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;key&gt;</span>NSCameraUsageDescription<span class=nt>&lt;/key&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;string&gt;</span>We need camera access to take photos<span class=nt>&lt;/string&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;key&gt;</span>NSMicrophoneUsageDescription<span class=nt>&lt;/key&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;string&gt;</span>We need the microphone to record video<span class=nt>&lt;/string&gt;</span></span></span></code></pre></td></tr></table></div></div><h2 id=full-solution>Full solution<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;dart:io&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:camera/camera.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:path/path.dart&#39;</span> <span class=k>as</span> <span class=n>p</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:path_provider/path_provider.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>main</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>WidgetsFlutterBinding</span><span class=p>.</span><span class=n>ensureInitialized</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>cameras</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>availableCameras</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=n>runApp</span><span class=p>(</span><span class=n>MaterialApp</span><span class=p>(</span><span class=nl>home:</span> <span class=n>CameraScreen</span><span class=p>(</span><span class=nl>cameras:</span> <span class=n>cameras</span><span class=p>)));</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>CameraScreen</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>List</span><span class=o>&lt;</span><span class=n>CameraDescription</span><span class=o>&gt;</span> <span class=n>cameras</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>CameraScreen</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>cameras</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>CameraScreen</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_CameraScreenState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_CameraScreenState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>CameraScreen</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>with</span> <span class=n>WidgetsBindingObserver</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>CameraController</span><span class=o>?</span> <span class=n>_controller</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>_cameraIndex</span> <span class=o>=</span> <span class=m>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>FlashMode</span> <span class=n>_flashMode</span> <span class=o>=</span> <span class=n>FlashMode</span><span class=p>.</span><span class=n>auto</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kt>bool</span> <span class=n>_isCapturing</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>List</span><span class=o>&lt;</span><span class=kt>String</span><span class=o>&gt;</span> <span class=n>_capturedPaths</span> <span class=o>=</span> <span class=p>[];</span>
+</span></span><span class=line><span class=cl>  <span class=kt>String</span><span class=o>?</span> <span class=n>_initError</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>initState</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>initState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>WidgetsBinding</span><span class=p>.</span><span class=n>instance</span><span class=p>.</span><span class=n>addObserver</span><span class=p>(</span><span class=k>this</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_initCamera</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>dispose</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>WidgetsBinding</span><span class=p>.</span><span class=n>instance</span><span class=p>.</span><span class=n>removeObserver</span><span class=p>(</span><span class=k>this</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>_controller</span><span class=o>?</span><span class=p>.</span><span class=n>dispose</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>super</span><span class=p>.</span><span class=n>dispose</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>didChangeAppLifecycleState</span><span class=p>(</span><span class=n>AppLifecycleState</span> <span class=n>state</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>ctrl</span> <span class=o>=</span> <span class=n>_controller</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>ctrl</span> <span class=o>==</span> <span class=kc>null</span> <span class=o>||</span> <span class=o>!</span><span class=n>ctrl</span><span class=p>.</span><span class=n>value</span><span class=p>.</span><span class=n>isInitialized</span><span class=p>)</span> <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>state</span> <span class=o>==</span> <span class=n>AppLifecycleState</span><span class=p>.</span><span class=n>inactive</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>ctrl</span><span class=p>.</span><span class=n>dispose</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=n>state</span> <span class=o>==</span> <span class=n>AppLifecycleState</span><span class=p>.</span><span class=n>resumed</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>_initCamera</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_initCamera</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>widget</span><span class=p>.</span><span class=n>cameras</span><span class=p>.</span><span class=n>isEmpty</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_initError</span> <span class=o>=</span> <span class=s1>&#39;No cameras found on this device.&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>camera</span> <span class=o>=</span> <span class=n>widget</span><span class=p>.</span><span class=n>cameras</span><span class=p>[</span><span class=n>_cameraIndex</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>ctrl</span> <span class=o>=</span> <span class=n>CameraController</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=n>camera</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>ResolutionPreset</span><span class=p>.</span><span class=n>high</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>enableAudio:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>imageFormatGroup:</span> <span class=n>ImageFormatGroup</span><span class=p>.</span><span class=n>jpeg</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=kd>await</span> <span class=n>ctrl</span><span class=p>.</span><span class=n>initialize</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>      <span class=kd>await</span> <span class=n>ctrl</span><span class=p>.</span><span class=n>setFlashMode</span><span class=p>(</span><span class=n>_flashMode</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>mounted</span><span class=p>)</span> <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=n>setState</span><span class=p>(()</span> <span class=p>{</span> <span class=n>_controller</span> <span class=o>=</span> <span class=n>ctrl</span><span class=p>;</span> <span class=n>_initError</span> <span class=o>=</span> <span class=kc>null</span><span class=p>;</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=n>on</span> <span class=n>CameraException</span> <span class=k>catch</span> <span class=p>(</span><span class=n>e</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_initError</span> <span class=o>=</span> <span class=s1>&#39;</span><span class=si>${</span><span class=n>e</span><span class=p>.</span><span class=n>code</span><span class=si>}</span><span class=s1>: </span><span class=si>${</span><span class=n>e</span><span class=p>.</span><span class=n>description</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_switchCamera</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>widget</span><span class=p>.</span><span class=n>cameras</span><span class=p>.</span><span class=n>length</span> <span class=o>&lt;</span> <span class=m>2</span><span class=p>)</span> <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_controller</span><span class=o>?</span><span class=p>.</span><span class=n>dispose</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=p>{</span> <span class=n>_cameraIndex</span> <span class=o>=</span> <span class=p>(</span><span class=n>_cameraIndex</span> <span class=o>+</span> <span class=m>1</span><span class=p>)</span> <span class=o>%</span> <span class=n>widget</span><span class=p>.</span><span class=n>cameras</span><span class=p>.</span><span class=n>length</span><span class=p>;</span> <span class=n>_controller</span> <span class=o>=</span> <span class=kc>null</span><span class=p>;</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_initCamera</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_cycleFlash</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>modes</span> <span class=o>=</span> <span class=p>[</span><span class=n>FlashMode</span><span class=p>.</span><span class=n>auto</span><span class=p>,</span> <span class=n>FlashMode</span><span class=p>.</span><span class=n>always</span><span class=p>,</span> <span class=n>FlashMode</span><span class=p>.</span><span class=n>off</span><span class=p>,</span> <span class=n>FlashMode</span><span class=p>.</span><span class=n>torch</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>next</span> <span class=o>=</span> <span class=n>modes</span><span class=p>[(</span><span class=n>modes</span><span class=p>.</span><span class=n>indexOf</span><span class=p>(</span><span class=n>_flashMode</span><span class=p>)</span> <span class=o>+</span> <span class=m>1</span><span class=p>)</span> <span class=o>%</span> <span class=n>modes</span><span class=p>.</span><span class=n>length</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=kd>await</span> <span class=n>_controller</span><span class=o>?</span><span class=p>.</span><span class=n>setFlashMode</span><span class=p>(</span><span class=n>next</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_flashMode</span> <span class=o>=</span> <span class=n>next</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>_takePicture</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>ctrl</span> <span class=o>=</span> <span class=n>_controller</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>ctrl</span> <span class=o>==</span> <span class=kc>null</span> <span class=o>||</span> <span class=o>!</span><span class=n>ctrl</span><span class=p>.</span><span class=n>value</span><span class=p>.</span><span class=n>isInitialized</span> <span class=o>||</span> <span class=n>_isCapturing</span><span class=p>)</span> <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_isCapturing</span> <span class=o>=</span> <span class=kc>true</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=kd>final</span> <span class=n>dir</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>getTemporaryDirectory</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>      <span class=kd>final</span> <span class=n>path</span> <span class=o>=</span> <span class=n>p</span><span class=p>.</span><span class=n>join</span><span class=p>(</span><span class=n>dir</span><span class=p>.</span><span class=n>path</span><span class=p>,</span> <span class=s1>&#39;</span><span class=si>${</span><span class=n>DateTime</span><span class=p>.</span><span class=n>now</span><span class=p>().</span><span class=n>millisecondsSinceEpoch</span><span class=si>}</span><span class=s1>.jpg&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=kd>final</span> <span class=n>file</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>ctrl</span><span class=p>.</span><span class=n>takePicture</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>      <span class=kd>await</span> <span class=n>File</span><span class=p>(</span><span class=n>file</span><span class=p>.</span><span class=n>path</span><span class=p>).</span><span class=n>copy</span><span class=p>(</span><span class=n>path</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_capturedPaths</span><span class=p>.</span><span class=n>insert</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=n>path</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=n>on</span> <span class=n>CameraException</span> <span class=k>catch</span> <span class=p>(</span><span class=n>e</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=p>(</span><span class=n>mounted</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>ScaffoldMessenger</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>showSnackBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=n>SnackBar</span><span class=p>(</span><span class=nl>content:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Capture error: </span><span class=si>${</span><span class=n>e</span><span class=p>.</span><span class=n>description</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>        <span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>finally</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_isCapturing</span> <span class=o>=</span> <span class=kc>false</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>IconData</span> <span class=kd>get</span> <span class=n>_flashIcon</span> <span class=o>=&gt;</span> <span class=k>switch</span> <span class=p>(</span><span class=n>_flashMode</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>FlashMode</span><span class=p>.</span><span class=n>auto</span> <span class=o>=&gt;</span> <span class=n>Icons</span><span class=p>.</span><span class=n>flash_auto</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>FlashMode</span><span class=p>.</span><span class=n>always</span> <span class=o>=&gt;</span> <span class=n>Icons</span><span class=p>.</span><span class=n>flash_on</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>FlashMode</span><span class=p>.</span><span class=n>off</span> <span class=o>=&gt;</span> <span class=n>Icons</span><span class=p>.</span><span class=n>flash_off</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>FlashMode</span><span class=p>.</span><span class=n>torch</span> <span class=o>=&gt;</span> <span class=n>Icons</span><span class=p>.</span><span class=n>highlight</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>_</span> <span class=o>=&gt;</span> <span class=n>Icons</span><span class=p>.</span><span class=n>flash_auto</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>backgroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>black</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>SafeArea</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=n>_TopBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>flashIcon:</span> <span class=n>_flashIcon</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onFlash:</span> <span class=n>_cycleFlash</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>canSwitch:</span> <span class=n>widget</span><span class=p>.</span><span class=n>cameras</span><span class=p>.</span><span class=n>length</span> <span class=o>&gt;</span> <span class=m>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onSwitch:</span> <span class=n>_switchCamera</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Expanded</span><span class=p>(</span><span class=nl>child:</span> <span class=n>_buildPreview</span><span class=p>()),</span>
+</span></span><span class=line><span class=cl>            <span class=n>_BottomControls</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>isCapturing:</span> <span class=n>_isCapturing</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onCapture:</span> <span class=n>_takePicture</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>lastCapturePath:</span> <span class=n>_capturedPaths</span><span class=p>.</span><span class=n>isNotEmpty</span> <span class=o>?</span> <span class=n>_capturedPaths</span><span class=p>.</span><span class=n>first</span> <span class=o>:</span> <span class=kc>null</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>onShowGallery:</span> <span class=n>_capturedPaths</span><span class=p>.</span><span class=n>isEmpty</span> <span class=o>?</span> <span class=kc>null</span> <span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_showGallery</span><span class=p>(</span><span class=n>context</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>_buildPreview</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>_initError</span> <span class=o>!=</span> <span class=kc>null</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=n>Center</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>24</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>Text</span><span class=p>(</span><span class=n>_initError</span><span class=o>!</span><span class=p>,</span> <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>),</span> <span class=nl>textAlign:</span> <span class=n>TextAlign</span><span class=p>.</span><span class=n>center</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>ctrl</span> <span class=o>=</span> <span class=n>_controller</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>ctrl</span> <span class=o>==</span> <span class=kc>null</span> <span class=o>||</span> <span class=o>!</span><span class=n>ctrl</span><span class=p>.</span><span class=n>value</span><span class=p>.</span><span class=n>isInitialized</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=kd>const</span> <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>CircularProgressIndicator</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>ClipRect</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>OverflowBox</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>alignment:</span> <span class=n>Alignment</span><span class=p>.</span><span class=n>center</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>FittedBox</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>fit:</span> <span class=n>BoxFit</span><span class=p>.</span><span class=n>cover</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>child:</span> <span class=n>SizedBox</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>width:</span> <span class=n>ctrl</span><span class=p>.</span><span class=n>value</span><span class=p>.</span><span class=n>previewSize</span><span class=o>?</span><span class=p>.</span><span class=n>height</span> <span class=o>??</span> <span class=m>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>height:</span> <span class=n>ctrl</span><span class=p>.</span><span class=n>value</span><span class=p>.</span><span class=n>previewSize</span><span class=o>?</span><span class=p>.</span><span class=n>width</span> <span class=o>??</span> <span class=m>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>CameraPreview</span><span class=p>(</span><span class=n>ctrl</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>_showGallery</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>Navigator</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>push</span><span class=p>(</span><span class=n>MaterialPageRoute</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>builder:</span> <span class=p>(</span><span class=n>_</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>_GalleryScreen</span><span class=p>(</span><span class=nl>paths:</span> <span class=n>List</span><span class=p>.</span><span class=n>from</span><span class=p>(</span><span class=n>_capturedPaths</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>    <span class=p>));</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_TopBar</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>IconData</span> <span class=n>flashIcon</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>VoidCallback</span> <span class=n>onFlash</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>bool</span> <span class=n>canSwitch</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>VoidCallback</span> <span class=n>onSwitch</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_TopBar</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>flashIcon</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>onFlash</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>canSwitch</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>onSwitch</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>horizontal:</span> <span class=m>8</span><span class=p>,</span> <span class=nl>vertical:</span> <span class=m>4</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>mainAxisAlignment:</span> <span class=n>MainAxisAlignment</span><span class=p>.</span><span class=n>spaceBetween</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>IconButton</span><span class=p>(</span><span class=nl>icon:</span> <span class=n>Icon</span><span class=p>(</span><span class=n>flashIcon</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>),</span> <span class=nl>onPressed:</span> <span class=n>onFlash</span><span class=p>,</span> <span class=nl>tooltip:</span> <span class=s1>&#39;Toggle flash&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=p>(</span><span class=n>canSwitch</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>IconButton</span><span class=p>(</span><span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>flip_camera_ios</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>),</span> <span class=nl>onPressed:</span> <span class=n>onSwitch</span><span class=p>,</span> <span class=nl>tooltip:</span> <span class=s1>&#39;Switch camera&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_BottomControls</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>bool</span> <span class=n>isCapturing</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>VoidCallback</span> <span class=n>onCapture</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span><span class=o>?</span> <span class=n>lastCapturePath</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>VoidCallback</span><span class=o>?</span> <span class=n>onShowGallery</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_BottomControls</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>isCapturing</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>onCapture</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=n>lastCapturePath</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=n>onShowGallery</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>symmetric</span><span class=p>(</span><span class=nl>horizontal:</span> <span class=m>24</span><span class=p>,</span> <span class=nl>vertical:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>mainAxisAlignment:</span> <span class=n>MainAxisAlignment</span><span class=p>.</span><span class=n>spaceAround</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>GestureDetector</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onTap:</span> <span class=n>onShowGallery</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>width:</span> <span class=m>56</span><span class=p>,</span> <span class=nl>height:</span> <span class=m>56</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>border:</span> <span class=n>Border</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white54</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white12</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>lastCapturePath</span> <span class=o>!=</span> <span class=kc>null</span>
+</span></span><span class=line><span class=cl>                  <span class=o>?</span> <span class=n>ClipRRect</span><span class=p>(</span><span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>7</span><span class=p>),</span> <span class=nl>child:</span> <span class=n>Image</span><span class=p>.</span><span class=n>file</span><span class=p>(</span><span class=n>File</span><span class=p>(</span><span class=n>lastCapturePath</span><span class=o>!</span><span class=p>),</span> <span class=nl>fit:</span> <span class=n>BoxFit</span><span class=p>.</span><span class=n>cover</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                  <span class=o>:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>photo_library</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white54</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=n>GestureDetector</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onTap:</span> <span class=n>isCapturing</span> <span class=o>?</span> <span class=kc>null</span> <span class=o>:</span> <span class=n>onCapture</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>AnimatedContainer</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>duration:</span> <span class=kd>const</span> <span class=n>Duration</span><span class=p>(</span><span class=nl>milliseconds:</span> <span class=m>150</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>width:</span> <span class=n>isCapturing</span> <span class=o>?</span> <span class=m>64</span> <span class=o>:</span> <span class=m>72</span><span class=p>,</span> <span class=nl>height:</span> <span class=n>isCapturing</span> <span class=o>?</span> <span class=m>64</span> <span class=o>:</span> <span class=m>72</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span><span class=nl>shape:</span> <span class=n>BoxShape</span><span class=p>.</span><span class=n>circle</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>,</span> <span class=nl>border:</span> <span class=n>Border</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white54</span><span class=p>,</span> <span class=nl>width:</span> <span class=m>4</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>isCapturing</span> <span class=o>?</span> <span class=kd>const</span> <span class=n>Padding</span><span class=p>(</span><span class=nl>padding:</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span> <span class=nl>child:</span> <span class=n>CircularProgressIndicator</span><span class=p>(</span><span class=nl>strokeWidth:</span> <span class=m>2</span><span class=p>))</span> <span class=o>:</span> <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>.</span><span class=n>shrink</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>width:</span> <span class=m>56</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_GalleryScreen</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>List</span><span class=o>&lt;</span><span class=kt>String</span><span class=o>&gt;</span> <span class=n>paths</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_GalleryScreen</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>paths</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>_GalleryScreen</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_GalleryScreenState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_GalleryScreenState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>_GalleryScreen</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>late</span> <span class=kd>final</span> <span class=n>List</span><span class=o>&lt;</span><span class=kt>String</span><span class=o>&gt;</span> <span class=n>_paths</span> <span class=o>=</span> <span class=n>List</span><span class=p>.</span><span class=n>from</span><span class=p>(</span><span class=n>widget</span><span class=p>.</span><span class=n>paths</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=n>_delete</span><span class=p>(</span><span class=kt>String</span> <span class=n>path</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>File</span><span class=p>(</span><span class=n>path</span><span class=p>).</span><span class=n>deleteSync</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_paths</span><span class=p>.</span><span class=n>remove</span><span class=p>(</span><span class=n>path</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>_paths</span><span class=p>.</span><span class=n>isEmpty</span> <span class=o>&amp;&amp;</span> <span class=n>mounted</span><span class=p>)</span> <span class=n>Navigator</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>pop</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Gallery (</span><span class=si>${</span><span class=n>_paths</span><span class=p>.</span><span class=n>length</span><span class=si>}</span><span class=s1>)&#39;</span><span class=p>),</span> <span class=nl>backgroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>black</span><span class=p>,</span> <span class=nl>foregroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>backgroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>black</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>GridView</span><span class=p>.</span><span class=n>builder</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>4</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>gridDelegate:</span> <span class=kd>const</span> <span class=n>SliverGridDelegateWithFixedCrossAxisCount</span><span class=p>(</span><span class=nl>crossAxisCount:</span> <span class=m>3</span><span class=p>,</span> <span class=nl>crossAxisSpacing:</span> <span class=m>4</span><span class=p>,</span> <span class=nl>mainAxisSpacing:</span> <span class=m>4</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>itemCount:</span> <span class=n>_paths</span><span class=p>.</span><span class=n>length</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>itemBuilder:</span> <span class=p>(</span><span class=n>_</span><span class=p>,</span> <span class=n>i</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=kd>final</span> <span class=n>path</span> <span class=o>=</span> <span class=n>_paths</span><span class=p>[</span><span class=n>i</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=n>GestureDetector</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>onTap:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>Navigator</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>push</span><span class=p>(</span><span class=n>MaterialPageRoute</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>builder:</span> <span class=p>(</span><span class=n>_</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=n>_PhotoViewer</span><span class=p>(</span><span class=nl>path:</span> <span class=n>path</span><span class=p>,</span> <span class=nl>onDelete:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_delete</span><span class=p>(</span><span class=n>path</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=nl>child:</span> <span class=n>Image</span><span class=p>.</span><span class=n>file</span><span class=p>(</span><span class=n>File</span><span class=p>(</span><span class=n>path</span><span class=p>),</span> <span class=nl>fit:</span> <span class=n>BoxFit</span><span class=p>.</span><span class=n>cover</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_PhotoViewer</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>path</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=n>VoidCallback</span> <span class=n>onDelete</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_PhotoViewer</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>path</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>onDelete</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>backgroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>black</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>backgroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>black</span><span class=p>,</span> <span class=nl>foregroundColor:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>white</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>actions:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>IconButton</span><span class=p>(</span><span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>delete</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>red</span><span class=p>),</span> <span class=nl>onPressed:</span> <span class=p>()</span> <span class=p>{</span> <span class=n>onDelete</span><span class=p>();</span> <span class=n>Navigator</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>pop</span><span class=p>();</span> <span class=p>}),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Center</span><span class=p>(</span><span class=nl>child:</span> <span class=n>Image</span><span class=p>.</span><span class=n>file</span><span class=p>(</span><span class=n>File</span><span class=p>(</span><span class=n>path</span><span class=p>))),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=main-cameracontroller-methods>Main <code>CameraController</code> methods<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>initialize()</code></td><td>Initializes the hardware. Required before any operation</td></tr><tr><td><code>takePicture()</code></td><td>Captures a photo as <code>XFile</code></td></tr><tr><td><code>startVideoRecording()</code></td><td>Starts video recording</td></tr><tr><td><code>stopVideoRecording()</code></td><td>Stops and returns the video as <code>XFile</code></td></tr><tr><td><code>setFlashMode(mode)</code></td><td>Changes flash mode</td></tr><tr><td><code>setZoomLevel(zoom)</code></td><td>Adjusts zoom (between <code>minZoomLevel</code> and <code>maxZoomLevel</code>)</td></tr><tr><td><code>setFocusPoint(offset)</code></td><td>Sets focus point in normalized coordinates (0,0)–(1,1)</td></tr><tr><td><code>setExposureOffset(value)</code></td><td>Adjusts exposure in EV</td></tr></tbody></table><h2 id=common-mistakes>Common mistakes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>Not calling <code>dispose()</code> when leaving the screen</strong>: <code>CameraController</code> keeps an active sensor stream. If you don&rsquo;t <code>dispose()</code>, the camera indicator on iOS/Android stays active and the next open fails.</li><li><strong>Not handling <code>WidgetsBindingObserver</code></strong>: when the app goes to the background, camera access may be revoked by the OS. Listen to <code>didChangeAppLifecycleState</code> to <code>dispose</code> on <code>inactive</code> and reinitialize on <code>resumed</code>.</li><li><strong>Using <code>XFile.path</code> directly as a permanent path</strong>: <code>takePicture()</code> saves to a temporary folder that the OS may clean up. Copy the file to <code>getApplicationDocumentsDirectory()</code> if you need persistence.</li></ul><h2 id=practical-use>Practical use<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>The camera is the foundation for: QR/barcode scanners (with <code>mobile_scanner</code>), document scanning apps (scan + OCR), augmented reality filters, and identity verification (KYC) in fintech apps.</p><h2 id=recommended-next-exercise>Recommended next exercise<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/>permission_handler in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/>Biometrics with local_auth in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/>All Flutter exercises</a></li></ul><h2 id=guided-practice-and-next-step>Guided practice and next step<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/>More Flutter exercises</a></li><li><a href=https://www.amazon.com/dp/B0FZ4QHW8L rel=external>View the book on Amazon (included in Kindle Unlimited)</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=can-i-use-the-camera-plugin-on-the-android-emulator>Can I use the <code>camera</code> plugin on the Android emulator?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Yes, but the preview will show a generated test scene, not a real camera. For real capture testing you need a physical device.</p><h3 id=why-use-resolutionpresethigh-instead-of-max>Why use <code>ResolutionPreset.high</code> instead of <code>max</code>?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><code>ResolutionPreset.max</code> can cause performance issues on low-end devices and significantly increase initialization time. <code>high</code> offers a good balance between quality and performance.</p><h3 id=does-the-camera-plugin-support-qr-scanning>Does the <code>camera</code> plugin support QR scanning?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Not directly. For QR codes and barcodes use the <code>mobile_scanner</code> or <code>qr_code_scanner</code> plugin, which are optimized for continuous frame processing and pattern recognition.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> May 25, 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/en/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/en/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/en/index.html><a class=padding href=/en/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/en/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/en/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets and UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/en/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Forms and navigation</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/en/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> State and architecture</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/api-async/index.html><a class="padding default-animation" href=/en/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API and async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/en/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistence and data</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/en/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing and resources</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li class=parent data-nav-id=/en/ejercicios/dispositivo/index.html><a class="padding default-animation" href=/en/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Device</a><ul id=R-subsections-bff77604e23f257e9d87870fab19bd83 class=collapsible-menu><li data-nav-id=/en/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/dispositivo/flutter-biometria-local-auth-ejercicio-resuelto/index.html>Biometrics in Flutter: solved exercise with local_auth and fingerprint / Face ID</a></li><li class=active data-nav-id=/en/ejercicios/dispositivo/flutter-camera-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/dispositivo/flutter-camera-ejercicio-resuelto/index.html>Camera in Flutter: solved exercise with the camera plugin</a></li><li data-nav-id=/en/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html>permission_handler in Flutter: solved exercise with full permissions flow</a></li></ul></li><li data-nav-id=/en/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/en/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Tools & Code</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu></ul></li><li data-nav-id=/en/ejercicios/internacionalizacion/index.html><a class=padding href=/en/ejercicios/internacionalizacion/index.html>Internationalization</a></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Language</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/dispositivo/flutter-camera-ejercicio-resuelto/index.html lang=es></option><option id=R-select-language-en value=en data-url=/en/ejercicios/dispositivo/flutter-camera-ejercicio-resuelto/index.html lang=en selected data-selected></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Theme</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1784694320 defer></script><script src=/js/theme.min.js?1784694320 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
