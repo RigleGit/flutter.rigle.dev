@@ -1,0 +1,433 @@
+<!doctype html><html id=R-html lang=en dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Solved Flutter internationalization exercise: flutter_localizations, gen-l10n, ARB files, AppLocalizations, pluralization, and parameterized translations."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="Internationalization in Flutter: solved exercise with flutter_localizations and ARB files :: Flutter en rigle.dev"><meta name=twitter:description content="Solved Flutter internationalization exercise: flutter_localizations, gen-l10n, ARB files, AppLocalizations, pluralization, and parameterized translations."><meta property="og:url" content="https://flutter.rigle.dev/en/ejercicios/internacionalizacion/flutter-localizacion-arb-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="Internationalization in Flutter: solved exercise with flutter_localizations and ARB files :: Flutter en rigle.dev"><meta property="og:description" content="Solved Flutter internationalization exercise: flutter_localizations, gen-l10n, ARB files, AppLocalizations, pluralization, and parameterized translations."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="Solved Flutter exercises (step by step)"><meta property="article:published_time" content="2026-07-23T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermediate"><meta property="article:tag" content="Internationalization"><meta property="article:tag" content="Arb"><meta itemprop=name content="Internationalization in Flutter: solved exercise with flutter_localizations and ARB files :: Flutter en rigle.dev"><meta itemprop=description content="Solved Flutter internationalization exercise: flutter_localizations, gen-l10n, ARB files, AppLocalizations, pluralization, and parameterized translations."><meta itemprop=datePublished content="2026-07-23T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1123"><meta itemprop=keywords content="Intermediate,Internationalization,Arb"><title>Internationalization in Flutter: solved exercise with flutter_localizations and ARB files :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/internacionalizacion/flutter-localizacion-arb-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/internacionalizacion/flutter-localizacion-arb-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/internacionalizacion/flutter-localizacion-arb-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1784780617 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1784780617 defer></script><script src=/js/search-lunr.min.js?1784780617 defer></script><script src=/js/search.min.js?1784780617 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.en.js?1784780617"</script><script src=/js/lunr/lunr.min.js?1784780617 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1784780617 defer></script><script src=/js/lunr/lunr.multi.min.js?1784780617 defer></script><script src=/js/lunr/lunr.en.min.js?1784780617 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/fonts/fontawesome/css/all.min.css?1784780617 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1784780617 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1784780617 rel=stylesheet><link href=/css/theme.min.css?1784780617 rel=stylesheet><link href=/css/format-html.min.css?1784780617 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/en/ejercicios/internacionalizacion/flutter-localizacion-arb-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1784780617 rel=stylesheet></head><body class="mobile-support html" data-origin=/en/ejercicios/internacionalizacion/flutter-localizacion-arb-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#internationalization-in-flutter-solved-exercise-with-flutter_localizations-and-arb-files>Internationalization in Flutter: solved exercise with flutter_localizations and ARB files</a></li><li><a href=#problem-statement>Problem statement</a></li><li><a href=#dependencies-and-configuration>Dependencies and configuration</a><ul><li><a href=#pubspecyaml><code>pubspec.yaml</code></a></li><li><a href=#l10nyaml-in-the-project-root><code>l10n.yaml</code> (in the project root)</a></li><li><a href=#libl10napp_enarb><code>lib/l10n/app_en.arb</code></a></li><li><a href=#libl10napp_esarb><code>lib/l10n/app_es.arb</code></a></li></ul></li><li><a href=#full-solution>Full solution</a></li><li><a href=#arb-file-structure>ARB file structure</a></li><li><a href=#common-mistakes>Common mistakes</a></li><li><a href=#practical-use>Practical use</a></li><li><a href=#recommended-next-exercise>Recommended next exercise</a></li><li><a href=#guided-practice-and-next-step>Guided practice and next step</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#should-i-use-gen-l10n-or-the-intl_utils-package>Should I use <code>gen-l10n</code> or the <code>intl_utils</code> package?</a></li><li><a href=#how-does-pluralization-work-in-languages-with-more-than-two-forms>How does pluralization work in languages with more than two forms?</a></li><li><a href=#can-arb-files-be-shared-with-other-platforms>Can ARB files be shared with other platforms?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/index.html><span itemprop=name>Learn Flutter — solved exercises</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/index.html><span itemprop=name>Exercises</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/internacionalizacion/index.html><span itemprop=name>Internationalization</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Internationalization in Flutter: solved exercise with flutter_localizations and ARB files</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/internacionalizacion/index.html title="Internationalization (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle"><span><i class="fa-fw fas fa-chevron-right"></i></span></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Tags style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/en/tags/arb/index.html>Arb</a></li><li><a class=term-link href=/en/tags/intermediate/index.html>Intermediate</a></li><li><a class=term-link href=/en/tags/internationalization/index.html>Internationalization</a></li></ul></div></header><h1 id=internationalization-in-flutter-solved-exercise-with-flutter_localizations-and-arb-files>Internationalization in Flutter: solved exercise with flutter_localizations and ARB files</h1><h2 id=internationalization-in-flutter-solved-exercise-with-flutter_localizations-and-arb-files>Internationalization in Flutter: solved exercise with flutter_localizations and ARB files<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Internationalization (i18n) in Flutter is built on <code>flutter_localizations</code> + the <code>gen-l10n</code> code generator. ARB (Application Resource Bundle) files are the standard translation format: annotated JSON that the generator converts into typed Dart classes.</p><h2 id=problem-statement>Problem statement<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Build a multilingual app that:</p><ul><li>Supports English and Spanish via ARB files.</li><li>Uses <code>AppLocalizations</code> auto-generated with <code>flutter gen-l10n</code>.</li><li>Shows translations with variable arguments (username).</li><li>Uses correct pluralization (<code>itemCount</code>).</li><li>Shows the date formatted according to the active locale.</li></ul><h2 id=dependencies-and-configuration>Dependencies and configuration<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=pubspecyaml><code>pubspec.yaml</code><span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>flutter</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>sdk</span><span class=p>:</span><span class=w> </span><span class=l>flutter</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>flutter_localizations</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>sdk</span><span class=p>:</span><span class=w> </span><span class=l>flutter</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>intl</span><span class=p>:</span><span class=w> </span><span class=l>^0.19.0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>flutter</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>generate</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w> </span><span class=c># enables gen-l10n</span></span></span></code></pre></td></tr></table></div></div><h3 id=l10nyaml-in-the-project-root><code>l10n.yaml</code> (in the project root)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>arb-dir</span><span class=p>:</span><span class=w> </span><span class=l>lib/l10n</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>template-arb-file</span><span class=p>:</span><span class=w> </span><span class=l>app_en.arb</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>output-localization-file</span><span class=p>:</span><span class=w> </span><span class=l>app_localizations.dart</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>output-class</span><span class=p>:</span><span class=w> </span><span class=l>AppLocalizations</span></span></span></code></pre></td></tr></table></div></div><h3 id=libl10napp_enarb><code>lib/l10n/app_en.arb</code><span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;@@locale&#34;</span><span class=p>:</span> <span class=s2>&#34;en&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;appTitle&#34;</span><span class=p>:</span> <span class=s2>&#34;My Multilanguage App&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;@appTitle&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;Application title&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;greeting&#34;</span><span class=p>:</span> <span class=s2>&#34;Hello, {name}&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;@greeting&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;Personalized greeting&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;placeholders&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;String&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;example&#34;</span><span class=p>:</span> <span class=s2>&#34;Alice&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;itemCount&#34;</span><span class=p>:</span> <span class=s2>&#34;{count, plural, =0{No items} =1{1 item} other{{count} items}}&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;@itemCount&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;Item count with pluralization&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;placeholders&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;count&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;int&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;currentDate&#34;</span><span class=p>:</span> <span class=s2>&#34;Current date: {date}&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;@currentDate&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;Date formatted according to locale&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;placeholders&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;date&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;DateTime&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;format&#34;</span><span class=p>:</span> <span class=s2>&#34;yMMMMd&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;isCustomDateFormat&#34;</span><span class=p>:</span> <span class=s2>&#34;true&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;settingsTitle&#34;</span><span class=p>:</span> <span class=s2>&#34;Settings&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;languageLabel&#34;</span><span class=p>:</span> <span class=s2>&#34;Language&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;addItem&#34;</span><span class=p>:</span> <span class=s2>&#34;Add item&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;removeItem&#34;</span><span class=p>:</span> <span class=s2>&#34;Remove item&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;welcomeMessage&#34;</span><span class=p>:</span> <span class=s2>&#34;Welcome to the internationalization app&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h3 id=libl10napp_esarb><code>lib/l10n/app_es.arb</code><span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;@@locale&#34;</span><span class=p>:</span> <span class=s2>&#34;es&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;appTitle&#34;</span><span class=p>:</span> <span class=s2>&#34;Mi App Multiidioma&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;greeting&#34;</span><span class=p>:</span> <span class=s2>&#34;Hola, {name}&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;itemCount&#34;</span><span class=p>:</span> <span class=s2>&#34;{count, plural, =0{Sin elementos} =1{1 elemento} other{{count} elementos}}&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;currentDate&#34;</span><span class=p>:</span> <span class=s2>&#34;Fecha actual: {date}&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;settingsTitle&#34;</span><span class=p>:</span> <span class=s2>&#34;Configuración&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;languageLabel&#34;</span><span class=p>:</span> <span class=s2>&#34;Idioma&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;addItem&#34;</span><span class=p>:</span> <span class=s2>&#34;Añadir elemento&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;removeItem&#34;</span><span class=p>:</span> <span class=s2>&#34;Eliminar elemento&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;welcomeMessage&#34;</span><span class=p>:</span> <span class=s2>&#34;Bienvenido a la app de internacionalización&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><p>After creating the ARB files, run:</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>flutter gen-l10n</span></span></code></pre></td></tr></table></div></div><p>This generates <code>lib/gen/app_localizations.dart</code> (or inside <code>.dart_tool/flutter_gen/</code>).</p><h2 id=full-solution>Full solution<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=c1>// lib/main.dart
+</span></span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter_localizations/flutter_localizations.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter_gen/gen_l10n/app_localizations.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>main</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>MyApp</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>MyApp</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>MyApp</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>MaterialApp</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>title:</span> <span class=s1>&#39;Flutter i18n Demo&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>localizationsDelegates:</span> <span class=kd>const</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=n>AppLocalizations</span><span class=p>.</span><span class=n>delegate</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>GlobalMaterialLocalizations</span><span class=p>.</span><span class=n>delegate</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>GlobalWidgetsLocalizations</span><span class=p>.</span><span class=n>delegate</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>GlobalCupertinoLocalizations</span><span class=p>.</span><span class=n>delegate</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=nl>supportedLocales:</span> <span class=kd>const</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=n>Locale</span><span class=p>(</span><span class=s1>&#39;en&#39;</span><span class=p>),</span> <span class=c1>// English — default
+</span></span></span><span class=line><span class=cl>        <span class=n>Locale</span><span class=p>(</span><span class=s1>&#39;es&#39;</span><span class=p>),</span> <span class=c1>// Spanish
+</span></span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=nl>home:</span> <span class=kd>const</span> <span class=n>LocalizationDemo</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>LocalizationDemo</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>LocalizationDemo</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>State</span><span class=o>&lt;</span><span class=n>LocalizationDemo</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>_LocalizationDemoState</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_LocalizationDemoState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>LocalizationDemo</span><span class=o>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>_itemCount</span> <span class=o>=</span> <span class=m>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>_userName</span> <span class=o>=</span> <span class=s1>&#39;Alice&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>l10n</span> <span class=o>=</span> <span class=n>AppLocalizations</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>)</span><span class=o>!</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=n>Text</span><span class=p>(</span><span class=n>l10n</span><span class=p>.</span><span class=n>appTitle</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>stretch</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Greeting with argument ───────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=n>Card</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>ListTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>leading:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>person</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>title:</span> <span class=n>Text</span><span class=p>(</span><span class=n>l10n</span><span class=p>.</span><span class=n>greeting</span><span class=p>(</span><span class=n>_userName</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>subtitle:</span> <span class=n>Text</span><span class=p>(</span><span class=n>l10n</span><span class=p>.</span><span class=n>welcomeMessage</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Formatted date ───────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=n>Card</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>ListTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>leading:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>calendar_today</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nl>title:</span> <span class=n>Text</span><span class=p>(</span><span class=n>l10n</span><span class=p>.</span><span class=n>currentDate</span><span class=p>(</span><span class=n>DateTime</span><span class=p>.</span><span class=n>now</span><span class=p>())),</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// ── Pluralization ────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>            <span class=n>Card</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>              <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                  <span class=n>ListTile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>leading:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>list</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>title:</span> <span class=n>Text</span><span class=p>(</span><span class=n>l10n</span><span class=p>.</span><span class=n>itemCount</span><span class=p>(</span><span class=n>_itemCount</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>trailing:</span> <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                      <span class=s1>&#39;</span><span class=si>$</span><span class=n>_itemCount</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=nl>style:</span> <span class=n>Theme</span><span class=p>.</span><span class=n>of</span><span class=p>(</span><span class=n>context</span><span class=p>).</span><span class=n>textTheme</span><span class=p>.</span><span class=n>headlineMedium</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=n>Row</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>mainAxisAlignment:</span> <span class=n>MainAxisAlignment</span><span class=p>.</span><span class=n>spaceEvenly</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                      <span class=n>TextButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>onPressed:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_itemCount</span><span class=o>++</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>add</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>label:</span> <span class=n>Text</span><span class=p>(</span><span class=n>l10n</span><span class=p>.</span><span class=n>addItem</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                      <span class=p>),</span>
+</span></span><span class=line><span class=cl>                      <span class=n>TextButton</span><span class=p>.</span><span class=n>icon</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>onPressed:</span> <span class=n>_itemCount</span> <span class=o>&gt;</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>                            <span class=o>?</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=n>setState</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=n>_itemCount</span><span class=o>--</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                            <span class=o>:</span> <span class=kc>null</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>icon:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>remove</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                        <span class=nl>label:</span> <span class=n>Text</span><span class=p>(</span><span class=n>l10n</span><span class=p>.</span><span class=n>removeItem</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                      <span class=p>),</span>
+</span></span><span class=line><span class=cl>                    <span class=p>],</span>
+</span></span><span class=line><span class=cl>                  <span class=p>),</span>
+</span></span><span class=line><span class=cl>                  <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=p>],</span>
+</span></span><span class=line><span class=cl>              <span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>Spacer</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>            <span class=n>_LocaleInfo</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_LocaleInfo</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>locale</span> <span class=o>=</span> <span class=n>Localizations</span><span class=p>.</span><span class=n>localeOf</span><span class=p>(</span><span class=n>context</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Container</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>decoration:</span> <span class=n>BoxDecoration</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>blue</span><span class=p>.</span><span class=n>shade50</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>borderRadius:</span> <span class=n>BorderRadius</span><span class=p>.</span><span class=n>circular</span><span class=p>(</span><span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>border:</span> <span class=n>Border</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>blue</span><span class=p>.</span><span class=n>shade200</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Active locale: </span><span class=si>${</span><span class=n>locale</span><span class=p>.</span><span class=n>toLanguageTag</span><span class=p>()</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Language code: </span><span class=si>${</span><span class=n>locale</span><span class=p>.</span><span class=n>languageCode</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=p>(</span><span class=n>locale</span><span class=p>.</span><span class=n>countryCode</span> <span class=o>!=</span> <span class=kc>null</span><span class=p>)</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Country: </span><span class=si>${</span><span class=n>locale</span><span class=p>.</span><span class=n>countryCode</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;Change the device language to see the automatic switch.&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>style:</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontSize:</span> <span class=m>12</span><span class=p>,</span> <span class=nl>color:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>grey</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=arb-file-structure>ARB file structure<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Field</th><th>Usage</th></tr></thead><tbody><tr><td><code>@@locale</code></td><td>Declares the file language (<code>"en"</code>, <code>"es"</code>)</td></tr><tr><td><code>"key": "value"</code></td><td>Simple translation</td></tr><tr><td><code>"@key"</code></td><td>Key metadata (description, placeholders)</td></tr><tr><td><code>{param}</code></td><td>Positional String argument</td></tr><tr><td><code>{count, plural, ...}</code></td><td>Pluralization via ICU MessageFormat</td></tr><tr><td><code>{date}</code> with <code>"type": "DateTime"</code></td><td>Date formatted with <code>intl</code> per locale</td></tr></tbody></table><h2 id=common-mistakes>Common mistakes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>Forgetting <code>flutter: generate: true</code> in <code>pubspec.yaml</code></strong>: without this line, <code>flutter gen-l10n</code> does not generate Dart files and the <code>AppLocalizations</code> import does not exist.</li><li><strong>Using <code>AppLocalizations.of(context)</code> without <code>!</code></strong>: in a correctly configured <code>MaterialApp</code> it never returns null inside the widget tree. Use <code>!</code> or check for null only for screens outside the localization tree.</li><li><strong>Not adding <code>GlobalMaterialLocalizations.delegate</code></strong>: without this delegate, native Material strings (OK button, Cancel, date picker) won&rsquo;t be translated even if your content is.</li><li><strong>ARB with incorrect plural syntax</strong>: the ICU format is <code>{count, plural, =0{...} =1{...} other{...}}</code>. The <code>other</code> case is mandatory — if you omit it, <code>gen-l10n</code> fails with a cryptic error.</li></ul><h2 id=practical-use>Practical use<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Any app published in multiple markets needs i18n: productivity apps, e-commerce, and SaaS tools. The key is implementing it from the start — retrofitting i18n into a large app is expensive.</p><h2 id=recommended-next-exercise>Recommended next exercise<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/internacionalizacion/flutter-cambio-idioma-runtime-ejercicio-resuelto/>Runtime language change in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/>All Flutter exercises</a></li></ul><h2 id=guided-practice-and-next-step>Guided practice and next step<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/>More Flutter exercises</a></li><li><a href=https://www.amazon.com/dp/B0FZ4QHW8L rel=external>View the book on Amazon (included in Kindle Unlimited)</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=should-i-use-gen-l10n-or-the-intl_utils-package>Should I use <code>gen-l10n</code> or the <code>intl_utils</code> package?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p><code>gen-l10n</code> is the official Flutter team solution and requires no extra dependencies. <code>intl_utils</code> is a popular alternative with VS Code and Android Studio integration, but adds an extra dev dependency. For new projects, use <code>gen-l10n</code>.</p><h3 id=how-does-pluralization-work-in-languages-with-more-than-two-forms>How does pluralization work in languages with more than two forms?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>ICU MessageFormat supports the categories <code>zero</code>, <code>one</code>, <code>two</code>, <code>few</code>, <code>many</code>, <code>other</code>. The locale determines how many forms a language uses: English uses only <code>one/other</code>, Polish uses <code>one/few/many/other</code>. The <code>intl</code> library automatically handles selection by locale.</p><h3 id=can-arb-files-be-shared-with-other-platforms>Can ARB files be shared with other platforms?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>Yes. ARB is also the standard format for Flutter Web, macOS, and Desktop. Some teams reuse the same ARB files on Android (with <code>android-arb-plugin</code>) and in iOS/macOS projects semi-automatically.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> May 25, 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/en/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/en/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/en/index.html><a class=padding href=/en/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/en/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/en/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets and UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/en/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Forms and navigation</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/en/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> State and architecture</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/api-async/index.html><a class="padding default-animation" href=/en/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API and async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/en/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistence and data</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/en/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing and resources</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/dispositivo/index.html><a class="padding default-animation" href=/en/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Device</a><ul id=R-subsections-bff77604e23f257e9d87870fab19bd83 class=collapsible-menu></ul></li><li data-nav-id=/en/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/en/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Tools & Code</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu></ul></li><li class=parent data-nav-id=/en/ejercicios/internacionalizacion/index.html><a class="padding default-animation" href=/en/ejercicios/internacionalizacion/index.html>Internationalization</a><ul id=R-subsections-6bbe2db9ba6a2db3ce80272f82947f12 class=collapsible-menu><li class=active data-nav-id=/en/ejercicios/internacionalizacion/flutter-localizacion-arb-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/internacionalizacion/flutter-localizacion-arb-ejercicio-resuelto/index.html>Internationalization in Flutter: solved exercise with flutter_localizations and ARB files</a></li></ul></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Language</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/internacionalizacion/flutter-localizacion-arb-ejercicio-resuelto/index.html lang=es></option><option id=R-select-language-en value=en data-url=/en/ejercicios/internacionalizacion/flutter-localizacion-arb-ejercicio-resuelto/index.html lang=en selected data-selected></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Theme</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1784780617 defer></script><script src=/js/theme.min.js?1784780617 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>
