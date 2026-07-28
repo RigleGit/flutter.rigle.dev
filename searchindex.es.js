@@ -49,7 +49,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios",
-    "content": "Accede a las capacidades nativas del dispositivo desde Flutter. Estos ejercicios cubren los patrones más comunes: solicitud de permisos con permission_handler, autenticación biométrica con local_auth, captura de fotos con el plugin camera y más. Esenciales para cualquier app que interactúe con el hardware.\nBiometría en Flutter: ejercicio resuelto con local_auth y huella dactilar / Face ID Cámara en Flutter: ejercicio resuelto con el plugin camera permission_handler en Flutter: ejercicio resuelto con flujo completo de permisos",
+    "content": "Accede a las capacidades nativas del dispositivo desde Flutter. Estos ejercicios cubren los patrones más comunes: solicitud de permisos con permission_handler, autenticación biométrica con local_auth, captura de fotos con el plugin camera y más. Esenciales para cualquier app que interactúe con el hardware.\nBiometría en Flutter: ejercicio resuelto con local_auth y huella dactilar / Face ID Cámara en Flutter: ejercicio resuelto con el plugin camera Method Channels en Flutter: ejercicio resuelto con código nativo Android e iOS permission_handler en Flutter: ejercicio resuelto con flujo completo de permisos",
     "description": "Ejercicios resueltos de acceso a hardware en Flutter: cámara, biometría, permisos con permission_handler y sensores del dispositivo.",
     "tags": [],
     "title": "Dispositivo",
@@ -607,6 +607,14 @@ var relearn_searchindex = [
     "content": "",
     "description": "",
     "tags": [],
+    "title": "Etiqueta :: Ios",
+    "uri": "/tags/ios/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
     "title": "Etiqueta :: Isolates",
     "uri": "/tags/isolates/index.html"
   },
@@ -683,12 +691,34 @@ var relearn_searchindex = [
     "uri": "/ejercicios/widgets-ui/flutter-lottie-ejercicio-resuelto/index.html"
   },
   {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Ejercicios \u003e Dispositivo",
+    "content": "Method Channels en Flutter: ejercicio resuelto con código nativo Los platform channels son el mecanismo de Flutter para llamar a APIs nativas de Android (Kotlin/Java) e iOS (Swift/Objective-C) que no tienen plugin en pub.dev o cuando necesitas acceso de bajo nivel a la plataforma. MethodChannel es el canal más común: permite llamadas request-response sincrónicas desde Dart al código nativo.\nEnunciado Implementa una pantalla que obtenga el nivel de batería del dispositivo usando código nativo:\nDefine el canal MethodChannel con un nombre único en Dart. Implementa el handler en Kotlin (MainActivity.kt) para Android. Implementa el handler en Swift (AppDelegate.swift) para iOS. Muestra el porcentaje con un icono que cambia según el nivel. Maneja el PlatformException cuando la batería no está disponible. Dependencias Solo el SDK de Flutter — MethodChannel está en package:flutter/services.dart.\n1 2 3 dependencies: flutter: sdk: flutter Solución completa Flutter (Dart) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 import 'package:flutter/material.dart'; import 'package:flutter/services.dart'; // ── Canal de plataforma ─────────────────────────────────────────────────────── // El nombre debe ser único — usa el bundle/package ID como prefijo por convenio const _channel = MethodChannel('com.ejemplo.app/bateria'); Future\u003cvoid\u003e main() =\u003e runApp(const MyApp()); class MyApp extends StatelessWidget { const MyApp({super.key}); @override Widget build(BuildContext context) { return MaterialApp( title: 'Method Channel Demo', theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.orange), home: const BatteryPage(), ); } } class BatteryPage extends StatefulWidget { const BatteryPage({super.key}); @override State\u003cBatteryPage\u003e createState() =\u003e _BatteryPageState(); } class _BatteryPageState extends State\u003cBatteryPage\u003e { int? _batteryLevel; String? _error; bool _loading = false; Future\u003cvoid\u003e _getBatteryLevel() async { setState(() { _loading = true; _error = null; }); try { // invokeMethod lanza PlatformException si el nativo llama result.error() final level = await _channel.invokeMethod\u003cint\u003e('getBatteryLevel'); if (mounted) setState(() =\u003e _batteryLevel = level); } on PlatformException catch (e) { if (mounted) setState(() =\u003e _error = '${e.code}: ${e.message}'); } finally { if (mounted) setState(() =\u003e _loading = false); } } IconData _batteryIcon(int level) { if (level \u003e 80) return Icons.battery_full; if (level \u003e 50) return Icons.battery_5_bar; if (level \u003e 30) return Icons.battery_3_bar; if (level \u003e 10) return Icons.battery_1_bar; return Icons.battery_alert; } Color _batteryColor(int level) { if (level \u003e 30) return Colors.green; if (level \u003e 10) return Colors.orange; return Colors.red; } @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar(title: const Text('Method Channel: Batería')), body: Center( child: Padding( padding: const EdgeInsets.all(24), child: Column( mainAxisAlignment: MainAxisAlignment.center, children: [ if (_loading) const CircularProgressIndicator() else if (_error != null) Column(children: [ const Icon(Icons.error_outline, size: 48, color: Colors.red), const SizedBox(height: 12), Text('Error: $_error', textAlign: TextAlign.center, style: const TextStyle(color: Colors.red)), ]) else if (_batteryLevel != null) Column(children: [ Icon( _batteryIcon(_batteryLevel!), size: 72, color: _batteryColor(_batteryLevel!), ), const SizedBox(height: 12), Text( '$_batteryLevel%', style: const TextStyle( fontSize: 52, fontWeight: FontWeight.bold), ), const Text('nivel de batería', style: TextStyle(color: Colors.grey)), ]) else const Text( 'Pulsa el botón para llamar al código nativo', textAlign: TextAlign.center, ), const SizedBox(height: 32), FilledButton.icon( onPressed: _loading ? null : _getBatteryLevel, icon: const Icon(Icons.battery_unknown), label: const Text('Obtener nivel de batería'), ), ], ), ), ), ); } } Android — android/app/src/main/kotlin/.../MainActivity.kt 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 package com.ejemplo.app import android.content.Context import android.os.BatteryManager import io.flutter.embedding.android.FlutterActivity import io.flutter.embedding.engine.FlutterEngine import io.flutter.plugin.common.MethodChannel class MainActivity : FlutterActivity() { private val CHANNEL = \"com.ejemplo.app/bateria\" override fun configureFlutterEngine(flutterEngine: FlutterEngine) { super.configureFlutterEngine(flutterEngine) MethodChannel( flutterEngine.dartExecutor.binaryMessenger, CHANNEL ).setMethodCallHandler { call, result -\u003e when (call.method) { \"getBatteryLevel\" -\u003e { val level = getBatteryLevel() if (level != -1) { result.success(level) } else { result.error( \"UNAVAILABLE\", \"No se pudo obtener el nivel de batería\", null ) } } else -\u003e result.notImplemented() } } } private fun getBatteryLevel(): Int { val batteryManager = getSystemService(Context.BATTERY_SERVICE) as BatteryManager return batteryManager .getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY) } } iOS — ios/Runner/AppDelegate.swift 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 import Flutter import UIKit @UIApplicationMain @objc class AppDelegate: FlutterAppDelegate { override func application( _ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? ) -\u003e Bool { let controller = window?.rootViewController as! FlutterViewController let batteryChannel = FlutterMethodChannel( name: \"com.ejemplo.app/bateria\", binaryMessenger: controller.binaryMessenger ) batteryChannel.setMethodCallHandler { [weak self] call, result in guard call.method == \"getBatteryLevel\" else { result(FlutterMethodNotImplemented) return } self?.getBatteryLevel(result: result) } GeneratedPluginRegistrant.register(with: self) return super.application(application, didFinishLaunchingWithOptions: launchOptions) } private func getBatteryLevel(result: FlutterResult) { let device = UIDevice.current device.isBatteryMonitoringEnabled = true guard device.batteryState != .unknown else { result(FlutterError( code: \"UNAVAILABLE\", message: \"Nivel de batería no disponible (simulador o modo avión)\", details: nil )) return } result(Int(device.batteryLevel * 100)) } } Conceptos clave Concepto Detalle MethodChannel('nombre') Canal identificado por nombre único; debe coincidir en Dart y nativo channel.invokeMethod\u003cT\u003e('metodo') Llama al método nativo y espera T; lanza PlatformException en error result.success(value) Nativo responde con éxito y un valor result.error(code, msg, details) Nativo responde con error → PlatformException en Dart result.notImplemented() El método no está implementado en este lado nativo PlatformException Error tipado que llega de la capa nativa; tiene code y message configureFlutterEngine Override en Android para registrar canales FlutterMethodChannel Equivalente iOS de MethodChannel en Dart Errores frecuentes Nombre de canal no coincide: si el string en Dart difiere del nativo, invokeMethod devuelve null o lanza error. Usa una constante compartida o document el nombre claramente. result.success() llamado múltiples veces: el canal nativo solo puede responder una vez por llamada. Llamar a result.success() dos veces lanza una excepción nativa. No cubrir else -\u003e result.notImplemented(): sin este caso, métodos desconocidos quedan colgados esperando respuesta indefinidamente. Probar en simulador iOS: isBatteryMonitoringEnabled no funciona en simuladores. Usa un dispositivo físico o retorna un valor mock en debug. Aplicación práctica Los platform channels son la vía estándar para acceder a Bluetooth de bajo nivel, NFC, sensores del acelerómetro con alta frecuencia, Face ID/Touch ID personalizado, o cualquier API de sistema que los plugins existentes no cubran. El patrón MethodChannel es el más común; para eventos continuos desde nativo a Flutter existe EventChannel.\nSiguiente ejercicio recomendado Biometría con local_auth en Flutter: ejercicio resuelto Permisos con permission_handler: ejercicio resuelto Todos los ejercicios de Flutter Práctica guiada y siguiente paso Más ejercicios de Flutter Ejercicios C para reforzar fundamentos Programación en C en 100 ejercicios resueltos Ver en Amazon (incluido en Kindle Unlimited) FAQ ¿Es mejor usar un plugin existente o crear un Method Channel propio? Siempre busca primero en pub.dev. Los platform channels propios tienen coste de mantenimiento: tienes que actualizar el código nativo cuando cambia la API del SO. Si no existe plugin o el existente no cubre tu caso, entonces el canal propio es la solución.\n¿Puedo enviar datos en ambas direcciones? MethodChannel es request-response: Dart llama, nativo responde. Para eventos continuos desde nativo a Dart (sensores, Bluetooth, geolocalización en tiempo real), usa EventChannel, que proporciona un Stream en Dart.\n¿Method Channel funciona en Flutter Web y Desktop? En Web no existe código nativo equivalente; usas JavaScript interop con dart:js_interop. En Desktop (macOS, Windows, Linux) sí existe el equivalente de platform channels con APIs de cada plataforma.",
+    "description": "Ejercicio resuelto de Method Channels en Flutter: MethodChannel, código nativo Kotlin y Swift, PlatformException y comunicación bidireccional Flutter-plataforma.",
+    "tags": [
+      "Intermedio",
+      "Nativo",
+      "Android",
+      "Ios",
+      "Platform-Channels"
+    ],
+    "title": "Method Channels en Flutter: ejercicio resuelto con código nativo Android e iOS",
+    "uri": "/ejercicios/dispositivo/flutter-method-channels-ejercicio-resuelto/index.html"
+  },
+  {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
     "content": "",
     "description": "",
     "tags": [],
     "title": "Etiqueta :: Multiplataforma",
     "uri": "/tags/multiplataforma/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Nativo",
+    "uri": "/tags/nativo/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
@@ -745,6 +775,14 @@ var relearn_searchindex = [
     ],
     "title": "permission_handler en Flutter: ejercicio resuelto con flujo completo de permisos",
     "uri": "/ejercicios/dispositivo/flutter-permisos-permission-handler-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Etiqueta :: Platform-Channels",
+    "uri": "/tags/platform-channels/index.html"
   },
   {
     "breadcrumb": "Aprende Flutter — ejercicios resueltos \u003e Etiquetas",
