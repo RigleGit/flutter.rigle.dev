@@ -1,0 +1,401 @@
+<!doctype html><html id=R-html lang=en dir=ltr itemscope itemtype=http://schema.org/Article data-r-output-format=html><head><meta charset=utf-8><meta name=viewport content="height=device-height,width=device-width,initial-scale=1,minimum-scale=1"><meta name=generator content="Hugo 0.157.0"><meta name=generator content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee"><meta name=description content="Solved exercise for Dart 3 Records and Patterns in Flutter: anonymous and named records, pattern matching with switch, sealed classes and destructuring."><meta name=author content="Rodrigo Iglesias"><meta name=twitter:card content="summary"><meta name=twitter:title content="Dart 3 Records and Patterns in Flutter: solved exercise :: Flutter en rigle.dev"><meta name=twitter:description content="Solved exercise for Dart 3 Records and Patterns in Flutter: anonymous and named records, pattern matching with switch, sealed classes and destructuring."><meta property="og:url" content="https://flutter.rigle.dev/en/ejercicios/herramientas-codigo/flutter-dart3-records-patterns-ejercicio-resuelto/index.html"><meta property="og:site_name" content="Flutter en rigle.dev"><meta property="og:title" content="Dart 3 Records and Patterns in Flutter: solved exercise :: Flutter en rigle.dev"><meta property="og:description" content="Solved exercise for Dart 3 Records and Patterns in Flutter: anonymous and named records, pattern matching with switch, sealed classes and destructuring."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="Solved Flutter exercises (step by step)"><meta property="article:published_time" content="2026-07-29T00:00:00+02:00"><meta property="article:modified_time" content="2026-05-25T00:00:00+02:00"><meta property="article:tag" content="Intermediate"><meta property="article:tag" content="Dart3"><meta property="article:tag" content="Records"><meta property="article:tag" content="Patterns"><meta property="article:tag" content="Language"><meta itemprop=name content="Dart 3 Records and Patterns in Flutter: solved exercise :: Flutter en rigle.dev"><meta itemprop=description content="Solved exercise for Dart 3 Records and Patterns in Flutter: anonymous and named records, pattern matching with switch, sealed classes and destructuring."><meta itemprop=datePublished content="2026-07-29T00:00:00+02:00"><meta itemprop=dateModified content="2026-05-25T00:00:00+02:00"><meta itemprop=wordCount content="1369"><meta itemprop=keywords content="Intermediate,Dart3,Records,Patterns,Language"><title>Dart 3 Records and Patterns in Flutter: solved exercise :: Flutter en rigle.dev</title><link href=https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-dart3-records-patterns-ejercicio-resuelto/index.html rel=alternate hreflang=x-default><link href=https://flutter.rigle.dev/ejercicios/herramientas-codigo/flutter-dart3-records-patterns-ejercicio-resuelto/index.html rel=alternate hreflang=es><link href=https://flutter.rigle.dev/en/ejercicios/herramientas-codigo/flutter-dart3-records-patterns-ejercicio-resuelto/index.html rel=alternate hreflang=en><link href=/css/auto-complete/auto-complete.min.css?1785298824 rel=stylesheet><script src=/js/auto-complete/auto-complete.min.js?1785298824 defer></script><script src=/js/search-lunr.min.js?1785298824 defer></script><script src=/js/search.min.js?1785298824 defer></script><script>window.relearn=window.relearn||{},window.relearn.index_js_url="/searchindex.en.js?1785298824"</script><script src=/js/lunr/lunr.min.js?1785298824 defer></script><script src=/js/lunr/lunr.stemmer.support.min.js?1785298824 defer></script><script src=/js/lunr/lunr.multi.min.js?1785298824 defer></script><script src=/js/lunr/lunr.en.min.js?1785298824 defer></script><script>window.relearn=window.relearn||{},window.relearn.contentLangs=["en"]</script><link href=/fonts/fontawesome/css/all.min.css?1785298824 rel=stylesheet media=print onload='this.media="all",this.onload=null'><noscript><link href=/fonts/fontawesome/css/all.min.css?1785298824 rel=stylesheet></noscript><link href=/css/perfect-scrollbar/perfect-scrollbar.min.css?1785298824 rel=stylesheet><link href=/css/theme.min.css?1785298824 rel=stylesheet><link href=/css/format-html.min.css?1785298824 rel=stylesheet id=R-format-style><script>window.relearn=window.relearn||{},window.relearn.min=`.min`,window.relearn.path="/en/ejercicios/herramientas-codigo/flutter-dart3-records-patterns-ejercicio-resuelto/index.html",window.relearn.relBasePath="../../../..",window.relearn.relBaseUri="../../../..",window.relearn.absBaseUri="https://flutter.rigle.dev",window.relearn.disableInlineCopyToClipboard=!1,window.relearn.enableBlockCodeWrap=!0,window.T_Copy_to_clipboard=`Copy text to clipboard`,window.T_Copied_to_clipboard=`Text copied to clipboard!`,window.T_Link_copied_to_clipboard=`Link copied to clipboard!`,window.T_Reset_view=`Reset view`,window.T_View_reset=`View reset!`,window.T_No_results_found=`No results found for "{0}"`,window.T_N_results_found=`{1} results found for "{0}"`,window.T_Browser_unsupported_feature=`This browser doesn't support this feature`,window.relearn.themevariants=["auto","blue","zen-dark"],window.relearn.customvariantprefix="my-custom-",window.relearn.changeVariant=function(e){var t=document.documentElement.dataset.rThemeVariant;window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e),document.documentElement.dataset.rThemeVariant=e,t!=e&&(document.dispatchEvent(new CustomEvent("themeVariantLoaded",{detail:{variant:e,oldVariant:t}})),window.relearn.markVariant())},window.relearn.markVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant");document.querySelectorAll(".R-variantswitcher select").forEach(t=>{t.value=e})},window.relearn.initVariant=function(){var e=window.localStorage.getItem(window.relearn.absBaseUri+"/variant")??"";(!e||!e.startsWith(window.relearn.customvariantprefix)&&!window.relearn.themevariants.includes(e)||e.startsWith(window.relearn.customvariantprefix)&&!window.localStorage.getItem(window.relearn.absBaseUri+"/variantstylesheet-"+e))&&(e=window.relearn.themevariants[0],window.localStorage.setItem(window.relearn.absBaseUri+"/variant",e)),document.documentElement.dataset.rThemeVariant=e},window.relearn.initVariant(),window.relearn.markVariant()</script><link href=/css/custom.css?1785298824 rel=stylesheet></head><body class="mobile-support html" data-origin=/en/ejercicios/herramientas-codigo/flutter-dart3-records-patterns-ejercicio-resuelto/index.html><div id=R-body class=default-animation><div id=R-body-overlay></div><nav id=R-topbar class=default-animation><div class="topbar-wrapper default-animation"><div class="topbar-sidebar-divider default-animation"></div><div class="topbar-area topbar-area-start" data-area=start><div class="topbar-button topbar-button-sidebar default-animation" data-content-empty=disable data-width-s=show data-width-m=hide data-width-l=hide><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleNav() type=button title="Menu (CTRL+ALT+n)"><i class="fa-fw fas fa-bars"></i></button></span></div><div class="topbar-button topbar-button-toc default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title="Table of Contents (CTRL+ALT+t)"><i class="fa-fw fas fa-table-list"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><nav class=TableOfContents><ul><li><a href=#dart-3-records-and-patterns-in-flutter-solved-exercise>Dart 3 Records and Patterns in Flutter: solved exercise</a></li><li><a href=#problem-statement>Problem statement</a></li><li><a href=#dependencies>Dependencies</a></li><li><a href=#full-solution>Full solution</a></li><li><a href=#key-concepts>Key concepts</a></li><li><a href=#common-mistakes>Common mistakes</a></li><li><a href=#practical-application>Practical application</a></li><li><a href=#recommended-next-exercises>Recommended next exercises</a></li><li><a href=#guided-practice-and-next-step>Guided practice and next step</a></li><li><a href=#faq>FAQ</a><ul><li><a href=#do-records-replace-classes-in-dart-3>Do records replace classes in Dart 3?</a></li><li><a href=#what-is-the-difference-between-a-switch-statement-and-a-switch-expression>What is the difference between a <code>switch</code> statement and a <code>switch</code> expression?</a></li><li><a href=#are-sealed-classes-like-enums>Are sealed classes like enums?</a></li></ul></li></ul></nav></div></div></div></div><ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype=http://schema.org/BreadcrumbList><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/index.html><span itemprop=name>Learn Flutter — solved exercises</span></a><meta itemprop=position content="1">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/index.html><span itemprop=name>Exercises</span></a><meta itemprop=position content="2">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><a itemprop=item href=/en/ejercicios/herramientas-codigo/index.html><span itemprop=name>Tools & Code</span></a><meta itemprop=position content="3">&nbsp;>&nbsp;</li><li itemscope itemtype=https://schema.org/ListItem itemprop=itemListElement><span itemprop=name>Dart 3 Records and Patterns in Flutter: solved exercise</span><meta itemprop=position content="4"></li></ol><div class="topbar-area topbar-area-end" data-area=end><div class="topbar-button topbar-button-prev default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html title="CI/CD with GitHub Actions in Flutter: solved exercise (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a></span></div><div class="topbar-button topbar-button-next default-animation" data-content-empty=disable data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><a href=/en/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html title="Flutter Flavors dev, staging and prod: solved exercise (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a></span></div><div class="topbar-button topbar-button-more default-animation" data-content-empty=hide data-width-s=show data-width-m=show data-width-l=show><span class="btn cstyle button link noborder notitle interactive"><button onclick=toggleTopbarFlyout(this) type=button title=More><i class="fa-fw fas fa-ellipsis-v"></i></button></span><div class=topbar-content><div class=topbar-content-wrapper><div class="topbar-area topbar-area-more" data-area=more></div></div></div></div></div></div></nav><div id=R-main-overlay></div><main id=R-body-inner class="highlightable ejercicios" tabindex=-1><div class=flex-block-wrapper><article class=default><header class=headline><div class="R-taxonomy taxonomy-tags cstyle tags" title=Tags style=--VARIABLE-TAGS-BG-color:var(--INTERNAL-TAG-BG-color)><i class="fa-fw fas fa-layer-group"></i><ul><li><a class=term-link href=/en/tags/dart3/index.html>Dart3</a></li><li><a class=term-link href=/en/tags/intermediate/index.html>Intermediate</a></li><li><a class=term-link href=/en/tags/language/index.html>Language</a></li><li><a class=term-link href=/en/tags/patterns/index.html>Patterns</a></li><li><a class=term-link href=/en/tags/records/index.html>Records</a></li></ul></div></header><h1 id=dart-3-records-and-patterns-in-flutter-solved-exercise>Dart 3 Records and Patterns in Flutter: solved exercise</h1><h2 id=dart-3-records-and-patterns-in-flutter-solved-exercise>Dart 3 Records and Patterns in Flutter: solved exercise<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Dart 3 introduced three major language features: <strong>records</strong> (anonymous structs with static typing), <strong>patterns</strong> (destructuring and pattern matching), and <strong>sealed classes</strong> (closed hierarchies that enable exhaustiveness checking). Together they transform how state and business logic are modeled in Flutter.</p><h2 id=problem-statement>Problem statement<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Implement a mini-app that demonstrates all three features:</p><ol><li><strong>Records</strong>: function that returns a record with name, price, and stock.</li><li><strong>Pattern matching with switch expression</strong>: <code>area()</code> function accepting different shapes.</li><li><strong>Sealed classes</strong>: <code>LoadState&lt;T></code> to model async state (<code>Loading</code>, <code>Success</code>, <code>Failure</code>).</li><li><strong>List & map patterns</strong>: destructuring of lists and maps.</li><li>Display all examples in a screen with a <code>ListView</code> of <code>Card</code> widgets.</li></ol><h2 id=dependencies>Dependencies<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><p>Dart 3 only — already included in Flutter 3.10+. No extra dependencies.</p><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>dependencies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>flutter</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>sdk</span><span class=p>:</span><span class=w> </span><span class=l>flutter</span></span></span></code></pre></td></tr></table></div></div><h2 id=full-solution>Full solution<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><div class="highlight actionbar-wrapper wrap-code" dir=auto><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=k>import</span> <span class=s1>&#39;package:flutter/material.dart&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ══════════════════════════════════════════════════════════════════════════════
+</span></span></span><span class=line><span class=cl><span class=c1>// 1. RECORDS — anonymous struct with static typing
+</span></span></span><span class=line><span class=cl><span class=c1>// ══════════════════════════════════════════════════════════════════════════════
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Record with positional fields
+</span></span></span><span class=line><span class=cl><span class=kd>typedef</span> <span class=n>Point</span> <span class=o>=</span> <span class=p>(</span><span class=kt>double</span> <span class=n>x</span><span class=p>,</span> <span class=kt>double</span> <span class=n>y</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Record with named fields
+</span></span></span><span class=line><span class=cl><span class=kd>typedef</span> <span class=n>Product</span> <span class=o>=</span> <span class=p>({</span><span class=kt>String</span> <span class=n>name</span><span class=p>,</span> <span class=kt>double</span> <span class=n>price</span><span class=p>,</span> <span class=kt>int</span> <span class=n>stock</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Product</span> <span class=n>fetchProduct</span><span class=p>()</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nl>name:</span> <span class=s1>&#39;Flutter Course&#39;</span><span class=p>,</span> <span class=nl>price:</span> <span class=m>29.99</span><span class=p>,</span> <span class=nl>stock:</span> <span class=m>100</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Function returning multiple values without creating a class
+</span></span></span><span class=line><span class=cl><span class=p>(</span><span class=kt>String</span> <span class=n>city</span><span class=p>,</span> <span class=kt>int</span> <span class=n>population</span><span class=p>)</span> <span class=n>getCapital</span><span class=p>(</span><span class=kt>String</span> <span class=n>country</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=k>switch</span> <span class=p>(</span><span class=n>country</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Spain&#39;</span>   <span class=o>=&gt;</span> <span class=p>(</span><span class=s1>&#39;Madrid&#39;</span><span class=p>,</span> <span class=m>3</span><span class=n>_300_000</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;France&#39;</span>  <span class=o>=&gt;</span> <span class=p>(</span><span class=s1>&#39;Paris&#39;</span><span class=p>,</span> <span class=m>2</span><span class=n>_100_000</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Germany&#39;</span> <span class=o>=&gt;</span> <span class=p>(</span><span class=s1>&#39;Berlin&#39;</span><span class=p>,</span> <span class=m>3</span><span class=n>_700_000</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>_</span>         <span class=o>=&gt;</span> <span class=p>(</span><span class=s1>&#39;Unknown&#39;</span><span class=p>,</span> <span class=m>0</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ══════════════════════════════════════════════════════════════════════════════
+</span></span></span><span class=line><span class=cl><span class=c1>// 2. SEALED CLASSES — closed hierarchy with guaranteed exhaustiveness
+</span></span></span><span class=line><span class=cl><span class=c1>// ══════════════════════════════════════════════════════════════════════════════
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>sealed</span> <span class=kd>class</span> <span class=nc>Shape</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Circle</span>    <span class=kd>extends</span> <span class=n>Shape</span> <span class=p>{</span> <span class=kd>final</span> <span class=kt>double</span> <span class=n>radius</span><span class=p>;</span>  <span class=n>Circle</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=n>radius</span><span class=p>);</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Rectangle</span> <span class=kd>extends</span> <span class=n>Shape</span> <span class=p>{</span> <span class=kd>final</span> <span class=kt>double</span> <span class=n>width</span><span class=p>,</span> <span class=n>height</span><span class=p>;</span> <span class=n>Rectangle</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=n>width</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=n>height</span><span class=p>);</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Triangle</span>  <span class=kd>extends</span> <span class=n>Shape</span> <span class=p>{</span> <span class=kd>final</span> <span class=kt>double</span> <span class=n>base</span><span class=p>,</span> <span class=n>height</span><span class=p>;</span>  <span class=n>Triangle</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=n>base</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=n>height</span><span class=p>);</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// switch expression is exhaustive with sealed — the compiler verifies it
+</span></span></span><span class=line><span class=cl><span class=kt>double</span> <span class=n>area</span><span class=p>(</span><span class=n>Shape</span> <span class=n>shape</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=k>switch</span> <span class=p>(</span><span class=n>shape</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>Circle</span><span class=p>(</span><span class=o>:</span><span class=kd>var</span> <span class=n>radius</span><span class=p>)</span>                    <span class=o>=&gt;</span> <span class=m>3.14159</span> <span class=o>*</span> <span class=n>radius</span> <span class=o>*</span> <span class=n>radius</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>Rectangle</span><span class=p>(</span><span class=o>:</span><span class=kd>var</span> <span class=n>width</span><span class=p>,</span> <span class=o>:</span><span class=kd>var</span> <span class=n>height</span><span class=p>)</span>     <span class=o>=&gt;</span> <span class=n>width</span> <span class=o>*</span> <span class=n>height</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>Triangle</span><span class=p>(</span><span class=o>:</span><span class=kd>var</span> <span class=n>base</span><span class=p>,</span> <span class=o>:</span><span class=kd>var</span> <span class=n>height</span><span class=p>)</span>       <span class=o>=&gt;</span> <span class=m>0.5</span> <span class=o>*</span> <span class=n>base</span> <span class=o>*</span> <span class=n>height</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Generic async state with sealed class
+</span></span></span><span class=line><span class=cl><span class=n>sealed</span> <span class=kd>class</span> <span class=nc>LoadState</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Loading</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span> <span class=kd>extends</span> <span class=n>LoadState</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Success</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span> <span class=kd>extends</span> <span class=n>LoadState</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span> <span class=p>{</span> <span class=kd>final</span> <span class=n>T</span> <span class=n>data</span><span class=p>;</span> <span class=n>Success</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=n>data</span><span class=p>);</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Failure</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span> <span class=kd>extends</span> <span class=n>LoadState</span><span class=o>&lt;</span><span class=n>T</span><span class=o>&gt;</span> <span class=p>{</span> <span class=kd>final</span> <span class=kt>String</span> <span class=n>message</span><span class=p>;</span> <span class=n>Failure</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=n>message</span><span class=p>);</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ══════════════════════════════════════════════════════════════════════════════
+</span></span></span><span class=line><span class=cl><span class=c1>// 3. PATTERNS — list and map destructuring
+</span></span></span><span class=line><span class=cl><span class=c1>// ══════════════════════════════════════════════════════════════════════════════
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>String</span> <span class=n>describeList</span><span class=p>(</span><span class=n>List</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>numbers</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=k>switch</span> <span class=p>(</span><span class=n>numbers</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=p>[]</span>                              <span class=o>=&gt;</span> <span class=s1>&#39;Empty list&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>[</span><span class=kd>var</span> <span class=n>single</span><span class=p>]</span>                    <span class=o>=&gt;</span> <span class=s1>&#39;One element: </span><span class=si>$</span><span class=n>single</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>[</span><span class=kd>var</span> <span class=n>first</span><span class=p>,</span> <span class=kd>var</span> <span class=n>second</span><span class=p>]</span>         <span class=o>=&gt;</span> <span class=s1>&#39;Two elements: </span><span class=si>$</span><span class=n>first</span><span class=s1> and </span><span class=si>$</span><span class=n>second</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>[</span><span class=kd>var</span> <span class=n>first</span><span class=p>,</span> <span class=p>...,</span> <span class=kd>var</span> <span class=n>last</span><span class=p>]</span>      <span class=o>=&gt;</span> <span class=s1>&#39;Several: first </span><span class=si>$</span><span class=n>first</span><span class=s1>, last </span><span class=si>$</span><span class=n>last</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>String</span> <span class=n>readConfig</span><span class=p>(</span><span class=n>Map</span><span class=o>&lt;</span><span class=kt>String</span><span class=p>,</span> <span class=kt>dynamic</span><span class=o>&gt;</span> <span class=n>config</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=k>switch</span> <span class=p>(</span><span class=n>config</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s1>&#39;mode&#39;</span><span class=o>:</span> <span class=s1>&#39;debug&#39;</span><span class=p>,</span>   <span class=s1>&#39;version&#39;</span><span class=o>:</span> <span class=kd>var</span> <span class=n>v</span><span class=p>}</span> <span class=o>=&gt;</span> <span class=s1>&#39;DEBUG v</span><span class=si>$</span><span class=n>v</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s1>&#39;mode&#39;</span><span class=o>:</span> <span class=s1>&#39;release&#39;</span><span class=p>,</span> <span class=s1>&#39;version&#39;</span><span class=o>:</span> <span class=kd>var</span> <span class=n>v</span><span class=p>}</span> <span class=o>=&gt;</span> <span class=s1>&#39;RELEASE v</span><span class=si>$</span><span class=n>v</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>_</span> <span class=o>=&gt;</span> <span class=s1>&#39;Unknown configuration&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ══════════════════════════════════════════════════════════════════════════════
+</span></span></span><span class=line><span class=cl><span class=c1>// Flutter app
+</span></span></span><span class=line><span class=cl><span class=c1>// ══════════════════════════════════════════════════════════════════════════════
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Future</span><span class=o>&lt;</span><span class=kt>void</span><span class=o>&gt;</span> <span class=n>main</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=n>runApp</span><span class=p>(</span><span class=kd>const</span> <span class=n>MyApp</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>MyApp</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>MyApp</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>MaterialApp</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>title:</span> <span class=s1>&#39;Dart 3 Features&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nl>theme:</span> <span class=n>ThemeData</span><span class=p>(</span><span class=nl>useMaterial3:</span> <span class=kc>true</span><span class=p>,</span> <span class=nl>colorSchemeSeed:</span> <span class=n>Colors</span><span class=p>.</span><span class=n>deepPurple</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>home:</span> <span class=kd>const</span> <span class=n>Dart3Page</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Dart3Page</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>Dart3Page</span><span class=p>({</span><span class=k>super</span><span class=p>.</span><span class=n>key</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// ── 1. Records ────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>product</span> <span class=o>=</span> <span class=n>fetchProduct</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=p>(</span><span class=n>city</span><span class=p>,</span> <span class=n>population</span><span class=p>)</span> <span class=o>=</span> <span class=n>getCapital</span><span class=p>(</span><span class=s1>&#39;Spain&#39;</span><span class=p>);</span> <span class=c1>// positional destructuring
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// ── 2. Shapes ─────────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>shapes</span> <span class=o>=</span> <span class=o>&lt;</span><span class=n>Shape</span><span class=o>&gt;</span><span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=n>Circle</span><span class=p>(</span><span class=m>5</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>Rectangle</span><span class=p>(</span><span class=m>4</span><span class=p>,</span> <span class=m>6</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=n>Triangle</span><span class=p>(</span><span class=m>3</span><span class=p>,</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// ── 3. LoadState ──────────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>LoadState</span><span class=o>&lt;</span><span class=kt>String</span><span class=o>&gt;</span> <span class=n>state</span> <span class=o>=</span> <span class=n>Success</span><span class=p>(</span><span class=s1>&#39;Data loaded successfully&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// ── 4. Lists and maps ─────────────────────────────────────────────────────
+</span></span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>listExamples</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=n>describeList</span><span class=p>([]),</span>
+</span></span><span class=line><span class=cl>      <span class=n>describeList</span><span class=p>([</span><span class=m>42</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>      <span class=n>describeList</span><span class=p>([</span><span class=m>1</span><span class=p>,</span> <span class=m>2</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>      <span class=n>describeList</span><span class=p>([</span><span class=m>10</span><span class=p>,</span> <span class=m>20</span><span class=p>,</span> <span class=m>30</span><span class=p>,</span> <span class=m>40</span><span class=p>,</span> <span class=m>50</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>    <span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>final</span> <span class=n>mapExample</span> <span class=o>=</span> <span class=n>readConfig</span><span class=p>({</span><span class=s1>&#39;mode&#39;</span><span class=o>:</span> <span class=s1>&#39;release&#39;</span><span class=p>,</span> <span class=s1>&#39;version&#39;</span><span class=o>:</span> <span class=s1>&#39;2.0.0&#39;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span><span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s1>&#39;Dart 3: Records &amp; Patterns&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>body:</span> <span class=n>ListView</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// Named record
+</span></span></span><span class=line><span class=cl>          <span class=n>_DemoCard</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>title:</span> <span class=s1>&#39;📦 Named record fields&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>content:</span> <span class=s1>&#39;Product: </span><span class=si>${</span><span class=n>product</span><span class=p>.</span><span class=n>name</span><span class=si>}</span><span class=se>\n</span><span class=s1>&#39;</span>
+</span></span><span class=line><span class=cl>                <span class=s1>&#39;Price: </span><span class=se>\$</span><span class=si>${</span><span class=n>product</span><span class=p>.</span><span class=n>price</span><span class=si>}</span><span class=se>\n</span><span class=s1>&#39;</span>
+</span></span><span class=line><span class=cl>                <span class=s1>&#39;Stock: </span><span class=si>${</span><span class=n>product</span><span class=p>.</span><span class=n>stock</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// Positional record + destructuring
+</span></span></span><span class=line><span class=cl>          <span class=n>_DemoCard</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>title:</span> <span class=s1>&#39;🗺 Positional record + destructuring&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>content:</span> <span class=s1>&#39;Capital: </span><span class=si>$</span><span class=n>city</span><span class=se>\n</span><span class=s1>Population: </span><span class=si>$</span><span class=n>population</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// Sealed + switch expression
+</span></span></span><span class=line><span class=cl>          <span class=n>_DemoCard</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>title:</span> <span class=s1>&#39;🔷 Sealed class: shapes and areas&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>content:</span> <span class=n>shapes</span><span class=p>.</span><span class=n>map</span><span class=p>((</span><span class=n>s</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=kd>final</span> <span class=n>name</span> <span class=o>=</span> <span class=k>switch</span> <span class=p>(</span><span class=n>s</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>Circle</span><span class=p>()</span>    <span class=o>=&gt;</span> <span class=s1>&#39;Circle&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=n>Rectangle</span><span class=p>()</span> <span class=o>=&gt;</span> <span class=s1>&#39;Rectangle&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=n>Triangle</span><span class=p>()</span>  <span class=o>=&gt;</span> <span class=s1>&#39;Triangle&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=p>};</span>
+</span></span><span class=line><span class=cl>              <span class=k>return</span> <span class=s1>&#39;</span><span class=si>$</span><span class=n>name</span><span class=s1> → area </span><span class=si>${</span><span class=n>area</span><span class=p>(</span><span class=n>s</span><span class=p>).</span><span class=n>toStringAsFixed</span><span class=p>(</span><span class=m>2</span><span class=p>)</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=p>}).</span><span class=n>join</span><span class=p>(</span><span class=s1>&#39;</span><span class=se>\n</span><span class=s1>&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// LoadState
+</span></span></span><span class=line><span class=cl>          <span class=n>_DemoCard</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>title:</span> <span class=s1>&#39;🔄 Sealed LoadState&lt;T&gt;&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>content:</span> <span class=k>switch</span> <span class=p>(</span><span class=n>state</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=n>Loading</span><span class=p>()</span>              <span class=o>=&gt;</span> <span class=s1>&#39;Loading...&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=n>Success</span><span class=p>(</span><span class=o>:</span><span class=kd>var</span> <span class=n>data</span><span class=p>)</span>     <span class=o>=&gt;</span> <span class=s1>&#39;✅ </span><span class=si>$</span><span class=n>data</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=n>Failure</span><span class=p>(</span><span class=o>:</span><span class=kd>var</span> <span class=n>message</span><span class=p>)</span>  <span class=o>=&gt;</span> <span class=s1>&#39;❌ </span><span class=si>$</span><span class=n>message</span><span class=s1>&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=p>},</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// List patterns
+</span></span></span><span class=line><span class=cl>          <span class=n>_DemoCard</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>title:</span> <span class=s1>&#39;📋 List patterns&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>content:</span> <span class=n>listExamples</span><span class=p>.</span><span class=n>join</span><span class=p>(</span><span class=s1>&#39;</span><span class=se>\n</span><span class=s1>&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// Map patterns
+</span></span></span><span class=line><span class=cl>          <span class=n>_DemoCard</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nl>title:</span> <span class=s1>&#39;🗂 Map patterns&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nl>content:</span> <span class=n>mapExample</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>_DemoCard</span> <span class=kd>extends</span> <span class=n>StatelessWidget</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>title</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>final</span> <span class=kt>String</span> <span class=n>content</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>const</span> <span class=n>_DemoCard</span><span class=p>({</span><span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>title</span><span class=p>,</span> <span class=kd>required</span> <span class=k>this</span><span class=p>.</span><span class=n>content</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@</span><span class=n>override</span>
+</span></span><span class=line><span class=cl>  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Card</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nl>margin:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>only</span><span class=p>(</span><span class=nl>bottom:</span> <span class=m>12</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nl>child:</span> <span class=n>Padding</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=nl>padding:</span> <span class=kd>const</span> <span class=n>EdgeInsets</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=m>16</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=nl>crossAxisAlignment:</span> <span class=n>CrossAxisAlignment</span><span class=p>.</span><span class=n>start</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nl>children:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=n>Text</span><span class=p>(</span><span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                    <span class=nl>fontWeight:</span> <span class=n>FontWeight</span><span class=p>.</span><span class=n>bold</span><span class=p>,</span> <span class=nl>fontSize:</span> <span class=m>15</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>            <span class=kd>const</span> <span class=n>SizedBox</span><span class=p>(</span><span class=nl>height:</span> <span class=m>8</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>Text</span><span class=p>(</span><span class=n>content</span><span class=p>,</span> <span class=nl>style:</span> <span class=kd>const</span> <span class=n>TextStyle</span><span class=p>(</span><span class=nl>fontFamily:</span> <span class=s1>&#39;monospace&#39;</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>          <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h2 id=key-concepts>Key concepts<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><table><thead><tr><th>Concept</th><th>Detail</th></tr></thead><tbody><tr><td><code>(A, B)</code></td><td>Positional record; access with <code>$1</code>, <code>$2</code> or destructuring <code>(var a, var b) = rec</code></td></tr><tr><td><code>({String name, int age})</code></td><td>Named record; access with <code>.name</code>, <code>.age</code></td></tr><tr><td><code>sealed class</code></td><td>Closed class: only subclasses in the same file. Enables exhaustiveness in <code>switch</code></td></tr><tr><td><code>switch expression</code></td><td>Expression (not statement) that returns a value; compiler requires all cases to be covered with sealed</td></tr><tr><td><code>:var field</code></td><td>Named object pattern: extracts <code>field</code> without repeating the name</td></tr><tr><td><code>[first, ..., last]</code></td><td>List rest pattern: captures first and last element, ignores the middle</td></tr><tr><td><code>{'key': var v}</code></td><td>Map pattern: extracts the value at key <code>'key'</code></td></tr></tbody></table><h2 id=common-mistakes>Common mistakes<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>Non-exhaustive <code>switch</code></strong>: with sealed classes, the compiler emits a warning if any subtype is missing. Only add a <code>_</code> case if there is a genuinely valid default.</li><li><strong>Records vs classes</strong>: records are immutable and have no methods. For business logic, a class is still better. Records shine for multiple return values and temporary data.</li><li><strong><code>$1</code> vs <code>.fieldName</code></strong>: positional records use <code>$1</code>, <code>$2</code>…; named records use <code>.fieldName</code>. Mixing them causes a compile error.</li><li><strong>Flutter &lt; 3.10</strong>: Dart 3 requires Flutter 3.10+. Verify with <code>flutter --version</code>.</li></ul><h2 id=practical-application>Practical application<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><strong>Multiple return values</strong>: <code>(String, int) parseVersion(String v)</code> avoids creating wrapper classes.</li><li><strong>Async state</strong>: <code>LoadState&lt;T></code> sealed is a very clean pattern that replaces multiple booleans (<code>isLoading</code>, <code>hasError</code>).</li><li><strong>Pattern matching in Navigator</strong>: <code>switch (route)</code> with sealed classes for type-safe routing.</li><li><strong>Riverpod + sealed</strong>: combined with <code>@riverpod</code>, <code>AsyncValue</code> uses the same pattern internally.</li></ul><h2 id=recommended-next-exercises>Recommended next exercises<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/gestion-estado/flutter-riverpod-contador-ejercicio-resuelto/>Riverpod in Flutter: solved exercise</a></li><li><a href=/en/ejercicios/testing/flutter-widget-test-ejercicio-resuelto/>Flutter Widget Test: solved exercise</a></li><li><a href=/en/ejercicios/>All Flutter exercises</a></li></ul><h2 id=guided-practice-and-next-step>Guided practice and next step<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><ul><li><a href=/en/ejercicios/>More Flutter exercises</a></li><li><a href=https://c.rigle.dev/en/ejercicios/ rel=external>C exercises to strengthen fundamentals</a></li><li><a href=https://c.rigle.dev/en/c100/ rel=external>Programming in C in 100 Solved Exercises</a></li><li><a href=https://www.amazon.com/dp/B0FZ4QHW8L rel=external>View on Amazon (included in Kindle Unlimited)</a></li></ul><h2 id=faq>FAQ<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2><h3 id=do-records-replace-classes-in-dart-3>Do records replace classes in Dart 3?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>No. Records are for temporary data, multiple return values, and simple composition. Classes remain better when you need methods, inheritance, custom equality (though records have automatic structural equality), or complex JSON serialization.</p><h3 id=what-is-the-difference-between-a-switch-statement-and-a-switch-expression>What is the difference between a <code>switch</code> statement and a <code>switch</code> expression?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>The <code>switch</code> expression (with <code>=></code>) returns a value and is more concise. The <code>switch</code> statement (with <code>{ case: break; }</code>) executes code. With Dart 3, the expression is preferred for mapping values; the statement for executing side effects.</p><h3 id=are-sealed-classes-like-enums>Are sealed classes like enums?<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type=button title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3><p>They are complementary. Enums are for simple constant value sets. Sealed classes are for type hierarchies where each subtype can have its own fields. <code>LoadState&lt;T></code> with <code>Success(data)</code> and <code>Failure(message)</code> would not be possible with an enum.</p><footer class=footline><i class='fa-fw fas fa-calendar'></i> May 25, 2026</footer></article></div></main></div><aside id=R-sidebar class=default-animation><div id=R-header-topbar class=default-animation></div><div id=R-header-wrapper class=default-animation><a id=R-logo class="R-default direction-row" href=/en/index.html><span class="logo-title default-animation">Flutter en rigle.dev</span>
+</a><search><form action=/en/search/index.html method=get><div class="searchbox default-animation"><button class=search-detail type=submit title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+<label class=a11y-only for=R-search-by>Search</label>
+<input data-search-input id=R-search-by name=search-by class=search-by type=search placeholder=Search...>
+<button class=search-clear type=button data-search-clear title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button></div></form></search></div><div id=R-homelinks class="default-animation homelinks"><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation"><ul class="space collapsible-menu"><li data-nav-id=/en/index.html><a class=padding href=/en/index.html><i class="fa-fw fas fa-home"></i> Home</a></li></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation"><ul></ul></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div></div><div id=R-content-wrapper class=highlightable><div class="R-sidebarmenu R-shortcutmenu-ejercicios default-animation"><ul class="enlarge morespace collapsible-menu"><li class=alwaysopen data-nav-id=/en/ejercicios/widgets-ui/index.html><a class="padding default-animation" href=/en/ejercicios/widgets-ui/index.html><i class="fas fa-mobile-alt"></i> Widgets and UI</a><ul id=R-subsections-40f018c68cd38048934ce6cd7464239f class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/formularios-navegacion/index.html><a class="padding default-animation" href=/en/ejercicios/formularios-navegacion/index.html><i class="fas fa-route"></i> Forms and navigation</a><ul id=R-subsections-cb9aa892df9e69f7a3d52e5c1e6538fd class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/estado-arquitectura/index.html><a class="padding default-animation" href=/en/ejercicios/estado-arquitectura/index.html><i class="fas fa-layer-group"></i> State and architecture</a><ul id=R-subsections-3d20bfe67cecad008d9d446ad6e45c85 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/api-async/index.html><a class="padding default-animation" href=/en/ejercicios/api-async/index.html><i class="fas fa-plug"></i> API and async</a><ul id=R-subsections-3c6bc424f3b9fd93354992385902ab9e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/persistencia-datos/index.html><a class="padding default-animation" href=/en/ejercicios/persistencia-datos/index.html><i class="fas fa-database"></i> Persistence and data</a><ul id=R-subsections-70e7788fafb9b4a637793e5ad04a515e class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/testing-recursos/index.html><a class="padding default-animation" href=/en/ejercicios/testing-recursos/index.html><i class="fas fa-vial"></i> Testing and resources</a><ul id=R-subsections-b931b7b9fdd02b088d14bff9ac823688 class=collapsible-menu></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/dispositivo/index.html><a class="padding default-animation" href=/en/ejercicios/dispositivo/index.html><i class="fas fa-mobile-alt"></i> Device</a><ul id=R-subsections-bff77604e23f257e9d87870fab19bd83 class=collapsible-menu></ul></li><li class=parent data-nav-id=/en/ejercicios/herramientas-codigo/index.html><a class="padding default-animation" href=/en/ejercicios/herramientas-codigo/index.html><i class="fas fa-tools"></i> Tools & Code</a><ul id=R-subsections-fdf2b355b40fc2e4169f05e435afd59b class=collapsible-menu><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-ci-cd-github-actions-ejercicio-resuelto/index.html>CI/CD with GitHub Actions in Flutter: solved exercise</a></li><li class=active data-nav-id=/en/ejercicios/herramientas-codigo/flutter-dart3-records-patterns-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-dart3-records-patterns-ejercicio-resuelto/index.html>Dart 3 Records and Patterns in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-flavors-dev-prod-ejercicio-resuelto/index.html>Flutter Flavors dev, staging and prod: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-hooks-usestate-useeffect-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-hooks-usestate-useeffect-ejercicio-resuelto/index.html>flutter_hooks in Flutter: solved exercise with useState and useEffect</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-freezed-json-serializable-ejercicio-resuelto/index.html>Freezed and json_serializable in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-isolates-compute-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-isolates-compute-ejercicio-resuelto/index.html>Isolates and compute in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-json-serializable-buildrunner-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-json-serializable-buildrunner-ejercicio-resuelto/index.html>json_serializable with build_runner in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-linting-analysis-options-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-linting-analysis-options-ejercicio-resuelto/index.html>Linting and analysis_options in Flutter: solved exercise</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-local-notifications-ejercicio-resuelto/index.html>Local notifications in Flutter: solved exercise with flutter_local_notifications</a></li><li data-nav-id=/en/ejercicios/herramientas-codigo/flutter-shorebird-code-push-ejercicio-resuelto/index.html><a class=padding href=/en/ejercicios/herramientas-codigo/flutter-shorebird-code-push-ejercicio-resuelto/index.html>Shorebird in Flutter: solved exercise with code push and OTA updates</a></li></ul></li><li class=alwaysopen data-nav-id=/en/ejercicios/internacionalizacion/index.html><a class="padding default-animation" href=/en/ejercicios/internacionalizacion/index.html>Internationalization</a><ul id=R-subsections-6bbe2db9ba6a2db3ce80272f82947f12 class=collapsible-menu></ul></li></ul></div><div id=R-footer-margin class=default-animation></div><div class="R-menu-divider default-animation"><hr class="padding default-animation"></div><div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation"><ul><li class=R-languageswitcher><div class="padding menu-control"><i class="fa-fw fas fa-language"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-language>Language</label>
+<select id=R-select-language><option id=R-select-language-es value=es data-url=/ejercicios/herramientas-codigo/flutter-dart3-records-patterns-ejercicio-resuelto/index.html lang=es></option><option id=R-select-language-en value=en data-url=/en/ejercicios/herramientas-codigo/flutter-dart3-records-patterns-ejercicio-resuelto/index.html lang=en selected data-selected></option></select></div><div class=clear></div></div></li><li class=R-variantswitcher><div class="padding menu-control"><i class="fa-fw fas fa-paint-brush"></i>
+<span>&nbsp;</span><div class=control-style><label class=a11y-only for=R-select-variant>Theme</label>
+<select id=R-select-variant><option id=R-select-variant-auto value=auto selected>Auto</option><option id=R-select-variant-blue value=blue>Blue</option><option id=R-select-variant-zen-dark value=zen-dark>Zen Dark</option></select></div><div class=clear></div></div><script>window.relearn.markVariant()</script></li></ul></div><div id=R-footer class=default-animation><p>Built with <a href=https://github.com/McShelby/hugo-theme-relearn title=love><i class="fas fa-heart"></i></a> by <a href=https://gohugo.io/>Hugo</a></p></div></div></aside><script src=/js/perfect-scrollbar/perfect-scrollbar.min.js?1785298824 defer></script><script src=/js/theme.min.js?1785298824 defer></script><div id=toast-container role=status aria-live=polite aria-atomic=false></div></body></html>

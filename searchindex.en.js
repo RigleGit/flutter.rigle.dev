@@ -65,7 +65,7 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises",
-    "content": "Practical exercises on the tools and techniques that separate a demo project from a production-ready app: code generation, environment configuration, and battle-tested architecture patterns.\nCI/CD with GitHub Actions in Flutter: solved exercise Flutter Flavors dev, staging and prod: solved exercise flutter_hooks in Flutter: solved exercise with useState and useEffect Freezed and json_serializable in Flutter: solved exercise Isolates and compute in Flutter: solved exercise json_serializable with build_runner in Flutter: solved exercise Linting and analysis_options in Flutter: solved exercise Local notifications in Flutter: solved exercise with flutter_local_notifications Shorebird in Flutter: solved exercise with code push and OTA updates",
+    "content": "Practical exercises on the tools and techniques that separate a demo project from a production-ready app: code generation, environment configuration, and battle-tested architecture patterns.\nCI/CD with GitHub Actions in Flutter: solved exercise Dart 3 Records and Patterns in Flutter: solved exercise Flutter Flavors dev, staging and prod: solved exercise flutter_hooks in Flutter: solved exercise with useState and useEffect Freezed and json_serializable in Flutter: solved exercise Isolates and compute in Flutter: solved exercise json_serializable with build_runner in Flutter: solved exercise Linting and analysis_options in Flutter: solved exercise Local notifications in Flutter: solved exercise with flutter_local_notifications Shorebird in Flutter: solved exercise with code push and OTA updates",
     "description": "Flutter exercises on code generation, advanced dependency injection, flavors, and productivity tools for production-ready projects.",
     "tags": [
       "Tools",
@@ -306,6 +306,28 @@ var relearn_searchindex = [
     ],
     "title": "CustomPainter in Flutter: solved exercise",
     "uri": "/en/ejercicios/widgets-ui/flutter-custom-painter-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Exercises \u003e Tools \u0026 Code",
+    "content": "Dart 3 Records and Patterns in Flutter: solved exercise Dart 3 introduced three major language features: records (anonymous structs with static typing), patterns (destructuring and pattern matching), and sealed classes (closed hierarchies that enable exhaustiveness checking). Together they transform how state and business logic are modeled in Flutter.\nProblem statement Implement a mini-app that demonstrates all three features:\nRecords: function that returns a record with name, price, and stock. Pattern matching with switch expression: area() function accepting different shapes. Sealed classes: LoadState\u003cT\u003e to model async state (Loading, Success, Failure). List \u0026 map patterns: destructuring of lists and maps. Display all examples in a screen with a ListView of Card widgets. Dependencies Dart 3 only — already included in Flutter 3.10+. No extra dependencies.\n1 2 3 dependencies: flutter: sdk: flutter Full solution 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 import 'package:flutter/material.dart'; // ══════════════════════════════════════════════════════════════════════════════ // 1. RECORDS — anonymous struct with static typing // ══════════════════════════════════════════════════════════════════════════════ // Record with positional fields typedef Point = (double x, double y); // Record with named fields typedef Product = ({String name, double price, int stock}); Product fetchProduct() =\u003e (name: 'Flutter Course', price: 29.99, stock: 100); // Function returning multiple values without creating a class (String city, int population) getCapital(String country) { return switch (country) { 'Spain' =\u003e ('Madrid', 3_300_000), 'France' =\u003e ('Paris', 2_100_000), 'Germany' =\u003e ('Berlin', 3_700_000), _ =\u003e ('Unknown', 0), }; } // ══════════════════════════════════════════════════════════════════════════════ // 2. SEALED CLASSES — closed hierarchy with guaranteed exhaustiveness // ══════════════════════════════════════════════════════════════════════════════ sealed class Shape {} class Circle extends Shape { final double radius; Circle(this.radius); } class Rectangle extends Shape { final double width, height; Rectangle(this.width, this.height); } class Triangle extends Shape { final double base, height; Triangle(this.base, this.height); } // switch expression is exhaustive with sealed — the compiler verifies it double area(Shape shape) =\u003e switch (shape) { Circle(:var radius) =\u003e 3.14159 * radius * radius, Rectangle(:var width, :var height) =\u003e width * height, Triangle(:var base, :var height) =\u003e 0.5 * base * height, }; // Generic async state with sealed class sealed class LoadState\u003cT\u003e {} class Loading\u003cT\u003e extends LoadState\u003cT\u003e {} class Success\u003cT\u003e extends LoadState\u003cT\u003e { final T data; Success(this.data); } class Failure\u003cT\u003e extends LoadState\u003cT\u003e { final String message; Failure(this.message); } // ══════════════════════════════════════════════════════════════════════════════ // 3. PATTERNS — list and map destructuring // ══════════════════════════════════════════════════════════════════════════════ String describeList(List\u003cint\u003e numbers) =\u003e switch (numbers) { [] =\u003e 'Empty list', [var single] =\u003e 'One element: $single', [var first, var second] =\u003e 'Two elements: $first and $second', [var first, ..., var last] =\u003e 'Several: first $first, last $last', }; String readConfig(Map\u003cString, dynamic\u003e config) { return switch (config) { {'mode': 'debug', 'version': var v} =\u003e 'DEBUG v$v', {'mode': 'release', 'version': var v} =\u003e 'RELEASE v$v', _ =\u003e 'Unknown configuration', }; } // ══════════════════════════════════════════════════════════════════════════════ // Flutter app // ══════════════════════════════════════════════════════════════════════════════ Future\u003cvoid\u003e main() =\u003e runApp(const MyApp()); class MyApp extends StatelessWidget { const MyApp({super.key}); @override Widget build(BuildContext context) { return MaterialApp( title: 'Dart 3 Features', theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.deepPurple), home: const Dart3Page(), ); } } class Dart3Page extends StatelessWidget { const Dart3Page({super.key}); @override Widget build(BuildContext context) { // ── 1. Records ──────────────────────────────────────────────────────────── final product = fetchProduct(); final (city, population) = getCapital('Spain'); // positional destructuring // ── 2. Shapes ───────────────────────────────────────────────────────────── final shapes = \u003cShape\u003e[ Circle(5), Rectangle(4, 6), Triangle(3, 8), ]; // ── 3. LoadState ────────────────────────────────────────────────────────── final LoadState\u003cString\u003e state = Success('Data loaded successfully'); // ── 4. Lists and maps ───────────────────────────────────────────────────── final listExamples = [ describeList([]), describeList([42]), describeList([1, 2]), describeList([10, 20, 30, 40, 50]), ]; final mapExample = readConfig({'mode': 'release', 'version': '2.0.0'}); return Scaffold( appBar: AppBar(title: const Text('Dart 3: Records \u0026 Patterns')), body: ListView( padding: const EdgeInsets.all(16), children: [ // Named record _DemoCard( title: '📦 Named record fields', content: 'Product: ${product.name}\\n' 'Price: \\$${product.price}\\n' 'Stock: ${product.stock}', ), // Positional record + destructuring _DemoCard( title: '🗺 Positional record + destructuring', content: 'Capital: $city\\nPopulation: $population', ), // Sealed + switch expression _DemoCard( title: '🔷 Sealed class: shapes and areas', content: shapes.map((s) { final name = switch (s) { Circle() =\u003e 'Circle', Rectangle() =\u003e 'Rectangle', Triangle() =\u003e 'Triangle', }; return '$name → area ${area(s).toStringAsFixed(2)}'; }).join('\\n'), ), // LoadState _DemoCard( title: '🔄 Sealed LoadState\u003cT\u003e', content: switch (state) { Loading() =\u003e 'Loading...', Success(:var data) =\u003e '✅ $data', Failure(:var message) =\u003e '❌ $message', }, ), // List patterns _DemoCard( title: '📋 List patterns', content: listExamples.join('\\n'), ), // Map patterns _DemoCard( title: '🗂 Map patterns', content: mapExample, ), ], ), ); } } class _DemoCard extends StatelessWidget { final String title; final String content; const _DemoCard({required this.title, required this.content}); @override Widget build(BuildContext context) { return Card( margin: const EdgeInsets.only(bottom: 12), child: Padding( padding: const EdgeInsets.all(16), child: Column( crossAxisAlignment: CrossAxisAlignment.start, children: [ Text(title, style: const TextStyle( fontWeight: FontWeight.bold, fontSize: 15)), const SizedBox(height: 8), Text(content, style: const TextStyle(fontFamily: 'monospace')), ], ), ), ); } } Key concepts Concept Detail (A, B) Positional record; access with $1, $2 or destructuring (var a, var b) = rec ({String name, int age}) Named record; access with .name, .age sealed class Closed class: only subclasses in the same file. Enables exhaustiveness in switch switch expression Expression (not statement) that returns a value; compiler requires all cases to be covered with sealed :var field Named object pattern: extracts field without repeating the name [first, ..., last] List rest pattern: captures first and last element, ignores the middle {'key': var v} Map pattern: extracts the value at key 'key' Common mistakes Non-exhaustive switch: with sealed classes, the compiler emits a warning if any subtype is missing. Only add a _ case if there is a genuinely valid default. Records vs classes: records are immutable and have no methods. For business logic, a class is still better. Records shine for multiple return values and temporary data. $1 vs .fieldName: positional records use $1, $2…; named records use .fieldName. Mixing them causes a compile error. Flutter \u003c 3.10: Dart 3 requires Flutter 3.10+. Verify with flutter --version. Practical application Multiple return values: (String, int) parseVersion(String v) avoids creating wrapper classes. Async state: LoadState\u003cT\u003e sealed is a very clean pattern that replaces multiple booleans (isLoading, hasError). Pattern matching in Navigator: switch (route) with sealed classes for type-safe routing. Riverpod + sealed: combined with @riverpod, AsyncValue uses the same pattern internally. Recommended next exercises Riverpod in Flutter: solved exercise Flutter Widget Test: solved exercise All Flutter exercises Guided practice and next step More Flutter exercises C exercises to strengthen fundamentals Programming in C in 100 Solved Exercises View on Amazon (included in Kindle Unlimited) FAQ Do records replace classes in Dart 3? No. Records are for temporary data, multiple return values, and simple composition. Classes remain better when you need methods, inheritance, custom equality (though records have automatic structural equality), or complex JSON serialization.\nWhat is the difference between a switch statement and a switch expression? The switch expression (with =\u003e) returns a value and is more concise. The switch statement (with { case: break; }) executes code. With Dart 3, the expression is preferred for mapping values; the statement for executing side effects.\nAre sealed classes like enums? They are complementary. Enums are for simple constant value sets. Sealed classes are for type hierarchies where each subtype can have its own fields. LoadState\u003cT\u003e with Success(data) and Failure(message) would not be possible with an enum.",
+    "description": "Solved exercise for Dart 3 Records and Patterns in Flutter: anonymous and named records, pattern matching with switch, sealed classes and destructuring.",
+    "tags": [
+      "Intermediate",
+      "Dart3",
+      "Records",
+      "Patterns",
+      "Language"
+    ],
+    "title": "Dart 3 Records and Patterns in Flutter: solved exercise",
+    "uri": "/en/ejercicios/herramientas-codigo/flutter-dart3-records-patterns-ejercicio-resuelto/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Dart3",
+    "uri": "/en/tags/dart3/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
@@ -595,6 +617,14 @@ var relearn_searchindex = [
     "uri": "/en/tags/kotlin/index.html"
   },
   {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Language",
+    "uri": "/en/tags/language/index.html"
+  },
+  {
     "breadcrumb": "",
     "content": "Practical resources to learn Flutter and Dart.\nSolved exercises",
     "description": "Solved Flutter and Dart exercises step by step. From basics to complete apps.",
@@ -725,6 +755,14 @@ var relearn_searchindex = [
     "content": "",
     "description": "",
     "tags": [],
+    "title": "Tag :: Patterns",
+    "uri": "/en/tags/patterns/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
     "title": "Tag :: Performance",
     "uri": "/en/tags/performance/index.html"
   },
@@ -787,6 +825,14 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Tag :: Real-Time",
     "uri": "/en/tags/real-time/index.html"
+  },
+  {
+    "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
+    "content": "",
+    "description": "",
+    "tags": [],
+    "title": "Tag :: Records",
+    "uri": "/en/tags/records/index.html"
   },
   {
     "breadcrumb": "Learn Flutter — solved exercises \u003e Tags",
